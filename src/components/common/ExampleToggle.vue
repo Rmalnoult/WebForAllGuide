@@ -89,9 +89,10 @@ const showGood = ref(false)
 
 .toggle-buttons button {
   padding: 0.5rem 1rem;
-  border: 2px solid transparent;
+  border: 2px solid var(--color-border);
   border-radius: 0.25rem;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s;
@@ -99,6 +100,8 @@ const showGood = ref(false)
 
 .toggle-buttons button:hover {
   transform: translateY(-1px);
+  background: var(--color-hover);
+  border-color: var(--color-primary);
 }
 
 .toggle-buttons button:focus-visible {
@@ -117,6 +120,19 @@ const showGood = ref(false)
 
 .toggle-good.active {
   background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+/* Styles spécifiques pour les boutons non actifs */
+.toggle-bad:not(.active) {
+  background: var(--color-bg);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.toggle-good:not(.active) {
+  background: var(--color-bg);
+  color: var(--color-success);
   border-color: var(--color-success);
 }
 
