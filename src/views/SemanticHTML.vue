@@ -286,7 +286,8 @@ h1 {
 
 /* Article demo styles */
 .article-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -367,7 +368,8 @@ h1 {
 
 /* Lists demo styles */
 .list-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);

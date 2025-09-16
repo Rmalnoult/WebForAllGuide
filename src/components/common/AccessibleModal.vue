@@ -87,6 +87,7 @@ watch(() => props.modelValue, async (isOpen) => {
 
 .modal {
   background: var(--color-bg);
+  color: var(--color-text);
   border-radius: 0.5rem;
   max-width: 500px;
   width: 90%;
@@ -120,6 +121,7 @@ watch(() => props.modelValue, async (isOpen) => {
   align-items: center;
   justify-content: center;
   border-radius: 0.25rem;
+  color: var(--color-text);
 }
 
 .modal-close:hover {

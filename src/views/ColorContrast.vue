@@ -358,7 +358,8 @@ h1 {
 
 /* Contrast demo styles */
 .contrast-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -411,7 +412,8 @@ h1 {
 
 /* Color information demo */
 .color-info-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -508,7 +510,8 @@ h1 {
 
 /* Colorblind demo */
 .colorblind-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -597,7 +600,8 @@ h1 {
 
 /* Theme demo */
 .theme-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -716,8 +720,8 @@ h1 {
 
 /* Good theme styles */
 .demo-content-good.theme-light {
-  background: white;
-  color: #1a202c;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .demo-content-good.theme-dark {
@@ -726,8 +730,8 @@ h1 {
 }
 
 .demo-content-good.theme-auto {
-  background: white;
-  color: #1a202c;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 @media (prefers-color-scheme: dark) {

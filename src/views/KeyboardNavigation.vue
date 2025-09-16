@@ -327,7 +327,8 @@ h1 {
 
 /* Focus demo styles */
 .focus-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -393,7 +394,8 @@ h1 {
 
 /* Skip link demo styles */
 .skip-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
   overflow: hidden;
@@ -484,7 +486,8 @@ h1 {
 }
 
 .modal-content-bad, .modal-content-good {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border-radius: 0.5rem;
   max-width: 500px;
   width: 90%;
@@ -550,7 +553,8 @@ h1 {
 
 /* Menu navigation styles */
 .list-nav-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);

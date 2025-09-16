@@ -677,7 +677,8 @@ h1 {
 
 /* Accordion styles */
 .accordion-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -733,7 +734,8 @@ h1 {
 
 .accordion-content {
   padding: 1.5rem;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .accordion-content p {
@@ -743,7 +745,8 @@ h1 {
 
 /* Toast styles */
 .toast-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -842,7 +845,8 @@ h1 {
 
 /* Dropdown styles */
 .dropdown-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -880,7 +884,8 @@ h1 {
   top: 100%;
   left: 0;
   min-width: 200px;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -923,7 +928,8 @@ h1 {
 
 /* Table styles */
 .table-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);

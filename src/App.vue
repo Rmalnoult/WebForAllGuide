@@ -42,7 +42,7 @@ const appClass = computed(() => {
 
 .app-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 200px 1fr;
   min-height: 100vh;
 }
 
@@ -57,7 +57,6 @@ const appClass = computed(() => {
 
 .app-main {
   padding: 2rem;
-  max-width: 1200px;
   width: 100%;
 }
 

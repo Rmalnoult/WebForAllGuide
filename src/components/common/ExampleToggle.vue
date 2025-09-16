@@ -2,41 +2,26 @@
   <div class="example-toggle">
     <div class="toggle-header">
       <h3>{{ title }}</h3>
-      <div class="toggle-buttons" role="group" :aria-label="`Basculer entre les exemples ${title}`">
-        <button
-          @click="showGood = false"
-          :aria-pressed="!showGood"
-          :class="{ active: !showGood }"
-          class="toggle-bad"
-        >
-          ❌ Mauvais exemple
-        </button>
-        <button
-          @click="showGood = true"
-          :aria-pressed="showGood"
-          :class="{ active: showGood }"
-          class="toggle-good"
-        >
-          ✅ Bon exemple
-        </button>
-      </div>
     </div>
 
-    <div class="example-content">
-      <transition name="fade" mode="out-in">
-        <div v-if="!showGood" key="bad" class="example bad-example">
-          <div class="example-label bad-label">
-            <span aria-hidden="true">❌</span> Mauvais exemple
-          </div>
+    <div class="examples-container">
+      <div class="example bad-example">
+        <div class="example-label bad-label">
+          <span aria-hidden="true">❌</span> Mauvais exemple
+        </div>
+        <div class="example-content">
           <slot name="bad"></slot>
         </div>
-        <div v-else key="good" class="example good-example">
-          <div class="example-label good-label">
-            <span aria-hidden="true">✅</span> Bon exemple
-          </div>
+      </div>
+
+      <div class="example good-example">
+        <div class="example-label good-label">
+          <span aria-hidden="true">✅</span> Bon exemple
+        </div>
+        <div class="example-content">
           <slot name="good"></slot>
         </div>
-      </transition>
+      </div>
     </div>
 
     <div v-if="explanation" class="example-explanation" role="note">
@@ -46,8 +31,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 defineProps({
   title: {
     type: String,
@@ -55,8 +38,6 @@ defineProps({
   },
   explanation: String
 })
-
-const showGood = ref(false)
 </script>
 
 <style scoped>
@@ -70,11 +51,7 @@ const showGood = ref(false)
 .toggle-header {
   background: var(--color-bg-secondary);
   padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .toggle-header h3 {
@@ -82,58 +59,20 @@ const showGood = ref(false)
   font-size: 1.25rem;
 }
 
-.toggle-buttons {
-  display: flex;
-  gap: 0.5rem;
+.examples-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--color-border);
 }
 
-.toggle-buttons button {
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--color-border);
-  border-radius: 0.25rem;
+.example {
+  position: relative;
   background: var(--color-bg);
-  color: var(--color-text);
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
 }
 
-.toggle-buttons button:hover {
-  transform: translateY(-1px);
-  background: var(--color-hover);
-  border-color: var(--color-primary);
-}
-
-.toggle-buttons button:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-.toggle-buttons button.active {
-  color: white;
-}
-
-.toggle-bad.active {
-  background: var(--color-error);
-  border-color: var(--color-error);
-}
-
-.toggle-good.active {
-  background: var(--color-success);
-  border-color: var(--color-success);
-}
-
-/* Styles spécifiques pour les boutons non actifs */
-.toggle-bad:not(.active) {
-  background: var(--color-bg);
-  color: var(--color-error);
-  border-color: var(--color-error);
-}
-
-.toggle-good:not(.active) {
-  background: var(--color-bg);
-  color: var(--color-success);
-  border-color: var(--color-success);
+.bad-example {
+  border-right: 1px solid var(--color-border);
 }
 
 .example-content {
@@ -141,19 +80,11 @@ const showGood = ref(false)
   min-height: 200px;
 }
 
-.example {
-  position: relative;
-}
-
 .example-label {
-  position: absolute;
-  top: -0.5rem;
-  right: 1rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
   font-size: 0.875rem;
   font-weight: 600;
-  z-index: 1;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .bad-label {
@@ -170,29 +101,20 @@ const showGood = ref(false)
 
 .example-explanation {
   background: var(--color-info-light);
+  color: var(--color-text);
   border-top: 2px solid var(--color-info);
   padding: 1rem;
   font-size: 0.95rem;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .toggle-buttons button {
-    transition: none;
+@media (max-width: 768px) {
+  .examples-container {
+    grid-template-columns: 1fr;
   }
 
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: none;
+  .bad-example {
+    border-right: none;
+    border-bottom: 2px solid var(--color-border);
   }
 }
 </style>

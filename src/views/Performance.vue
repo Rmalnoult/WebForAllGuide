@@ -614,7 +614,8 @@ h1 {
 
 /* Motion demo styles */
 .motion-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -644,7 +645,8 @@ h1 {
   padding: 1.5rem;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   position: relative;
   overflow: hidden;
 }
@@ -781,7 +783,8 @@ h1 {
   width: 40px;
   height: 40px;
   border: 1px solid var(--color-border);
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border-radius: 50%;
   cursor: pointer;
   font-size: 1.2rem;
@@ -802,7 +805,8 @@ h1 {
 .load-button, .pulse-button {
   padding: 0.5rem 1rem;
   border: 1px solid var(--color-border);
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border-radius: 0.25rem;
   cursor: pointer;
 }
@@ -839,7 +843,8 @@ h1 {
 
 /* Zoom demo styles */
 .zoom-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -950,7 +955,8 @@ h1 {
   padding: 1rem;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .price-bad, .price-good {
@@ -962,7 +968,8 @@ h1 {
 
 /* Responsive demo styles */
 .responsive-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -986,7 +993,8 @@ h1 {
 }
 
 .fixed-interface, .responsive-interface {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .header-bad, .header-good {
@@ -1085,7 +1093,8 @@ h1 {
 
 /* Preferences demo styles */
 .preferences-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -1121,7 +1130,8 @@ h1 {
 }
 
 .preference-group {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -1205,7 +1215,8 @@ h1 {
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--color-bg);
+    color: var(--color-text);
     border-top: 1px solid var(--color-border);
     flex-direction: column;
     padding: 1rem;
@@ -1225,7 +1236,8 @@ h1 {
 
 .device-simulator-good.mobile .nav-good {
   flex-direction: column;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border-top: 1px solid var(--color-border);
   margin-top: 1rem;
   padding-top: 1rem;

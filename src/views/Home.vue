@@ -251,7 +251,8 @@ kbd {
   padding: 0.2rem 0.4rem;
   font-size: 0.85rem;
   font-family: monospace;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 0.25rem;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);

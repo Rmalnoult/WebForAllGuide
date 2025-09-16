@@ -355,7 +355,8 @@ h1 {
 }
 
 .product-card {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   padding: 1.5rem;
@@ -410,7 +411,8 @@ h1 {
 
 /* Gallery demo styles */
 .gallery-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -492,7 +494,8 @@ h1 {
 
 /* Video demo styles */
 .video-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
@@ -530,7 +533,8 @@ h1 {
 
 /* Chart demo styles */
 .chart-demo {
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
