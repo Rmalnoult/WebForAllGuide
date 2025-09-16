@@ -1,0 +1,208 @@
+@import './variables.css';
+
+/* Reset et base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus visible pour tous les éléments interactifs */
+:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Typographie */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Liens */
+a {
+  color: var(--color-primary);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Boutons */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  background: var(--color-primary);
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+button.secondary:hover:not(:disabled) {
+  background: var(--color-hover);
+}
+
+/* Formulaires */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  padding: var(--spacing-sm);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 100%;
+  max-width: 400px;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--color-primary);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+}
+
+/* Classes utilitaires */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+.error {
+  color: var(--color-error);
+}
+
+.success {
+  color: var(--color-success);
+}
+
+.warning {
+  color: var(--color-warning);
+}
+
+/* Animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    transition-timing-function: ease-in-out;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    transition: all 0.2s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Support du zoom */
+@media (min-width: 320px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+/* Impression */
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  body {
+    color: black;
+    background: white;
+  }
+}
