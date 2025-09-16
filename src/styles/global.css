@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
 @import './variables.css';
 
 /* Reset et base */
@@ -42,7 +43,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: var(--font-size-3xl); }
-h2 { font-size: var(--font-size-2xl); }
+h2 {
+  font-size: var(--font-size-2xl);
+  color: white;
+}
 h3 { font-size: var(--font-size-xl); }
 h4 { font-size: var(--font-size-lg); }
 
@@ -81,12 +85,14 @@ button:hover:not(:disabled) {
 }
 
 button:active:not(:disabled) {
+  background: var(--color-primary-darker);
   transform: translateY(0);
 }
 
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none !important;
 }
 
 button.secondary {
@@ -97,6 +103,24 @@ button.secondary {
 
 button.secondary:hover:not(:disabled) {
   background: var(--color-hover);
+}
+
+button.secondary:active:not(:disabled) {
+  background: var(--color-border);
+}
+
+/* Bouton info */
+button.info {
+  background: var(--color-info);
+  color: white;
+}
+
+button.info:hover:not(:disabled) {
+  background: var(--color-info-dark);
+}
+
+button.info:active:not(:disabled) {
+  background: var(--color-info-darker);
 }
 
 /* Formulaires */

@@ -7,6 +7,32 @@
       </p>
     </header>
 
+    <section aria-labelledby="keyboard-shortcuts-title">
+      <h2 id="keyboard-shortcuts-title">Raccourcis clavier</h2>
+      <dl class="shortcuts-list">
+        <div>
+          <dt><kbd>Tab</kbd></dt>
+          <dd>Naviguer entre les éléments interactifs</dd>
+        </div>
+        <div>
+          <dt><kbd>Shift + Tab</kbd></dt>
+          <dd>Navigation arrière</dd>
+        </div>
+        <div>
+          <dt><kbd>Entrée</kbd> / <kbd>Espace</kbd></dt>
+          <dd>Activer les boutons et liens</dd>
+        </div>
+        <div>
+          <dt><kbd>Échap</kbd></dt>
+          <dd>Fermer les modales et menus</dd>
+        </div>
+        <div>
+          <dt><kbd>↑ ↓</kbd></dt>
+          <dd>Naviguer dans les listes et menus</dd>
+        </div>
+      </dl>
+    </section>
+
     <ExampleToggle
       title="Styles de focus visibles"
       explanation="Les utilisateurs qui naviguent au clavier ont besoin d'indicateurs visuels clairs pour savoir où ils se trouvent sur la page."
@@ -325,6 +351,39 @@ h1 {
   color: var(--color-text-secondary);
 }
 
+/* Keyboard shortcuts */
+.shortcuts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  background: var(--color-bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.shortcuts-list div {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.shortcuts-list dt {
+  flex-shrink: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.85rem;
+  font-family: monospace;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
 /* Focus demo styles */
 .focus-demo {
   background: var(--color-bg);
@@ -589,6 +648,14 @@ h1 {
 .menu-item-good.selected {
   background: var(--color-primary);
   color: white;
+}
+
+.menu-item-good.selected:hover {
+  background: var(--color-primary-dark);
+}
+
+.menu-item-good.selected:active {
+  background: var(--color-primary-darker);
 }
 
 .hint {

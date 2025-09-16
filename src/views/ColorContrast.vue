@@ -15,23 +15,33 @@
         <div class="contrast-demo">
           <div class="text-samples-bad">
             <div class="sample sample-1">
-              <p class="light-gray-text">Texte gris clair sur blanc (2.2:1) - Échec AA</p>
+              <p class="light-gray-text">Texte gris clair sur blanc (2.2:1) - Échec</p>
               <small class="ratio">Ratio: 2.2:1</small>
             </div>
 
             <div class="sample sample-2">
-              <p class="medium-gray-text">Texte gris moyen sur blanc (3.8:1) - Échec AA</p>
+              <p class="medium-gray-text">Texte gris moyen sur blanc (3.8:1) - Échec</p>
               <small class="ratio">Ratio: 3.8:1</small>
             </div>
 
             <div class="sample sample-3">
-              <p class="yellow-text">Texte jaune sur blanc (1.9:1) - Échec AA</p>
+              <p class="yellow-text">Texte jaune sur blanc (1.9:1) - Échec</p>
               <small class="ratio">Ratio: 1.9:1</small>
             </div>
 
-            <div class="sample sample-4">
-              <p class="orange-text">Orange sur rouge (1.2:1) - Échec AA</p>
-              <small class="ratio">Ratio: 1.2:1</small>
+            <div class="sample sample-4 red-bg">
+              <p class="orange-on-red">Orange sur rouge (1.2:1) - Échec</p>
+              <small class="ratio ratio-light">Ratio: 1.2:1</small>
+            </div>
+
+            <div class="sample sample-5 dark-bg">
+              <p class="dark-gray-on-dark">Gris foncé sur fond noir (2.5:1) - Échec</p>
+              <small class="ratio">Ratio: 2.5:1</small>
+            </div>
+
+            <div class="sample sample-6 dark-bg">
+              <p class="blue-on-dark">Bleu sur fond sombre (1.8:1) - Échec</p>
+              <small class="ratio">Ratio: 1.8:1</small>
             </div>
           </div>
         </div>
@@ -55,9 +65,19 @@
               <small class="ratio">Ratio: 5.9:1</small>
             </div>
 
-            <div class="sample sample-4">
-              <p class="white-on-dark">Blanc sur bleu foncé (8.6:1) - Réussite AAA</p>
-              <small class="ratio">Ratio: 8.6:1</small>
+            <div class="sample sample-4 blue-bg">
+              <p class="white-on-blue">Blanc sur bleu foncé (8.6:1) - Réussite AAA</p>
+              <small class="ratio ratio-light">Ratio: 8.6:1</small>
+            </div>
+
+            <div class="sample sample-5 dark-bg">
+              <p class="white-on-black">Blanc sur fond noir (21:1) - Réussite AAA</p>
+              <small class="ratio">Ratio: 21:1</small>
+            </div>
+
+            <div class="sample sample-6 dark-bg">
+              <p class="yellow-on-dark">Jaune sur fond sombre (12.3:1) - Réussite AAA</p>
+              <small class="ratio">Ratio: 12.3:1</small>
             </div>
           </div>
         </div>
@@ -92,15 +112,15 @@
             <div class="order-list">
               <div class="order-item">
                 <span class="order-number">#1234</span>
-                <span class="status-red">En attente</span>
+                <span class="status-dot status-red" aria-hidden="true">●</span>
               </div>
               <div class="order-item">
                 <span class="order-number">#1235</span>
-                <span class="status-yellow">En cours</span>
+                <span class="status-dot status-yellow" aria-hidden="true">●</span>
               </div>
               <div class="order-item">
                 <span class="order-number">#1236</span>
-                <span class="status-green">Livrée</span>
+                <span class="status-dot status-green" aria-hidden="true">●</span>
               </div>
             </div>
           </div>
@@ -374,6 +394,9 @@ h1 {
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border);
+  background: white;
+  isolation: isolate;
+  position: relative;
 }
 
 .sample p {
@@ -384,30 +407,92 @@ h1 {
 
 .ratio {
   font-size: 0.85rem;
-  color: #666;
+  color: #666 !important;
   font-weight: normal;
 }
 
-/* Bad contrast examples */
-.light-gray-text { color: #bbb; }
-.medium-gray-text { color: #999; }
-.yellow-text { color: #ffff00; }
-.orange-text {
-  color: #ff8c00;
-  background: #ff4444;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+/* Bad contrast examples - sur fond blanc */
+.text-samples-bad .sample:not(.dark-bg):not(.red-bg) {
+  background: white !important;
 }
 
-/* Good contrast examples */
-.dark-gray-text { color: #333; }
-.black-text { color: #000; }
-.blue-text { color: #1a365d; }
-.white-on-dark {
-  color: white;
-  background: #1a365d;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+.light-gray-text {
+  color: #d8d8d8 !important; /* Ratio 2.2:1 sur blanc */
+}
+
+.medium-gray-text {
+  color: #949494 !important; /* Ratio 3.8:1 sur blanc */
+}
+
+.yellow-text {
+  color: #e6d800 !important; /* Ratio 1.9:1 sur blanc */
+}
+
+/* Red background for bad sample-4 */
+.sample-4.red-bg {
+  background: #ff4444 !important;
+}
+
+.orange-on-red {
+  color: #ff8c00 !important; /* Orange sur rouge */
+}
+
+/* Good contrast examples - sur fond blanc */
+.text-samples-good .sample:not(.dark-bg):not(.blue-bg) {
+  background: white !important;
+}
+
+.dark-gray-text {
+  color: #555555 !important; /* Ratio 7.0:1 sur blanc */
+}
+
+.black-text {
+  color: #000000 !important; /* Ratio 21:1 sur blanc */
+}
+
+.blue-text {
+  color: #0056b3 !important; /* Ratio 5.9:1 sur blanc */
+}
+
+/* Blue background for sample-4 */
+.sample-4.blue-bg {
+  background: #003d82 !important;
+}
+
+.white-on-blue {
+  color: white !important; /* Blanc sur bleu foncé */
+}
+
+.ratio-light {
+  color: #ccc !important; /* Ratio text visible sur fond foncé */
+}
+
+/* Dark background examples */
+.sample-5.dark-bg,
+.sample-6.dark-bg {
+  background: #1a1a1a !important;
+}
+
+.dark-bg .ratio {
+  color: #999 !important;
+}
+
+/* Bad contrast on dark */
+.dark-gray-on-dark {
+  color: #4a4a4a !important; /* Gris foncé sur noir - ratio 2.5:1 */
+}
+
+.blue-on-dark {
+  color: #003d82 !important; /* Bleu foncé sur noir - ratio 1.8:1 */
+}
+
+/* Good contrast on dark */
+.white-on-black {
+  color: #ffffff !important; /* Blanc sur noir - ratio 21:1 */
+}
+
+.yellow-on-dark {
+  color: #ffd700 !important; /* Jaune sur noir - ratio 12.3:1 */
 }
 
 /* Color information demo */
@@ -496,9 +581,15 @@ h1 {
   font-weight: 600;
 }
 
-.status-red { color: #e53e3e; font-weight: 500; }
-.status-yellow { color: #d69e2e; font-weight: 500; }
-.status-green { color: #38a169; font-weight: 500; }
+.status-dot {
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.status-red { color: #e53e3e; }
+.status-yellow { color: #d69e2e; }
+.status-green { color: #38a169; }
 
 .status-pending { color: #d69e2e; font-weight: 500; }
 .status-processing { color: #3182ce; font-weight: 500; }
@@ -720,24 +811,30 @@ h1 {
 
 /* Good theme styles */
 .demo-content-good.theme-light {
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+.demo-content-good.theme-light h5,
+.demo-content-good.theme-light h6,
+.demo-content-good.theme-light p {
+  color: #1a1a1a !important;
 }
 
 .demo-content-good.theme-dark {
-  background: #1a202c;
-  color: #f7fafc;
+  background: #1a202c !important;
+  color: #f7fafc !important;
 }
 
 .demo-content-good.theme-auto {
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: #ffffff !important;
+  color: #1a1a1a !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .demo-content-good.theme-auto {
-    background: #1a202c;
-    color: #f7fafc;
+    background: #1a202c !important;
+    color: #f7fafc !important;
   }
 }
 
@@ -780,9 +877,9 @@ h1 {
 }
 
 .theme-light .demo-card-good {
-  background: #f7fafc;
-  border-color: #e2e8f0;
-  color: #2d3748;
+  background: #f7fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #1a1a1a !important;
 }
 
 .theme-dark .demo-card-good {
@@ -792,9 +889,9 @@ h1 {
 }
 
 .theme-auto .demo-card-good {
-  background: #f7fafc;
-  border-color: #e2e8f0;
-  color: #2d3748;
+  background: #f7fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #1a1a1a !important;
 }
 
 @media (prefers-color-scheme: dark) {

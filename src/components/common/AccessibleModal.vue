@@ -1,43 +1,24 @@
 <template>
-  <Teleport to="body">
-    <Transition name="modal">
-      <div v-if="modelValue" class="modal-overlay" @click.self="close">
-        <div
-          ref="modalRef"
-          class="modal"
-          role="dialog"
-          aria-modal="true"
-          :aria-labelledby="titleId"
-          :aria-describedby="descId"
-          @keydown.esc="close"
-        >
-          <header class="modal-header">
-            <h2 :id="titleId">{{ title }}</h2>
-            <button
-              @click="close"
-              :aria-label="`Fermer ${title}`"
-              class="modal-close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </header>
-
-          <div :id="descId" class="modal-content">
-            <slot></slot>
-          </div>
-
-          <footer class="modal-footer" v-if="$slots.footer">
-            <slot name="footer"></slot>
-          </footer>
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
+  <c-modal
+    :show="modelValue"
+    @close="close"
+    :aria-labelledby="titleId"
+    :aria-describedby="descId"
+  >
+    <template #title><c-text :id="titleId">{{ title }}</c-text></template>
+    <div :id="descId" class="modal-content">
+      <slot></slot>
+    </div>
+    <template #footer v-if="$slots.footer">
+      <slot name="footer"></slot>
+    </template>
+  </c-modal>
 </template>
 
 <script setup>
 import { ref, watch, nextTick } from 'vue'
 import { useFocusTrap } from '../../composables/useA11y'
+import { CModal, CText, CButton } from '@carrefour/design-system-components-vue3';
 
 const props = defineProps({
   modelValue: Boolean,

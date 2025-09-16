@@ -1,6 +1,5 @@
 <template>
   <nav aria-label="Navigation principale" class="app-nav">
-    <h2 id="nav-title">Exemples d'accessibilité</h2>
     <ul role="list">
       <li v-for="item in navItems" :key="item.path">
         <router-link
@@ -45,11 +44,6 @@ const announceNavigation = (label) => {
   border-right: 2px solid var(--color-border);
 }
 
-.app-nav h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  color: var(--color-primary);
-}
 
 .app-nav ul {
   list-style: none;
@@ -85,6 +79,14 @@ const announceNavigation = (label) => {
   background: var(--color-primary);
   color: white;
   font-weight: 600;
+}
+
+.app-nav a[aria-current="page"]:hover {
+  background: var(--color-primary-dark);
+}
+
+.app-nav a[aria-current="page"]:active {
+  background: var(--color-primary-darker);
 }
 
 .nav-icon {

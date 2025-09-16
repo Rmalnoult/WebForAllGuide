@@ -321,27 +321,32 @@
     </ExampleToggle>
 
     <ExampleToggle
-      title="Gestion des préférences utilisateur"
-      explanation="Respecter et mémoriser les préférences d'accessibilité de l'utilisateur pour personnaliser l'expérience."
+      title="Optimisation des ressources et lazy loading"
+      explanation="Charger les ressources de manière intelligente pour optimiser les performances, surtout sur connexions lentes ou appareils limités."
     >
       <template #bad>
-        <div class="preferences-demo">
+        <div class="loading-demo">
           <div class="interface-bad">
-            <h4>Interface sans options</h4>
+            <h4>Chargement non optimisé</h4>
             <div class="content-example-bad">
-              <p>Cette interface impose ses choix :</p>
+              <p>❌ Problèmes de performance :</p>
               <ul>
-                <li>Taille de police fixe</li>
-                <li>Contraste standard seulement</li>
-                <li>Animations toujours activées</li>
-                <li>Lecture automatique</li>
+                <li>🖼️ Images HD chargées immédiatement (5MB chacune)</li>
+                <li>📹 Vidéos préchargées en arrière-plan</li>
+                <li>📦 Bundle JavaScript monolithique (2MB)</li>
+                <li>🔄 Pas de mise en cache</li>
               </ul>
-              <div class="media-bad">
-                <video autoplay muted loop style="width: 200px; height: 150px; background: #ddd;">
-                  <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">
-                    📹 Vidéo en lecture automatique
-                  </div>
-                </video>
+              <div class="loading-simulation">
+                <div class="loading-bar-bad">
+                  <div class="loading-progress" style="width: 100%; background: #dc3545;"></div>
+                </div>
+                <span class="loading-text">Chargement... 15.3 MB / 15.3 MB</span>
+              </div>
+              <div class="resource-list-bad">
+                <div class="resource-item">image1-hd.jpg - 5.2 MB ⏳</div>
+                <div class="resource-item">image2-hd.jpg - 4.8 MB ⏳</div>
+                <div class="resource-item">video-bg.mp4 - 3.1 MB ⏳</div>
+                <div class="resource-item">app.bundle.js - 2.2 MB ⏳</div>
               </div>
             </div>
           </div>
@@ -349,98 +354,76 @@
       </template>
 
       <template #good>
-        <div class="preferences-demo">
+        <div class="loading-demo">
           <div class="interface-good">
-            <h4>Interface personnalisable</h4>
-
-            <details class="preferences-panel" :open="preferencesOpen">
-              <summary @click="preferencesOpen = !preferencesOpen">
-                ⚙️ Préférences d'accessibilité
-              </summary>
-
-              <div class="preferences-content">
-                <div class="preference-group">
-                  <h6>Affichage</h6>
-                  <label>
-                    Taille du texte :
-                    <select v-model="preferences.fontSize" @change="savePreferences">
-                      <option value="small">Petit</option>
-                      <option value="normal">Normal</option>
-                      <option value="large">Grand</option>
-                      <option value="extra-large">Très grand</option>
-                    </select>
-                  </label>
-
-                  <label>
-                    Contraste :
-                    <select v-model="preferences.contrast" @change="savePreferences">
-                      <option value="normal">Normal</option>
-                      <option value="high">Élevé</option>
-                      <option value="extra-high">Très élevé</option>
-                    </select>
-                  </label>
-                </div>
-
-                <div class="preference-group">
-                  <h6>Animations</h6>
-                  <label>
-                    <input
-                      type="checkbox"
-                      v-model="preferences.reduceMotion"
-                      @change="savePreferences"
-                    >
-                    Réduire les animations
-                  </label>
-                </div>
-
-                <div class="preference-group">
-                  <h6>Médias</h6>
-                  <label>
-                    <input
-                      type="checkbox"
-                      v-model="preferences.autoplay"
-                      @change="savePreferences"
-                    >
-                    Lecture automatique des vidéos
-                  </label>
-                </div>
-
-                <button @click="resetPreferences" class="reset-button">
-                  Réinitialiser les préférences
-                </button>
-              </div>
-            </details>
-
-            <div
-              class="content-example-good"
-              :class="{
-                [`font-${preferences.fontSize}`]: true,
-                [`contrast-${preferences.contrast}`]: true,
-                'reduced-motion': preferences.reduceMotion
-              }"
-            >
-              <p>Cette interface s'adapte à vos préférences :</p>
+            <h4>Chargement optimisé</h4>
+            <div class="content-example-good">
+              <p>✅ Optimisations actives :</p>
               <ul>
-                <li>Taille de police : {{ preferences.fontSize }}</li>
-                <li>Contraste : {{ preferences.contrast }}</li>
-                <li>Animations : {{ preferences.reduceMotion ? 'réduites' : 'normales' }}</li>
-                <li>Lecture auto : {{ preferences.autoplay ? 'activée' : 'désactivée' }}</li>
+                <li>🖼️ Images lazy loading avec placeholder (50KB → 500KB)</li>
+                <li>📹 Vidéos chargées à la demande</li>
+                <li>📦 Code splitting et chunks (200KB initial)</li>
+                <li>💾 Service Worker avec cache intelligent</li>
               </ul>
 
-              <div class="media-good">
-                <div class="video-placeholder" style="width: 200px; height: 150px; background: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem;">
-                  <div style="text-align: center; color: #666;">
-                    📹 Vidéo<br>
-                    <button v-if="!preferences.autoplay" @click="playVideo" style="margin-top: 0.5rem;">
-                      ▶️ Lecture
-                    </button>
-                    <div v-else style="margin-top: 0.5rem;">Lecture auto</div>
-                  </div>
+              <div class="loading-controls">
+                <label>
+                  <input type="checkbox" v-model="lazyLoadImages" @change="updateLoadingStrategy">
+                  Lazy loading des images
+                </label>
+                <label>
+                  <input type="checkbox" v-model="cacheEnabled" @change="updateLoadingStrategy">
+                  Cache activé
+                </label>
+                <label>
+                  Qualité d'image :
+                  <select v-model="imageQuality" @change="updateLoadingStrategy">
+                    <option value="auto">Auto (selon connexion)</option>
+                    <option value="low">Basse (data saver)</option>
+                    <option value="high">Haute</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="loading-simulation">
+                <div class="loading-bar-good">
+                  <div class="loading-progress" :style="{ width: loadingProgress + '%', background: '#28a745' }"></div>
+                </div>
+                <span class="loading-text">{{ loadingProgress < 100 ? `Chargement initial... ${(loadingProgress * 2).toFixed(0)} KB / 200 KB` : 'Prêt - Ressources chargées à la demande' }}</span>
+              </div>
+
+              <div class="resource-list-good">
+                <div class="resource-item" :class="{ loaded: loadingProgress > 25 }">
+                  <span>app.core.js - 50 KB</span>
+                  <span class="status">{{ loadingProgress > 25 ? '✅' : '⏳' }}</span>
+                </div>
+                <div class="resource-item" :class="{ loaded: loadingProgress > 50 }">
+                  <span>styles.critical.css - 15 KB</span>
+                  <span class="status">{{ loadingProgress > 50 ? '✅' : '⏳' }}</span>
+                </div>
+                <div class="resource-item" :class="{ 'lazy-loaded': lazyLoadImages }">
+                  <span>images - {{ lazyLoadImages ? 'Chargées au scroll' : '500 KB' }}</span>
+                  <span class="status">{{ lazyLoadImages ? '⏸️' : '⏳' }}</span>
+                </div>
+                <div class="resource-item cached" v-if="cacheEnabled">
+                  <span>Depuis le cache - 0 KB</span>
+                  <span class="status">⚡</span>
                 </div>
               </div>
 
-              <div class="status-message" role="status" aria-live="polite">
-                {{ statusMessage }}
+              <div class="performance-metrics">
+                <div class="metric">
+                  <span class="metric-label">First Paint:</span>
+                  <span class="metric-value" :class="{ good: lazyLoadImages }">{{ lazyLoadImages ? '0.8s' : '3.2s' }}</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">Interactivité:</span>
+                  <span class="metric-value" :class="{ good: cacheEnabled }">{{ cacheEnabled ? '1.2s' : '4.5s' }}</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">Data usage:</span>
+                  <span class="metric-value good">{{ imageQuality === 'low' ? '~200 KB' : imageQuality === 'auto' ? '~500 KB' : '~2 MB' }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -475,14 +458,11 @@ const sidebarCollapsed = ref(false)
 const deviceType = ref('desktop')
 const mobileMenuOpen = ref(false)
 
-// User preferences
-const preferencesOpen = ref(false)
-const preferences = ref({
-  fontSize: 'normal',
-  contrast: 'normal',
-  reduceMotion: false,
-  autoplay: false
-})
+// Lazy loading and optimization
+const lazyLoadImages = ref(true)
+const cacheEnabled = ref(true)
+const imageQuality = ref('auto')
+const loadingProgress = ref(0)
 
 const statusMessage = ref('')
 
@@ -532,45 +512,31 @@ function closeMenu() {
   mobileMenuOpen.value = false
 }
 
-function savePreferences() {
-  localStorage.setItem('accessibilityPreferences', JSON.stringify(preferences.value))
-  statusMessage.value = 'Préférences sauvegardées'
-  setTimeout(() => {
-    statusMessage.value = ''
-  }, 3000)
-}
-
-function loadPreferences() {
-  const saved = localStorage.getItem('accessibilityPreferences')
-  if (saved) {
-    preferences.value = { ...preferences.value, ...JSON.parse(saved) }
+function updateLoadingStrategy() {
+  statusMessage.value = 'Stratégie de chargement mise à jour'
+  // Simulate loading progress when options change
+  if (loadingProgress.value === 100) {
+    simulateLoading()
   }
-}
-
-function resetPreferences() {
-  preferences.value = {
-    fontSize: 'normal',
-    contrast: 'normal',
-    reduceMotion: false,
-    autoplay: false
-  }
-  localStorage.removeItem('accessibilityPreferences')
-  statusMessage.value = 'Préférences réinitialisées'
-  setTimeout(() => {
-    statusMessage.value = ''
-  }, 3000)
-}
-
-function playVideo() {
-  statusMessage.value = 'Vidéo en cours de lecture'
   setTimeout(() => {
     statusMessage.value = ''
   }, 2000)
 }
 
+function simulateLoading() {
+  loadingProgress.value = 0
+  const interval = setInterval(() => {
+    loadingProgress.value += 10
+    if (loadingProgress.value >= 100) {
+      clearInterval(interval)
+    }
+  }, 200)
+}
+
 // Detect user's reduced motion preference
 onMounted(() => {
-  loadPreferences()
+  // Start loading simulation
+  simulateLoading()
 
   // Listen for changes in system reduced motion preference
   const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -1263,6 +1229,139 @@ h1 {
 /* Tablet simulation */
 .device-simulator-good.tablet .content-section-good {
   grid-template-columns: 1fr;
+}
+
+/* Loading and optimization styles */
+.loading-demo {
+  padding: 1rem;
+}
+
+.loading-simulation {
+  margin: 1.5rem 0;
+}
+
+.loading-bar-bad,
+.loading-bar-good {
+  width: 100%;
+  height: 24px;
+  background: var(--color-bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.loading-progress {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 12px;
+}
+
+.loading-text {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.resource-list-bad,
+.resource-list-good {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+}
+
+.resource-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: var(--color-bg);
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.resource-item:last-child {
+  margin-bottom: 0;
+}
+
+.resource-item.loaded {
+  background: #d4edda;
+  color: #155724;
+}
+
+.resource-item.lazy-loaded {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.resource-item.cached {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.resource-item .status {
+  font-size: 1.1rem;
+}
+
+.loading-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+}
+
+.loading-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.loading-controls select {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.performance-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.metric {
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.metric-value.good {
+  color: #28a745;
 }
 
 /* Animations */

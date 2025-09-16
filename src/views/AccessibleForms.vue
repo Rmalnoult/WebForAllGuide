@@ -188,47 +188,56 @@
     </ExampleToggle>
 
     <ExampleToggle
-      title="Fieldsets et groupes de champs"
-      explanation="Les groupes de champs liés doivent être regroupés dans des fieldsets avec des légendes descriptives, particulièrement pour les boutons radio et cases à cocher."
+      title="Groupes de champs avec aria-labelledby"
+      explanation="Les groupes de champs liés doivent être associés à leurs titres via aria-labelledby pour créer des relations sémantiques claires, particulièrement pour les boutons radio et cases à cocher."
     >
       <template #bad>
         <div class="form-demo">
           <form class="form-fieldset-bad">
-            <h4>Préférences de contact</h4>
+            <h4>Préférences</h4>
 
-            <div class="form-section">
-              <p>Comment souhaitez-vous être contacté ?</p>
-              <div class="radio-group">
+            <div class="messy-form">
+              <div class="form-row">
                 <input type="radio" name="contact-bad" id="email-contact-bad" value="email">
                 <label for="email-contact-bad">Email</label>
+
+                <input type="checkbox" id="newsletter-bad" value="newsletter">
+                <label for="newsletter-bad">Newsletter</label>
               </div>
-              <div class="radio-group">
+
+              <div class="form-row">
                 <input type="radio" name="contact-bad" id="phone-contact-bad" value="phone">
                 <label for="phone-contact-bad">Téléphone</label>
+
+                <input type="text" placeholder="Nom" class="text-input">
               </div>
-              <div class="radio-group">
+
+              <div class="form-row">
+                <input type="checkbox" id="offers-bad" value="offers">
+                <label for="offers-bad">Offres</label>
+
                 <input type="radio" name="contact-bad" id="sms-contact-bad" value="sms">
                 <label for="sms-contact-bad">SMS</label>
               </div>
-            </div>
 
-            <div class="form-section">
-              <p>Quels types de communications souhaitez-vous recevoir ?</p>
-              <div class="checkbox-group">
-                <input type="checkbox" id="newsletter-bad" value="newsletter">
-                <label for="newsletter-bad">Newsletter hebdomadaire</label>
-              </div>
-              <div class="checkbox-group">
-                <input type="checkbox" id="offers-bad" value="offers">
-                <label for="offers-bad">Offres spéciales</label>
-              </div>
-              <div class="checkbox-group">
+              <div class="form-row">
+                <input type="email" placeholder="Email" class="text-input">
+
                 <input type="checkbox" id="updates-bad" value="updates">
-                <label for="updates-bad">Mises à jour produit</label>
+                <label for="updates-bad">Updates</label>
+              </div>
+
+              <div class="form-row">
+                <select class="select-input">
+                  <option>Choisir...</option>
+                  <option>Quotidien</option>
+                  <option>Hebdomadaire</option>
+                  <option>Mensuel</option>
+                </select>
               </div>
             </div>
 
-            <button type="submit">Sauvegarder</button>
+            <button type="submit">OK</button>
           </form>
         </div>
       </template>
@@ -238,55 +247,66 @@
           <form class="form-fieldset-good">
             <h4>Préférences de contact</h4>
 
-            <fieldset>
-              <legend>Comment souhaitez-vous être contacté ? *</legend>
-              <div class="radio-group">
-                <input type="radio" name="contact-good" id="email-contact-good" value="email" required>
-                <label for="email-contact-good">
-                  <span class="radio-label">Email</span>
-                  <span class="radio-description">Notifications par email</span>
-                </label>
+            <div class="form-section" role="group" aria-labelledby="personal-info-title">
+              <h5 id="personal-info-title">Informations personnelles</h5>
+              <div class="form-field">
+                <label for="name-good">Nom complet *</label>
+                <input type="text" id="name-good" name="name" required aria-required="true" aria-describedby="name-desc">
+                <span id="name-desc" class="field-description">Votre nom complet tel qu'il apparaîtra dans nos communications</span>
               </div>
-              <div class="radio-group">
-                <input type="radio" name="contact-good" id="phone-contact-good" value="phone" required>
-                <label for="phone-contact-good">
-                  <span class="radio-label">Téléphone</span>
-                  <span class="radio-description">Appels directs</span>
-                </label>
+              <div class="form-field">
+                <label for="email-field-good">Adresse email *</label>
+                <input type="email" id="email-field-good" name="email-field" required aria-required="true" aria-describedby="email-desc">
+                <span id="email-desc" class="field-description">Nous utiliserons cet email pour toutes nos communications</span>
               </div>
-              <div class="radio-group">
-                <input type="radio" name="contact-good" id="sms-contact-good" value="sms" required>
-                <label for="sms-contact-good">
-                  <span class="radio-label">SMS</span>
-                  <span class="radio-description">Messages texte</span>
-                </label>
-              </div>
-            </fieldset>
+            </div>
 
-            <fieldset>
-              <legend>Types de communications (optionnel)</legend>
+            <div class="form-section" role="radiogroup" aria-labelledby="contact-method-title" aria-required="true">
+              <h5 id="contact-method-title">Méthode de contact préférée *</h5>
+              <div class="radio-group">
+                <input type="radio" name="contact-good" id="email-contact-good" value="email" required aria-describedby="contact-method-title">
+                <label for="email-contact-good">Email</label>
+              </div>
+              <div class="radio-group">
+                <input type="radio" name="contact-good" id="phone-contact-good" value="phone" required aria-describedby="contact-method-title">
+                <label for="phone-contact-good">Téléphone</label>
+              </div>
+              <div class="radio-group">
+                <input type="radio" name="contact-good" id="sms-contact-good" value="sms" required aria-describedby="contact-method-title">
+                <label for="sms-contact-good">SMS</label>
+              </div>
+            </div>
+
+            <div class="form-section" role="group" aria-labelledby="comm-types-title">
+              <h5 id="comm-types-title">Types de communications</h5>
+              <p id="comm-types-desc" class="section-description">Sélectionnez les types de communications que vous souhaitez recevoir</p>
               <div class="checkbox-group">
-                <input type="checkbox" id="newsletter-good" value="newsletter">
-                <label for="newsletter-good">
-                  <span class="checkbox-label">Newsletter hebdomadaire</span>
-                  <span class="checkbox-description">Actualités et conseils chaque semaine</span>
-                </label>
+                <input type="checkbox" id="newsletter-good" value="newsletter" aria-describedby="comm-types-desc">
+                <label for="newsletter-good">Newsletter</label>
               </div>
               <div class="checkbox-group">
-                <input type="checkbox" id="offers-good" value="offers">
-                <label for="offers-good">
-                  <span class="checkbox-label">Offres spéciales</span>
-                  <span class="checkbox-description">Promotions et réductions exclusives</span>
-                </label>
+                <input type="checkbox" id="offers-good" value="offers" aria-describedby="comm-types-desc">
+                <label for="offers-good">Offres spéciales</label>
               </div>
               <div class="checkbox-group">
-                <input type="checkbox" id="updates-good" value="updates">
-                <label for="updates-good">
-                  <span class="checkbox-label">Mises à jour produit</span>
-                  <span class="checkbox-description">Nouvelles fonctionnalités et améliorations</span>
-                </label>
+                <input type="checkbox" id="updates-good" value="updates" aria-describedby="comm-types-desc">
+                <label for="updates-good">Mises à jour produit</label>
               </div>
-            </fieldset>
+            </div>
+
+            <div class="form-section" role="group" aria-labelledby="frequency-title">
+              <h5 id="frequency-title">Fréquence des communications</h5>
+              <div class="form-field">
+                <label for="frequency-good">Choisir la fréquence</label>
+                <select id="frequency-good" name="frequency" aria-describedby="frequency-desc">
+                  <option value="">Sélectionner...</option>
+                  <option value="daily">Quotidien</option>
+                  <option value="weekly">Hebdomadaire</option>
+                  <option value="monthly">Mensuel</option>
+                </select>
+                <span id="frequency-desc" class="field-description">Définit la fréquence maximale de nos envois</span>
+              </div>
+            </div>
 
             <button type="submit">Sauvegarder les préférences</button>
           </form>
@@ -823,6 +843,145 @@ fieldset legend {
 .form-section p {
   margin: 0 0 1rem 0;
   font-weight: 500;
+}
+
+/* Messy form styles for bad example */
+.form-fieldset-bad {
+  background: #2d3748;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.form-fieldset-bad h4 {
+  color: #e2e8f0;
+  margin-bottom: 1rem;
+}
+
+.messy-form {
+  padding: 1rem;
+  background: #1a202c;
+  border-radius: 0.25rem;
+}
+
+.messy-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #4a5568;
+}
+
+.messy-form .form-row:last-child {
+  border-bottom: none;
+}
+
+.messy-form input[type="radio"],
+.messy-form input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.messy-form label {
+  color: #cbd5e0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.messy-form .text-input,
+.messy-form .select-input {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.5rem;
+  border: 1px solid #4a5568;
+  border-radius: 0.25rem;
+  background: #2d3748;
+  color: #e2e8f0;
+}
+
+.messy-form .text-input::placeholder {
+  color: #718096;
+}
+
+.form-fieldset-bad button[type="submit"] {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.form-fieldset-bad button[type="submit"]:hover {
+  background: #3182ce;
+}
+
+/* Good form with aria-labelledby styles */
+.form-fieldset-good h4 {
+  margin-bottom: 1.5rem;
+}
+
+.form-fieldset-good .form-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-bg-secondary);
+}
+
+.form-fieldset-good h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.form-fieldset-good .section-description {
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.form-fieldset-good .field-description {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.form-fieldset-good .form-field {
+  margin-bottom: 1rem;
+}
+
+.form-fieldset-good .form-field:last-child {
+  margin-bottom: 0;
+}
+
+.form-fieldset-good .form-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.form-fieldset-good .form-field input[type="text"],
+.form-fieldset-good .form-field input[type="email"],
+.form-fieldset-good .form-field select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.form-fieldset-good .form-field select {
+  cursor: pointer;
 }
 
 /* Complex form styles */

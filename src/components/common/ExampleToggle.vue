@@ -1,36 +1,38 @@
 <template>
-  <div class="example-toggle">
+  <c-card class="example-toggle">
     <div class="toggle-header">
-      <h3>{{ title }}</h3>
+      <c-text tag="h3">{{ title }}</c-text>
     </div>
 
     <div class="examples-container">
-      <div class="example bad-example">
+      <c-card class="example bad-example">
         <div class="example-label bad-label">
-          <span aria-hidden="true">❌</span> Mauvais exemple
+          <c-icon name="error-circle" aria-hidden="true" /> Mauvais exemple
         </div>
         <div class="example-content">
           <slot name="bad"></slot>
         </div>
-      </div>
+      </c-card>
 
-      <div class="example good-example">
+      <c-card class="example good-example">
         <div class="example-label good-label">
-          <span aria-hidden="true">✅</span> Bon exemple
+          <c-icon name="check-circle" aria-hidden="true" /> Bon exemple
         </div>
         <div class="example-content">
           <slot name="good"></slot>
         </div>
-      </div>
+      </c-card>
     </div>
 
     <div v-if="explanation" class="example-explanation" role="note">
-      <strong>Explication :</strong> {{ explanation }}
+      <c-text><strong>Explication :</strong> {{ explanation }}</c-text>
     </div>
-  </div>
+  </c-card>
 </template>
 
 <script setup>
+import { CCard, CText, CIcon } from '@carrefour/design-system-components-vue3';
+
 defineProps({
   title: {
     type: String,
