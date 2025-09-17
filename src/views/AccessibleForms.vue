@@ -21,12 +21,32 @@
             <div class="form-group">
               <input type="password" placeholder="Mot de passe">
             </div>
-            <div class="form-group">
+            <div class="form-group checkbox-group">
               <input type="checkbox">
               <span>Se souvenir de moi</span>
             </div>
             <button type="submit">Se connecter</button>
           </form>
+        </div>
+        <div class="code-example">
+          <div class="code-block language-html">
+            <pre><code>&lt;!-- Labels manquants, placeholders utilisés comme labels --&gt;
+&lt;form&gt;
+  &lt;h4&gt;Connexion&lt;/h4&gt;
+
+  &lt;!-- Pas de label associé, placeholder insuffisant --&gt;
+  &lt;input type="email" placeholder="Votre email"&gt;
+
+  &lt;!-- Pas de label associé --&gt;
+  &lt;input type="password" placeholder="Mot de passe"&gt;
+
+  &lt;!-- Checkbox non associée au texte --&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span&gt;Se souvenir de moi&lt;/span&gt;
+
+  &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
         </div>
       </template>
 
@@ -66,6 +86,46 @@
             <button type="submit">Se connecter</button>
           </form>
         </div>
+
+        <div class="code-example">
+          <div class="code-block language-html">
+            <pre><code>&lt;!-- Labels explicites et correctement associés --&gt;
+&lt;form&gt;
+  &lt;h4&gt;Connexion&lt;/h4&gt;
+
+  &lt;!-- Label associé via for/id --&gt;
+  &lt;label for="email-good"&gt;Adresse email&lt;/label&gt;
+  &lt;input
+    type="email"
+    id="email-good"
+    placeholder="exemple@domaine.fr"
+    required
+    aria-describedby="email-help"
+  &gt;
+  &lt;div id="email-help"&gt;
+    Nous ne partagerons jamais votre email
+  &lt;/div&gt;
+
+  &lt;!-- Label avec instructions --&gt;
+  &lt;label for="password-good"&gt;Mot de passe&lt;/label&gt;
+  &lt;input
+    type="password"
+    id="password-good"
+    required
+    aria-describedby="password-help"
+  &gt;
+  &lt;div id="password-help"&gt;
+    Minimum 8 caractères avec majuscules et chiffres
+  &lt;/div&gt;
+
+  &lt;!-- Checkbox correctement associée --&gt;
+  &lt;input type="checkbox" id="remember-good"&gt;
+  &lt;label for="remember-good"&gt;Se souvenir de moi&lt;/label&gt;
+
+  &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+        </div>
       </template>
     </ExampleToggle>
 
@@ -79,15 +139,15 @@
             <h4>Inscription newsletter</h4>
             <div class="form-group">
               <label>Nom</label>
-              <input type="text" v-model="badForm.name" :class="{ error: badFormSubmitted && !badForm.name }">
+              <input type="text" v-model="badForm.name" :class="{ 'error': badFormSubmitted && !badForm.name }">
             </div>
             <div class="form-group">
               <label>Email</label>
-              <input type="email" v-model="badForm.email" :class="{ error: badFormSubmitted && !isValidEmail(badForm.email) }">
+              <input type="email" v-model="badForm.email" :class="{ 'error': badFormSubmitted && !isValidEmail(badForm.email) }">
             </div>
             <div class="form-group">
               <label>Âge</label>
-              <input type="number" v-model="badForm.age" :class="{ error: badFormSubmitted && badForm.age < 16 }">
+              <input type="number" v-model="badForm.age" :class="{ 'error': badFormSubmitted && badForm.age < 16 }">
             </div>
 
             <div v-if="badFormSubmitted && badFormErrors.length" class="error-summary-bad">
@@ -108,7 +168,7 @@
               <h5 id="error-summary-title">Erreurs à corriger :</h5>
               <ul>
                 <li v-for="error in goodFormErrors" :key="error.field">
-                  <a :href="`#${error.field}-good-form`">{{ error.message }}</a>
+                  <a :href="`#${error.field}-good-form`">{{ error?.message || 'Erreur de validation' }}</a>
                 </li>
               </ul>
             </div>
@@ -119,7 +179,7 @@
                 type="text"
                 id="name-good-form"
                 v-model="goodForm.name"
-                :class="{ error: goodFormSubmitted && !goodForm.name }"
+                :class="{ 'error': goodFormSubmitted && !goodForm.name }"
                 required
                 aria-invalid="goodFormSubmitted && !goodForm.name"
                 aria-describedby="name-error"
@@ -140,7 +200,7 @@
                 type="email"
                 id="email-good-form"
                 v-model="goodForm.email"
-                :class="{ error: goodFormSubmitted && !isValidEmail(goodForm.email) }"
+                :class="{ 'error': goodFormSubmitted && !isValidEmail(goodForm.email) }"
                 required
                 aria-invalid="goodFormSubmitted && !isValidEmail(goodForm.email)"
                 aria-describedby="email-good-error"
@@ -163,7 +223,7 @@
                 v-model="goodForm.age"
                 min="16"
                 max="120"
-                :class="{ error: goodFormSubmitted && goodForm.age < 16 }"
+                :class="{ 'error': goodFormSubmitted && goodForm.age < 16 }"
                 required
                 aria-invalid="goodFormSubmitted && goodForm.age < 16"
                 aria-describedby="age-help age-error"
@@ -183,6 +243,49 @@
 
             <button type="submit">S'inscrire</button>
           </form>
+        </div>
+
+        <div class="code-example">
+          <div class="code-block language-html">
+            <pre><code>&lt;!-- Erreurs clairement associées et annoncées --&gt;
+&lt;form @submit.prevent="submitGoodForm" novalidate&gt;
+  &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
+
+  &lt;!-- Résumé des erreurs avec navigation --&gt;
+  &lt;div
+    v-if="goodFormSubmitted &amp;&amp; goodFormErrors.length"
+    role="alert"
+    aria-labelledby="error-summary-title"
+  &gt;
+    &lt;h5 id="error-summary-title"&gt;Erreurs à corriger :&lt;/h5&gt;
+    &lt;ul&gt;
+      &lt;li v-for="error in goodFormErrors" :key="error.field"&gt;
+        &lt;a :href="`#${error.field}-good-form`"&gt;{{ error.message }}&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Champ avec erreur spécifique associée --&gt;
+  &lt;label for="name-good-form"&gt;Nom complet *&lt;/label&gt;
+  &lt;input
+    type="text"
+    id="name-good-form"
+    v-model="goodForm.name"
+    required
+    aria-invalid="goodFormSubmitted &amp;&amp; !goodForm.name"
+    aria-describedby="name-error"
+  &gt;
+  &lt;div
+    v-if="goodFormSubmitted &amp;&amp; !goodForm.name"
+    id="name-error"
+    role="alert"
+  &gt;
+    ❌ Le nom est obligatoire
+  &lt;/div&gt;
+
+  &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
         </div>
       </template>
     </ExampleToggle>
@@ -311,6 +414,78 @@
             <button type="submit">Sauvegarder les préférences</button>
           </form>
         </div>
+
+        <div class="code-example">
+          <div class="code-block language-html">
+            <pre><code>&lt;!-- Groupes logiques avec aria-labelledby --&gt;
+&lt;form&gt;
+  &lt;h4&gt;Préférences de contact&lt;/h4&gt;
+
+  &lt;!-- Section informations personnelles --&gt;
+  &lt;div role="group" aria-labelledby="personal-info-title"&gt;
+    &lt;h5 id="personal-info-title"&gt;Informations personnelles&lt;/h5&gt;
+
+    &lt;label for="name-good"&gt;Nom complet *&lt;/label&gt;
+    &lt;input
+      type="text"
+      id="name-good"
+      name="name"
+      required
+      aria-required="true"
+      aria-describedby="name-desc"
+    &gt;
+    &lt;span id="name-desc"&gt;
+      Votre nom tel qu'il apparaîtra dans nos communications
+    &lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Groupe de boutons radio --&gt;
+  &lt;div
+    role="radiogroup"
+    aria-labelledby="contact-method-title"
+    aria-required="true"
+  &gt;
+    &lt;h5 id="contact-method-title"&gt;Méthode de contact préférée *&lt;/h5&gt;
+
+    &lt;input
+      type="radio"
+      name="contact-good"
+      id="email-contact-good"
+      value="email"
+      required
+    &gt;
+    &lt;label for="email-contact-good"&gt;Email&lt;/label&gt;
+
+    &lt;input
+      type="radio"
+      name="contact-good"
+      id="phone-contact-good"
+      value="phone"
+      required
+    &gt;
+    &lt;label for="phone-contact-good"&gt;Téléphone&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Groupe de cases à cocher --&gt;
+  &lt;div role="group" aria-labelledby="comm-types-title"&gt;
+    &lt;h5 id="comm-types-title"&gt;Types de communications&lt;/h5&gt;
+    &lt;p id="comm-types-desc"&gt;
+      Sélectionnez les types de communications que vous souhaitez recevoir
+    &lt;/p&gt;
+
+    &lt;input
+      type="checkbox"
+      id="newsletter-good"
+      value="newsletter"
+      aria-describedby="comm-types-desc"
+    &gt;
+    &lt;label for="newsletter-good"&gt;Newsletter&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit"&gt;Sauvegarder les préférences&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+        </div>
       </template>
     </ExampleToggle>
 
@@ -330,7 +505,7 @@
                   type="text"
                   v-model="complexBadForm.username"
                   @input="validateUsernameBad"
-                  :class="{ error: usernameBadError }"
+                  :class="{ 'error': usernameBadError }"
                 >
                 <div v-if="usernameBadError" class="error-inline">{{ usernameBadError }}</div>
               </div>
@@ -341,7 +516,7 @@
                   type="email"
                   v-model="complexBadForm.email"
                   @input="validateEmailBad"
-                  :class="{ error: emailBadError }"
+                  :class="{ 'error': emailBadError }"
                 >
                 <div v-if="emailBadError" class="error-inline">{{ emailBadError }}</div>
               </div>
@@ -353,7 +528,7 @@
                 type="password"
                 v-model="complexBadForm.password"
                 @input="validatePasswordBad"
-                :class="{ error: passwordBadError }"
+                :class="{ 'error': passwordBadError }"
               >
               <div v-if="passwordBadError" class="error-inline">{{ passwordBadError }}</div>
             </div>
@@ -376,7 +551,7 @@
                   id="username-complex"
                   v-model="complexGoodForm.username"
                   @blur="validateUsernameGood"
-                  :class="{ error: usernameGoodError, success: usernameGoodValid }"
+                  :class="{ 'error': usernameGoodError, 'success': usernameGoodValid }"
                   aria-describedby="username-requirements username-feedback"
                   aria-invalid="!!usernameGoodError"
                   required
@@ -419,7 +594,7 @@
                   id="email-complex"
                   v-model="complexGoodForm.email"
                   @blur="validateEmailGood"
-                  :class="{ error: emailGoodError, success: emailGoodValid }"
+                  :class="{ 'error': emailGoodError, 'success': emailGoodValid }"
                   aria-describedby="email-complex-feedback"
                   aria-invalid="!!emailGoodError"
                   required
@@ -452,7 +627,7 @@
                 id="password-complex"
                 v-model="complexGoodForm.password"
                 @input="validatePasswordGood"
-                :class="{ error: passwordGoodError }"
+                :class="{ 'error': passwordGoodError }"
                 aria-describedby="password-strength password-feedback"
                 aria-invalid="!!passwordGoodError"
                 required
@@ -497,6 +672,85 @@
             </button>
           </form>
         </div>
+
+        <div class="code-example">
+          <div class="code-block language-html">
+            <pre><code>&lt;!-- Validation respectueuse avec feedback constructif --&gt;
+&lt;form&gt;
+  &lt;h4&gt;Créer un compte&lt;/h4&gt;
+
+  &lt;!-- Validation sur blur, pas sur input --&gt;
+  &lt;label for="username-complex"&gt;Nom d'utilisateur *&lt;/label&gt;
+  &lt;input
+    type="text"
+    id="username-complex"
+    v-model="complexGoodForm.username"
+    @blur="validateUsernameGood"
+    :class="{ error: usernameGoodError, success: usernameGoodValid }"
+    aria-describedby="username-requirements username-feedback"
+    aria-invalid="!!usernameGoodError"
+    required
+  &gt;
+
+  &lt;!-- Instructions claires --&gt;
+  &lt;div id="username-requirements"&gt;
+    &lt;h6&gt;Exigences :&lt;/h6&gt;
+    &lt;ul&gt;
+      &lt;li :class="{ valid: complexGoodForm.username.length &gt;= 3 }"&gt;
+        Au moins 3 caractères
+      &lt;/li&gt;
+      &lt;li :class="{ valid: /^[a-zA-Z0-9_]+$/.test(complexGoodForm.username) }"&gt;
+        Lettres, chiffres et underscore uniquement
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Feedback accessible --&gt;
+  &lt;div
+    v-if="usernameGoodError"
+    id="username-feedback"
+    role="alert"
+    aria-live="polite"
+  &gt;
+    ❌ &#123;&#123; usernameGoodError &#125;&#125;
+  &lt;/div&gt;
+  &lt;div
+    v-else-if="usernameGoodValid"
+    id="username-feedback"
+    role="status"
+    aria-live="polite"
+  &gt;
+    ✅ Nom d'utilisateur disponible
+  &lt;/div&gt;
+
+  &lt;!-- Indicateur de force du mot de passe --&gt;
+  &lt;label for="password-complex"&gt;Mot de passe *&lt;/label&gt;
+  &lt;input
+    type="password"
+    id="password-complex"
+    v-model="complexGoodForm.password"
+    @input="validatePasswordGood"
+    aria-describedby="password-strength"
+    required
+  &gt;
+
+  &lt;div id="password-strength"&gt;
+    &lt;h6&gt;Force du mot de passe :&lt;/h6&gt;
+    &lt;div class="strength-indicator"&gt;
+      &lt;div
+        class="strength-bar"
+        :class="`strength-${passwordStrength}`"
+        :style="{ width: `${passwordStrength * 25}%` }"
+      &gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit" :disabled="!isFormValid"&gt;
+    Créer le compte
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+        </div>
       </template>
     </ExampleToggle>
   </div>
@@ -505,6 +759,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
+
+// Add default error state to prevent undefined access
+const error = ref({ message: '' })
 
 // Simple form validation
 const badForm = ref({ name: '', email: '', age: 0 })
@@ -540,13 +801,13 @@ const badFormErrors = computed(() => {
 
 const goodFormErrors = computed(() => {
   const errors = []
-  if (!goodForm.value.name) {
+  if (goodForm.value && !goodForm.value.name) {
     errors.push({ field: 'name', message: 'Le nom est obligatoire' })
   }
-  if (!isValidEmail(goodForm.value.email)) {
+  if (goodForm.value && !isValidEmail(goodForm.value.email)) {
     errors.push({ field: 'email', message: 'L\'adresse email est invalide' })
   }
-  if (goodForm.value.age < 16) {
+  if (goodForm.value && goodForm.value.age < 16) {
     errors.push({ field: 'age', message: 'L\'âge minimum requis est 16 ans' })
   }
   return errors
@@ -776,7 +1037,7 @@ h1 {
 /* Checkbox and radio styles */
 .checkbox-group {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.75rem;
 }
 
@@ -1107,6 +1368,146 @@ button[type="submit"]:focus-visible {
 
   button[type="submit"] {
     transition: none;
+  }
+}
+
+/* Examples section styles */
+.examples-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.examples-section h5 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.code-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.example-container {
+  background: var(--color-bg);
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.example-container h6 {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.example-container.bad h6 {
+  background: var(--color-error-light);
+  color: var(--color-error);
+  border-bottom-color: var(--color-error);
+}
+
+.example-container.good h6 {
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border-bottom-color: var(--color-success);
+}
+
+/* Code block styles - now properly nested */
+.example-container .code-block {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.example-container .code-block pre {
+  margin: 0;
+  padding: 1rem;
+  background: #1a1a1a;
+  color: #e5e5e5;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  border-radius: 0;
+}
+
+.example-container .code-block code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  white-space: pre;
+  color: #e5e5e5;
+}
+
+/* Responsive code blocks */
+@media (max-width: 1024px) {
+  .code-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .example-container .code-block pre {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .examples-section {
+    padding: 1rem;
+  }
+
+  .example-container .code-block pre {
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Code example styles for individual slots */
+.code-example {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-border);
+}
+
+.code-example .code-block {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.code-example .code-block pre {
+  margin: 0;
+  padding: 1rem;
+  background: #1a1a1a;
+  color: #e5e5e5;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  border-radius: 0.25rem;
+}
+
+.code-example .code-block code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  white-space: pre;
+  color: #e5e5e5;
+}
+
+@media (max-width: 768px) {
+  .code-example {
+    padding: 0.75rem;
+  }
+
+  .code-example .code-block pre {
+    padding: 0.75rem;
+    font-size: 0.75rem;
   }
 }
 </style>

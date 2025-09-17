@@ -34,6 +34,98 @@
     </section>
 
     <ExampleToggle
+      title="Navigation au clavier dans les listes"
+      explanation="Les listes navigables au clavier permettent d'utiliser les flèches directionnelles pour se déplacer entre les éléments, en plus de la navigation Tab classique."
+    >
+      <template #bad>
+        <div class="list-nav-demo">
+          <p>Menu avec navigation Tab uniquement :</p>
+          <div class="menu-bad">
+            <div class="menu-item-bad" tabindex="0">🏠 Accueil</div>
+            <div class="menu-item-bad" tabindex="0">📋 Projets</div>
+            <div class="menu-item-bad" tabindex="0">👥 Équipe</div>
+            <div class="menu-item-bad" tabindex="0">📊 Statistiques</div>
+            <div class="menu-item-bad" tabindex="0">⚙️ Paramètres</div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : navigation Tab uniquement --&gt;
+&lt;div class="menu"&gt;
+  &lt;div tabindex="0"&gt;🏠 Accueil&lt;/div&gt;
+  &lt;div tabindex="0"&gt;📋 Projets&lt;/div&gt;
+  &lt;div tabindex="0"&gt;👥 Équipe&lt;/div&gt;
+  &lt;div tabindex="0"&gt;📊 Stats&lt;/div&gt;
+  &lt;div tabindex="0"&gt;⚙️ Paramètres&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Utilisateur doit Tab 5 fois --&gt;
+&lt;!-- Pas de navigation par flèches --&gt;
+&lt;!-- Pas de sémantique de menu --&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="list-nav-demo">
+          <p>Menu avec navigation par flèches :</p>
+          <div
+            class="menu-good"
+            role="menu"
+            @keydown="handleMenuKeydown"
+          >
+            <div
+              v-for="(item, index) in menuItems"
+              :key="index"
+              class="menu-item-good"
+              role="menuitem"
+              :tabindex="selectedMenuItem === index ? 0 : -1"
+              @click="selectMenuItem(index)"
+              @focus="selectedMenuItem = index"
+              :class="{ selected: selectedMenuItem === index }"
+            >
+              {{ item }}
+            </div>
+          </div>
+          <p class="hint">💡 Utilisez ↑ ↓ pour naviguer, Entrée pour sélectionner</p>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : navigation par flèches avec roving tabindex --&gt;
+&lt;div
+  role="menu"
+  @keydown="handleKeydown"
+&gt;
+  &lt;div
+    v-for="(item, i) in items"
+    role="menuitem"
+    :tabindex="selected === i ? 0 : -1"
+    @focus="selected = i"
+    :class="{ selected: selected === i }"
+  &gt;
+    {{ item }}
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function handleKeydown(e) {
+  switch(e.key) {
+    case 'ArrowDown':
+      selected = (selected + 1) % items.length
+      break
+    case 'ArrowUp':
+      selected = selected === 0
+        ? items.length - 1
+        : selected - 1
+      break
+    case 'Enter':
+      selectItem(selected)
+      break
+  }
+}
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
       title="Styles de focus visibles"
       explanation="Les utilisateurs qui naviguent au clavier ont besoin d'indicateurs visuels clairs pour savoir où ils se trouvent sur la page."
     >
@@ -47,6 +139,19 @@
             <input type="text" class="input-no-focus" placeholder="Saisissez du texte" />
             <button class="btn-no-focus">Valider</button>
           </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : focus supprimé avec CSS --&gt;
+&lt;style&gt;
+  button:focus {
+    outline: none !important;
+  }
+&lt;/style&gt;
+
+&lt;button&gt;Bouton 1&lt;/button&gt;
+&lt;button&gt;Bouton 2&lt;/button&gt;
+&lt;a href="#"&gt;Lien&lt;/a&gt;
+&lt;input type="text" /&gt;</code></pre>
+          </div>
         </div>
       </template>
 
@@ -59,6 +164,26 @@
             <a href="#" class="link-good-focus">Lien vers la page</a>
             <input type="text" class="input-good-focus" placeholder="Saisissez du texte" />
             <button class="btn-good-focus">Valider</button>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : indicateurs de focus visibles --&gt;
+&lt;style&gt;
+  button:focus-visible {
+    outline: 3px solid #4F46E5;
+    outline-offset: 2px;
+  }
+
+  input:focus-visible {
+    border-color: #4F46E5;
+    outline: 2px solid #4F46E5;
+    outline-offset: 1px;
+  }
+&lt;/style&gt;
+
+&lt;button&gt;Bouton 1&lt;/button&gt;
+&lt;button&gt;Bouton 2&lt;/button&gt;
+&lt;a href="#"&gt;Lien&lt;/a&gt;
+&lt;input type="text" /&gt;</code></pre>
           </div>
         </div>
       </template>
@@ -89,6 +214,21 @@
               <p>L'utilisateur doit naviguer à travers tous les liens de navigation...</p>
             </div>
           </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : pas de lien d'évitement --&gt;
+&lt;header&gt;
+  &lt;nav&gt;
+    &lt;a href="#"&gt;Accueil&lt;/a&gt;
+    &lt;a href="#"&gt;Produits&lt;/a&gt;
+    &lt;a href="#"&gt;Services&lt;/a&gt;
+    &lt;!-- 10+ liens de navigation... --&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;!-- L'utilisateur doit traverser toute la nav --&gt;
+  &lt;h1&gt;Contenu principal&lt;/h1&gt;
+&lt;/main&gt;</code></pre>
+          </div>
         </div>
       </template>
 
@@ -113,6 +253,32 @@
               <h2>Contenu principal</h2>
               <p>L'utilisateur peut accéder directement ici grâce au lien d'évitement !</p>
             </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : lien d'évitement visible au focus --&gt;
+&lt;style&gt;
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+&lt;/style&gt;
+
+&lt;a href="#main-content" class="skip-link"&gt;
+  Aller au contenu principal
+&lt;/a&gt;
+&lt;header&gt;
+  &lt;nav&gt;
+    &lt;!-- Navigation... --&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main id="main-content"&gt;
+  &lt;h1&gt;Contenu principal&lt;/h1&gt;
+&lt;/main&gt;</code></pre>
           </div>
         </div>
       </template>
@@ -143,6 +309,22 @@
                 <button @click="confirmBadModal">Confirmer</button>
               </div>
             </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : modal sans gestion du focus --&gt;
+&lt;div v-if="modalOpen" class="modal"&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;button @click="close"&gt;×&lt;/button&gt;
+    &lt;h2&gt;Titre&lt;/h2&gt;
+    &lt;input type="text" /&gt;
+    &lt;button&gt;Annuler&lt;/button&gt;
+    &lt;button&gt;Confirmer&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Focus peut sortir de la modal --&gt;
+&lt;!-- Pas de gestion de la touche Échap --&gt;
+&lt;!-- Focus non restauré à la fermeture --&gt;</code></pre>
           </div>
         </div>
       </template>
@@ -188,49 +370,42 @@
               </div>
             </div>
           </div>
-        </div>
-      </template>
-    </ExampleToggle>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : modal avec piège à focus --&gt;
+&lt;div
+  v-if="modalOpen"
+  class="modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  @keydown.esc="closeModal"
+&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;button
+      @click="closeModal"
+      aria-label="Fermer"
+    &gt;×&lt;/button&gt;
+    &lt;h2 id="modal-title"&gt;Titre&lt;/h2&gt;
+    &lt;input
+      ref="firstInput"
+      type="text"
+      @keydown.tab="handleTab"
+    /&gt;
+    &lt;button @click="closeModal"&gt;Annuler&lt;/button&gt;
+    &lt;button
+      ref="lastButton"
+      @click="confirm"
+      @keydown.tab="handleTab"
+    &gt;Confirmer&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 
-    <ExampleToggle
-      title="Navigation au clavier dans les listes"
-      explanation="Les listes navigables au clavier permettent d'utiliser les flèches directionnelles pour se déplacer entre les éléments, en plus de la navigation Tab classique."
-    >
-      <template #bad>
-        <div class="list-nav-demo">
-          <p>Menu avec navigation Tab uniquement :</p>
-          <div class="menu-bad">
-            <div class="menu-item-bad" tabindex="0">🏠 Accueil</div>
-            <div class="menu-item-bad" tabindex="0">📋 Projets</div>
-            <div class="menu-item-bad" tabindex="0">👥 Équipe</div>
-            <div class="menu-item-bad" tabindex="0">📊 Statistiques</div>
-            <div class="menu-item-bad" tabindex="0">⚙️ Paramètres</div>
+&lt;script&gt;
+// Focus sur le premier élément à l'ouverture
+// Piège à focus avec gestion Tab/Shift+Tab
+// Retour du focus à l'élément déclencheur
+&lt;/script&gt;</code></pre>
           </div>
-        </div>
-      </template>
-
-      <template #good>
-        <div class="list-nav-demo">
-          <p>Menu avec navigation par flèches :</p>
-          <div
-            class="menu-good"
-            role="menu"
-            @keydown="handleMenuKeydown"
-          >
-            <div
-              v-for="(item, index) in menuItems"
-              :key="index"
-              class="menu-item-good"
-              role="menuitem"
-              :tabindex="selectedMenuItem === index ? 0 : -1"
-              @click="selectMenuItem(index)"
-              @focus="selectedMenuItem = index"
-              :class="{ selected: selectedMenuItem === index }"
-            >
-              {{ item }}
-            </div>
-          </div>
-          <p class="hint">💡 Utilisez ↑ ↓ pour naviguer, Entrée pour sélectionner</p>
         </div>
       </template>
     </ExampleToggle>
@@ -240,6 +415,10 @@
 <script setup>
 import { ref, nextTick } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
 
 // Modal states
 const badModalOpen = ref(false)
@@ -663,6 +842,28 @@ kbd {
   color: var(--color-text-secondary);
   font-style: italic;
   margin-top: 0.5rem;
+}
+
+.code-block {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border: 1px solid var(--color-border);
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.code-block code {
+  white-space: pre;
+  word-wrap: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -26,6 +26,18 @@
             Commande confirmée !
           </div>
         </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais : textes alternatifs non descriptifs --&gt;
+&lt;img src="laptop.jpg" alt="image" /&gt;
+&lt;img src="star-icon.svg" alt="star.png" /&gt;
+&lt;img src="success-icon.svg" alt="success.svg" /&gt;
+
+&lt;!-- Problèmes :
+- alt="image" n'est pas descriptif
+- alt="star.png" décrit le fichier, pas le contenu
+- Les icônes décoratives ont un alt non vide --&gt;</code></pre>
+        </div>
       </template>
 
       <template #good>
@@ -35,7 +47,7 @@
             <h3>MacBook Pro 16"</h3>
             <p class="price">2 499 €</p>
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMkw5IDlINUwxMCAxNEwyMCA5SDE2TDEzIDJIMTJaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPgo=" alt="" />
-            <span>4.8/5 (127 avis)</span>
+            <span><span class="sr-only">Note de </span>4.8/5 <span class="sr-only">étoiles, basée sur </span>(127 avis)</span>
           </article>
 
           <div class="notification">
@@ -43,7 +55,31 @@
             Commande confirmée !
           </div>
         </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon : textes alternatifs descriptifs --&gt;
+&lt;img src="laptop.jpg"
+     alt="MacBook Pro 16 pouces, vue de face,
+          écran ouvert montrant l'interface macOS" /&gt;
+
+&lt;!-- Icône décorative : alt vide, .sr-only pour contexte --&gt;
+&lt;img src="star-icon.svg" alt="" /&gt;
+&lt;span&gt;
+  &lt;span class="sr-only"&gt;Note de &lt;/span&gt;4.8/5
+  &lt;span class="sr-only"&gt; étoiles&lt;/span&gt; (127 avis)
+&lt;/span&gt;
+
+&lt;!-- Icône décorative dans notification --&gt;
+&lt;img src="success-icon.svg" alt="" /&gt;
+&lt;span&gt;Commande confirmée !&lt;/span&gt;
+
+&lt;!-- Bonnes pratiques :
+- Images informatives : alt descriptif du contenu/fonction
+- Images décoratives : alt="" (vide)
+- Éviter les mots comme "image", "photo", "icône" --&gt;</code></pre>
+        </div>
       </template>
+
     </ExampleToggle>
 
     <ExampleToggle
@@ -67,6 +103,25 @@
               <img :src="galleryImages[selectedBadImage].full" />
             </div>
           </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais : galerie non accessible au clavier --&gt;
+&lt;div class="thumbnails"&gt;
+  &lt;img v-for="image in images"
+       :src="image.thumb"
+       @click="selectImage(index)"
+       :class="{ active: selected === index }" /&gt;
+&lt;/div&gt;
+&lt;div class="main-image"&gt;
+  &lt;img :src="images[selected].full" /&gt;
+&lt;/div&gt;
+
+&lt;!-- Problèmes :
+- Pas de navigation au clavier
+- Pas de rôles ARIA
+- Images sans descriptions alternatives
+- Pas de focus management --&gt;</code></pre>
         </div>
       </template>
 
@@ -106,7 +161,37 @@
             </div>
           </div>
         </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon : galerie accessible avec navigation clavier --&gt;
+&lt;div role="tablist" aria-label="Images du produit"&gt;
+  &lt;button v-for="(image, index) in images"
+          :id="`tab-${index}`"
+          role="tab"
+          :aria-selected="selected === index"
+          :aria-controls="`panel-${index}`"
+          :tabindex="selected === index ? 0 : -1"
+          @click="selectImage(index)"
+          @keydown="handleKeydown($event, index)"&gt;
+    &lt;img :src="image.thumb" :alt="`${image.alt} - Miniature`" /&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div :id="`panel-${selected}`"
+     role="tabpanel"
+     :aria-labelledby="`tab-${selected}`"&gt;
+  &lt;img :src="images[selected].full" :alt="images[selected].alt" /&gt;
+  &lt;p&gt;&#123;&#123; images[selected].description &#125;&#125;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Bonnes pratiques :
+- Pattern tablist/tab/tabpanel ARIA
+- Navigation avec flèches, Home, End
+- Focus management avec tabindex
+- Descriptions détaillées pour chaque image --&gt;</code></pre>
+        </div>
       </template>
+
     </ExampleToggle>
 
     <ExampleToggle
@@ -133,6 +218,21 @@
               <small>(Lecture automatique, pas de sous-titres)</small>
             </div>
           </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais : vidéo avec lecture automatique --&gt;
+&lt;video width="100%" height="200" autoplay loop muted&gt;
+  &lt;source src="demo.mp4" type="video/mp4"&gt;
+  Votre navigateur ne supporte pas la vidéo.
+&lt;/video&gt;
+
+&lt;!-- Problèmes :
+- autoplay peut désorienter les utilisateurs
+- Pas de sous-titres (captions)
+- Pas de description audio
+- Contrôles non explicites
+- Pas d'alternative textuelle --&gt;</code></pre>
         </div>
       </template>
 
@@ -175,6 +275,44 @@
             </div>
           </div>
         </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon : vidéo accessible avec sous-titres et contrôles --&gt;
+&lt;video width="100%" height="200"
+       controls
+       preload="metadata"
+       aria-describedby="video-description"&gt;
+  &lt;source src="demo.mp4" type="video/mp4"&gt;
+
+  &lt;!-- Sous-titres pour les malentendants --&gt;
+  &lt;track kind="captions"
+         src="captions.vtt"
+         srclang="fr"
+         label="Français"
+         default&gt;
+
+  &lt;!-- Descriptions audio pour les malvoyants --&gt;
+  &lt;track kind="descriptions"
+         src="descriptions.vtt"
+         srclang="fr"
+         label="Description audio"&gt;
+
+  &lt;!-- Fallback avec lien vers transcription --&gt;
+  Votre navigateur ne supporte pas la vidéo.
+  &lt;a href="transcript.html"&gt;Consulter la transcription&lt;/a&gt;
+&lt;/video&gt;
+
+&lt;div id="video-description"&gt;
+  Vidéo de 2 minutes présentant les fonctionnalités du MacBook Pro.
+  Sous-titres en français disponibles.
+&lt;/div&gt;
+
+&lt;!-- Bonnes pratiques :
+- controls : contrôles natifs accessibles
+- preload="metadata" : pas de lecture automatique
+- Sous-titres (captions) et descriptions audio
+- Transcription alternative disponible --&gt;</code></pre>
+        </div>
       </template>
     </ExampleToggle>
 
@@ -193,6 +331,22 @@
               <rect x="230" y="40" width="40" height="100" fill="#3b82f6" />
             </svg>
           </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais : graphique sans description ni données alternatives --&gt;
+&lt;svg width="300" height="150" viewBox="0 0 300 150"&gt;
+  &lt;rect x="50" y="100" width="40" height="40" fill="#3b82f6" /&gt;
+  &lt;rect x="110" y="80" width="40" height="60" fill="#3b82f6" /&gt;
+  &lt;rect x="170" y="60" width="40" height="80" fill="#3b82f6" /&gt;
+  &lt;rect x="230" y="40" width="40" height="100" fill="#3b82f6" /&gt;
+&lt;/svg&gt;
+
+&lt;!-- Problèmes :
+- Pas de role="img"
+- Pas de titre ni description
+- Données non accessibles aux lecteurs d'écran
+- Pas d'alternative textuelle --&gt;</code></pre>
         </div>
       </template>
 
@@ -259,6 +413,59 @@
             </table>
           </div>
         </div>
+
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon : graphique accessible avec données alternatives --&gt;
+&lt;svg width="300" height="150"
+     role="img"
+     aria-labelledby="chart-title"
+     aria-describedby="chart-desc"&gt;
+
+  &lt;title id="chart-title"&gt;Graphique en barres des ventes trimestrielles&lt;/title&gt;
+  &lt;desc id="chart-desc"&gt;
+    Évolution croissante des ventes sur 4 trimestres :
+    Q1: 40k€, Q2: 60k€, Q3: 80k€, Q4: 100k€
+  &lt;/desc&gt;
+
+  &lt;!-- Barres du graphique --&gt;
+  &lt;rect x="50" y="100" width="40" height="40" fill="#3b82f6" /&gt;
+  &lt;rect x="110" y="80" width="40" height="60" fill="#3b82f6" /&gt;
+  &lt;rect x="170" y="60" width="40" height="80" fill="#3b82f6" /&gt;
+  &lt;rect x="230" y="40" width="40" height="100" fill="#3b82f6" /&gt;
+
+  &lt;!-- Labels accessibles --&gt;
+  &lt;text x="70" y="130"&gt;Q1&lt;/text&gt;
+  &lt;text x="130" y="130"&gt;Q2&lt;/text&gt;
+  &lt;text x="190" y="130"&gt;Q3&lt;/text&gt;
+  &lt;text x="250" y="130"&gt;Q4&lt;/text&gt;
+&lt;/svg&gt;
+
+&lt;!-- Table alternative avec toutes les données --&gt;
+&lt;table&gt;
+  &lt;caption&gt;Données détaillées des ventes trimestrielles&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Trimestre&lt;/th&gt;
+      &lt;th scope="col"&gt;Ventes (k€)&lt;/th&gt;
+      &lt;th scope="col"&gt;Évolution&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Q1 2024&lt;/th&gt;
+      &lt;td&gt;40&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;!-- ... autres lignes --&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- Bonnes pratiques :
+- role="img" pour indiquer que le SVG est une image
+- &lt;title&gt; et &lt;desc&gt; pour décrire le graphique
+- Table alternative avec toutes les données
+- Labels textuels dans le SVG --&gt;</code></pre>
+        </div>
       </template>
     </ExampleToggle>
   </div>
@@ -267,6 +474,10 @@
 <script setup>
 import { ref } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
 
 // Gallery states
 const selectedBadImage = ref(0)
@@ -571,6 +782,29 @@ h1 {
 
 .chart-data tbody th {
   background: var(--color-bg-secondary);
+}
+
+/* Code block styles */
+.code-block {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border: 1px solid var(--color-border);
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.code-block code {
+  white-space: pre;
+  word-wrap: normal;
 }
 
 @media (max-width: 768px) {

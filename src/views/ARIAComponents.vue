@@ -45,61 +45,6 @@
       </div>
     </section>
 
-    <section class="tabindex-section">
-      <c-text tag="h2" class="section-title">Tabindex et navigation clavier</c-text>
-      <c-text tag="p">
-        L'attribut <code class="inline-code">tabindex</code> contrôle si un élément peut recevoir le focus clavier et dans quel ordre.
-      </c-text>
-
-      <div class="tabindex-values">
-        <div class="tabindex-card">
-          <c-text tag="h3">✅ tabindex="0"</c-text>
-          <c-text tag="p">L'élément est focusable dans l'ordre naturel du DOM</c-text>
-          <code class="aria-example"><span class="attr">tabindex</span>=<span class="value">"0"</span></code>
-          <div class="code-block">
-            <pre><code>&lt;!-- Good: Interactive element focusable --&gt;
-&lt;div role="button" tabindex="0"&gt;
-  Custom button
-&lt;/div&gt;</code></pre>
-          </div>
-        </div>
-
-        <div class="tabindex-card">
-          <c-text tag="h3">⚠️ tabindex="-1"</c-text>
-          <c-text tag="p">Focusable par JavaScript mais pas par Tab</c-text>
-          <code class="aria-example"><span class="attr">tabindex</span>=<span class="value">"-1"</span></code>
-          <div class="code-block">
-            <pre><code>&lt;!-- Good: For programmatic focus --&gt;
-&lt;div role="alert" tabindex="-1"&gt;
-  Error message
-&lt;/div&gt;</code></pre>
-          </div>
-        </div>
-
-        <div class="tabindex-card bad">
-          <c-text tag="h3">❌ tabindex > 0</c-text>
-          <c-text tag="p">Change l'ordre de navigation (à éviter !)</c-text>
-          <code class="aria-example bad-example"><span class="attr">tabindex</span>=<span class="value">"5"</span></code>
-          <div class="code-block">
-            <pre><code>&lt;!-- Bad: Breaks natural tab order --&gt;
-&lt;button tabindex="3"&gt;Third&lt;/button&gt;
-&lt;button tabindex="1"&gt;First&lt;/button&gt;
-&lt;button tabindex="2"&gt;Second&lt;/button&gt;</code></pre>
-          </div>
-        </div>
-      </div>
-
-      <div class="tabindex-best-practices">
-        <c-text tag="h3">📋 Bonnes pratiques tabindex</c-text>
-        <ul>
-          <li>Utilisez <code class="inline-code">tabindex="0"</code> pour rendre les éléments custom interactifs focusables</li>
-          <li>Utilisez <code class="inline-code">tabindex="-1"</code> pour le focus programmatique (modals, alerts)</li>
-          <li>N'utilisez JAMAIS de valeurs positives - respectez l'ordre du DOM</li>
-          <li>Les éléments natifs interactifs (<code class="inline-code">&lt;button&gt;</code>, <code class="inline-code">&lt;a&gt;</code>, <code class="inline-code">&lt;input&gt;</code>) n'ont pas besoin de tabindex</li>
-        </ul>
-      </div>
-    </section>
-
     <ExampleToggle
       title="Accordéon accessible"
       explanation="Un accordéon doit utiliser les attributs ARIA appropriés, supporter la navigation clavier et annoncer les changements d'état."
@@ -185,6 +130,125 @@
         </div>
       </template>
     </ExampleToggle>
+
+    <section class="tabindex-section">
+      <c-text tag="h2" class="section-title">Tabindex et navigation clavier</c-text>
+      <c-text tag="p">
+        L'attribut <code class="inline-code">tabindex</code> contrôle si un élément peut recevoir le focus clavier et dans quel ordre.
+      </c-text>
+
+      <div class="tabindex-values">
+        <div class="tabindex-card">
+          <c-text tag="h3">✅ tabindex="0"</c-text>
+          <c-text tag="p">L'élément est focusable dans l'ordre naturel du DOM</c-text>
+          <code class="aria-example"><span class="attr">tabindex</span>=<span class="value">"0"</span></code>
+          <div class="code-block">
+            <pre><code>&lt;!-- Good: Interactive element focusable --&gt;
+&lt;div role="button" aria-label="Custom action" tabindex="0"&gt;
+  Custom button
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="tabindex-card">
+          <c-text tag="h3">⚠️ tabindex="-1"</c-text>
+          <c-text tag="p">Focusable par JavaScript mais pas par Tab</c-text>
+          <code class="aria-example"><span class="attr">tabindex</span>=<span class="value">"-1"</span></code>
+          <div class="code-block">
+            <pre><code>&lt;!-- Good: For programmatic focus --&gt;
+&lt;div role="alert" aria-live="assertive" tabindex="-1"&gt;
+  Error message
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="tabindex-card bad">
+          <c-text tag="h3">❌ tabindex > 0</c-text>
+          <c-text tag="p">Change l'ordre de navigation (à éviter !)</c-text>
+          <code class="aria-example bad-example"><span class="attr">tabindex</span>=<span class="value">"5"</span></code>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bad: Breaks natural tab order --&gt;
+&lt;button tabindex="3"&gt;Third&lt;/button&gt;
+&lt;button tabindex="1"&gt;First&lt;/button&gt;
+&lt;button tabindex="2"&gt;Second&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabindex-best-practices">
+        <c-text tag="h3">📋 Bonnes pratiques tabindex</c-text>
+        <ul>
+          <li>Utilisez <code class="inline-code">tabindex="0"</code> pour rendre les éléments custom interactifs focusables</li>
+          <li>Utilisez <code class="inline-code">tabindex="-1"</code> pour le focus programmatique (modals, alerts)</li>
+          <li>N'utilisez JAMAIS de valeurs positives - respectez l'ordre du DOM</li>
+          <li>Les éléments natifs interactifs (<code class="inline-code">&lt;button&gt;</code>, <code class="inline-code">&lt;a&gt;</code>, <code class="inline-code">&lt;input&gt;</code>) n'ont pas besoin de tabindex</li>
+        </ul>
+      </div>
+
+      <!-- Interactive examples -->
+      <div class="focus-examples">
+        <c-text tag="h3">🎯 Exemples interactifs</c-text>
+        <c-text tag="p">Testez la navigation au clavier (Tab/Shift+Tab) avec ces éléments :</c-text>
+
+        <div class="focus-demo-grid">
+          <div class="focus-demo-section">
+            <c-text tag="h4">✅ Éléments focusables</c-text>
+
+            <!-- Native focusable elements -->
+            <button class="demo-button">Bouton natif</button>
+            <input type="text" placeholder="Champ de texte" class="demo-input" />
+            <a href="#demo" class="demo-link">Lien</a>
+
+            <!-- Custom focusable elements -->
+            <div role="button" aria-label="Bouton personnalisé" tabindex="0" class="custom-button" @click="handleCustomButtonClick" @keydown="handleCustomButtonKeydown">
+              Bouton custom (div)
+            </div>
+
+            <div role="tab" aria-selected="false" aria-controls="panel-1" tabindex="0" class="custom-tab" @click="handleTabClick" @keydown="handleTabKeydown">
+              Onglet personnalisé
+            </div>
+
+            <div role="menuitem" aria-label="Option de menu" tabindex="0" class="custom-menuitem" @click="handleMenuClick" @keydown="handleMenuKeydown">
+              Option de menu
+            </div>
+          </div>
+
+          <div class="focus-demo-section">
+            <c-text tag="h4">❌ Éléments non-focusables</c-text>
+
+            <!-- Non-focusable elements -->
+            <div class="demo-text">Texte simple (div)</div>
+            <span class="demo-span">Texte inline (span)</span>
+            <p class="demo-paragraph">Paragraphe</p>
+
+            <!-- Disabled elements -->
+            <button disabled class="demo-button">Bouton désactivé</button>
+            <input type="text" disabled placeholder="Champ désactivé" class="demo-input" />
+
+            <!-- Hidden from screen readers -->
+            <div aria-hidden="true" class="demo-hidden">Élément aria-hidden</div>
+
+            <!-- Programmatically focusable only -->
+            <div role="alert" aria-live="polite" tabindex="-1" class="demo-alert" ref="alertElement">
+              Message d'alerte (tabindex="-1")
+            </div>
+
+            <button @click="focusAlert" class="demo-button">Focus sur l'alerte</button>
+          </div>
+        </div>
+
+        <div class="focus-tips">
+          <c-text tag="h4">💡 Conseils pour tester</c-text>
+          <ul>
+            <li>Utilisez <kbd>Tab</kbd> pour naviguer vers l'avant</li>
+            <li>Utilisez <kbd>Shift + Tab</kbd> pour naviguer vers l'arrière</li>
+            <li>Utilisez <kbd>Espace</kbd> ou <kbd>Entrée</kbd> pour activer les éléments</li>
+            <li>Observez l'indicateur de focus (contour bleu)</li>
+            <li>Notez quels éléments peuvent ou ne peuvent pas recevoir le focus</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <ExampleToggle
       title="Menu déroulant accessible"
@@ -823,6 +887,10 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
 import { CAccordion, CButton, CFunctionalNotice, CIcon, CPopin, CText, CBadge } from '@carrefour/design-system-components-vue3';
 
 // Accordion state
@@ -1141,6 +1209,54 @@ function submitForm() {
     alert('Formulaire soumis avec succès!')
   } else {
     submitStatus.value = 'Veuillez corriger les erreurs avant de soumettre'
+  }
+}
+
+// Focus demo refs and functions
+const alertElement = ref(null)
+
+function handleCustomButtonClick() {
+  alert('Bouton personnalisé cliqué!')
+}
+
+function handleCustomButtonKeydown(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleCustomButtonClick()
+  }
+}
+
+function handleTabClick() {
+  alert('Onglet sélectionné!')
+}
+
+function handleTabKeydown(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleTabClick()
+  }
+}
+
+function handleMenuClick() {
+  alert('Option de menu sélectionnée!')
+}
+
+function handleMenuKeydown(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleMenuClick()
+  }
+}
+
+function focusAlert() {
+  if (alertElement.value) {
+    alertElement.value.focus()
+    alertElement.value.textContent = 'Message d\'alerte maintenant focusé!'
+    setTimeout(() => {
+      if (alertElement.value) {
+        alertElement.value.textContent = 'Message d\'alerte (tabindex="-1")'
+      }
+    }, 2000)
   }
 }
 </script>
@@ -2013,5 +2129,193 @@ legend {
   border-radius: 0.25rem;
   font-family: monospace;
   color: var(--color-primary);
+}
+
+/* Focus demo styles */
+.focus-examples {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+}
+
+.focus-demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.focus-demo-section {
+  padding: 1.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-bg);
+}
+
+.focus-demo-section h4 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.demo-button,
+.custom-button,
+.custom-tab,
+.custom-menuitem {
+  margin: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.demo-button {
+  background: var(--color-primary);
+  color: white;
+}
+
+.demo-button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.demo-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.custom-button {
+  background: var(--color-info);
+  color: white;
+  border-color: var(--color-info);
+}
+
+.custom-button:hover {
+  background: var(--color-info-dark);
+}
+
+.custom-tab {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.custom-tab:hover {
+  background: var(--color-hover);
+}
+
+.custom-menuitem {
+  background: var(--color-warning);
+  color: white;
+  border-color: var(--color-warning);
+}
+
+.custom-menuitem:hover {
+  background: var(--color-warning-dark);
+}
+
+.demo-input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.25rem;
+  width: auto;
+  max-width: 200px;
+}
+
+.demo-input:focus {
+  border-color: var(--color-primary);
+}
+
+.demo-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.demo-link {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.demo-link:hover {
+  color: var(--color-primary-dark);
+}
+
+.demo-text,
+.demo-span,
+.demo-paragraph {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.25rem;
+  color: var(--color-text-secondary);
+}
+
+.demo-hidden {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.demo-alert {
+  margin: 0.5rem;
+  padding: 0.75rem;
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  border: 2px solid var(--color-warning);
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+.demo-alert:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.focus-tips {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-info-light);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--color-info);
+}
+
+.focus-tips h4 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.focus-tips ul {
+  margin-left: 1.5rem;
+}
+
+.focus-tips li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.focus-tips kbd {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .focus-demo-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 </style>

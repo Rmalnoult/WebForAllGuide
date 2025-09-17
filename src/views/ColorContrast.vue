@@ -82,6 +82,84 @@
           </div>
         </div>
       </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Ratios de contraste insuffisants --&gt;
+&lt;style&gt;
+  /* Texte gris clair - Ratio 2.2:1 (échec) */
+  .light-text {
+    color: #d8d8d8;
+    background: #ffffff;
+  }
+
+  /* Texte gris moyen - Ratio 3.8:1 (échec AA) */
+  .medium-text {
+    color: #949494;
+    background: #ffffff;
+  }
+
+  /* Texte jaune - Ratio 1.9:1 (échec) */
+  .warning-text {
+    color: #e6d800;
+    background: #ffffff;
+  }
+
+  /* Orange sur rouge - Ratio 1.2:1 (échec) */
+  .error-combo {
+    color: #ff8c00;
+    background: #ff4444;
+  }
+&lt;/style&gt;
+
+&lt;p class="light-text"&gt;Texte difficile à lire&lt;/p&gt;
+&lt;p class="medium-text"&gt;Contraste insuffisant&lt;/p&gt;
+&lt;p class="warning-text"&gt;Jaune sur blanc&lt;/p&gt;
+&lt;div class="error-combo"&gt;Orange sur rouge&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: Ratios de contraste conformes WCAG --&gt;
+&lt;style&gt;
+  /* Texte gris foncé - Ratio 7.0:1 (AAA) */
+  .accessible-text {
+    color: #555555;
+    background: #ffffff;
+  }
+
+  /* Texte noir - Ratio 21:1 (AAA) */
+  .high-contrast {
+    color: #000000;
+    background: #ffffff;
+  }
+
+  /* Bleu foncé - Ratio 5.9:1 (AA) */
+  .link-text {
+    color: #0056b3;
+    background: #ffffff;
+  }
+
+  /* Blanc sur bleu - Ratio 8.6:1 (AAA) */
+  .button-primary {
+    color: #ffffff;
+    background: #003d82;
+  }
+
+  /* Jaune sur noir - Ratio 12.3:1 (AAA) */
+  .warning-accessible {
+    color: #ffd700;
+    background: #1a1a1a;
+  }
+&lt;/style&gt;
+
+&lt;p class="accessible-text"&gt;Texte facilement lisible&lt;/p&gt;
+&lt;p class="high-contrast"&gt;Contraste maximum&lt;/p&gt;
+&lt;a class="link-text"&gt;Lien accessible&lt;/a&gt;
+&lt;button class="button-primary"&gt;Bouton accessible&lt;/button&gt;</code></pre>
+        </div>
+      </template>
     </ExampleToggle>
 
     <ExampleToggle
@@ -182,6 +260,82 @@
           </div>
         </div>
       </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Information uniquement par la couleur --&gt;
+&lt;style&gt;
+  .input-error {
+    border: 2px solid red; /* Seulement la couleur rouge */
+  }
+
+  .input-valid {
+    border: 2px solid green; /* Seulement la couleur verte */
+  }
+
+  .status-pending { color: red; }
+  .status-processing { color: yellow; }
+  .status-completed { color: green; }
+&lt;/style&gt;
+
+&lt;!-- Formulaire sans indicateurs textuels --&gt;
+&lt;input class="input-error" value="Jo"&gt;
+&lt;input class="input-valid" value="john@example.com"&gt;
+
+&lt;!-- Statuts sans texte explicite --&gt;
+&lt;div class="order"&gt;
+  &lt;span&gt;#1234&lt;/span&gt;
+  &lt;span class="status-pending"&gt;●&lt;/span&gt; &lt;!-- Seule la couleur --&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: Couleur + texte + icônes + ARIA --&gt;
+&lt;style&gt;
+  .input-error {
+    border: 2px solid #e53e3e;
+  }
+
+  .input-valid {
+    border: 2px solid #38a169;
+  }
+
+  .error-message {
+    color: #e53e3e;
+  }
+
+  .success-message {
+    color: #38a169;
+  }
+&lt;/style&gt;
+
+&lt;!-- Formulaire avec messages explicites --&gt;
+&lt;input class="input-error"
+       value="Jo"
+       aria-describedby="name-error"&gt;
+&lt;div id="name-error" class="error-message"&gt;
+  ❌ Le nom doit contenir au moins 3 caractères
+&lt;/div&gt;
+
+&lt;input class="input-valid"
+       value="john@example.com"
+       aria-describedby="email-success"&gt;
+&lt;div id="email-success" class="success-message"&gt;
+  ✅ Email valide
+&lt;/div&gt;
+
+&lt;!-- Statuts avec texte et icônes --&gt;
+&lt;div class="order"&gt;
+  &lt;span&gt;#1234&lt;/span&gt;
+  &lt;span class="status-pending"&gt;
+    &lt;span aria-hidden="true"&gt;⏳&lt;/span&gt;
+    En attente
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
     </ExampleToggle>
 
     <ExampleToggle
@@ -255,6 +409,118 @@
               </div>
             </div>
           </div>
+        </div>
+      </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Rouge/Vert indistinguables pour daltoniens --&gt;
+&lt;style&gt;
+  .chart-legend {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Problématique pour daltonisme rouge-vert */
+  .legend-red { background: #e53e3e; }
+  .legend-green { background: #38a169; }
+
+  .data-error { background: #e53e3e; }
+  .data-success { background: #38a169; }
+&lt;/style&gt;
+
+&lt;!-- Légende basée uniquement sur les couleurs --&gt;
+&lt;div class="chart-legend"&gt;
+  &lt;div class="legend-item"&gt;
+    &lt;div class="legend-red"&gt;&lt;/div&gt;
+    &lt;span&gt;Échecs&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="legend-item"&gt;
+    &lt;div class="legend-green"&gt;&lt;/div&gt;
+    &lt;span&gt;Succès&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Barres sans différenciation visuelle --&gt;
+&lt;div class="chart"&gt;
+  &lt;div class="data-error" style="height: 60px"&gt;&lt;/div&gt;
+  &lt;div class="data-success" style="height: 40px"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: Couleurs distinctes + motifs + icônes --&gt;
+&lt;style&gt;
+  .chart-legend {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Couleurs plus distinctes (bleu au lieu de vert) */
+  .legend-error { background: #e53e3e; }
+  .legend-success { background: #3182ce; }
+
+  .data-error {
+    background: #e53e3e;
+    /* Motif rayé pour différenciation */
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.3) 2px,
+      rgba(255,255,255,0.3) 4px
+    );
+  }
+
+  .data-success {
+    background: #3182ce;
+    /* Motif pointillé pour différenciation */
+    background-image: radial-gradient(
+      circle,
+      rgba(255,255,255,0.3) 1px,
+      transparent 1px
+    );
+    background-size: 4px 4px;
+  }
+&lt;/style&gt;
+
+&lt;!-- Légende avec icônes explicites --&gt;
+&lt;div class="chart-legend"&gt;
+  &lt;div class="legend-item"&gt;
+    &lt;div class="legend-error"&gt;&lt;/div&gt;
+    &lt;span aria-hidden="true"&gt;❌&lt;/span&gt;
+    &lt;span&gt;Échecs&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="legend-item"&gt;
+    &lt;div class="legend-success"&gt;&lt;/div&gt;
+    &lt;span aria-hidden="true"&gt;✅&lt;/span&gt;
+    &lt;span&gt;Succès&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Barres avec motifs et tooltips --&gt;
+&lt;div class="chart"&gt;
+  &lt;div class="data-error"
+       style="height: 60px"
+       title="Échecs: 60"&gt;&lt;/div&gt;
+  &lt;div class="data-success"
+       style="height: 40px"
+       title="Succès: 40"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>
@@ -342,6 +608,146 @@
           </div>
         </div>
       </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Contraste perdu, pas d'accessibilité --&gt;
+&lt;style&gt;
+  .theme-toggle {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .theme-btn {
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+  }
+
+  .theme-btn.active {
+    border-color: #007bff;
+  }
+
+  /* Mauvais contrastes dans les thèmes */
+  .content.light {
+    background: #f0f0f0;
+    color: #ccc; /* Ratio insuffisant */
+  }
+
+  .content.dark {
+    background: #222;
+    color: #555; /* Ratio insuffisant */
+  }
+
+  .btn.light {
+    background: #ddd;
+    color: #bbb; /* Invisible */
+  }
+
+  .btn.dark {
+    background: #333;
+    color: #666; /* Difficile à lire */
+  }
+&lt;/style&gt;
+
+&lt;!-- Contrôles non accessibles --&gt;
+&lt;div class="theme-toggle"&gt;
+  &lt;div class="theme-btn" onclick="setTheme('light')"&gt;☀️&lt;/div&gt;
+  &lt;div class="theme-btn" onclick="setTheme('dark')"&gt;🌙&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="content light"&gt;
+  &lt;h3&gt;Titre peu visible&lt;/h3&gt;
+  &lt;p&gt;Texte difficile à lire&lt;/p&gt;
+  &lt;button class="btn light"&gt;Action&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: Contrastes maintenus, accessible, préférence système --&gt;
+&lt;style&gt;
+  .theme-controls {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  .theme-controls input {
+    margin-right: 0.5rem;
+  }
+
+  /* Contrastes respectés dans tous les thèmes */
+  .content.light {
+    background: #ffffff;
+    color: #1a1a1a; /* Ratio 21:1 */
+  }
+
+  .content.dark {
+    background: #1a202c;
+    color: #f7fafc; /* Ratio élevé */
+  }
+
+  .content.auto {
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+
+  /* Respect des préférences système */
+  @media (prefers-color-scheme: dark) {
+    .content.auto {
+      background: #1a202c;
+      color: #f7fafc;
+    }
+  }
+
+  .btn.light {
+    background: #3182ce;
+    color: #ffffff; /* Contraste AAA */
+  }
+
+  .btn.dark {
+    background: #63b3ed;
+    color: #1a202c; /* Contraste AAA */
+  }
+
+  /* Respect des préférences de mouvement */
+  @media (prefers-reduced-motion: reduce) {
+    .content {
+      transition: none;
+    }
+  }
+&lt;/style&gt;
+
+&lt;!-- Contrôles accessibles avec fieldset --&gt;
+&lt;fieldset class="theme-controls"&gt;
+  &lt;legend&gt;Choisir le thème&lt;/legend&gt;
+
+  &lt;label&gt;
+    &lt;input type="radio" name="theme" value="light"&gt;
+    &lt;span&gt;☀️ Clair&lt;/span&gt;
+  &lt;/label&gt;
+
+  &lt;label&gt;
+    &lt;input type="radio" name="theme" value="dark"&gt;
+    &lt;span&gt;🌙 Sombre&lt;/span&gt;
+  &lt;/label&gt;
+
+  &lt;label&gt;
+    &lt;input type="radio" name="theme" value="auto"&gt;
+    &lt;span&gt;💻 Auto (système)&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/fieldset&gt;
+
+&lt;div class="content light"&gt;
+  &lt;h3&gt;Titre toujours lisible&lt;/h3&gt;
+  &lt;p&gt;Texte avec bon contraste&lt;/p&gt;
+  &lt;button class="btn light"&gt;Action accessible&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
     </ExampleToggle>
   </div>
 </template>
@@ -349,6 +755,10 @@
 <script setup>
 import { ref } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
 
 const badTheme = ref('light')
 const goodTheme = ref('light')
@@ -909,6 +1319,42 @@ h1 {
 
   .theme-controls-good label {
     transition: none;
+  }
+}
+
+/* Code blocks styling */
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 0.375rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1rem;
+  background: transparent;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.code-block code {
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
+  color: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .code-block {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+
+  .code-block code {
+    color: #e2e8f0;
   }
 }
 </style>

@@ -29,6 +29,23 @@
             <div>© 2024 Mon Site</div>
           </div>
         </div>
+        <div class="code-block">
+          <pre><code>&lt;!-- Mauvais : divs génériques sans sémantique --&gt;
+&lt;div class="page-header"&gt;
+  &lt;div class="site-title"&gt;Mon Site&lt;/div&gt;
+  &lt;div class="navigation"&gt;
+    &lt;div&gt;Accueil&lt;/div&gt;
+    &lt;div&gt;À propos&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="page-content"&gt;
+  &lt;div class="content-title"&gt;Bienvenue&lt;/div&gt;
+  &lt;div&gt;Contenu principal...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="page-footer"&gt;
+  © 2024 Mon Site
+&lt;/div&gt;</code></pre>
+        </div>
       </template>
 
       <template #good>
@@ -50,6 +67,25 @@
           <footer class="page-footer">
             <p>© 2024 Mon Site</p>
           </footer>
+        </div>
+        <div class="code-block">
+          <pre><code>&lt;!-- Bon : éléments sémantiques avec rôles appropriés --&gt;
+&lt;header&gt;
+  &lt;h1&gt;Mon Site&lt;/h1&gt;
+  &lt;nav aria-label="Navigation principale"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/about"&gt;À propos&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;h1&gt;Bienvenue&lt;/h1&gt;
+  &lt;p&gt;Contenu principal...&lt;/p&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+  &lt;p&gt;© 2024 Mon Site&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>
@@ -75,6 +111,17 @@
           <div class="title-medium">CSS et accessibilité</div>
           <p>Le CSS peut améliorer...</p>
         </article>
+        <div class="code-block">
+          <pre><code>&lt;!-- Mauvais : divs stylisées sans hiérarchie --&gt;
+&lt;div class="title-large"&gt;Introduction&lt;/div&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;div class="title-medium"&gt;Section 1&lt;/div&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;div class="title-medium"&gt;Section 2&lt;/div&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;div class="title-small"&gt;Sous-section&lt;/div&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;</code></pre>
+        </div>
       </template>
 
       <template #good>
@@ -94,6 +141,19 @@
           <h3>CSS et accessibilité</h3>
           <p>Le CSS peut améliorer...</p>
         </article>
+        <div class="code-block">
+          <pre><code>&lt;!-- Bon : hiérarchie logique des titres --&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;h2&gt;Techniques de base&lt;/h2&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;h3&gt;HTML sémantique&lt;/h3&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;h4&gt;Éléments de structure&lt;/h4&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;
+&lt;h3&gt;CSS et accessibilité&lt;/h3&gt;
+&lt;p&gt;Contenu...&lt;/p&gt;</code></pre>
+        </div>
       </template>
     </ExampleToggle>
 
@@ -116,6 +176,18 @@
             ℹ️ Plus d'infos
           </span>
         </div>
+        <div class="code-block">
+          <pre><code>&lt;!-- Mauvais : divs cliquables sans sémantique --&gt;
+&lt;div @click="handleSave" style="cursor: pointer;"&gt;
+  💾 Sauvegarder
+&lt;/div&gt;
+&lt;div @click="handleDelete" style="cursor: pointer;"&gt;
+  🗑️ Supprimer
+&lt;/div&gt;
+&lt;span @click="navigateToProfile" style="cursor: pointer;"&gt;
+  👤 Voir le profil
+&lt;/span&gt;</code></pre>
+        </div>
       </template>
 
       <template #good>
@@ -132,6 +204,21 @@
           <button type="button" class="action-item" @click="toggleModal">
             ℹ️ Plus d'infos
           </button>
+        </div>
+        <div class="code-block">
+          <pre><code>&lt;!-- Bon : boutons et liens avec sémantique correcte --&gt;
+&lt;button type="button" @click="handleSave"&gt;
+  💾 Sauvegarder
+&lt;/button&gt;
+&lt;button type="button" @click="handleDelete"&gt;
+  🗑️ Supprimer
+&lt;/button&gt;
+&lt;a href="/profile"&gt;
+  👤 Voir le profil
+&lt;/a&gt;
+&lt;button type="button" @click="toggleModal"&gt;
+  ℹ️ Plus d'infos
+&lt;/button&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>
@@ -158,6 +245,18 @@
             <div>4. Plier en deux et servir</div>
           </div>
         </div>
+        <div class="code-block">
+          <pre><code>&lt;!-- Mauvais : divs sans structure de liste --&gt;
+&lt;div class="list-title"&gt;Ingrédients :&lt;/div&gt;
+&lt;div&gt;3 œufs&lt;/div&gt;
+&lt;div&gt;2 cuillères à soupe de lait&lt;/div&gt;
+&lt;div&gt;Sel et poivre&lt;/div&gt;
+
+&lt;div class="list-title"&gt;Étapes :&lt;/div&gt;
+&lt;div&gt;1. Battre les œufs&lt;/div&gt;
+&lt;div&gt;2. Faire chauffer le beurre&lt;/div&gt;
+&lt;div&gt;3. Verser et cuire&lt;/div&gt;</code></pre>
+        </div>
       </template>
 
       <template #good>
@@ -178,6 +277,23 @@
             <li>Plier en deux et servir</li>
           </ol>
         </div>
+        <div class="code-block">
+          <pre><code>&lt;!-- Bon : listes sémantiques appropriées --&gt;
+&lt;h3&gt;Ingrédients :&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;3 œufs&lt;/li&gt;
+  &lt;li&gt;2 cuillères à soupe de lait&lt;/li&gt;
+  &lt;li&gt;Sel et poivre&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Étapes :&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Battre les œufs avec le lait&lt;/li&gt;
+  &lt;li&gt;Faire chauffer le beurre&lt;/li&gt;
+  &lt;li&gt;Verser les œufs et cuire&lt;/li&gt;
+  &lt;li&gt;Plier en deux et servir&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        </div>
       </template>
     </ExampleToggle>
   </div>
@@ -185,6 +301,10 @@
 
 <script setup>
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
 
 // Simulated action handlers
 function handleSave() {
@@ -408,6 +528,28 @@ h1 {
 .list-demo li {
   margin-bottom: 0.5rem;
   line-height: 1.4;
+}
+
+.code-block {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border: 1px solid var(--color-border);
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.code-block code {
+  white-space: pre;
+  word-wrap: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {

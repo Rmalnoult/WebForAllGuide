@@ -84,6 +84,55 @@
           </div>
         </div>
       </template>
+
+      <div class="code-block">
+        <h5>Code d'exemple</h5>
+        <div class="code-example">
+          <h6>❌ Mauvais : Animations sans respect des préférences</h6>
+          <pre><code><!-- CSS qui force les animations -->
+.animated-card {
+  animation: bounce 2s infinite; /* Toujours actif */
+}
+
+.pulse-element {
+  animation: pulse 1.5s infinite; /* Pas de contrôle utilisateur */
+}
+
+<!-- HTML sans contrôles -->
+&lt;div class="auto-carousel"&gt;
+  <!-- Carousel qui défile automatiquement sans possibilité d'arrêt -->
+&lt;/div&gt;</code></pre>
+
+          <h6>✅ Bon : Respect de prefers-reduced-motion</h6>
+          <pre><code><!-- CSS qui respecte les préférences utilisateur -->
+.animated-card {
+  transition: transform 0.3s ease;
+}
+
+.animated-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Respect des préférences système */
+@media (prefers-reduced-motion: reduce) {
+  .animated-card {
+    transition: none;
+  }
+  .animated-card:hover {
+    transform: none;
+  }
+}
+
+<!-- HTML avec contrôles utilisateur -->
+&lt;div class="controlled-carousel"&gt;
+  &lt;button aria-label="Slide précédent"&gt;‹&lt;/button&gt;
+  &lt;div class="carousel-content"&gt;
+    <!-- Contenu contrôlé par l'utilisateur -->
+  &lt;/div&gt;
+  &lt;button aria-label="Slide suivant"&gt;›&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
     </ExampleToggle>
 
     <ExampleToggle
@@ -194,6 +243,62 @@
           </div>
         </div>
       </template>
+
+      <div class="code-block">
+        <h5>Code d'exemple</h5>
+        <div class="code-example">
+          <h6>❌ Mauvais : Tailles fixes qui ne s'adaptent pas</h6>
+          <pre><code><!-- CSS avec dimensions fixes -->
+.sidebar {
+  width: 250px; /* Largeur fixe */
+  font-size: 14px; /* Taille fixe */
+}
+
+.content {
+  max-width: 800px; /* Ne s'adapte pas au zoom */
+  overflow: hidden; /* Contenu coupé au zoom */
+}
+
+<!-- HTML sans structure adaptative -->
+&lt;div class="fixed-layout"&gt;
+  &lt;div class="sidebar"&gt;Menu&lt;/div&gt;
+  &lt;div class="content"&gt;Contenu fixe&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+          <h6>✅ Bon : Unités relatives et flexibilité</h6>
+          <pre><code><!-- CSS avec unités relatives -->
+.sidebar {
+  width: 15rem; /* Unité relative au root font-size */
+  min-width: 200px;
+  font-size: 1rem; /* S'adapte aux préférences */
+}
+
+.content {
+  flex: 1; /* Flexible */
+  max-width: none; /* Pas de limite fixe */
+  overflow-wrap: break-word; /* Gestion du contenu */
+}
+
+/* Support du zoom jusqu'à 200% */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 100%;
+    order: 2;
+  }
+}
+
+<!-- HTML avec structure flexible -->
+&lt;div class="flexible-layout"&gt;
+  &lt;aside class="sidebar" aria-label="Navigation"&gt;
+    &lt;button aria-expanded="false" aria-controls="nav-menu"&gt;
+      Toggle Menu
+    &lt;/button&gt;
+    &lt;nav id="nav-menu"&gt;Menu adaptatif&lt;/nav&gt;
+  &lt;/aside&gt;
+  &lt;main class="content"&gt;Contenu adaptatif&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
     </ExampleToggle>
 
     <ExampleToggle
@@ -318,6 +423,101 @@
           </div>
         </div>
       </template>
+
+      <div class="code-block">
+        <h5>Code d'exemple</h5>
+        <div class="code-example">
+          <h6>❌ Mauvais : Interface fixe non responsive</h6>
+          <pre><code><!-- CSS rigide -->
+.header {
+  display: flex;
+  position: fixed; /* Problématique sur mobile */
+  width: 1200px; /* Largeur fixe */
+}
+
+.nav-menu {
+  display: flex; /* Déborde sur mobile */
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Toujours 2 colonnes */
+}
+
+button {
+  padding: 4px 8px; /* Trop petit pour le tactile */
+  min-width: auto;
+}
+
+<!-- HTML sans adaptabilité -->
+&lt;header class="header"&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+  &lt;nav class="nav-menu"&gt;
+    &lt;a href="#"&gt;Link1&lt;/a&gt;&lt;a href="#"&gt;Link2&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+
+          <h6>✅ Bon : Design responsive et adaptatif</h6>
+          <pre><code><!-- CSS responsive -->
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%; /* Fluide */
+  max-width: 1200px;
+}
+
+.nav-menu {
+  display: none; /* Caché par défaut sur mobile */
+}
+
+.nav-menu.open {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex !important;
+    flex-direction: row;
+  }
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+button {
+  min-height: 44px; /* Target tactile minimum */
+  min-width: 44px;
+  padding: 0.75rem 1.5rem;
+}
+
+<!-- HTML avec navigation adaptative -->
+&lt;header class="header"&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+  &lt;button class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"&gt;
+    ☰ Menu
+  &lt;/button&gt;
+  &lt;nav id="nav-menu" class="nav-menu"&gt;
+    &lt;a href="#"&gt;Accueil&lt;/a&gt;
+    &lt;a href="#"&gt;Services&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+        </div>
+      </div>
     </ExampleToggle>
 
     <ExampleToggle
@@ -429,6 +629,74 @@
           </div>
         </div>
       </template>
+
+      <div class="code-block">
+        <h5>Code d'exemple</h5>
+        <div class="code-example">
+          <h6>❌ Mauvais : Chargement non optimisé</h6>
+          <pre><code>&lt;!-- HTML qui charge tout immédiatement --&gt;
+&lt;img src="/images/large-image.jpg" alt="Image"&gt;
+&lt;video src="video-3mb.mp4" autoplay preload="auto"&gt;&lt;/video&gt;
+
+&lt;!-- JavaScript monolithique --&gt;
+&lt;script src="app-bundle-2mb.js"&gt;&lt;/script&gt;
+
+/* CSS avec ressources lourdes */
+.background {
+  background-image: url('heavy-bg-2mb.jpg');
+}
+
+<!-- Pas de mise en cache -->
+&lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
+
+          <h6>✅ Bon : Chargement optimisé et intelligent</h6>
+          <pre><code>&lt;!-- HTML avec lazy loading --&gt;
+&lt;img src="placeholder-50kb.jpg"
+     data-src="optimized-image-500kb.webp"
+     alt="Image"
+     loading="lazy"&gt;
+
+&lt;video preload="none" poster="thumbnail.jpg"&gt;
+  &lt;source src="video-compressed.webm" type="video/webm"&gt;
+  &lt;source src="video-compressed.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+&lt;!-- Code splitting et modules --&gt;
+&lt;script type="module"&gt;
+  // Chargement à la demande
+  import('./feature-module.js').then(module => {
+    module.init();
+  });
+&lt;/script&gt;
+
+/* CSS avec media queries pour les ressources */
+@media (min-width: 768px) {
+  .background {
+    background-image: url('bg-optimized.webp');
+  }
+}
+
+&lt;!-- Service Worker pour la mise en cache --&gt;
+&lt;script&gt;
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+&lt;/script&gt;
+
+&lt;!-- Optimisation des ressources critiques --&gt;
+&lt;link rel="preload" href="critical.css" as="style"&gt;
+&lt;link rel="prefetch" href="non-critical.js"&gt;
+
+&lt;!-- Responsive images avec srcset --&gt;
+&lt;img srcset="image-320.webp 320w,
+             image-768.webp 768w,
+             image-1200.webp 1200w"
+     sizes="(max-width: 768px) 100vw, 50vw"
+     src="image-768.webp"
+     alt="Description"
+     loading="lazy"&gt;</code></pre>
+        </div>
+      </div>
     </ExampleToggle>
   </div>
 </template>
@@ -436,6 +704,10 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
 
 // Motion preferences
 const reducedMotionOverride = ref(false)
@@ -1402,6 +1674,47 @@ h1 {
   20% { opacity: 1; transform: translateY(0); }
   80% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Code block styles */
+.code-block {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.code-block h5 {
+  margin: 0 0 1rem 0;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.code-example h6 {
+  margin: 1.5rem 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.code-example h6:first-child {
+  margin-top: 0;
+}
+
+.code-block pre {
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.code-block code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  white-space: pre;
 }
 
 /* Respect user's reduced motion preference */
