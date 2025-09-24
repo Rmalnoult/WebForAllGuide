@@ -101,6 +101,204 @@
       </p>
     </section>
 
+    <section aria-labelledby="tools-title">
+      <h2 id="tools-title">Outils gratuits pour tester l'accessibilité</h2>
+      <p>Ces outils vous aident à identifier et corriger les problèmes d'accessibilité :</p>
+
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🌊</span>
+            <h3>WAVE</h3>
+          </div>
+          <p class="tool-description">Extension navigateur qui visualise les erreurs d'accessibilité directement sur votre page</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Analyse en temps réel</span>
+            <span class="tool-feature">✓ Visualisation des erreurs</span>
+            <span class="tool-feature">✓ Rapport détaillé</span>
+          </div>
+          <a href="https://wave.webaim.org/" class="tool-link" target="_blank" rel="noopener">
+            Installer WAVE
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🪓</span>
+            <h3>axe DevTools</h3>
+          </div>
+          <p class="tool-description">Extension développeur intégrée aux DevTools, très précise et détaillée</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Intégré aux DevTools</span>
+            <span class="tool-feature">✓ Tests automatisés</span>
+            <span class="tool-feature">✓ Suggestions de correction</span>
+          </div>
+          <a href="https://www.deque.com/axe/devtools/" class="tool-link" target="_blank" rel="noopener">
+            Installer axe DevTools
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🏮</span>
+            <h3>Lighthouse</h3>
+          </div>
+          <p class="tool-description">Audit intégré à Chrome DevTools, inclut un score d'accessibilité global</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Déjà dans Chrome</span>
+            <span class="tool-feature">✓ Score global</span>
+            <span class="tool-feature">✓ Recommandations</span>
+          </div>
+          <a href="https://developer.chrome.com/docs/lighthouse/accessibility/" class="tool-link" target="_blank" rel="noopener">
+            Guide Lighthouse
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">📚</span>
+            <h3>MDN Accessibility</h3>
+          </div>
+          <p class="tool-description">Documentation de référence complète sur l'accessibilité web</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Guides détaillés</span>
+            <span class="tool-feature">✓ Exemples pratiques</span>
+            <span class="tool-feature">✓ Mises à jour régulières</span>
+          </div>
+          <a href="https://developer.mozilla.org/fr/docs/Web/Accessibility" class="tool-link" target="_blank" rel="noopener">
+            Documentation MDN
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🎨</span>
+            <h3>Colour Contrast Analyser</h3>
+          </div>
+          <p class="tool-description">Application gratuite pour tester les contrastes de couleurs selon WCAG</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Test en temps réel</span>
+            <span class="tool-feature">✓ Pipette de couleur</span>
+            <span class="tool-feature">✓ Ratios WCAG AA/AAA</span>
+          </div>
+          <a href="https://www.tpgi.com/color-contrast-checker/" class="tool-link" target="_blank" rel="noopener">
+            Télécharger CCA
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🔍</span>
+            <h3>Accessibility Insights</h3>
+          </div>
+          <p class="tool-description">Suite d'outils Microsoft pour tests manuels et automatiques approfondis</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Tests guidés</span>
+            <span class="tool-feature">✓ Ordre de focus visuel</span>
+            <span class="tool-feature">✓ FastPass automatique</span>
+          </div>
+          <a href="https://accessibilityinsights.io/" class="tool-link" target="_blank" rel="noopener">
+            Installer AI
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pro-tip">
+        <strong>💡 Conseil pro :</strong> Utilisez ces outils en complément, pas en remplacement des tests utilisateurs réels.
+        Aucun outil automatique ne peut détecter 100% des problèmes d'accessibilité.
+      </div>
+    </section>
+
+    <section aria-labelledby="screen-readers-title">
+      <h2 id="screen-readers-title">Lecteurs d'écran courants</h2>
+      <p>Comprendre les lecteurs d'écran les plus utilisés pour mieux tester vos interfaces :</p>
+
+      <div class="screen-readers-grid">
+        <div class="screen-reader-card">
+          <div class="screen-reader-header">
+            <span class="screen-reader-icon" aria-hidden="true">🖥️</span>
+            <h3>NVDA</h3>
+            <span class="platform-tag">Windows</span>
+          </div>
+          <p>Lecteur d'écran gratuit et open source, très populaire</p>
+          <div class="screen-reader-stats">
+            <span class="stat">✓ Gratuit</span>
+            <span class="stat">41% d'usage</span>
+          </div>
+          <a href="https://www.nvaccess.org/" class="screen-reader-link" target="_blank" rel="noopener">
+            Télécharger NVDA
+          </a>
+        </div>
+
+        <div class="screen-reader-card">
+          <div class="screen-reader-header">
+            <span class="screen-reader-icon" aria-hidden="true">🖥️</span>
+            <h3>JAWS</h3>
+            <span class="platform-tag">Windows</span>
+          </div>
+          <p>Lecteur d'écran professionnel, leader historique du marché</p>
+          <div class="screen-reader-stats">
+            <span class="stat">💰 Payant</span>
+            <span class="stat">40% d'usage</span>
+          </div>
+          <a href="https://www.freedomscientific.com/products/software/jaws/" class="screen-reader-link" target="_blank" rel="noopener">
+            Site officiel JAWS
+          </a>
+        </div>
+
+        <div class="screen-reader-card">
+          <div class="screen-reader-header">
+            <span class="screen-reader-icon" aria-hidden="true">🍎</span>
+            <h3>VoiceOver</h3>
+            <span class="platform-tag">macOS/iOS</span>
+          </div>
+          <p>Lecteur d'écran intégré à tous les appareils Apple</p>
+          <div class="screen-reader-stats">
+            <span class="stat">✓ Intégré</span>
+            <span class="stat">8% d'usage</span>
+          </div>
+          <div class="shortcut-tip">
+            <strong>Raccourci :</strong> <kbd>Cmd</kbd> + <kbd>F5</kbd>
+          </div>
+        </div>
+
+        <div class="screen-reader-card">
+          <div class="screen-reader-header">
+            <span class="screen-reader-icon" aria-hidden="true">🤖</span>
+            <h3>TalkBack</h3>
+            <span class="platform-tag">Android</span>
+          </div>
+          <p>Lecteur d'écran par défaut sur Android</p>
+          <div class="screen-reader-stats">
+            <span class="stat">✓ Intégré</span>
+            <span class="stat">Usage mobile</span>
+          </div>
+          <div class="shortcut-tip">
+            <strong>Activation :</strong> Paramètres > Accessibilité
+          </div>
+        </div>
+      </div>
+
+      <div class="testing-tip">
+        <h4>🧪 Comment tester avec un lecteur d'écran</h4>
+        <ol>
+          <li><strong>Fermez les yeux</strong> ou éteignez l'écran</li>
+          <li><strong>Naviguez uniquement au clavier</strong> (Tab, flèches, Entrée, Espace)</li>
+          <li><strong>Écoutez attentivement</strong> ce qui est annoncé</li>
+          <li><strong>Vérifiez que tout est compréhensible</strong> sans voir l'écran</li>
+        </ol>
+        <p class="testing-note">
+          <strong>Note :</strong> 15 minutes de test avec un lecteur d'écran valent plus que des heures d'audit automatique.
+        </p>
+      </div>
+    </section>
+
     <section aria-labelledby="nav-title">
       <h2 id="nav-title">Navigation rapide</h2>
       <p>Utilisez le menu latéral ou ces raccourcis pour explorer les exemples :</p>
@@ -408,8 +606,233 @@ kbd {
   color: var(--color-primary);
 }
 
+/* Tools section */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.tool-card {
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tool-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tool-icon {
+  font-size: 1.5rem;
+}
+
+.tool-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.tool-description {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.tool-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.tool-feature {
+  font-size: 0.9rem;
+  color: var(--color-success);
+}
+
+.tool-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  border: 2px solid var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tool-link:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.tool-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.pro-tip {
+  background: var(--color-warning-light);
+  border: 2px solid var(--color-warning);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.pro-tip strong {
+  color: var(--color-warning-dark);
+}
+
+/* Screen readers section */
+.screen-readers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.screen-reader-card {
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.screen-reader-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.screen-reader-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.screen-reader-icon {
+  font-size: 1.5rem;
+}
+
+.screen-reader-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  flex: 1;
+}
+
+.platform-tag {
+  background: var(--color-info-light);
+  color: var(--color-info-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.screen-reader-stats {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: var(--color-bg);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--color-border);
+}
+
+.screen-reader-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  border: 2px solid var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s, color 0.2s;
+  margin-top: 1rem;
+}
+
+.screen-reader-link:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.screen-reader-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.shortcut-tip {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--color-bg);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.testing-tip {
+  background: var(--color-info-light);
+  border: 2px solid var(--color-info);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testing-tip h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--color-info-dark);
+}
+
+.testing-tip ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.testing-tip li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.testing-note {
+  margin-bottom: 0;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .quick-link {
+  .quick-link,
+  .tool-card,
+  .screen-reader-card {
     transition: none;
   }
 }

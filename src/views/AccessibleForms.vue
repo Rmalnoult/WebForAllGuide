@@ -29,18 +29,22 @@
           </form>
         </div>
         <div class="code-example">
-          <div class="code-block language-html">
-            <pre><code>&lt;!-- Labels manquants, placeholders utilisés comme labels --&gt;
+          <div class="code-block">
+            <pre><code>&lt;!-- ❌ Mauvais : Labels manquants --&gt;
 &lt;form&gt;
   &lt;h4&gt;Connexion&lt;/h4&gt;
 
-  &lt;!-- Pas de label associé, placeholder insuffisant --&gt;
-  &lt;input type="email" placeholder="Votre email"&gt;
+  &lt;!-- Pas de label associé --&gt;
+  &lt;input
+    type="email"
+    placeholder="Votre email"&gt;
 
   &lt;!-- Pas de label associé --&gt;
-  &lt;input type="password" placeholder="Mot de passe"&gt;
+  &lt;input
+    type="password"
+    placeholder="Mot de passe"&gt;
 
-  &lt;!-- Checkbox non associée au texte --&gt;
+  &lt;!-- Checkbox non associée --&gt;
   &lt;input type="checkbox"&gt;
   &lt;span&gt;Se souvenir de moi&lt;/span&gt;
 
@@ -88,8 +92,8 @@
         </div>
 
         <div class="code-example">
-          <div class="code-block language-html">
-            <pre><code>&lt;!-- Labels explicites et correctement associés --&gt;
+          <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : Labels explicites et associés --&gt;
 &lt;form&gt;
   &lt;h4&gt;Connexion&lt;/h4&gt;
 
@@ -100,8 +104,7 @@
     id="email-good"
     placeholder="exemple@domaine.fr"
     required
-    aria-describedby="email-help"
-  &gt;
+    aria-describedby="email-help"&gt;
   &lt;div id="email-help"&gt;
     Nous ne partagerons jamais votre email
   &lt;/div&gt;
@@ -112,8 +115,7 @@
     type="password"
     id="password-good"
     required
-    aria-describedby="password-help"
-  &gt;
+    aria-describedby="password-help"&gt;
   &lt;div id="password-help"&gt;
     Minimum 8 caractères avec majuscules et chiffres
   &lt;/div&gt;
@@ -156,6 +158,43 @@
 
             <button type="submit">S'inscrire</button>
           </form>
+        </div>
+
+        <div class="code-example">
+          <div class="code-block">
+            <pre><code>&lt;!-- ❌ Mauvais : Erreurs mal annoncées --&gt;
+&lt;form @submit.prevent="submitBadForm"&gt;
+  &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
+
+  &lt;!-- Pas d'association label-input --&gt;
+  &lt;label&gt;Nom&lt;/label&gt;
+  &lt;input
+    type="text"
+    v-model="badForm.name"
+    :class="{ 'error': submitted &amp;&amp; !badForm.name }"&gt;
+
+  &lt;!-- Erreur visuelle seulement --&gt;
+  &lt;label&gt;Email&lt;/label&gt;
+  &lt;input
+    type="email"
+    v-model="badForm.email"
+    :class="{ 'error': submitted &amp;&amp; !isValidEmail(badForm.email) }"&gt;
+
+  &lt;!-- Pas d'information sur l'erreur --&gt;
+  &lt;label&gt;Âge&lt;/label&gt;
+  &lt;input
+    type="number"
+    v-model="badForm.age"
+    :class="{ 'error': submitted &amp;&amp; badForm.age &lt; 16 }"&gt;
+
+  &lt;!-- Message d'erreur générique et inutile --&gt;
+  &lt;div v-if="submitted &amp;&amp; badFormErrors.length"&gt;
+    ❌ Veuillez corriger les erreurs
+  &lt;/div&gt;
+
+  &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
         </div>
       </template>
 
@@ -246,21 +285,22 @@
         </div>
 
         <div class="code-example">
-          <div class="code-block language-html">
-            <pre><code>&lt;!-- Erreurs clairement associées et annoncées --&gt;
+          <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : Erreurs clairement associées --&gt;
 &lt;form @submit.prevent="submitGoodForm" novalidate&gt;
   &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
 
   &lt;!-- Résumé des erreurs avec navigation --&gt;
   &lt;div
-    v-if="goodFormSubmitted &amp;&amp; goodFormErrors.length"
+    v-if="submitted &amp;&amp; goodFormErrors.length"
     role="alert"
-    aria-labelledby="error-summary-title"
-  &gt;
+    aria-labelledby="error-summary-title"&gt;
     &lt;h5 id="error-summary-title"&gt;Erreurs à corriger :&lt;/h5&gt;
     &lt;ul&gt;
       &lt;li v-for="error in goodFormErrors" :key="error.field"&gt;
-        &lt;a :href="`#${error.field}-good-form`"&gt;{{ error.message }}&lt;/a&gt;
+        &lt;a :href="`#${error.field}-good-form`"&gt;
+          {{ error.message }}
+        &lt;/a&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
@@ -272,14 +312,12 @@
     id="name-good-form"
     v-model="goodForm.name"
     required
-    aria-invalid="goodFormSubmitted &amp;&amp; !goodForm.name"
-    aria-describedby="name-error"
-  &gt;
+    aria-invalid="submitted &amp;&amp; !goodForm.name"
+    aria-describedby="name-error"&gt;
   &lt;div
-    v-if="goodFormSubmitted &amp;&amp; !goodForm.name"
+    v-if="submitted &amp;&amp; !goodForm.name"
     id="name-error"
-    role="alert"
-  &gt;
+    role="alert"&gt;
     ❌ Le nom est obligatoire
   &lt;/div&gt;
 
@@ -342,6 +380,53 @@
 
             <button type="submit">OK</button>
           </form>
+        </div>
+
+        <div class="code-example">
+          <div class="code-block">
+            <pre><code>&lt;!-- ❌ Mauvais : Structure désorganisée --&gt;
+&lt;form&gt;
+  &lt;h4&gt;Préférences&lt;/h4&gt;
+
+  &lt;!-- Éléments mélangés sans logique --&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="contact-bad"
+           id="email-contact-bad" value="email"&gt;
+    &lt;label for="email-contact-bad"&gt;Email&lt;/label&gt;
+
+    &lt;input type="checkbox" id="newsletter-bad"
+           value="newsletter"&gt;
+    &lt;label for="newsletter-bad"&gt;Newsletter&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;input type="radio" name="contact-bad"
+           id="phone-contact-bad" value="phone"&gt;
+    &lt;label for="phone-contact-bad"&gt;Téléphone&lt;/label&gt;
+
+    &lt;!-- Champ texte sans contexte --&gt;
+    &lt;input type="text" placeholder="Nom"&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;input type="checkbox" id="offers-bad" value="offers"&gt;
+    &lt;label for="offers-bad"&gt;Offres&lt;/label&gt;
+
+    &lt;input type="radio" name="contact-bad"
+           id="sms-contact-bad" value="sms"&gt;
+    &lt;label for="sms-contact-bad"&gt;SMS&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Select sans contexte --&gt;
+  &lt;select&gt;
+    &lt;option&gt;Choisir...&lt;/option&gt;
+    &lt;option&gt;Quotidien&lt;/option&gt;
+    &lt;option&gt;Hebdomadaire&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;button type="submit"&gt;OK&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
         </div>
       </template>
 
@@ -416,14 +501,16 @@
         </div>
 
         <div class="code-example">
-          <div class="code-block language-html">
-            <pre><code>&lt;!-- Groupes logiques avec aria-labelledby --&gt;
+          <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : Groupes logiques avec aria-labelledby --&gt;
 &lt;form&gt;
   &lt;h4&gt;Préférences de contact&lt;/h4&gt;
 
   &lt;!-- Section informations personnelles --&gt;
   &lt;div role="group" aria-labelledby="personal-info-title"&gt;
-    &lt;h5 id="personal-info-title"&gt;Informations personnelles&lt;/h5&gt;
+    &lt;h5 id="personal-info-title"&gt;
+      Informations personnelles
+    &lt;/h5&gt;
 
     &lt;label for="name-good"&gt;Nom complet *&lt;/label&gt;
     &lt;input
@@ -432,8 +519,7 @@
       name="name"
       required
       aria-required="true"
-      aria-describedby="name-desc"
-    &gt;
+      aria-describedby="name-desc"&gt;
     &lt;span id="name-desc"&gt;
       Votre nom tel qu'il apparaîtra dans nos communications
     &lt;/span&gt;
@@ -443,17 +529,17 @@
   &lt;div
     role="radiogroup"
     aria-labelledby="contact-method-title"
-    aria-required="true"
-  &gt;
-    &lt;h5 id="contact-method-title"&gt;Méthode de contact préférée *&lt;/h5&gt;
+    aria-required="true"&gt;
+    &lt;h5 id="contact-method-title"&gt;
+      Méthode de contact préférée *
+    &lt;/h5&gt;
 
     &lt;input
       type="radio"
       name="contact-good"
       id="email-contact-good"
       value="email"
-      required
-    &gt;
+      required&gt;
     &lt;label for="email-contact-good"&gt;Email&lt;/label&gt;
 
     &lt;input
@@ -461,8 +547,7 @@
       name="contact-good"
       id="phone-contact-good"
       value="phone"
-      required
-    &gt;
+      required&gt;
     &lt;label for="phone-contact-good"&gt;Téléphone&lt;/label&gt;
   &lt;/div&gt;
 
@@ -470,19 +555,21 @@
   &lt;div role="group" aria-labelledby="comm-types-title"&gt;
     &lt;h5 id="comm-types-title"&gt;Types de communications&lt;/h5&gt;
     &lt;p id="comm-types-desc"&gt;
-      Sélectionnez les types de communications que vous souhaitez recevoir
+      Sélectionnez les types de communications
+      que vous souhaitez recevoir
     &lt;/p&gt;
 
     &lt;input
       type="checkbox"
       id="newsletter-good"
       value="newsletter"
-      aria-describedby="comm-types-desc"
-    &gt;
+      aria-describedby="comm-types-desc"&gt;
     &lt;label for="newsletter-good"&gt;Newsletter&lt;/label&gt;
   &lt;/div&gt;
 
-  &lt;button type="submit"&gt;Sauvegarder les préférences&lt;/button&gt;
+  &lt;button type="submit"&gt;
+    Sauvegarder les préférences
+  &lt;/button&gt;
 &lt;/form&gt;</code></pre>
           </div>
         </div>
@@ -535,6 +622,47 @@
 
             <button type="submit">Créer le compte</button>
           </form>
+        </div>
+
+        <div class="code-example">
+          <div class="code-block">
+            <pre><code>&lt;!-- ❌ Mauvais : Validation intrusive --&gt;
+&lt;form&gt;
+  &lt;h4&gt;Créer un compte&lt;/h4&gt;
+
+  &lt;!-- Validation immédiate sur chaque frappe --&gt;
+  &lt;label&gt;Nom d'utilisateur&lt;/label&gt;
+  &lt;input
+    type="text"
+    v-model="complexBadForm.username"
+    @input="validateUsernameBad"
+    :class="{ 'error': usernameBadError }"&gt;
+  &lt;!-- Erreur qui apparaît/disparaît constamment --&gt;
+  &lt;div v-if="usernameBadError"&gt;
+    {{ usernameBadError }}
+  &lt;/div&gt;
+
+  &lt;!-- Pas d'association avec aria-describedby --&gt;
+  &lt;label&gt;Email&lt;/label&gt;
+  &lt;input
+    type="email"
+    v-model="complexBadForm.email"
+    @input="validateEmailBad"
+    :class="{ 'error': emailBadError }"&gt;
+  &lt;div v-if="emailBadError"&gt;{{ emailBadError }}&lt;/div&gt;
+
+  &lt;!-- Messages d'erreur trop courts et peu utiles --&gt;
+  &lt;label&gt;Mot de passe&lt;/label&gt;
+  &lt;input
+    type="password"
+    v-model="complexBadForm.password"
+    @input="validatePasswordBad"
+    :class="{ 'error': passwordBadError }"&gt;
+  &lt;div v-if="passwordBadError"&gt;{{ passwordBadError }}&lt;/div&gt;
+
+  &lt;button type="submit"&gt;Créer le compte&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
         </div>
       </template>
 
@@ -674,8 +802,8 @@
         </div>
 
         <div class="code-example">
-          <div class="code-block language-html">
-            <pre><code>&lt;!-- Validation respectueuse avec feedback constructif --&gt;
+          <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : Validation respectueuse avec feedback --&gt;
 &lt;form&gt;
   &lt;h4&gt;Créer un compte&lt;/h4&gt;
 
@@ -686,11 +814,11 @@
     id="username-complex"
     v-model="complexGoodForm.username"
     @blur="validateUsernameGood"
-    :class="{ error: usernameGoodError, success: usernameGoodValid }"
+    :class="{ error: usernameGoodError,
+              success: usernameGoodValid }"
     aria-describedby="username-requirements username-feedback"
     aria-invalid="!!usernameGoodError"
-    required
-  &gt;
+    required&gt;
 
   &lt;!-- Instructions claires --&gt;
   &lt;div id="username-requirements"&gt;
@@ -699,7 +827,7 @@
       &lt;li :class="{ valid: complexGoodForm.username.length &gt;= 3 }"&gt;
         Au moins 3 caractères
       &lt;/li&gt;
-      &lt;li :class="{ valid: /^[a-zA-Z0-9_]+$/.test(complexGoodForm.username) }"&gt;
+      &lt;li :class="{ valid: /^[a-zA-Z0-9_]+$/.test(username) }"&gt;
         Lettres, chiffres et underscore uniquement
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -710,16 +838,14 @@
     v-if="usernameGoodError"
     id="username-feedback"
     role="alert"
-    aria-live="polite"
-  &gt;
-    ❌ &#123;&#123; usernameGoodError &#125;&#125;
+    aria-live="polite"&gt;
+    ❌ {{ usernameGoodError }}
   &lt;/div&gt;
   &lt;div
     v-else-if="usernameGoodValid"
     id="username-feedback"
     role="status"
-    aria-live="polite"
-  &gt;
+    aria-live="polite"&gt;
     ✅ Nom d'utilisateur disponible
   &lt;/div&gt;
 
@@ -731,8 +857,7 @@
     v-model="complexGoodForm.password"
     @input="validatePasswordGood"
     aria-describedby="password-strength"
-    required
-  &gt;
+    required&gt;
 
   &lt;div id="password-strength"&gt;
     &lt;h6&gt;Force du mot de passe :&lt;/h6&gt;
@@ -740,8 +865,8 @@
       &lt;div
         class="strength-bar"
         :class="`strength-${passwordStrength}`"
-        :style="{ width: `${passwordStrength * 25}%` }"
-      &gt;&lt;/div&gt;
+        :style="{ width: `${passwordStrength * 25}%` }"&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
@@ -904,7 +1029,7 @@ const isFormValid = computed(() => {
 
 <style scoped>
 .accessible-forms {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -935,7 +1060,7 @@ h1 {
 
 .form-bad, .form-good, .form-validation-bad, .form-validation-good,
 .form-fieldset-bad, .form-fieldset-good, .complex-form-bad, .complex-form-good {
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .form-group {

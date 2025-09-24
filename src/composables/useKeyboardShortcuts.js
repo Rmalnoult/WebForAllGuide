@@ -88,17 +88,21 @@ export function useKeyboardShortcuts() {
   }
 
   function showHelpDialog() {
+    // Store the element that triggered the modal for focus restoration
+    const triggerElement = document.activeElement
+
     // Create help dialog
     const dialog = document.createElement('div')
     dialog.className = 'keyboard-help-dialog'
     dialog.setAttribute('role', 'dialog')
+    dialog.setAttribute('aria-modal', 'true')
     dialog.setAttribute('aria-labelledby', 'help-title')
     dialog.setAttribute('aria-describedby', 'help-content')
 
     dialog.innerHTML = `
-      <div class="dialog-overlay" onclick="this.parentElement.remove()"></div>
-      <div class="dialog-content">
-        <h2 id="help-title">Raccourcis Clavier</h2>
+      <div class="dialog-overlay"></div>
+      <div class="dialog-content" role="document">
+        <h2 id="help-title" tabindex="-1">Raccourcis Clavier</h2>
         <div id="help-content">
           <h3>Navigation</h3>
           <dl class="shortcuts-list">
@@ -136,7 +140,7 @@ export function useKeyboardShortcuts() {
             <dd>Fermer cette fenêtre</dd>
           </dl>
         </div>
-        <button class="dialog-close" onclick="this.closest('.keyboard-help-dialog').remove()">
+        <button class="dialog-close" type="button" aria-label="Fermer la fenêtre d'aide">
           Fermer (Échap)
         </button>
       </div>
@@ -144,18 +148,77 @@ export function useKeyboardShortcuts() {
 
     document.body.appendChild(dialog)
 
-    // Focus on close button
+    // Get focusable elements for focus trap
+    const dialogContent = dialog.querySelector('.dialog-content')
+    const dialogTitle = dialog.querySelector('#help-title')
     const closeButton = dialog.querySelector('.dialog-close')
-    if (closeButton) closeButton.focus()
+    const overlay = dialog.querySelector('.dialog-overlay')
 
-    // Handle escape key
-    const handleEscape = (e) => {
+    // Set initial focus on the dialog title
+    if (dialogTitle) dialogTitle.focus()
+
+    // Function to close the dialog
+    const closeDialog = () => {
+      dialog.remove()
+      // Restore focus to the triggering element
+      if (triggerElement) {
+        triggerElement.focus()
+      }
+      // Remove event listeners
+      document.removeEventListener('keydown', handleKeydown)
+    }
+
+    // Handle click on overlay
+    overlay.addEventListener('click', closeDialog)
+
+    // Handle click on close button
+    closeButton.addEventListener('click', closeDialog)
+
+    // Handle keyboard events including Escape and Tab trap
+    const handleKeydown = (e) => {
       if (e.key === 'Escape') {
-        dialog.remove()
-        document.removeEventListener('keydown', handleEscape)
+        e.preventDefault()
+        closeDialog()
+      }
+
+      // Implement focus trap
+      if (e.key === 'Tab') {
+        const focusableElements = dialogContent.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const focusableArray = Array.from(focusableElements)
+        const firstFocusable = focusableArray[0]
+        const lastFocusable = focusableArray[focusableArray.length - 1]
+
+        if (e.shiftKey) {
+          // Shift+Tab
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault()
+            lastFocusable.focus()
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault()
+            firstFocusable.focus()
+          }
+        }
       }
     }
-    document.addEventListener('keydown', handleEscape)
+
+    document.addEventListener('keydown', handleKeydown)
+
+    // Announce modal opening for screen readers
+    const announcement = document.createElement('div')
+    announcement.setAttribute('role', 'status')
+    announcement.setAttribute('aria-live', 'assertive')
+    announcement.className = 'sr-only'
+    announcement.textContent = 'Fenêtre de raccourcis clavier ouverte. Appuyez sur Échap pour fermer.'
+    document.body.appendChild(announcement)
+
+    setTimeout(() => {
+      document.body.removeChild(announcement)
+    }, 1000)
   }
 
   onMounted(() => {

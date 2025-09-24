@@ -133,24 +133,34 @@ function handleKeydown(e) {
         <div class="focus-demo">
           <p>Essayez de naviguer avec Tab dans cette zone :</p>
           <div class="controls-bad">
-            <button class="btn-no-focus">Bouton 1</button>
-            <button class="btn-no-focus">Bouton 2</button>
+            <button type="button" class="btn-no-focus">Bouton 1</button>
+            <button type="button" class="btn-no-focus">Bouton 2</button>
             <a href="#" class="link-no-focus">Lien vers la page</a>
             <input type="text" class="input-no-focus" placeholder="Saisissez du texte" />
-            <button class="btn-no-focus">Valider</button>
+            <button type="button" class="btn-no-focus">Valider</button>
           </div>
           <div class="code-block">
             <pre><code>&lt;!-- Mauvais : focus supprimé avec CSS --&gt;
 &lt;style&gt;
-  button:focus {
+  /* ❌ Supprime tous les indicateurs de focus */
+  *:focus {
+    outline: none !important;
+  }
+
+  button:focus,
+  a:focus,
+  input:focus {
     outline: none !important;
   }
 &lt;/style&gt;
 
-&lt;button&gt;Bouton 1&lt;/button&gt;
-&lt;button&gt;Bouton 2&lt;/button&gt;
-&lt;a href="#"&gt;Lien&lt;/a&gt;
-&lt;input type="text" /&gt;</code></pre>
+&lt;!-- ❌ Problèmes d'accessibilité : --&gt;
+&lt;button&gt;Bouton 1&lt;/button&gt;        &lt;!-- Pas de type, focus invisible --&gt;
+&lt;button&gt;Bouton 2&lt;/button&gt;        &lt;!-- Pas de type, focus invisible --&gt;
+&lt;a href="#"&gt;Lien&lt;/a&gt;           &lt;!-- Focus invisible --&gt;
+&lt;input type="text" /&gt;         &lt;!-- Focus invisible --&gt;
+
+&lt;!-- Navigation clavier impossible à suivre visuellement --&gt;</code></pre>
           </div>
         </div>
       </template>
@@ -159,11 +169,11 @@ function handleKeydown(e) {
         <div class="focus-demo">
           <p>Essayez de naviguer avec Tab dans cette zone :</p>
           <div class="controls-good">
-            <button class="btn-good-focus">Bouton 1</button>
-            <button class="btn-good-focus">Bouton 2</button>
+            <button type="button" class="btn-good-focus">Bouton 1</button>
+            <button type="button" class="btn-good-focus">Bouton 2</button>
             <a href="#" class="link-good-focus">Lien vers la page</a>
             <input type="text" class="input-good-focus" placeholder="Saisissez du texte" />
-            <button class="btn-good-focus">Valider</button>
+            <button type="button" class="btn-good-focus">Valider</button>
           </div>
           <div class="code-block">
             <pre><code>&lt;!-- Bon : indicateurs de focus visibles --&gt;
@@ -180,10 +190,10 @@ function handleKeydown(e) {
   }
 &lt;/style&gt;
 
-&lt;button&gt;Bouton 1&lt;/button&gt;
-&lt;button&gt;Bouton 2&lt;/button&gt;
-&lt;a href="#"&gt;Lien&lt;/a&gt;
-&lt;input type="text" /&gt;</code></pre>
+&lt;button type="button"&gt;Bouton 1&lt;/button&gt;
+&lt;button type="button"&gt;Bouton 2&lt;/button&gt;
+&lt;a href="#"&gt;Lien vers la page&lt;/a&gt;
+&lt;input type="text" placeholder="Saisissez du texte" /&gt;</code></pre>
           </div>
         </div>
       </template>
@@ -261,6 +271,12 @@ function handleKeydown(e) {
     position: absolute;
     top: -100px;
     left: 1rem;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.25rem;
   }
 
   .skip-link:focus {
@@ -272,8 +288,12 @@ function handleKeydown(e) {
   Aller au contenu principal
 &lt;/a&gt;
 &lt;header&gt;
-  &lt;nav&gt;
-    &lt;!-- Navigation... --&gt;
+  &lt;nav aria-label="Navigation principale"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/produits"&gt;Produits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/services"&gt;Services&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/nav&gt;
 &lt;/header&gt;
 &lt;main id="main-content"&gt;
@@ -290,7 +310,7 @@ function handleKeydown(e) {
     >
       <template #bad>
         <div class="modal-demo">
-          <button @click="openBadModal" class="open-modal-btn">
+          <button type="button" @click="openBadModal" class="open-modal-btn">
             Ouvrir modal (mauvais exemple)
           </button>
 
@@ -298,40 +318,52 @@ function handleKeydown(e) {
             <div class="modal-content-bad" @click.stop>
               <div class="modal-header">
                 <h3>Confirmer l'action</h3>
-                <button @click="closeBadModal" class="close-btn">×</button>
+                <button type="button" @click="closeBadModal" class="close-btn">×</button>
               </div>
               <div class="modal-body">
                 <p>Êtes-vous sûr de vouloir continuer ?</p>
                 <input type="text" placeholder="Raison (optionnel)" />
               </div>
               <div class="modal-footer">
-                <button @click="closeBadModal">Annuler</button>
-                <button @click="confirmBadModal">Confirmer</button>
+                <button type="button" @click="closeBadModal">Annuler</button>
+                <button type="button" @click="confirmBadModal">Confirmer</button>
               </div>
             </div>
           </div>
           <div class="code-block">
             <pre><code>&lt;!-- Mauvais : modal sans gestion du focus --&gt;
-&lt;div v-if="modalOpen" class="modal"&gt;
-  &lt;div class="modal-content"&gt;
-    &lt;button @click="close"&gt;×&lt;/button&gt;
-    &lt;h2&gt;Titre&lt;/h2&gt;
-    &lt;input type="text" /&gt;
-    &lt;button&gt;Annuler&lt;/button&gt;
-    &lt;button&gt;Confirmer&lt;/button&gt;
+&lt;div v-if="modalOpen" class="modal-overlay" @click="close"&gt;
+  &lt;div class="modal-content" @click.stop&gt;
+    &lt;div class="modal-header"&gt;
+      &lt;h3&gt;Confirmer l'action&lt;/h3&gt;
+      &lt;button @click="close"&gt;×&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-body"&gt;
+      &lt;p&gt;Êtes-vous sûr de vouloir continuer ?&lt;/p&gt;
+      &lt;input type="text" placeholder="Raison" /&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-footer"&gt;
+      &lt;button @click="close"&gt;Annuler&lt;/button&gt;
+      &lt;button @click="confirm"&gt;Confirmer&lt;/button&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- Focus peut sortir de la modal --&gt;
-&lt;!-- Pas de gestion de la touche Échap --&gt;
-&lt;!-- Focus non restauré à la fermeture --&gt;</code></pre>
+&lt;!-- ❌ Problèmes :
+  - Pas de type="button" (soumettrait un form)
+  - Pas de role="dialog" ni aria-modal
+  - Focus peut sortir de la modal (Tab)
+  - Pas de gestion de la touche Échap
+  - Focus non restauré à la fermeture
+  - Pas d'aria-label sur le bouton fermer
+  - Pas d'aria-labelledby pour le titre --&gt;</code></pre>
           </div>
         </div>
       </template>
 
       <template #good>
         <div class="modal-demo">
-          <button @click="openGoodModal" class="open-modal-btn" ref="goodModalTrigger">
+          <button type="button" @click="openGoodModal" class="open-modal-btn" ref="goodModalTrigger">
             Ouvrir modal (bon exemple)
           </button>
 
@@ -347,7 +379,7 @@ function handleKeydown(e) {
             <div class="modal-content-good" @click.stop>
               <div class="modal-header">
                 <h3 id="good-modal-title">Confirmer l'action</h3>
-                <button @click="closeGoodModal" class="close-btn" aria-label="Fermer la modal">×</button>
+                <button type="button" @click="closeGoodModal" class="close-btn" aria-label="Fermer la modal">×</button>
               </div>
               <div class="modal-body">
                 <p>Êtes-vous sûr de vouloir continuer ?</p>
@@ -359,8 +391,9 @@ function handleKeydown(e) {
                 />
               </div>
               <div class="modal-footer">
-                <button @click="closeGoodModal" @keydown.tab="handleGoodModalTab">Annuler</button>
+                <button type="button" @click="closeGoodModal" @keydown.tab="handleGoodModalTab">Annuler</button>
                 <button
+                  type="button"
                   @click="confirmGoodModal"
                   @keydown.tab="handleGoodModalTab"
                   ref="goodModalLastButton"
@@ -374,36 +407,59 @@ function handleKeydown(e) {
             <pre><code>&lt;!-- Bon : modal avec piège à focus --&gt;
 &lt;div
   v-if="modalOpen"
-  class="modal"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="modal-title"
+  class="modal-overlay"
+  @click="closeModal"
   @keydown.esc="closeModal"
 &gt;
-  &lt;div class="modal-content"&gt;
-    &lt;button
-      @click="closeModal"
-      aria-label="Fermer"
-    &gt;×&lt;/button&gt;
-    &lt;h2 id="modal-title"&gt;Titre&lt;/h2&gt;
-    &lt;input
-      ref="firstInput"
-      type="text"
-      @keydown.tab="handleTab"
-    /&gt;
-    &lt;button @click="closeModal"&gt;Annuler&lt;/button&gt;
-    &lt;button
-      ref="lastButton"
-      @click="confirm"
-      @keydown.tab="handleTab"
-    &gt;Confirmer&lt;/button&gt;
+  &lt;div
+    class="modal-content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    @click.stop
+  &gt;
+    &lt;header class="modal-header"&gt;
+      &lt;h2 id="modal-title"&gt;Confirmer l'action&lt;/h2&gt;
+      &lt;button
+        type="button"
+        @click="closeModal"
+        aria-label="Fermer la modal"
+        class="close-btn"
+      &gt;×&lt;/button&gt;
+    &lt;/header&gt;
+
+    &lt;div class="modal-body"&gt;
+      &lt;p&gt;Êtes-vous sûr de vouloir continuer ?&lt;/p&gt;
+      &lt;input
+        ref="firstInput"
+        type="text"
+        placeholder="Raison (optionnel)"
+        @keydown.tab="handleFocusTrap"
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;footer class="modal-footer"&gt;
+      &lt;button
+        type="button"
+        @click="closeModal"
+        @keydown.tab="handleFocusTrap"
+      &gt;Annuler&lt;/button&gt;
+      &lt;button
+        type="button"
+        ref="lastButton"
+        @click="confirmAction"
+        @keydown.tab="handleFocusTrap"
+      &gt;Confirmer&lt;/button&gt;
+    &lt;/footer&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-// Focus sur le premier élément à l'ouverture
-// Piège à focus avec gestion Tab/Shift+Tab
-// Retour du focus à l'élément déclencheur
+// Fonctions essentielles :
+// - Focus automatique sur premier élément
+// - Piège à focus (Tab/Shift+Tab)
+// - Fermeture par Échap
+// - Retour du focus à l'élément déclencheur
 &lt;/script&gt;</code></pre>
           </div>
         </div>

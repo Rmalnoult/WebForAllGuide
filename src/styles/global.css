@@ -61,12 +61,12 @@ p {
 
 /* Liens */
 a {
-  color: var(--color-primary);
+  color: var(--color-link, var(--color-primary));  /* Use high contrast color for links */
   text-underline-offset: 2px;
 }
 
 a:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-link-hover, var(--color-primary-dark));
 }
 
 /* Boutons */

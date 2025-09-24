@@ -192,9 +192,9 @@
   .string { color: #032f62; }
   .keyword { color: #d73a49; }
   .function { color: #6f42c1; }
-  .number { color: #005cc5; }
+  .number { color: #1e3a8a; }
   .selector { color: #d73a49; }
-  .property { color: #005cc5; }
+  .property { color: #1e3a8a; }
   .value { color: #032f62; }
 
   .copy-button {

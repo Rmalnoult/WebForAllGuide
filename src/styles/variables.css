@@ -1,6 +1,6 @@
 :root {
   /* Couleurs avec contrastes WCAG AAA */
-  --color-primary: #0970e6;
+  --color-primary: #0970e6;  /* Original color for buttons and backgrounds */
   --color-primary-dark: #0866d3;
   --color-primary-darker: #075cc0;
   --color-primary-light: #e6f0ff;
@@ -36,6 +36,11 @@
   --color-hover: rgba(0, 0, 0, 0.05);
   --color-focus: var(--ds-color-interactive-background-brand);
 
+  /* High contrast color for text links only */
+  --color-link: #0055cc;  /* Contrast 5.96:1 - WCAG AA compliant */
+  --color-link-hover: #004bb0;
+  --color-link-visited: #00419d;
+
   /* Espacements */
   --spacing-xs: var(--ds-spacing-xs);
   --spacing-sm: var(--ds-spacing-s);
@@ -60,7 +65,7 @@
 /* Mode sombre automatique */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: #0970e6;
+    --color-primary: #0970e6;  /* Keep original for buttons/backgrounds */
     --color-primary-dark: #4A9FFF;
     --color-primary-light: #1A3A52;
 
@@ -86,6 +91,11 @@
     --color-border: #495057;
     --color-hover: rgba(255, 255, 255, 0.1);
     --color-focus: #0970e6;
+
+    /* High contrast colors for links in dark mode */
+    --color-link: #4A9FFF;
+    --color-link-hover: #6BB2FF;
+    --color-link-visited: #3A8FEF;
   }
 }
 
