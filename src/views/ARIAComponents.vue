@@ -685,7 +685,7 @@
   &lt;span class="icon"&gt;🔍&lt;/span&gt;
 &lt;/button&gt;
 
-&lt;!-- Mauvais : erreur non associée --&gt;
+&lt;!-- Mauvais : erreur non associée, pas d'autocomplete --&gt;
 &lt;input type="password"&gt;
 &lt;div class="error"&gt;Mot de passe trop court&lt;/div&gt;</code></pre>
           </div>
@@ -702,7 +702,7 @@
             </div>
 
             <div class="form-field">
-              <input type="password" placeholder="Mot de passe" class="bad-input error-input">
+              <input type="password" placeholder="Mot de passe" class="bad-input error-input" autocomplete="current-password">
               <div class="error-message">Mot de passe trop court</div>
             </div>
 
@@ -740,7 +740,8 @@
   type="password"
   aria-label="Mot de passe"
   aria-invalid="true"
-  aria-describedby="pwd-error"&gt;
+  aria-describedby="pwd-error"
+  autocomplete="new-password"&gt;
 &lt;div id="pwd-error" role="alert"&gt;
   Mot de passe trop court
 &lt;/div&gt;</code></pre>
@@ -750,7 +751,7 @@
             <div class="form-field">
               <label for="good-email" class="sr-only">Adresse email</label>
               <input
-                type="text"
+                type="email"
                 id="good-email"
                 aria-label="Adresse email"
                 aria-describedby="email-desc"
@@ -760,6 +761,7 @@
                 @blur="validateEmail"
                 placeholder="Votre email"
                 class="good-input"
+                autocomplete="email"
               >
               <span id="email-desc" class="field-hint">Format : nom@exemple.com</span>
               <div v-if="emailError" id="email-error" role="alert" class="error-message">
@@ -792,6 +794,7 @@
                 placeholder="Mot de passe"
                 class="good-input"
                 :class="{ 'error': passwordInvalid }"
+                autocomplete="new-password"
               >
               <div id="pwd-requirements" class="field-hint">
                 Minimum 8 caractères avec chiffres et lettres
@@ -891,7 +894,6 @@ import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 
 // Initialize syntax highlighting
 useSyntaxHighlight()
-import { CAccordion, CButton, CFunctionalNotice, CIcon, CPopin, CText, CBadge } from '@carrefour/design-system-components-vue3';
 
 // Accordion state
 const badAccordionOpen = ref([false, false, false])

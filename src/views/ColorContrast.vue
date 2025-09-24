@@ -180,7 +180,7 @@
             </div>
             <div class="form-group">
               <label>Mot de passe</label>
-              <input type="password" class="input-error" value="123">
+              <input type="password" class="input-error" value="123" autocomplete="new-password">
             </div>
             <p class="color-legend">🔴 Rouge = Erreur, 🟢 Vert = Valide</p>
           </div>
@@ -225,7 +225,7 @@
             </div>
             <div class="form-group">
               <label>Mot de passe</label>
-              <input type="password" class="input-error" value="123" aria-describedby="password-error">
+              <input type="password" class="input-error" value="123" aria-describedby="password-error" autocomplete="new-password">
               <div id="password-error" class="error-message">
                 ❌ Le mot de passe doit contenir au moins 8 caractères
               </div>

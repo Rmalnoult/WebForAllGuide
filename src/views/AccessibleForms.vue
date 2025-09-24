@@ -19,7 +19,7 @@
               <input type="email" placeholder="Votre email">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Mot de passe">
+              <input type="password" placeholder="Mot de passe" autocomplete="current-password">
             </div>
             <div class="form-group checkbox-group">
               <input type="checkbox">
@@ -39,7 +39,7 @@
     type="email"
     placeholder="Votre email"&gt;
 
-  &lt;!-- Pas de label associé --&gt;
+  &lt;!-- Pas de label associé, pas d'autocomplete --&gt;
   &lt;input
     type="password"
     placeholder="Mot de passe"&gt;
@@ -66,6 +66,7 @@
                 placeholder="exemple@domaine.fr"
                 required
                 aria-describedby="email-help"
+                autocomplete="email"
               >
               <div id="email-help" class="field-help">
                 Nous ne partagerons jamais votre email
@@ -78,6 +79,7 @@
                 id="password-good"
                 required
                 aria-describedby="password-help"
+                autocomplete="current-password"
               >
               <div id="password-help" class="field-help">
                 Minimum 8 caractères avec majuscules et chiffres
@@ -104,7 +106,8 @@
     id="email-good"
     placeholder="exemple@domaine.fr"
     required
-    aria-describedby="email-help"&gt;
+    aria-describedby="email-help"
+    autocomplete="email"&gt;
   &lt;div id="email-help"&gt;
     Nous ne partagerons jamais votre email
   &lt;/div&gt;
@@ -115,7 +118,8 @@
     type="password"
     id="password-good"
     required
-    aria-describedby="password-help"&gt;
+    aria-describedby="password-help"
+    autocomplete="current-password"&gt;
   &lt;div id="password-help"&gt;
     Minimum 8 caractères avec majuscules et chiffres
   &lt;/div&gt;
@@ -616,6 +620,7 @@
                 v-model="complexBadForm.password"
                 @input="validatePasswordBad"
                 :class="{ 'error': passwordBadError }"
+                autocomplete="new-password"
               >
               <div v-if="passwordBadError" class="error-inline">{{ passwordBadError }}</div>
             </div>
@@ -652,6 +657,7 @@
   &lt;div v-if="emailBadError"&gt;{{ emailBadError }}&lt;/div&gt;
 
   &lt;!-- Messages d'erreur trop courts et peu utiles --&gt;
+  &lt;!-- Pas d'autocomplete pour aider les gestionnaires de mots de passe --&gt;
   &lt;label&gt;Mot de passe&lt;/label&gt;
   &lt;input
     type="password"
@@ -759,6 +765,7 @@
                 aria-describedby="password-strength password-feedback"
                 aria-invalid="!!passwordGoodError"
                 required
+                autocomplete="new-password"
               >
               <div id="password-strength" class="password-strength">
                 <h6>Force du mot de passe :</h6>
@@ -857,6 +864,7 @@
     v-model="complexGoodForm.password"
     @input="validatePasswordGood"
     aria-describedby="password-strength"
+    autocomplete="new-password"
     required&gt;
 
   &lt;div id="password-strength"&gt;

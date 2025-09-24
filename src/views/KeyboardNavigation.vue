@@ -99,7 +99,7 @@
     @focus="selected = i"
     :class="{ selected: selected === i }"
   &gt;
-    {{ item }}
+    {{ '{' + '{ item }' + '}' }}
   &lt;/div&gt;
 &lt;/div&gt;
 

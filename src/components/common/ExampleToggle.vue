@@ -1,7 +1,7 @@
 <template>
-  <c-card class="example-toggle" :data-card-title="title">
+  <div class="example-toggle card" :data-card-title="title">
     <div class="toggle-header">
-      <c-text tag="h3">{{ title }}</c-text>
+      <h3>{{ title }}</h3>
 
       <!-- Menu déroulant discret -->
       <div class="dropdown-menu" ref="dropdownContainer">
@@ -39,7 +39,7 @@
             role="menuitem"
             ref="exportMenuItem"
           >
-            <c-icon name="download" aria-hidden="true" />
+            <span class="icon" aria-hidden="true">📥</span>
             <span>{{ isExporting ? 'Export en cours...' : 'Exporter en image' }}</span>
           </button>
         </div>
@@ -47,34 +47,33 @@
     </div>
 
     <div class="examples-container">
-      <c-card class="example bad-example">
+      <div class="example bad-example card">
         <div class="example-label bad-label">
-          <c-icon name="error-circle" aria-hidden="true" /> Mauvais exemple
+          <span class="icon" aria-hidden="true">❌</span> Mauvais exemple
         </div>
         <div class="example-content">
           <slot name="bad"></slot>
         </div>
-      </c-card>
+      </div>
 
-      <c-card class="example good-example">
+      <div class="example good-example card">
         <div class="example-label good-label">
-          <c-icon name="check-circle" aria-hidden="true" /> Bon exemple
+          <span class="icon" aria-hidden="true">✅</span> Bon exemple
         </div>
         <div class="example-content">
           <slot name="good"></slot>
         </div>
-      </c-card>
+      </div>
     </div>
 
     <div v-if="explanation" class="example-explanation" role="note">
-      <c-text><strong>Explication :</strong> {{ explanation }}</c-text>
+      <p><strong>Explication :</strong> {{ explanation }}</p>
     </div>
-  </c-card>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import { CCard, CText, CIcon } from '@carrefour/design-system-components-vue3'
 import { useExportToImage } from '@/composables/useExportToImage'
 
 const props = defineProps({
@@ -192,6 +191,12 @@ onUnmounted(() => {
   border: 2px solid var(--color-border);
   border-radius: 0.5rem;
   overflow: hidden;
+}
+
+.card {
+  background: var(--color-bg);
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
 
 .toggle-header {
