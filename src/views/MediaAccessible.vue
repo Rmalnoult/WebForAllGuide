@@ -325,10 +325,34 @@
           <h3>Ventes trimestrielles</h3>
           <div class="chart-bad">
             <svg width="300" height="150" viewBox="0 0 300 150">
-              <rect x="50" y="100" width="40" height="40" fill="#3b82f6" />
-              <rect x="110" y="80" width="40" height="60" fill="#3b82f6" />
-              <rect x="170" y="60" width="40" height="80" fill="#3b82f6" />
-              <rect x="230" y="40" width="40" height="100" fill="#3b82f6" />
+              <rect
+                x="50"
+                y="100"
+                width="40"
+                height="40"
+                fill="#3b82f6"
+              />
+              <rect
+                x="110"
+                y="80"
+                width="40"
+                height="60"
+                fill="#3b82f6"
+              />
+              <rect
+                x="170"
+                y="60"
+                width="40"
+                height="80"
+                fill="#3b82f6"
+              />
+              <rect
+                x="230"
+                y="40"
+                width="40"
+                height="100"
+                fill="#3b82f6"
+              />
             </svg>
           </div>
         </div>
@@ -336,10 +360,34 @@
         <div class="code-block">
           <pre><code>&lt;!-- ❌ Mauvais : graphique sans description ni données alternatives --&gt;
 &lt;svg width="300" height="150" viewBox="0 0 300 150"&gt;
-  &lt;rect x="50" y="100" width="40" height="40" fill="#3b82f6" /&gt;
-  &lt;rect x="110" y="80" width="40" height="60" fill="#3b82f6" /&gt;
-  &lt;rect x="170" y="60" width="40" height="80" fill="#3b82f6" /&gt;
-  &lt;rect x="230" y="40" width="40" height="100" fill="#3b82f6" /&gt;
+  &lt;rect
+    x="50"
+    y="100"
+    width="40"
+    height="40"
+    fill="#3b82f6"
+  /&gt;
+  &lt;rect
+    x="110"
+    y="80"
+    width="40"
+    height="60"
+    fill="#3b82f6"
+  /&gt;
+  &lt;rect
+    x="170"
+    y="60"
+    width="40"
+    height="80"
+    fill="#3b82f6"
+  /&gt;
+  &lt;rect
+    x="230"
+    y="40"
+    width="40"
+    height="100"
+    fill="#3b82f6"
+  /&gt;
 &lt;/svg&gt;
 
 &lt;!-- Problèmes :
@@ -367,10 +415,34 @@
                 Évolution croissante des ventes sur 4 trimestres :
                 Q1: 40k€, Q2: 60k€, Q3: 80k€, Q4: 100k€
               </desc>
-              <rect x="50" y="100" width="40" height="40" fill="#3b82f6" />
-              <rect x="110" y="80" width="40" height="60" fill="#3b82f6" />
-              <rect x="170" y="60" width="40" height="80" fill="#3b82f6" />
-              <rect x="230" y="40" width="40" height="100" fill="#3b82f6" />
+              <rect
+                x="50"
+                y="100"
+                width="40"
+                height="40"
+                fill="#3b82f6"
+              />
+              <rect
+                x="110"
+                y="80"
+                width="40"
+                height="60"
+                fill="#3b82f6"
+              />
+              <rect
+                x="170"
+                y="60"
+                width="40"
+                height="80"
+                fill="#3b82f6"
+              />
+              <rect
+                x="230"
+                y="40"
+                width="40"
+                height="100"
+                fill="#3b82f6"
+              />
 
               <!-- Labels -->
               <text x="70" y="130" text-anchor="middle" font-size="12">Q1</text>
@@ -390,22 +462,22 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">Q1 2024</th>
+                  <th scope="row">Q1 2025</th>
                   <td>40</td>
                   <td>-</td>
                 </tr>
                 <tr>
-                  <th scope="row">Q2 2024</th>
+                  <th scope="row">Q2 2025</th>
                   <td>60</td>
                   <td>+50%</td>
                 </tr>
                 <tr>
-                  <th scope="row">Q3 2024</th>
+                  <th scope="row">Q3 2025</th>
                   <td>80</td>
                   <td>+33%</td>
                 </tr>
                 <tr>
-                  <th scope="row">Q4 2024</th>
+                  <th scope="row">Q4 2025</th>
                   <td>100</td>
                   <td>+25%</td>
                 </tr>
@@ -428,10 +500,34 @@
   &lt;/desc&gt;
 
   &lt;!-- Barres du graphique --&gt;
-  &lt;rect x="50" y="100" width="40" height="40" fill="#3b82f6" /&gt;
-  &lt;rect x="110" y="80" width="40" height="60" fill="#3b82f6" /&gt;
-  &lt;rect x="170" y="60" width="40" height="80" fill="#3b82f6" /&gt;
-  &lt;rect x="230" y="40" width="40" height="100" fill="#3b82f6" /&gt;
+  &lt;rect
+    x="50"
+    y="100"
+    width="40"
+    height="40"
+    fill="#3b82f6"
+  /&gt;
+  &lt;rect
+    x="110"
+    y="80"
+    width="40"
+    height="60"
+    fill="#3b82f6"
+  /&gt;
+  &lt;rect
+    x="170"
+    y="60"
+    width="40"
+    height="80"
+    fill="#3b82f6"
+  /&gt;
+  &lt;rect
+    x="230"
+    y="40"
+    width="40"
+    height="100"
+    fill="#3b82f6"
+  /&gt;
 
   &lt;!-- Labels accessibles --&gt;
   &lt;text x="70" y="130"&gt;Q1&lt;/text&gt;
@@ -452,7 +548,7 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;th scope="row"&gt;Q1 2024&lt;/th&gt;
+      &lt;th scope="row"&gt;Q1 2025&lt;/th&gt;
       &lt;td&gt;40&lt;/td&gt;
       &lt;td&gt;-&lt;/td&gt;
     &lt;/tr&gt;
@@ -543,13 +639,13 @@ function handleGalleryKeydown(event, index) {
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -566,15 +662,16 @@ h1 {
 }
 
 .product-card {
-  background: var(--color-bg);
+  /* Light background to distinguish from parent */
+  background: var(--color-bg-secondary);
   color: var(--color-text);
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.25rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  text-align: left;
 }
 
 .product-card img:first-child {
@@ -593,7 +690,7 @@ h1 {
 .price {
   font-size: 1.25rem;
   font-weight: bold;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 0.5rem;
 }
 
@@ -608,11 +705,12 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.75rem;
   background: var(--color-success-light);
   border: 1px solid var(--color-success);
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   color: var(--color-success-dark);
+  margin-top: 0.5rem;
 }
 
 .notification img {
@@ -622,11 +720,8 @@ h1 {
 
 /* Gallery demo styles */
 .gallery-demo {
-  background: var(--color-bg);
+  /* Remove card styles to avoid nested cards */
   color: var(--color-text);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
 }
 
 .gallery-bad, .gallery-good {
@@ -652,7 +747,7 @@ h1 {
 }
 
 .thumbnails-bad img.active {
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 .thumbnail-btn {
@@ -672,7 +767,7 @@ h1 {
 }
 
 .thumbnail-btn.active {
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 .thumbnail-btn:focus-visible {
@@ -705,11 +800,8 @@ h1 {
 
 /* Video demo styles */
 .video-demo {
-  background: var(--color-bg);
+  /* Remove card styles to avoid nested cards */
   color: var(--color-text);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
 }
 
 .video-container-bad, .video-container-good {
@@ -730,7 +822,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   font-size: 1.25rem;
 }
 
@@ -744,11 +836,8 @@ h1 {
 
 /* Chart demo styles */
 .chart-demo {
-  background: var(--color-bg);
+  /* Remove card styles to avoid nested cards */
   color: var(--color-text);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
 }
 
 .chart-bad, .chart-good {

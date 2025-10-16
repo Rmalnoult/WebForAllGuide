@@ -1270,13 +1270,13 @@ function focusAlert() {
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -1568,7 +1568,7 @@ h1 {
 
 .aria-live-demo h4 {
   margin-top: 0;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .live-controls {
@@ -1673,7 +1673,7 @@ h1 {
 
 .icon-buttons-demo h4 {
   margin-top: 0;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .icon-buttons-demo h5 {
@@ -1706,7 +1706,7 @@ h1 {
 
 .icon-button:hover {
   background: var(--color-primary-light);
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
   transform: translateY(-2px);
 }
 
@@ -1735,7 +1735,7 @@ h1 {
 .text-icon-button:hover {
   background: var(--color-primary);
   color: white;
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 .text-icon-button .icon {
@@ -1818,7 +1818,7 @@ h2 {
 }
 
 .principle-card h3 {
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
@@ -1932,7 +1932,7 @@ code.inline-code {
 }
 
 .tabindex-card h3 {
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
@@ -1975,7 +1975,7 @@ code.inline-code {
 }
 
 .form-aria-demo h4 {
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -2087,7 +2087,7 @@ fieldset {
 
 legend {
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-text);
   padding: 0 0.5rem;
 }
 
@@ -2103,7 +2103,7 @@ legend {
 }
 
 .aria-attributes-list h5 {
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -2122,7 +2122,7 @@ legend {
   content: "→";
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .aria-attributes-list code {
@@ -2130,7 +2130,7 @@ legend {
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-family: monospace;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 /* Focus demo styles */
@@ -2227,7 +2227,7 @@ legend {
 }
 
 .demo-input:focus {
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 .demo-input:disabled {
@@ -2239,7 +2239,7 @@ legend {
   display: inline-block;
   margin: 0.5rem;
   padding: 0.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   text-decoration: underline;
 }
 

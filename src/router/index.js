@@ -10,6 +10,10 @@ import Performance from '../views/Performance.vue'
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // Always scroll to top when navigating to a new route
+    return { top: 0, behavior: 'smooth' }
+  },
   routes: [
     {
       path: '/',

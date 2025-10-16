@@ -26,7 +26,7 @@
             <div>Contenu principal de la page...</div>
           </div>
           <div class="page-footer">
-            <div>© 2024 Mon Site</div>
+            <div>© 2025 Mon Site</div>
           </div>
         </div>
         <div class="code-block">
@@ -43,7 +43,7 @@
   &lt;div&gt;Contenu principal...&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="page-footer"&gt;
-  © 2024 Mon Site
+  © 2025 Mon Site
 &lt;/div&gt;</code></pre>
         </div>
       </template>
@@ -65,7 +65,7 @@
             <p>Contenu principal de la page...</p>
           </main>
           <footer class="page-footer">
-            <p>© 2024 Mon Site</p>
+            <p>© 2025 Mon Site</p>
           </footer>
         </div>
         <div class="code-block">
@@ -84,7 +84,7 @@
   &lt;p&gt;Contenu principal...&lt;/p&gt;
 &lt;/main&gt;
 &lt;footer&gt;
-  &lt;p&gt;© 2024 Mon Site&lt;/p&gt;
+  &lt;p&gt;© 2025 Mon Site&lt;/p&gt;
 &lt;/footer&gt;</code></pre>
         </div>
       </template>
@@ -333,13 +333,13 @@ function toggleModal() {
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -356,15 +356,31 @@ h1 {
   font-size: 0.9rem;
 }
 
+/* Remove margin from header in examples */
+.example-content header {
+  margin-bottom: 0;
+}
+
+/* Smaller h1 in examples */
+.example-content h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
 .page-header {
   background: var(--color-bg-secondary);
   padding: 1rem;
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
 }
 
 .site-title {
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  font-size: 1.25rem;
 }
 
 .navigation {
@@ -391,7 +407,7 @@ h1 {
 }
 
 .content-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }

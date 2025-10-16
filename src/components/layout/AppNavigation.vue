@@ -5,13 +5,7 @@
     role="navigation"
     @keydown="handleNavKeydown"
   >
-    <div class="nav-header">
-      <h2 id="nav-heading" class="nav-title">Navigation</h2>
-      <p class="nav-hint" aria-live="polite">
-        <kbd>↑</kbd> <kbd>↓</kbd> pour naviguer
-      </p>
-    </div>
-    <ul role="list" aria-labelledby="nav-heading">
+    <ul role="list">
       <li v-for="(item, index) in navItems" :key="item.path">
         <router-link
           :to="item.path"
@@ -68,7 +62,7 @@ const showKeyboardHelp = () => {
 const navItems = [
   { path: '/', label: 'Accueil', icon: '🏠', description: 'Page d\'accueil et présentation' },
   { path: '/semantic-html', label: 'HTML Sémantique', icon: '📝', description: 'Structure et éléments HTML' },
-  { path: '/keyboard-navigation', label: 'Navigation Clavier', icon: '⌨️', description: 'Focus et raccourcis clavier' },
+  { path: '/keyboard-navigation', label: 'Navigation Clavier', icon: '⌨️', description: 'Focus et raccourcis' },
   { path: '/media-accessible', label: 'Images & Médias', icon: '🖼️', description: 'Alt text et sous-titres' },
   { path: '/color-contrast', label: 'Contrastes & Couleurs', icon: '🎨', description: 'Ratios WCAG et daltonisme' },
   { path: '/accessible-forms', label: 'Formulaires', icon: '📋', description: 'Labels et validation' },
@@ -151,7 +145,7 @@ watch(() => route.path, (newPath) => {
 
 <style scoped>
 .app-nav {
-  background: var(--color-bg-secondary);
+  background: #1D252B;
   padding: 1rem;
   min-height: 100vh;
   border-right: 2px solid var(--color-border);
@@ -207,20 +201,20 @@ watch(() => route.path, (newPath) => {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  color: var(--color-text);
+  color: #E8E6E3;
   text-decoration: none;
   border-radius: 0.5rem;
   transition: background-color 0.2s;
 }
 
 .app-nav a:hover {
-  background: var(--color-hover);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .app-nav a:focus {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
-  background: var(--color-hover);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .app-nav a:focus-visible {
@@ -231,19 +225,6 @@ watch(() => route.path, (newPath) => {
 /* Visual indicator for keyboard navigation */
 .app-nav a[tabindex="0"] {
   position: relative;
-}
-
-.app-nav a[tabindex="0"]::before {
-  content: "▶";
-  position: absolute;
-  left: -10px;
-  color: var(--color-primary);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.app-nav a[tabindex="0"]:focus::before {
-  opacity: 1;
 }
 
 .app-nav a[aria-current="page"] {
@@ -279,8 +260,8 @@ watch(() => route.path, (newPath) => {
 
 .nav-description {
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
-  opacity: 0.8;
+  color: #B8B5B0;
+  opacity: 0.9;
 }
 
 .app-nav a[aria-current="page"] .nav-description {
@@ -291,7 +272,7 @@ watch(() => route.path, (newPath) => {
 .nav-help {
   margin-top: auto;
   padding: 1rem;
-  border-top: 2px solid var(--color-border);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .help-button {
@@ -300,9 +281,9 @@ watch(() => route.path, (newPath) => {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  background: var(--color-bg);
-  color: var(--color-text);
-  border: 2px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.1);
+  color: #E8E6E3;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;

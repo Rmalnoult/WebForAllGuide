@@ -48,18 +48,18 @@
 
     <div class="examples-container">
       <div class="example bad-example card">
-        <div class="example-label bad-label">
+        <h3 class="example-label bad-label">
           <span class="icon" aria-hidden="true">❌</span> Mauvais exemple
-        </div>
+        </h3>
         <div class="example-content">
           <slot name="bad"></slot>
         </div>
       </div>
 
       <div class="example good-example card">
-        <div class="example-label good-label">
+        <h3 class="example-label good-label">
           <span class="icon" aria-hidden="true">✅</span> Bon exemple
-        </div>
+        </h3>
         <div class="example-content">
           <slot name="good"></slot>
         </div>
@@ -193,16 +193,19 @@ onUnmounted(() => {
   overflow: hidden;
 }
 
+.examples-container .card.example {
+  border-radius: 0;
+}
+
 .card {
-  background: var(--color-bg);
-  border-radius: 0.5rem;
+  background: var(--color-bg-secondary);
   padding: 1rem;
 }
 
 .toggle-header {
   background: var(--color-bg-secondary);
   padding: 1rem;
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -311,12 +314,14 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
-  background: var(--color-border);
 }
 
 .example {
   position: relative;
-  background: var(--color-bg);
+  background: var(--color-bg-secondary);
+  border-radius: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .bad-example {
@@ -326,6 +331,8 @@ onUnmounted(() => {
 .example-content {
   padding: 1.5rem;
   min-height: 200px;
+  overflow-x: auto;
+  width: 100%;
 }
 
 .example-label {
@@ -333,6 +340,7 @@ onUnmounted(() => {
   font-size: 0.875rem;
   font-weight: 600;
   border-bottom: 1px solid var(--color-border);
+  margin: 0;
 }
 
 .bad-label {

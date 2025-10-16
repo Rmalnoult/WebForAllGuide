@@ -372,6 +372,7 @@ function handleKeydown(e) {
             class="modal-overlay-good"
             @click="closeGoodModal"
             @keydown.esc="closeGoodModal"
+            @keydown.tab="handleGoodModalTab"
             role="dialog"
             aria-modal="true"
             aria-labelledby="good-modal-title"
@@ -379,7 +380,13 @@ function handleKeydown(e) {
             <div class="modal-content-good" @click.stop>
               <div class="modal-header">
                 <h3 id="good-modal-title">Confirmer l'action</h3>
-                <button type="button" @click="closeGoodModal" class="close-btn" aria-label="Fermer la modal">×</button>
+                <button
+                  type="button"
+                  @click="closeGoodModal"
+                  ref="goodModalCloseButton"
+                  class="close-btn-good"
+                  aria-label="Fermer la modal"
+                >×</button>
               </div>
               <div class="modal-body">
                 <p>Êtes-vous sûr de vouloir continuer ?</p>
@@ -387,16 +394,20 @@ function handleKeydown(e) {
                   type="text"
                   placeholder="Raison (optionnel)"
                   ref="goodModalFirstInput"
-                  @keydown.tab="handleGoodModalTab"
                 />
               </div>
               <div class="modal-footer">
-                <button type="button" @click="closeGoodModal" @keydown.tab="handleGoodModalTab">Annuler</button>
+                <button
+                  type="button"
+                  @click="closeGoodModal"
+                  ref="goodModalCancelButton"
+                  class="btn-cancel"
+                >Annuler</button>
                 <button
                   type="button"
                   @click="confirmGoodModal"
-                  @keydown.tab="handleGoodModalTab"
                   ref="goodModalLastButton"
+                  class="btn-confirm"
                 >
                   Confirmer
                 </button>
@@ -480,7 +491,9 @@ useSyntaxHighlight()
 const badModalOpen = ref(false)
 const goodModalOpen = ref(false)
 const goodModalTrigger = ref(null)
+const goodModalCloseButton = ref(null)
 const goodModalFirstInput = ref(null)
+const goodModalCancelButton = ref(null)
 const goodModalLastButton = ref(null)
 
 // Menu navigation
@@ -505,8 +518,8 @@ function confirmBadModal() {
 async function openGoodModal() {
   goodModalOpen.value = true
   await nextTick()
-  if (goodModalFirstInput.value) {
-    goodModalFirstInput.value.focus()
+  if (goodModalCloseButton.value) {
+    goodModalCloseButton.value.focus()
   }
 }
 
@@ -523,18 +536,38 @@ function confirmGoodModal() {
 }
 
 function handleGoodModalTab(event) {
-  // Simple focus trap implementation
+  // Prevent default tab behavior to trap focus
+  event.preventDefault()
+
+  // Get all focusable elements in the modal
+  const focusableElements = [
+    goodModalCloseButton.value,
+    goodModalFirstInput.value,
+    goodModalCancelButton.value,
+    goodModalLastButton.value
+  ].filter(el => el !== null)
+
+  if (focusableElements.length === 0) return
+
+  const currentIndex = focusableElements.findIndex(el => el === document.activeElement)
+
   if (event.shiftKey) {
     // Shift + Tab - going backward
-    if (event.target === goodModalFirstInput.value) {
-      event.preventDefault()
-      goodModalLastButton.value?.focus()
+    if (currentIndex <= 0) {
+      // Wrap to last element
+      focusableElements[focusableElements.length - 1]?.focus()
+    } else {
+      // Move to previous element
+      focusableElements[currentIndex - 1]?.focus()
     }
   } else {
     // Tab - going forward
-    if (event.target === goodModalLastButton.value) {
-      event.preventDefault()
-      goodModalFirstInput.value?.focus()
+    if (currentIndex === -1 || currentIndex >= focusableElements.length - 1) {
+      // Wrap to first element
+      focusableElements[0]?.focus()
+    } else {
+      // Move to next element
+      focusableElements[currentIndex + 1]?.focus()
     }
   }
 }
@@ -813,6 +846,24 @@ kbd {
   outline: 2px solid var(--color-focus);
 }
 
+.close-btn-good {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  color: var(--color-text);
+}
+
+.close-btn-good:hover {
+  background: var(--color-bg-secondary);
+}
+
+.close-btn-good:focus-visible {
+  outline: 2px solid var(--color-focus);
+}
+
 .modal-body {
   padding: 1.5rem;
 }
@@ -843,6 +894,39 @@ kbd {
   background: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
+}
+
+/* Boutons spécifiques pour le bon exemple */
+.btn-cancel {
+  background: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+}
+
+.btn-cancel:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-text);
+}
+
+.btn-cancel:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.btn-confirm {
+  background: var(--color-primary);
+  color: white;
+  border: 2px solid var(--color-primary);
+}
+
+.btn-confirm:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn-confirm:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 /* Menu navigation styles */

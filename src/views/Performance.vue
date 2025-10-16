@@ -835,13 +835,13 @@ watch(deviceType, (newType) => {
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -1047,6 +1047,12 @@ h1 {
   color: var(--color-text);
   border-radius: 0.25rem;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.load-button:hover, .pulse-button:hover {
+  background: var(--color-text);
+  color: white;
 }
 
 .feedback-message {
@@ -1191,16 +1197,15 @@ h1 {
 
 .card-bad, .card-good {
   padding: 1rem;
-  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  background: var(--color-bg);
+  background: var(--color-bg-secondary);
   color: var(--color-text);
 }
 
 .price-bad, .price-good {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-top: 0.5rem;
 }
 
@@ -1326,7 +1331,7 @@ h1 {
 .form-actions-good button[type="submit"] {
   background: var(--color-primary);
   color: white;
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 /* Preferences demo styles */
@@ -1378,7 +1383,7 @@ h1 {
 .preference-group h6 {
   margin: 0 0 1rem 0;
   font-size: 1rem;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .preference-group label {
@@ -1530,7 +1535,7 @@ h1 {
 
 .loading-text {
   display: block;
-  text-align: center;
+  text-align: left;
   font-size: 0.9rem;
   color: var(--color-text-secondary);
 }
@@ -1615,7 +1620,7 @@ h1 {
   padding: 1rem;
   background: var(--color-bg-secondary);
   border-radius: 0.5rem;
-  text-align: center;
+  text-align: left;
 }
 
 .metric-label {
@@ -1687,7 +1692,7 @@ h1 {
 
 .code-block h5 {
   margin: 0 0 1rem 0;
-  color: var(--color-primary);
+  color: var(--color-text);
   font-size: 1.1rem;
 }
 

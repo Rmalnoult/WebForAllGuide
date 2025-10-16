@@ -16,41 +16,39 @@
           <span class="stat-number">15%</span>
           <span class="stat-label">de la population vit avec un handicap</span>
         </div>
-        <div class="stat-card">
+        <a href="https://ec.europa.eu/social/main.jsp?catId=1202" class="stat-card stat-card-link" target="_blank" rel="noopener">
           <span class="stat-number">2025</span>
-          <span class="stat-label">Directive Accessibilité Europe</span>
-        </div>
+          <span class="stat-label">Directive Accessibilité Europe ↗</span>
+        </a>
         <div class="stat-card">
-          <span class="stat-number">4.5:1</span>
-          <span class="stat-label">Ratio de contraste WCAG AA</span>
+          <span class="stat-number">96%</span>
+          <span class="stat-label">des sites ont des erreurs d'accessibilité</span>
         </div>
       </div>
     </section>
 
     <section aria-labelledby="curb-cut-title">
-      <h2 id="curb-cut-title">L'effet bordure de trottoir (curb cut effect)</h2>
-
       <div class="curb-cut-intro">
-        <div class="curb-cut-text">
-          <p>
-            Quand on conçoit pour le handicap, on résout des problèmes que tout le monde rencontre.
-            Les rampes de trottoir ont révolutionné la ville pour les fauteuils roulants,
-            mais aussi pour 99% des piétons avec valises, poussettes ou vélos.
-          </p>
-          <p>
-            Une amélioration pour certains profite à tous. Ce concept, né des rampes d'accès dans les rues,
-            s'applique parfaitement au web.
-          </p>
+          <div class="curb-cut-text">
+            <h2 id="curb-cut-title">Quand on conçoit pour le handicap, on résout des problèmes que tout le monde rencontre</h2>
+            <p>
+              Les rampes de trottoir ont révolutionné la ville pour les fauteuils roulants,
+              mais aussi pour 99% des piétons avec valises, poussettes ou vélos.
+            </p>
+            <p>
+              Une amélioration pour certains profite à tous. Ce concept, né des rampes d'accès dans les rues,
+              s'applique parfaitement au web.
+            </p>
+          </div>
+          <div class="curb-cut-image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Naked_Pictures_of_Bea_Arthur_0048.jpg/1920px-Naked_Pictures_of_Bea_Arthur_0048.jpg"
+              alt="Rampe de trottoir (curb cut) permettant l'accès depuis la rue au trottoir"
+              loading="lazy"
+            />
+            <p class="image-caption">Exemple typique d'une rampe de trottoir (curb cut)</p>
+          </div>
         </div>
-        <div class="curb-cut-image">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Naked_Pictures_of_Bea_Arthur_0048.jpg/1920px-Naked_Pictures_of_Bea_Arthur_0048.jpg"
-            alt="Rampe de trottoir (curb cut) permettant l'accès depuis la rue au trottoir"
-            loading="lazy"
-          />
-          <p class="image-caption">Exemple typique d'une rampe de trottoir (curb cut)</p>
-        </div>
-      </div>
 
       <div class="curb-cut-examples">
         <div class="curb-cut-example">
@@ -373,13 +371,13 @@ const quickLinks = [
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -411,15 +409,33 @@ section {
   background: var(--color-bg-secondary);
   padding: 1.5rem;
   border-radius: 0.5rem;
-  text-align: center;
-  border: 2px solid var(--color-border);
+  text-align: left;
+}
+
+.stat-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  cursor: pointer;
+}
+
+.stat-card-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-primary-light);
+}
+
+.stat-card-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 .stat-number {
   display: block;
   font-size: 2.5rem;
   font-weight: bold;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .stat-label {
@@ -437,12 +453,16 @@ section {
   margin: 1.5rem 0;
 }
 
+.quick-nav li {
+  display: flex;
+}
+
 .quick-link {
   display: flex;
   flex-direction: column;
+  flex: 1;
   padding: 1.5rem;
   background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
   border-radius: 0.5rem;
   text-decoration: none;
   color: inherit;
@@ -467,7 +487,7 @@ section {
 .quick-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 0.5rem;
 }
 
@@ -516,13 +536,21 @@ kbd {
   align-items: center;
 }
 
+.curb-cut-text h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
 .curb-cut-text p {
   margin-bottom: 1rem;
   line-height: 1.6;
+  position: relative;
+  z-index: 1;
 }
 
 .curb-cut-image {
-  text-align: center;
+  text-align: left;
 }
 
 .curb-cut-image img {
@@ -562,11 +590,10 @@ kbd {
   background: var(--color-bg-secondary);
   padding: 1.5rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
 }
 
 .curb-cut-example h4 {
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
   font-size: 1.1rem;
   display: flex;
@@ -598,12 +625,12 @@ kbd {
   padding: 2rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-info-light) 100%);
   border-radius: 1rem;
-  text-align: center;
+  text-align: left;
   font-size: 1.25rem;
 }
 
 .accessibility-quote strong {
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 /* Tools section */
@@ -616,7 +643,6 @@ kbd {
 
 .tool-card {
   background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
   border-radius: 0.75rem;
   padding: 1.5rem;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -641,7 +667,7 @@ kbd {
 .tool-header h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .tool-description {
@@ -666,7 +692,7 @@ kbd {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
   border: 2px solid var(--color-primary);
@@ -676,7 +702,7 @@ kbd {
 }
 
 .tool-link:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-text);
   color: white;
 }
 
@@ -709,7 +735,6 @@ kbd {
 
 .screen-reader-card {
   background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
   border-radius: 0.75rem;
   padding: 1.5rem;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -735,7 +760,7 @@ kbd {
 .screen-reader-header h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   flex: 1;
 }
 
@@ -767,7 +792,7 @@ kbd {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
   border: 2px solid var(--color-primary);
@@ -778,7 +803,7 @@ kbd {
 }
 
 .screen-reader-link:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-text);
   color: white;
 }
 
@@ -832,7 +857,8 @@ kbd {
 @media (prefers-reduced-motion: reduce) {
   .quick-link,
   .tool-card,
-  .screen-reader-card {
+  .screen-reader-card,
+  .stat-card-link {
     transition: none;
   }
 }

@@ -14,8 +14,13 @@ export function highlightCode(code, language = 'html') {
 }
 
 function highlightHTML(code) {
-  // Highlight comments
-  code = code.replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="comment">$1</span>');
+  // Store comments temporarily to protect them from other replacements
+  const comments = [];
+  code = code.replace(/(&lt;!--[\s\S]*?--&gt;)/g, (match) => {
+    const placeholder = `__COMMENT_${comments.length}__`;
+    comments.push(match);
+    return placeholder;
+  });
 
   // Highlight tags with attributes
   code = code.replace(/(&lt;\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:\s+[^&>]*)?)(&gt;)/g, (match, opening, tagName, attrs, closing) => {
@@ -36,10 +41,23 @@ function highlightHTML(code) {
     return `<span class="tag-bracket">${opening}</span><span class="tag-name">${tagName}</span>${highlightedAttrs}<span class="tag-bracket">${closing}</span>`;
   });
 
+  // Restore and highlight comments
+  comments.forEach((comment, index) => {
+    code = code.replace(`__COMMENT_${index}__`, `<span class="comment">${comment}</span>`);
+  });
+
   return code;
 }
 
 function highlightCSS(code) {
+  // Store existing HTML tags to protect them from CSS highlighting
+  const htmlTags = [];
+  code = code.replace(/(<\/?span[^>]*>)/g, (match) => {
+    const placeholder = `__HTMLTAG_${htmlTags.length}__`;
+    htmlTags.push(match);
+    return placeholder;
+  });
+
   // Highlight comments
   code = code.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>');
 
@@ -74,10 +92,23 @@ function highlightCSS(code) {
     return `${selector} {${rules}}`;
   });
 
+  // Restore HTML tags
+  htmlTags.forEach((tag, index) => {
+    code = code.replace(`__HTMLTAG_${index}__`, tag);
+  });
+
   return code;
 }
 
 function highlightJavaScript(code) {
+  // Store existing HTML tags to protect them from JavaScript highlighting
+  const htmlTags = [];
+  code = code.replace(/(<\/?span[^>]*>)/g, (match) => {
+    const placeholder = `__HTMLTAG_${htmlTags.length}__`;
+    htmlTags.push(match);
+    return placeholder;
+  });
+
   // Highlight comments
   code = code.replace(/(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>');
 
@@ -105,6 +136,11 @@ function highlightJavaScript(code) {
 
   // Highlight operators
   code = code.replace(/([+\-*/%=<>!&|^~?:])/g, '<span class="operator">$1</span>');
+
+  // Restore HTML tags
+  htmlTags.forEach((tag, index) => {
+    code = code.replace(`__HTMLTAG_${index}__`, tag);
+  });
 
   return code;
 }

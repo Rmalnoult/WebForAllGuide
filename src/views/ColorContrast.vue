@@ -7,6 +7,22 @@
       </p>
     </header>
 
+    <section aria-labelledby="wcag-stats-title" class="wcag-stats-section">
+      <h2 id="wcag-stats-title" class="visually-hidden">Critères WCAG EN 301 549</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">4.5:1</span>
+          <span class="stat-label">Texte normal - Ratio de contraste minimum</span>
+          <span class="stat-detail">EN 301 549 / WCAG AA</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">3:1</span>
+          <span class="stat-label">Texte large - Ratio de contraste minimum</span>
+          <span class="stat-detail">18pt+ ou 14pt+ gras</span>
+        </div>
+      </div>
+    </section>
+
     <ExampleToggle
       title="Contraste de texte"
       explanation="Le ratio de contraste WCAG AA exige au minimum 4.5:1 pour le texte normal et 3:1 pour le texte large (18pt+ ou 14pt+ gras). Le niveau AAA est plus strict avec 7:1 et 4.5:1."
@@ -382,12 +398,10 @@
             <div class="legend-good">
               <span class="legend-item">
                 <span class="legend-color error-color"></span>
-                <span class="legend-icon" aria-hidden="true">❌</span>
                 Échecs
               </span>
               <span class="legend-item">
                 <span class="legend-color success-color"></span>
-                <span class="legend-icon" aria-hidden="true">✅</span>
                 Succès
               </span>
             </div>
@@ -771,13 +785,13 @@ const goodTheme = ref('light')
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -786,13 +800,65 @@ h1 {
   color: var(--color-text-secondary);
 }
 
-/* Contrast demo styles */
-.contrast-demo {
-  background: var(--color-bg);
-  color: var(--color-text);
+/* WCAG Stats Section */
+.wcag-stats-section {
+  margin-bottom: 3rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background: var(--color-bg-secondary);
   padding: 1.5rem;
   border-radius: 0.5rem;
+  text-align: left;
   border: 1px solid var(--color-border);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.stat-detail {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* Contrast demo styles */
+.contrast-demo {
+  /* Remove card styles to avoid nested cards */
+  color: var(--color-text);
 }
 
 .text-samples-bad, .text-samples-good {
@@ -1011,11 +1077,8 @@ h1 {
 
 /* Colorblind demo */
 .colorblind-demo {
-  background: var(--color-bg);
+  /* Remove card styles to avoid nested cards */
   color: var(--color-text);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
 }
 
 .chart-bad, .chart-good {
@@ -1025,7 +1088,7 @@ h1 {
 .legend-bad, .legend-good {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .legend-item {
@@ -1128,7 +1191,7 @@ h1 {
 }
 
 .theme-option.active {
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 .theme-controls-good {

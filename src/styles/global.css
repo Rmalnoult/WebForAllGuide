@@ -46,12 +46,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: var(--font-size-3xl); }
 h2 {
   font-size: var(--font-size-2xl);
-  color: white;
+  color: var(--color-text);
 }
 h3 { font-size: var(--font-size-xl); }
 h4 {
   font-size: var(--font-size-lg);
-  color: white;
+  color: var(--color-text);
 }
 
 p {
@@ -184,7 +184,7 @@ label {
 }
 
 .dialog-content h2 {
-  color: white;
+  color: var(--color-text);
   margin-bottom: 1.5rem;
 }
 

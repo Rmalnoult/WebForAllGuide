@@ -22,13 +22,11 @@ export function useSyntaxHighlight() {
 
         // Check for specific content patterns
         const content = codeElement.innerHTML
-        if (content.includes('&lt;style') || content.includes('{') && content.includes(':') && content.includes(';')) {
-          // Detect CSS
-          if (content.includes('&lt;style') || (!content.includes('&lt;') && content.includes('{'))) {
-            language = 'css'
-          }
-        } else if (content.includes('function') || content.includes('const ') || content.includes('let ') || content.includes('var ')) {
-          // Detect JavaScript
+        // Only detect pure CSS (not HTML with <style> tags)
+        if (!content.includes('&lt;') && content.includes('{') && content.includes(':') && content.includes(';')) {
+          language = 'css'
+        } else if (!content.includes('&lt;') && (content.includes('function') || content.includes('const ') || content.includes('let ') || content.includes('var '))) {
+          // Only detect pure JavaScript (not HTML with <script> tags)
           language = 'javascript'
         }
       }

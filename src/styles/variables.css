@@ -1,16 +1,32 @@
 :root {
-  /* Couleurs avec contrastes WCAG AAA */
-  --color-primary: #0970e6;  /* Original color for buttons and backgrounds */
-  --color-primary-dark: #0866d3;
-  --color-primary-darker: #075cc0;
+  /* Light theme colors */
+  --color-primary: #0056d2;  /* Darker blue for better contrast on light bg */
+  --color-primary-dark: #004bb5;
+  --color-primary-darker: #003d96;
   --color-primary-light: #e6f0ff;
-  --color-primary-disabled: rgba(9, 112, 230, 0.4);
-  --ds-color-interactive-background-brand: #0970e6;
-  --ds-color-interactive-background-button-filled-main-hover: #0866d3;
-  --ds-color-interactive-background-button-filled-main-pressed: #075cc0;
-  --ds-color-interactive-background-button-filled-main-active: #0970e6;
-  --ds-color-interactive-background-button-filled-main-disabled: rgba(9, 112, 230, 0.4);
-  --ds-color-interactive-border-focus: #0970e6;
+  --color-primary-disabled: rgba(0, 86, 210, 0.4);
+
+  /* Design System colors */
+  --ds-color-interactive-background-brand: #0056d2;
+  --ds-color-interactive-background-button-filled-main-hover: #004bb5;
+  --ds-color-interactive-background-button-filled-main-pressed: #003d96;
+  --ds-color-interactive-background-button-filled-main-active: #0056d2;
+  --ds-color-interactive-background-button-filled-main-disabled: rgba(0, 86, 210, 0.4);
+  --ds-color-interactive-border-focus: #0056d2;
+
+  /* DS functional colors */
+  --ds-color-functional-success: #067a06;
+  --ds-color-functional-negative: #d11a2a;
+  --ds-color-functional-warning: #9d5f00;
+
+  /* DS content colors */
+  --ds-color-content-primary: #122940;  /* Main text color as requested */
+  --ds-color-content-secondary: #4a5568;
+
+  /* DS surface colors */
+  --ds-color-surface-primary: #EFEFEF;  /* Background as requested - light gray */
+  --ds-color-surface-secondary: #F2F5F8;  /* Cards - darker for better input contrast */
+  --ds-color-surface-tertiary: #e2e8f0;
 
   --color-success: var(--ds-color-functional-success);
   --color-success-light: #E6F5EC;
@@ -21,15 +37,15 @@
   --color-warning: var(--ds-color-functional-warning);
   --color-warning-light: #FFF3CD;
 
-  --color-info: #0970e6;
-  --color-info-dark: #0866d3;
-  --color-info-darker: #075cc0;
+  --color-info: #0056d2;
+  --color-info-dark: #004bb5;
+  --color-info-darker: #003d96;
   --color-info-light: #E6F2FF;
 
   --color-text: var(--ds-color-content-primary);
   --color-text-secondary: var(--ds-color-content-secondary);
 
-  --color-bg: var(--ds-color-surface-primary);
+  --color-bg: #ffffff;  /* White background for examples */
   --color-bg-secondary: var(--ds-color-surface-secondary);
 
   --color-border: var(--ds-color-surface-tertiary);
@@ -37,9 +53,9 @@
   --color-focus: var(--ds-color-interactive-background-brand);
 
   /* High contrast color for text links only */
-  --color-link: #0055cc;  /* Contrast 5.96:1 - WCAG AA compliant */
-  --color-link-hover: #004bb0;
-  --color-link-visited: #00419d;
+  --color-link: #004bb5;  /* Better contrast for light background */
+  --color-link-hover: #003d96;
+  --color-link-visited: #003380;
 
   /* Espacements */
   --spacing-xs: var(--ds-spacing-xs);
@@ -62,10 +78,11 @@
   --border-radius-lg: var(--ds-border-radius-l);
 }
 
-/* Mode sombre automatique */
+/* Disable dark mode - always use light theme */
+/* Commenting out dark mode to always use light theme
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: #0970e6;  /* Keep original for buttons/backgrounds */
+    --color-primary: #0970e6;
     --color-primary-dark: #4A9FFF;
     --color-primary-light: #1A3A52;
 
@@ -92,12 +109,12 @@
     --color-hover: rgba(255, 255, 255, 0.1);
     --color-focus: #0970e6;
 
-    /* High contrast colors for links in dark mode */
     --color-link: #4A9FFF;
     --color-link-hover: #6BB2FF;
     --color-link-visited: #3A8FEF;
   }
 }
+*/
 
 /* Mode haut contraste */
 @media (prefers-contrast: high) {

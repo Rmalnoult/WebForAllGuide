@@ -32,10 +32,14 @@ watch(() => route.path, (newPath) => {
   }
   routeAnnouncement.value = `Navigation vers ${pageNames[newPath] || 'nouvelle page'}`
 
-  // Clear announcement after a delay
+  // Focus main content for accessibility
   setTimeout(() => {
+    const mainContent = document.getElementById('main-content')
+    if (mainContent) {
+      mainContent.focus()
+    }
     routeAnnouncement.value = ''
-  }, 1000)
+  }, 100)
 })
 </script>
 
@@ -136,12 +140,12 @@ watch(() => route.path, (newPath) => {
 
 .app-layout {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 280px 1fr;
   min-height: 100vh;
 }
 
 .app-sidebar {
-  background: var(--color-bg-secondary);
+  background: #1D252B;
   border-right: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -150,6 +154,7 @@ watch(() => route.path, (newPath) => {
 }
 
 .app-main {
+  --main-padding: 2rem;
   padding: 2rem;
   width: 100%;
 }

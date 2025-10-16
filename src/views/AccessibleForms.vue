@@ -28,8 +28,7 @@
             <button type="submit">Se connecter</button>
           </form>
         </div>
-        <div class="code-example">
-          <div class="code-block">
+        <div class="code-block">
             <pre><code>&lt;!-- ❌ Mauvais : Labels manquants --&gt;
 &lt;form&gt;
   &lt;h4&gt;Connexion&lt;/h4&gt;
@@ -50,7 +49,6 @@
 
   &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
 
@@ -93,8 +91,7 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
+        <div class="code-block">
             <pre><code>&lt;!-- ✅ Bon : Labels explicites et associés --&gt;
 &lt;form&gt;
   &lt;h4&gt;Connexion&lt;/h4&gt;
@@ -130,7 +127,6 @@
 
   &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
     </ExampleToggle>
@@ -164,8 +160,7 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
+        <div class="code-block">
             <pre><code>&lt;!-- ❌ Mauvais : Erreurs mal annoncées --&gt;
 &lt;form @submit.prevent="submitBadForm"&gt;
   &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
@@ -198,7 +193,6 @@
 
   &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
 
@@ -288,8 +282,7 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
+        <div class="code-block">
             <pre><code>&lt;!-- ✅ Bon : Erreurs clairement associées --&gt;
 &lt;form @submit.prevent="submitGoodForm" novalidate&gt;
   &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
@@ -327,7 +320,6 @@
 
   &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
     </ExampleToggle>
@@ -386,9 +378,8 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
-            <pre><code>&lt;!-- ❌ Mauvais : Structure désorganisée --&gt;
+        <div class="code-block" data-no-highlight="true">
+            <pre><code data-highlighted="true">&lt;!-- ❌ Mauvais : Structure désorganisée --&gt;
 &lt;form&gt;
   &lt;h4&gt;Préférences&lt;/h4&gt;
 
@@ -430,7 +421,6 @@
 
   &lt;button type="submit"&gt;OK&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
 
@@ -504,9 +494,8 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
-            <pre><code>&lt;!-- ✅ Bon : Groupes logiques avec aria-labelledby --&gt;
+        <div class="code-block" data-no-highlight="true">
+            <pre><code data-highlighted="true">&lt;!-- ✅ Bon : Groupes logiques avec aria-labelledby --&gt;
 &lt;form&gt;
   &lt;h4&gt;Préférences de contact&lt;/h4&gt;
 
@@ -575,7 +564,6 @@
     Sauvegarder les préférences
   &lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
     </ExampleToggle>
@@ -629,8 +617,7 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
+        <div class="code-block">
             <pre><code>&lt;!-- ❌ Mauvais : Validation intrusive --&gt;
 &lt;form&gt;
   &lt;h4&gt;Créer un compte&lt;/h4&gt;
@@ -668,7 +655,6 @@
 
   &lt;button type="submit"&gt;Créer le compte&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
 
@@ -808,8 +794,7 @@
           </form>
         </div>
 
-        <div class="code-example">
-          <div class="code-block">
+        <div class="code-block">
             <pre><code>&lt;!-- ✅ Bon : Validation respectueuse avec feedback --&gt;
 &lt;form&gt;
   &lt;h4&gt;Créer un compte&lt;/h4&gt;
@@ -882,7 +867,6 @@
     Créer le compte
   &lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </div>
         </div>
       </template>
     </ExampleToggle>
@@ -1042,13 +1026,13 @@ const isFormValid = computed(() => {
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -1059,11 +1043,22 @@ h1 {
 
 /* Form demo styles */
 .form-demo {
-  background: var(--color-bg);
+  /* Remove card styles to avoid nested cards */
   color: var(--color-text);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
+}
+
+/* Ensure all form inputs have white background */
+.form-demo input[type="text"],
+.form-demo input[type="email"],
+.form-demo input[type="password"],
+.form-demo input[type="number"],
+.form-demo input[type="tel"],
+.form-demo input[type="url"],
+.form-demo input[type="search"],
+.form-demo textarea,
+.form-demo select {
+  background: #ffffff;
+  color: var(--color-text);
 }
 
 .form-bad, .form-good, .form-validation-bad, .form-validation-good,
@@ -1094,12 +1089,13 @@ h1 {
   border: 2px solid var(--color-border);
   border-radius: 0.25rem;
   font-size: 1rem;
+  background: #ffffff;
   transition: border-color 0.2s;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-text);
 }
 
 .form-group input.error {
@@ -1172,28 +1168,50 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.checkbox-group input {
-  width: auto;
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
   margin: 0;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.checkbox-group input[type="checkbox"]:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 .checkbox-group label {
   margin: 0;
   cursor: pointer;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .radio-group {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
-.radio-group input {
-  width: auto;
+.radio-group input[type="radio"] {
+  width: 20px;
+  height: 20px;
   margin: 0;
+  margin-top: 0.1rem;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.radio-group input[type="radio"]:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 .radio-group label {
@@ -1201,6 +1219,8 @@ h1 {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .radio-label, .checkbox-label {
@@ -1241,20 +1261,22 @@ fieldset legend {
 
 /* Messy form styles for bad example */
 .form-fieldset-bad {
-  background: #2d3748;
+  background: var(--color-bg-secondary);
   padding: 1.5rem;
   border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
 }
 
 .form-fieldset-bad h4 {
-  color: #e2e8f0;
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
 .messy-form {
   padding: 1rem;
-  background: #1a202c;
+  background: var(--color-bg);
   border-radius: 0.25rem;
+  border: 1px solid var(--color-border);
 }
 
 .messy-form .form-row {
@@ -1264,7 +1286,7 @@ fieldset legend {
   gap: 1rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #4a5568;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .messy-form .form-row:last-child {
@@ -1279,7 +1301,7 @@ fieldset legend {
 }
 
 .messy-form label {
-  color: #cbd5e0;
+  color: var(--color-text-secondary);
   font-size: 0.95rem;
   cursor: pointer;
   min-width: 80px;
@@ -1290,20 +1312,20 @@ fieldset legend {
   flex: 1;
   min-width: 150px;
   padding: 0.5rem;
-  border: 1px solid #4a5568;
+  border: 1px solid var(--color-border);
   border-radius: 0.25rem;
-  background: #2d3748;
-  color: #e2e8f0;
+  background: #ffffff;
+  color: var(--color-text);
 }
 
 .messy-form .text-input::placeholder {
-  color: #718096;
+  color: var(--color-text-secondary);
 }
 
 .form-fieldset-bad button[type="submit"] {
   margin-top: 1rem;
   padding: 0.75rem 2rem;
-  background: #4299e1;
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 0.25rem;
@@ -1311,7 +1333,7 @@ fieldset legend {
 }
 
 .form-fieldset-bad button[type="submit"]:hover {
-  background: #3182ce;
+  background: var(--color-primary-dark);
 }
 
 /* Good form with aria-labelledby styles */
@@ -1321,10 +1343,13 @@ fieldset legend {
 
 .form-fieldset-good .form-section {
   margin-bottom: 1.5rem;
-  padding: 1rem;
-  border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
-  background: var(--color-bg-secondary);
+  padding: 1rem 0;
+  /* Subtle separator instead of bordered card */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-fieldset-good .form-section:last-child {
+  border-bottom: none;
 }
 
 .form-fieldset-good h5 {
@@ -1370,7 +1395,7 @@ fieldset legend {
   padding: 0.5rem;
   border: 1px solid var(--color-border);
   border-radius: 0.25rem;
-  background: var(--color-bg);
+  background: #ffffff;
   color: var(--color-text);
 }
 
@@ -1433,10 +1458,10 @@ fieldset legend {
   border-radius: 4px;
 }
 
-.strength-bar.strength-1 { background: #e53e3e; }
-.strength-bar.strength-2 { background: #d69e2e; }
-.strength-bar.strength-3 { background: #38a169; }
-.strength-bar.strength-4 { background: #2d5a28; }
+.strength-bar.strength-1 { background: var(--color-error); }
+.strength-bar.strength-2 { background: var(--color-warning); }
+.strength-bar.strength-3 { background: var(--color-success); }
+.strength-bar.strength-4 { background: var(--color-success); }
 
 .strength-requirements {
   display: grid;
@@ -1564,18 +1589,19 @@ button[type="submit"]:focus-visible {
 .example-container .code-block pre {
   margin: 0;
   padding: 1rem;
-  background: #1a1a1a;
-  color: #e5e5e5;
+  background: #1e1e1e;
+  color: #e0e0e0;
   font-size: 0.85rem;
   line-height: 1.5;
   overflow-x: auto;
   border-radius: 0;
+  border: 1px solid var(--color-border);
 }
 
 .example-container .code-block code {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   white-space: pre;
-  color: #e5e5e5;
+  color: #e0e0e0;
 }
 
 /* Responsive code blocks */
@@ -1600,45 +1626,31 @@ button[type="submit"]:focus-visible {
   }
 }
 
-/* Code example styles for individual slots */
-.code-example {
+/* Code block styles for standalone use */
+.form-demo + .code-block {
   margin-top: 1.5rem;
-  padding: 1rem;
-  background: var(--color-bg-secondary);
-  border-radius: 0.375rem;
-  border: 1px solid var(--color-border);
 }
 
-.code-example .code-block {
-  margin: 0;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-}
-
-.code-example .code-block pre {
+.form-demo + .code-block pre {
   margin: 0;
   padding: 1rem;
-  background: #1a1a1a;
-  color: #e5e5e5;
+  background: #1e1e1e;
+  color: #e0e0e0;
   font-size: 0.85rem;
   line-height: 1.5;
   overflow-x: auto;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
 }
 
-.code-example .code-block code {
+.form-demo + .code-block code {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   white-space: pre;
-  color: #e5e5e5;
+  color: #e0e0e0;
 }
 
 @media (max-width: 768px) {
-  .code-example {
-    padding: 0.75rem;
-  }
-
-  .code-example .code-block pre {
+  .form-demo + .code-block pre {
     padding: 0.75rem;
     font-size: 0.75rem;
   }
