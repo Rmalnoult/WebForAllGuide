@@ -8,7 +8,7 @@
         <button
           class="menu-trigger"
           @click="toggleDropdown"
-          @keydown.escape="closeDropdown"
+          @keydown.escape="closeDropdown(true)"
           @keydown.arrow-down.prevent="focusFirstItem"
           type="button"
           :aria-expanded="isDropdownOpen"
@@ -25,7 +25,7 @@
           role="menu"
           :aria-labelledby="triggerId"
           ref="dropdownContent"
-          @keydown.escape="closeDropdown"
+          @keydown.escape="closeDropdown(true)"
           @keydown.arrow-down.prevent="focusNextItem"
           @keydown.arrow-up.prevent="focusPreviousItem"
           @keydown.home.prevent="focusFirstItem"
@@ -103,9 +103,11 @@ const toggleDropdown = () => {
   // Focus will be handled by keyboard navigation when needed
 }
 
-const closeDropdown = () => {
+const closeDropdown = (shouldFocusTrigger = false) => {
   isDropdownOpen.value = false
-  triggerButton.value?.focus({ preventScroll: true })
+  if (shouldFocusTrigger) {
+    triggerButton.value?.focus({ preventScroll: true })
+  }
 }
 
 // Navigation clavier dans le menu
@@ -143,21 +145,21 @@ const focusPreviousItem = () => {
 
 // Fermer le menu en cliquant à l'extérieur
 const handleClickOutside = (event) => {
-  if (dropdownContainer.value && !dropdownContainer.value.contains(event.target)) {
-    closeDropdown()
+  if (isDropdownOpen.value && dropdownContainer.value && !dropdownContainer.value.contains(event.target)) {
+    closeDropdown(false) // Don't steal focus when clicking outside
   }
 }
 
 // Fermer le menu avec Escape (global)
 const handleGlobalKeydown = (event) => {
   if (event.key === 'Escape' && isDropdownOpen.value) {
-    closeDropdown()
+    closeDropdown(true) // Return focus when using Escape key
   }
 }
 
 const handleExport = async () => {
   isExporting.value = true
-  closeDropdown() // Fermer le menu après avoir cliqué
+  closeDropdown(false) // Fermer le menu après avoir cliqué, don't steal focus
 
   try {
     const success = await exportCardAsImage(props.title)
