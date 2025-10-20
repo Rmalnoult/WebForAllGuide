@@ -12,10 +12,10 @@
       <h2 id="intro-title">Pourquoi l'accessibilité ?</h2>
 
       <div class="stats-grid">
-        <div class="stat-card">
+        <a href="https://www.un.org/fr/observances/day-of-persons-with-disabilities/background" class="stat-card stat-card-link" target="_blank" rel="noopener">
           <span class="stat-number">15%</span>
-          <span class="stat-label">de la population vit avec un handicap</span>
-        </div>
+          <span class="stat-label">de la population mondiale vit avec un handicap ↗</span>
+        </a>
         <a href="https://ec.europa.eu/social/main.jsp?catId=1202" class="stat-card stat-card-link" target="_blank" rel="noopener">
           <span class="stat-number">2025</span>
           <span class="stat-label">Directive Accessibilité Europe ↗</span>

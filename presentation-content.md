@@ -19,7 +19,7 @@ L'accessibilité, c'est garantir un web utilisable par tous :
 **Titre:** Pourquoi l'accessibilité est-elle essentielle ?
 
 **Contenu:**
-- **15%** de la population mondiale vit avec un handicap
+- **15%** de la population mondiale vit avec un handicap ([Source : Nations Unies](https://www.un.org/fr/observances/day-of-persons-with-disabilities/background))
 - **2025** : Directive Accessibilité Europe obligatoire
 - **96%** des sites web ont des erreurs d'accessibilité
 - C'est une obligation légale et morale

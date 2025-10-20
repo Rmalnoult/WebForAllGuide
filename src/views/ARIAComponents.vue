@@ -69,7 +69,7 @@
                 <c-text class="accordion-icon">{{ badAccordionOpen[1] ? '−' : '+' }}</c-text>
               </div>
               <div v-if="badAccordionOpen[1]" class="accordion-content">
-                <c-text>15% de la population mondiale vit avec un handicap. L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale.</c-text>
+                <c-text>15% de la population mondiale vit avec un handicap (Source : <a href="https://www.un.org/fr/observances/day-of-persons-with-disabilities/background" target="_blank" rel="noopener">Nations Unies</a>). L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale.</c-text>
               </div>
             </div>
 
@@ -906,7 +906,7 @@ const accordionItems = [
   },
   {
     title: "Pourquoi est-ce important ?",
-    content: "15% de la population mondiale vit avec un handicap. L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale."
+    content: "15% de la population mondiale vit avec un handicap (Source : Nations Unies). L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale."
   },
   {
     title: "Comment commencer ?",
