@@ -20,10 +20,10 @@
           <span class="stat-number">2025</span>
           <span class="stat-label">Directive Accessibilité Europe ↗</span>
         </a>
-        <div class="stat-card">
-          <span class="stat-number">96%</span>
-          <span class="stat-label">des sites ont des erreurs d'accessibilité</span>
-        </div>
+        <a href="https://webaim.org/projects/million/#intro" class="stat-card stat-card-link" target="_blank" rel="noopener">
+          <span class="stat-number">94.8%</span>
+          <span class="stat-label">des sites ont des erreurs d'accessibilité ↗</span>
+        </a>
       </div>
     </section>
 
