@@ -1,18 +1,28 @@
 :root {
+  /* Design System - Base tokens */
+  --ds-spacing-xs: 0.25rem;
+  --ds-spacing-s: 0.5rem;
+  --ds-spacing-m: 1rem;
+  --ds-spacing-l: 1.5rem;
+  --ds-spacing-xl: 2rem;
+
+  --ds-border-radius-m: 0.625rem;
+  --ds-border-radius-l: 0.625rem;
+
   /* Light theme colors */
-  --color-primary: #0056d2;  /* Darker blue for better contrast on light bg */
-  --color-primary-dark: #004bb5;
-  --color-primary-darker: #003d96;
-  --color-primary-light: #e6f0ff;
-  --color-primary-disabled: rgba(0, 86, 210, 0.4);
+  --color-primary: #1441D0;  /* Custom blue for better brand differentiation */
+  --color-primary-dark: #0F34A5;
+  --color-primary-darker: #0A2780;
+  --color-primary-light: #E8ECFA;
+  --color-primary-disabled: rgba(20, 65, 208, 0.4);
 
   /* Design System colors */
-  --ds-color-interactive-background-brand: #0056d2;
-  --ds-color-interactive-background-button-filled-main-hover: #004bb5;
-  --ds-color-interactive-background-button-filled-main-pressed: #003d96;
-  --ds-color-interactive-background-button-filled-main-active: #0056d2;
-  --ds-color-interactive-background-button-filled-main-disabled: rgba(0, 86, 210, 0.4);
-  --ds-color-interactive-border-focus: #0056d2;
+  --ds-color-interactive-background-brand: #1441D0;
+  --ds-color-interactive-background-button-filled-main-hover: #0F34A5;
+  --ds-color-interactive-background-button-filled-main-pressed: #0A2780;
+  --ds-color-interactive-background-button-filled-main-active: #1441D0;
+  --ds-color-interactive-background-button-filled-main-disabled: rgba(20, 65, 208, 0.4);
+  --ds-color-interactive-border-focus: #1441D0;
 
   /* DS functional colors */
   --ds-color-functional-success: #067a06;
@@ -37,10 +47,10 @@
   --color-warning: var(--ds-color-functional-warning);
   --color-warning-light: #FFF3CD;
 
-  --color-info: #0056d2;
-  --color-info-dark: #004bb5;
-  --color-info-darker: #003d96;
-  --color-info-light: #E6F2FF;
+  --color-info: #1441D0;
+  --color-info-dark: #0F34A5;
+  --color-info-darker: #0A2780;
+  --color-info-light: #E8ECFA;
 
   --color-text: var(--ds-color-content-primary);
   --color-text-secondary: var(--ds-color-content-secondary);
@@ -53,9 +63,9 @@
   --color-focus: var(--ds-color-interactive-background-brand);
 
   /* High contrast color for text links only */
-  --color-link: #004bb5;  /* Better contrast for light background */
-  --color-link-hover: #003d96;
-  --color-link-visited: #003380;
+  --color-link: #0F34A5;  /* Better contrast for light background */
+  --color-link-hover: #0A2780;
+  --color-link-visited: #081D60;
 
   /* Espacements */
   --spacing-xs: var(--ds-spacing-xs);
@@ -65,7 +75,7 @@
   --spacing-xl: var(--ds-spacing-xl);
 
   /* Typographie */
-  --font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
@@ -119,7 +129,7 @@
 /* Mode haut contraste */
 @media (prefers-contrast: high) {
   :root {
-    --color-primary: #0000FF;
+    --color-primary: #1441D0;
     --color-success: #008000;
     --color-error: #FF0000;
     --color-warning: #FFA500;

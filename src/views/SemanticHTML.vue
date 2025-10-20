@@ -351,7 +351,7 @@ h1 {
 /* Page structure demo styles */
 .page-structure {
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   overflow: hidden;
   font-size: 0.9rem;
 }
@@ -395,7 +395,7 @@ h1 {
   padding: 0.25rem 0.5rem;
   text-decoration: none;
   color: var(--color-primary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .nav-item:hover {
@@ -425,7 +425,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -484,7 +484,7 @@ h1 {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.2s;
@@ -507,7 +507,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -549,7 +549,7 @@ h1 {
 .code-block {
   background: #1e1e1e;
   color: #e0e0e0;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   margin-top: 1rem;
   overflow-x: auto;

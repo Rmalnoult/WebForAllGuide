@@ -635,7 +635,7 @@
   .theme-btn {
     padding: 0.75rem;
     cursor: pointer;
-    border-radius: 0.5rem;
+    border-radius: 0.625rem;
     border: 2px solid transparent;
   }
 
@@ -685,7 +685,7 @@
 &lt;style&gt;
   .theme-controls {
     border: 1px solid #ccc;
-    border-radius: 0.5rem;
+    border-radius: 0.625rem;
     padding: 1rem;
   }
 
@@ -827,7 +827,7 @@ h1 {
 .stat-card {
   background: var(--color-bg-secondary);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-align: left;
   border: 1px solid var(--color-border);
 }
@@ -868,7 +868,7 @@ h1 {
 
 .sample {
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   background: white;
   isolation: isolate;
@@ -976,7 +976,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   display: grid;
   gap: 2rem;
@@ -984,7 +984,7 @@ h1 {
 
 .form-example-bad, .form-example-good {
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1.5rem;
 }
 
@@ -1001,7 +1001,7 @@ h1 {
 .form-group input {
   width: 100%;
   padding: 0.75rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 1rem;
 }
 
@@ -1033,7 +1033,7 @@ h1 {
 
 .status-example-bad, .status-example-good {
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1.5rem;
 }
 
@@ -1050,7 +1050,7 @@ h1 {
   align-items: center;
   padding: 0.75rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .order-number {
@@ -1167,7 +1167,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1184,7 +1184,7 @@ h1 {
 .theme-option {
   padding: 0.75rem;
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   font-size: 1.5rem;
   background: var(--color-bg-secondary);
   border: 2px solid transparent;
@@ -1196,7 +1196,7 @@ h1 {
 
 .theme-controls-good {
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   display: flex;
   gap: 1rem;
@@ -1213,7 +1213,7 @@ h1 {
   align-items: center;
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   transition: background-color 0.2s;
 }
 
@@ -1233,7 +1233,7 @@ h1 {
 
 .demo-content-bad, .demo-content-good {
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   transition: all 0.3s;
 }
@@ -1252,7 +1252,7 @@ h1 {
 .demo-button-bad {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   margin: 0.5rem 0;
 }
 
@@ -1269,7 +1269,7 @@ h1 {
 .demo-card-bad {
   margin-top: 1rem;
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .theme-light .demo-card-bad {
@@ -1314,7 +1314,7 @@ h1 {
 .demo-button-good {
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   margin: 0.5rem 0;
   cursor: pointer;
   font-weight: 500;
@@ -1345,7 +1345,7 @@ h1 {
 .demo-card-good {
   margin-top: 1rem;
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   border: 1px solid;
 }
 
@@ -1389,7 +1389,7 @@ h1 {
 .code-block {
   background: #f8f9fa;
   border: 1px solid #e9ecef;
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   margin-top: 1rem;
   overflow-x: auto;
 }

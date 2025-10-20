@@ -1,16 +1,16 @@
-/* Syntax Highlighting for Code Blocks */
+/* Syntax Highlighting with accessible colors */
 
 /* Base styles for code blocks */
 .code-block {
-  background: #1e1e2e;
-  color: #cdd6f4;
-  border-radius: 0.5rem;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 0.625rem;
   padding: 1rem;
   margin-top: 1rem;
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.6;
-  border: 1px solid #313244;
+  border: 1px solid #334155;
   position: relative;
 }
 
@@ -25,126 +25,110 @@
   display: block;
 }
 
-/* Syntax highlighting colors */
+/* Syntax highlighting with high contrast colors */
 
 /* HTML Tags */
-.tag {
-  color: #89dceb;
+.tag,
+.tag-name {
+  color: #fb7185; /* Rose - good contrast */
 }
 
 .tag-bracket {
-  color: #6c7086;
-}
-
-.tag-name {
-  color: #f38ba8;
+  color: #94a3b8; /* Slate gray - good contrast */
 }
 
 /* Attributes */
 .attr-name {
-  color: #cba6f7;
+  color: #c4b5fd; /* Light purple - excellent contrast */
 }
 
 .attr-value {
-  color: #a6e3a1;
+  color: #86efac; /* Light green - excellent contrast */
 }
 
 .attr-equals {
-  color: #cdd6f4;
+  color: #e2e8f0;
+}
+
+/* Vue.js specific attributes */
+.vue-event,
+.vue-directive {
+  color: #fbbf24; /* Amber - excellent contrast for @ directives */
+  font-weight: 500;
+}
+
+.vue-bind {
+  color: #60a5fa; /* Light blue - excellent contrast for : bindings */
+  font-weight: 500;
 }
 
 /* Comments */
 .comment {
-  color: #6c7086;
+  color: #94a3b8; /* Lighter gray - good contrast */
   font-style: italic;
 }
 
 /* Strings */
 .string {
-  color: #a6e3a1;
+  color: #86efac; /* Light green - excellent contrast */
 }
 
 /* Keywords */
 .keyword {
-  color: #cba6f7;
-  font-weight: bold;
+  color: #fda4af; /* Light rose - good contrast */
+  font-weight: 500;
 }
 
 /* Functions */
 .function {
-  color: #89dceb;
+  color: #7dd3fc; /* Light cyan - excellent contrast */
 }
 
 /* Numbers */
 .number {
-  color: #fab387;
+  color: #fdba74; /* Light orange - excellent contrast */
 }
 
 /* CSS specific */
 .selector {
-  color: #f38ba8;
+  color: #fb7185;
 }
 
 .property {
-  color: #89dceb;
+  color: #7dd3fc; /* Light cyan - excellent contrast */
 }
 
 .value {
-  color: #a6e3a1;
+  color: #86efac;
 }
 
 .unit {
-  color: #fab387;
+  color: #fdba74;
 }
 
 .pseudo {
-  color: #cba6f7;
+  color: #c4b5fd;
 }
 
 .at-rule {
-  color: #f9e2af;
+  color: #fcd34d; /* Light yellow - excellent contrast */
 }
 
 /* JavaScript specific */
 .variable {
-  color: #cdd6f4;
+  color: #e2e8f0;
 }
 
 .operator {
-  color: #94e2d5;
+  color: #67e8f9; /* Cyan - excellent contrast */
 }
 
 .boolean {
-  color: #fab387;
+  color: #fdba74;
 }
 
 .null {
-  color: #f38ba8;
-}
-
-/* Special highlighting */
-.highlight-good {
-  background: rgba(166, 227, 161, 0.1);
-  border-left: 3px solid #a6e3a1;
-  padding-left: 0.5rem;
-  margin-left: -0.5rem;
-}
-
-.highlight-bad {
-  background: rgba(243, 139, 168, 0.1);
-  border-left: 3px solid #f38ba8;
-  padding-left: 0.5rem;
-  margin-left: -0.5rem;
-}
-
-/* Line numbers (optional) */
-.line-number {
-  color: #6c7086;
-  margin-right: 1rem;
-  user-select: none;
-  display: inline-block;
-  width: 3ch;
-  text-align: right;
+  color: #fb7185;
 }
 
 /* Copy button */
@@ -153,10 +137,10 @@
   top: 0.5rem;
   right: 0.5rem;
   padding: 0.25rem 0.5rem;
-  background: #313244;
-  color: #cdd6f4;
-  border: 1px solid #45475a;
-  border-radius: 0.25rem;
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 0.625rem;
   font-size: 0.75rem;
   cursor: pointer;
   opacity: 0;
@@ -168,42 +152,9 @@
 }
 
 .copy-button:hover {
-  background: #45475a;
+  background: #475569;
 }
 
 .copy-button:active {
-  background: #585b70;
-}
-
-/* Dark theme adjustments */
-@media (prefers-color-scheme: light) {
-  .code-block {
-    background: #f6f8fa;
-    color: #24292e;
-    border-color: #e1e4e8;
-  }
-
-  .tag { color: #22863a; }
-  .tag-bracket { color: #586069; }
-  .tag-name { color: #d73a49; }
-  .attr-name { color: #6f42c1; }
-  .attr-value { color: #032f62; }
-  .comment { color: #6a737d; }
-  .string { color: #032f62; }
-  .keyword { color: #d73a49; }
-  .function { color: #6f42c1; }
-  .number { color: #1e3a8a; }
-  .selector { color: #d73a49; }
-  .property { color: #1e3a8a; }
-  .value { color: #032f62; }
-
-  .copy-button {
-    background: #f6f8fa;
-    color: #24292e;
-    border-color: #e1e4e8;
-  }
-
-  .copy-button:hover {
-    background: #e1e4e8;
-  }
+  background: #64748b;
 }

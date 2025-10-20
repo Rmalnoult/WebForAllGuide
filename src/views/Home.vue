@@ -30,10 +30,10 @@
     <section aria-labelledby="curb-cut-title">
       <div class="curb-cut-intro">
           <div class="curb-cut-text">
-            <h2 id="curb-cut-title">Quand on conçoit pour le handicap, on résout des problèmes que tout le monde rencontre</h2>
+            <h3 id="curb-cut-title">Quand on conçoit pour le handicap, on résout des problèmes que tout le monde rencontre</h3>
             <p>
               Les rampes de trottoir ont révolutionné la ville pour les fauteuils roulants,
-              mais aussi pour 99% des piétons avec valises, poussettes ou vélos.
+              mais aussi pour tous les piétons avec valises, poussettes ou vélos.
             </p>
             <p>
               Une amélioration pour certains profite à tous. Ce concept, né des rampes d'accès dans les rues,
@@ -384,8 +384,7 @@ h1 {
 .lead {
   font-size: 1.25rem;
   color: var(--color-text);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .subtitle {
@@ -408,7 +407,7 @@ section {
 .stat-card {
   background: var(--color-bg-secondary);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-align: left;
 }
 
@@ -463,7 +462,7 @@ section {
   flex: 1;
   padding: 1.5rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -502,7 +501,7 @@ section {
   gap: 1rem;
   background: var(--color-bg-secondary);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .shortcuts-list div {
@@ -523,7 +522,7 @@ kbd {
   background: var(--color-bg);
   color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -557,7 +556,7 @@ kbd {
   width: 100%;
   max-width: 400px;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -589,7 +588,7 @@ kbd {
 .curb-cut-example {
   background: var(--color-bg-secondary);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .curb-cut-example h4 {
@@ -624,7 +623,7 @@ kbd {
   margin-bottom: 2rem;
   padding: 2rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-info-light) 100%);
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   text-align: left;
   font-size: 1.25rem;
 }
@@ -697,7 +696,7 @@ kbd {
   font-weight: 500;
   border: 2px solid var(--color-primary);
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -768,7 +767,7 @@ kbd {
   background: var(--color-info-light);
   color: var(--color-info-dark);
   padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   font-size: 0.8rem;
   font-weight: 500;
 }
@@ -783,7 +782,7 @@ kbd {
 .stat {
   background: var(--color-bg);
   padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   font-size: 0.85rem;
   border: 1px solid var(--color-border);
 }
@@ -797,7 +796,7 @@ kbd {
   font-weight: 500;
   border: 2px solid var(--color-primary);
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   transition: background-color 0.2s, color 0.2s;
   margin-top: 1rem;
 }
@@ -816,7 +815,7 @@ kbd {
   margin-top: 1rem;
   padding: 0.75rem;
   background: var(--color-bg);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   font-size: 0.9rem;
 }
@@ -850,7 +849,7 @@ kbd {
   font-style: italic;
   background: rgba(255, 255, 255, 0.5);
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   margin-top: 1rem;
 }
 

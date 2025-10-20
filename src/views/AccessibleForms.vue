@@ -1087,7 +1087,7 @@ h1 {
   width: 100%;
   padding: 0.75rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 1rem;
   background: #ffffff;
   transition: border-color 0.2s;
@@ -1135,7 +1135,7 @@ h1 {
   border: 1px solid var(--color-error);
   color: var(--color-error);
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   margin-bottom: 1rem;
 }
 
@@ -1144,7 +1144,7 @@ h1 {
   border: 2px solid var(--color-error);
   color: var(--color-error);
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   margin-bottom: 1.5rem;
 }
 
@@ -1236,7 +1236,7 @@ h1 {
 /* Fieldset styles */
 fieldset {
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -1251,7 +1251,7 @@ fieldset legend {
   margin-bottom: 2rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .form-section p {
@@ -1263,7 +1263,7 @@ fieldset legend {
 .form-fieldset-bad {
   background: var(--color-bg-secondary);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1275,7 +1275,7 @@ fieldset legend {
 .messy-form {
   padding: 1rem;
   background: var(--color-bg);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1313,7 +1313,7 @@ fieldset legend {
   min-width: 150px;
   padding: 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   background: #ffffff;
   color: var(--color-text);
 }
@@ -1328,7 +1328,7 @@ fieldset legend {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 }
 
@@ -1394,7 +1394,7 @@ fieldset legend {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   background: #ffffff;
   color: var(--color-text);
 }
@@ -1408,7 +1408,7 @@ fieldset legend {
   margin-top: 0.75rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
 }
 
@@ -1435,7 +1435,7 @@ fieldset legend {
   margin-top: 0.75rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .password-strength h6 {
@@ -1447,7 +1447,7 @@ fieldset legend {
   width: 100%;
   height: 8px;
   background: var(--color-border);
-  border-radius: 4px;
+  border-radius: 0.625rem;
   overflow: hidden;
   margin-bottom: 0.75rem;
 }
@@ -1455,7 +1455,7 @@ fieldset legend {
 .strength-bar {
   height: 100%;
   transition: width 0.3s, background-color 0.3s;
-  border-radius: 4px;
+  border-radius: 0.625rem;
 }
 
 .strength-bar.strength-1 { background: var(--color-error); }
@@ -1484,7 +1484,7 @@ button[type="submit"] {
   color: white;
   border: none;
   padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -1534,7 +1534,7 @@ button[type="submit"]:focus-visible {
   margin-top: 2rem;
   padding: 1.5rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1553,7 +1553,7 @@ button[type="submit"]:focus-visible {
 
 .example-container {
   background: var(--color-bg);
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   overflow: hidden;
 }
@@ -1639,7 +1639,7 @@ button[type="submit"]:focus-visible {
   font-size: 0.85rem;
   line-height: 1.5;
   overflow-x: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 

@@ -855,7 +855,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   min-height: 400px;
 }
@@ -864,7 +864,7 @@ h1 {
   margin-bottom: 1.5rem;
   padding: 1rem;
   background: var(--color-info-light);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .motion-controls label {
@@ -882,7 +882,7 @@ h1 {
 .animated-card {
   padding: 1.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   background: var(--color-bg);
   color: var(--color-text);
   position: relative;
@@ -907,7 +907,7 @@ h1 {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   animation: pulse 1.5s infinite;
 }
@@ -917,7 +917,7 @@ h1 {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -984,7 +984,7 @@ h1 {
   padding: 1rem;
   background: var(--color-warning);
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   animation: slide 3s linear infinite;
 }
 
@@ -993,7 +993,7 @@ h1 {
   width: 200px;
   height: 100px;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .carousel-track {
@@ -1032,7 +1032,7 @@ h1 {
   width: 200px;
   height: 100px;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1045,7 +1045,7 @@ h1 {
   border: 1px solid var(--color-border);
   background: var(--color-bg);
   color: var(--color-text);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
@@ -1062,7 +1062,7 @@ h1 {
   background: var(--color-success);
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
   animation: fadeInOut 2s ease-in-out;
 }
@@ -1090,7 +1090,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1098,19 +1098,19 @@ h1 {
   margin-bottom: 1.5rem;
   padding: 1rem;
   background: var(--color-info-light);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .zoom-controls select, .device-controls select {
   margin-left: 0.5rem;
   padding: 0.25rem 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .layout-bad, .layout-good {
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   overflow: hidden;
 }
 
@@ -1186,7 +1186,7 @@ h1 {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .cards-bad, .cards-good {
@@ -1197,7 +1197,7 @@ h1 {
 
 .card-bad, .card-good {
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   background: var(--color-bg-secondary);
   color: var(--color-text);
 }
@@ -1214,13 +1214,13 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
 .device-simulator-bad, .device-simulator-good {
   border: 2px solid var(--color-border);
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   overflow: hidden;
   margin-top: 1rem;
 }
@@ -1266,7 +1266,7 @@ h1 {
   padding: 0.5rem 1rem;
   text-decoration: none;
   color: var(--color-text);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   transition: background-color 0.2s;
 }
 
@@ -1279,7 +1279,7 @@ h1 {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 }
 
@@ -1309,7 +1309,7 @@ h1 {
 .form-bad textarea, .form-good textarea {
   padding: 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 1rem;
 }
 
@@ -1323,7 +1323,7 @@ h1 {
 .form-actions-bad button, .form-actions-good button {
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   font-size: 1rem;
 }
@@ -1339,13 +1339,13 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
 .interface-bad, .interface-good {
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   overflow: hidden;
 }
 
@@ -1376,7 +1376,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1396,7 +1396,7 @@ h1 {
   margin-left: 0.5rem;
   padding: 0.25rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .preference-group input[type="checkbox"] {
@@ -1409,7 +1409,7 @@ h1 {
   background: var(--color-error);
   color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   justify-self: start;
 }
@@ -1438,7 +1438,7 @@ h1 {
   margin-top: 1rem;
   padding: 0.75rem;
   background: var(--color-info-light);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-style: italic;
   min-height: 1.5rem;
 }
@@ -1522,7 +1522,7 @@ h1 {
   width: 100%;
   height: 24px;
   background: var(--color-bg-secondary);
-  border-radius: 12px;
+  border-radius: 0.625rem;
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
@@ -1530,7 +1530,7 @@ h1 {
 .loading-progress {
   height: 100%;
   transition: width 0.3s ease;
-  border-radius: 12px;
+  border-radius: 0.625rem;
 }
 
 .loading-text {
@@ -1545,7 +1545,7 @@ h1 {
   margin: 1.5rem 0;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .resource-item {
@@ -1555,7 +1555,7 @@ h1 {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   background: var(--color-bg);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
   transition: all 0.3s ease;
 }
@@ -1590,7 +1590,7 @@ h1 {
   margin: 1.5rem 0;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .loading-controls label {
@@ -1603,7 +1603,7 @@ h1 {
 .loading-controls select {
   padding: 0.25rem 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   background: var(--color-bg);
   color: var(--color-text);
   cursor: pointer;
@@ -1619,7 +1619,7 @@ h1 {
 .metric {
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-align: left;
 }
 
@@ -1686,7 +1686,7 @@ h1 {
   margin-top: 2rem;
   padding: 1.5rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1710,7 +1710,7 @@ h1 {
   background: #2d3748;
   color: #e2e8f0;
   padding: 1rem;
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.5;

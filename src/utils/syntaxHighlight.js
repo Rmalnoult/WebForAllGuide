@@ -28,12 +28,36 @@ function highlightHTML(code) {
     let highlightedAttrs = attrs;
     if (attrs) {
       highlightedAttrs = attrs.replace(
-        /(\s+)([a-zA-Z][a-zA-Z0-9-:]*)(\s*=\s*)?("[^"]*"|'[^']*')?/g,
+        /(\s+)([@:]?[a-zA-Z][a-zA-Z0-9-:]*)(\s*=\s*)?("[^"]*"|'[^']*')?/g,
         (attrMatch, space, name, equals, value) => {
-          if (!equals) {
-            return `${space}<span class="attr-name">${name}</span>`;
+          // Check if it's a Vue.js event handler (@click, @keydown, etc.)
+          if (name.startsWith('@')) {
+            if (!equals) {
+              return `${space}<span class="vue-event">${name}</span>`;
+            }
+            return `${space}<span class="vue-event">${name}</span><span class="attr-equals">${equals}</span><span class="attr-value">${value || ''}</span>`;
           }
-          return `${space}<span class="attr-name">${name}</span><span class="attr-equals">${equals}</span><span class="attr-value">${value || ''}</span>`;
+          // Check if it's a Vue.js binding (:hidden, :class, v-bind:, etc.)
+          else if (name.startsWith(':') || name.startsWith('v-bind:')) {
+            if (!equals) {
+              return `${space}<span class="vue-bind">${name}</span>`;
+            }
+            return `${space}<span class="vue-bind">${name}</span><span class="attr-equals">${equals}</span><span class="attr-value">${value || ''}</span>`;
+          }
+          // Check for other Vue directives (v-if, v-for, v-show, etc.)
+          else if (name.startsWith('v-')) {
+            if (!equals) {
+              return `${space}<span class="vue-directive">${name}</span>`;
+            }
+            return `${space}<span class="vue-directive">${name}</span><span class="attr-equals">${equals}</span><span class="attr-value">${value || ''}</span>`;
+          }
+          // Regular HTML attributes
+          else {
+            if (!equals) {
+              return `${space}<span class="attr-name">${name}</span>`;
+            }
+            return `${space}<span class="attr-name">${name}</span><span class="attr-equals">${equals}</span><span class="attr-value">${value || ''}</span>`;
+          }
         }
       );
     }

@@ -36,7 +36,19 @@
         <span aria-hidden="true">⌨️</span>
         <span>Aide (Alt+H)</span>
       </button>
+
+      <button
+        @click="showAboutModal"
+        class="about-link"
+        aria-label="À propos de ce site"
+        title="À propos de ce site"
+      >
+        À propos
+      </button>
     </div>
+
+    <!-- About Modal -->
+    <AboutModal v-model="isAboutModalOpen" />
   </nav>
 </template>
 
@@ -45,6 +57,7 @@ import { ref, onMounted, nextTick, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAnnounce } from '../../composables/useA11y'
 import { useKeyboardShortcuts } from '../../composables/useKeyboardShortcuts'
+import AboutModal from '../common/AboutModal.vue'
 
 const route = useRoute()
 const { announce } = useAnnounce()
@@ -53,10 +66,16 @@ const { showHelpDialog } = useKeyboardShortcuts()
 // Navigation refs and state
 const navItemRefs = ref([])
 const focusedNavIndex = ref(0)
+const isAboutModalOpen = ref(false)
 
 const showKeyboardHelp = () => {
   showHelpDialog()
   announce('Fenêtre d\'aide ouverte')
+}
+
+const showAboutModal = () => {
+  isAboutModalOpen.value = true
+  announce('Fenêtre à propos ouverte')
 }
 
 const navItems = [
@@ -145,7 +164,7 @@ watch(() => route.path, (newPath) => {
 
 <style scoped>
 .app-nav {
-  background: #1D252B;
+  background: #0C0C0C;
   padding: 1rem;
   min-height: 100vh;
   border-right: 2px solid var(--color-border);
@@ -181,7 +200,7 @@ watch(() => route.path, (newPath) => {
   background: var(--color-bg);
   color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: 0.2rem;
+  border-radius: 0.625rem;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -203,7 +222,7 @@ watch(() => route.path, (newPath) => {
   padding: 0.75rem 1rem;
   color: #E8E6E3;
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   transition: background-color 0.2s;
 }
 
@@ -273,6 +292,9 @@ watch(() => route.path, (newPath) => {
   margin-top: auto;
   padding: 1rem;
   border-top: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .help-button {
@@ -284,7 +306,7 @@ watch(() => route.path, (newPath) => {
   background: rgba(255, 255, 255, 0.1);
   color: #E8E6E3;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -307,9 +329,50 @@ watch(() => route.path, (newPath) => {
   font-size: 1.25rem;
 }
 
+/* About link - discret style */
+.about-link {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.2);
+  text-underline-offset: 3px;
+}
+
+.about-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.about-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+  .app-nav {
+    padding-top: 4.5rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .app-nav a {
+  .app-nav a,
+  .help-button,
+  .about-link {
     transition: none;
+  }
+
+  .help-button:hover {
+    transform: none;
   }
 }
 </style>

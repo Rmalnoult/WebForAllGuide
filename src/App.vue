@@ -3,19 +3,56 @@ import { RouterView, useRoute } from 'vue-router'
 import AppNavigation from './components/layout/AppNavigation.vue'
 import { useUserPreferences } from './composables/useA11y'
 import { useKeyboardShortcuts } from './composables/useKeyboardShortcuts'
-import { computed, ref, watch } from 'vue'
+import { useSEO } from './composables/useSEO'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 
 const { prefersReducedMotion, prefersHighContrast, prefersDarkMode } = useUserPreferences()
 const { showHelpDialog } = useKeyboardShortcuts()
+useSEO() // Initialize SEO management
 const route = useRoute()
 const routeAnnouncement = ref('')
+const isMobileMenuOpen = ref(false)
 
 const appClass = computed(() => {
   const classes = ['app']
   if (prefersHighContrast.value) classes.push('high-contrast')
   if (prefersDarkMode.value) classes.push('dark-mode')
   if (prefersReducedMotion.value) classes.push('reduced-motion')
+  if (isMobileMenuOpen.value) classes.push('mobile-menu-open')
   return classes.join(' ')
+})
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+  if (isMobileMenuOpen.value) {
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+}
+
+const closeMobileMenu = () => {
+  if (isMobileMenuOpen.value) {
+    isMobileMenuOpen.value = false
+    document.body.style.overflow = ''
+  }
+}
+
+// Close menu on escape key
+const handleEscape = (event) => {
+  if (event.key === 'Escape' && isMobileMenuOpen.value) {
+    closeMobileMenu()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', handleEscape)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleEscape)
+  document.body.style.overflow = ''
 })
 
 // Announce route changes for screen readers
@@ -32,12 +69,11 @@ watch(() => route.path, (newPath) => {
   }
   routeAnnouncement.value = `Navigation vers ${pageNames[newPath] || 'nouvelle page'}`
 
-  // Focus main content for accessibility
+  // Close mobile menu on route change
+  closeMobileMenu()
+
+  // Clear announcement after screen readers have read it
   setTimeout(() => {
-    const mainContent = document.getElementById('main-content')
-    if (mainContent) {
-      mainContent.focus()
-    }
     routeAnnouncement.value = ''
   }, 100)
 })
@@ -55,11 +91,35 @@ watch(() => route.path, (newPath) => {
       </a>
     </div>
 
+    <!-- Mobile burger button -->
+    <button
+      class="burger-button"
+      :aria-expanded="isMobileMenuOpen"
+      aria-controls="main-nav"
+      aria-label="Menu de navigation"
+      @click="toggleMobileMenu"
+    >
+      <span class="burger-icon" aria-hidden="true">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </span>
+      <span class="sr-only">{{ isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu' }}</span>
+    </button>
+
     <div class="app-layout">
+      <!-- Mobile backdrop overlay -->
+      <div
+        v-if="isMobileMenuOpen"
+        class="mobile-backdrop"
+        @click="closeMobileMenu"
+        aria-hidden="true"
+      ></div>
+
       <!-- Sidebar navigation -->
       <aside
         id="main-nav"
-        class="app-sidebar"
+        :class="['app-sidebar', { 'mobile-open': isMobileMenuOpen }]"
         role="complementary"
         aria-label="Barre latérale de navigation"
       >
@@ -85,6 +145,13 @@ watch(() => route.path, (newPath) => {
         </div>
 
         <RouterView />
+
+        <!-- Footer -->
+        <footer class="app-footer" role="contentinfo">
+          <p class="copyright">
+            © {{ new Date().getFullYear() }} Romain Malnoult. Tous droits réservés.
+          </p>
+        </footer>
       </main>
     </div>
   </div>
@@ -119,7 +186,7 @@ watch(() => route.path, (newPath) => {
   padding: 1rem 1.5rem;
   text-decoration: none;
   font-weight: 600;
-  border-radius: 0 0 0.5rem 0;
+  border-radius: 0 0 0.625rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -145,7 +212,7 @@ watch(() => route.path, (newPath) => {
 }
 
 .app-sidebar {
-  background: #1D252B;
+  background: #0C0C0C;
   border-right: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -157,19 +224,164 @@ watch(() => route.path, (newPath) => {
   --main-padding: 2rem;
   padding: 2rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Footer */
+.app-footer {
+  margin-top: auto;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+/* Mobile burger button */
+.burger-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1002;
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: left 0.3s ease-in-out, background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.burger-button:hover {
+  background: rgba(248, 248, 248, 0.98) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.burger-button:active {
+  background: rgba(240, 240, 240, 0.98) !important;
+  transform: scale(0.98);
+}
+
+.burger-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.burger-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem 0;
+}
+
+.burger-line {
+  display: block;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Burger animation when open - move to right side of menu */
+.mobile-menu-open .burger-button {
+  left: calc(280px - 3rem - 1rem);
+  background: rgba(255, 255, 255, 0.98) !important;
+}
+
+.mobile-menu-open .burger-button:hover {
+  background: rgba(248, 248, 248, 1) !important;
+}
+
+.mobile-menu-open .burger-button:active {
+  background: rgba(240, 240, 240, 1) !important;
+}
+
+.mobile-menu-open .burger-line:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.mobile-menu-open .burger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-open .burger-line:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile backdrop */
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  backdrop-filter: blur(2px);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .burger-button {
+    display: block;
+  }
+
+  .mobile-backdrop {
+    display: block;
+  }
+
   .app-layout {
     grid-template-columns: 1fr;
   }
 
   .app-sidebar {
-    position: static;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    max-width: 80vw;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    border-right: 1px solid var(--color-border);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .app-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .app-main {
+    padding: 5rem 1rem 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burger-button {
+    transition: none;
+  }
+
+  .burger-button:hover {
+    transform: none;
+  }
+
+  .burger-line {
+    transition: none;
+  }
+
+  .app-sidebar {
+    transition: none;
   }
 }
 

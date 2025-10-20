@@ -31,7 +31,7 @@ L'accessibilité, c'est garantir un web utilisable par tous :
 **Titre:** Quand on conçoit pour le handicap, tout le monde en profite
 
 **Contenu:**
-**Le concept du "Curb Cut"** (rampe de trottoir) : Conçu pour les fauteuils roulants, mais bénéficie à 99% des piétons (valises, poussettes, vélos...)
+**Le concept du "Curb Cut"** (rampe de trottoir) : Conçu pour les fauteuils roulants, mais bénéficie à tous les piétons (valises, poussettes, vélos...)
 
 **Exemples concrets :**
 - **Sous-titres vidéo** → Sourds, mais aussi : métro bruyant, apprentissage de langues

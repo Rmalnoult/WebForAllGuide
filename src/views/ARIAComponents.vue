@@ -1,40 +1,40 @@
 <template>
   <div class="aria-components">
     <header>
-      <c-text tag="h1">ARIA</c-text>
-      <c-text tag="p" class="lead">
+      <h1>ARIA</h1>
+      <p class="lead">
         Créer des interfaces interactives accessibles avec les bonnes attributions ARIA
-      </c-text>
+      </p>
     </header>
 
     <section class="aria-intro">
-      <c-text tag="h2" class="section-title">Qu'est-ce que ARIA ?</c-text>
-      <c-text tag="p">
+      <h2 class="section-title">Qu'est-ce que ARIA ?</h2>
+      <p>
         <strong>ARIA (Accessible Rich Internet Applications)</strong> est une spécification du W3C qui permet d'améliorer
         l'accessibilité des applications web dynamiques. ARIA fournit des attributs supplémentaires pour décrire
         le rôle, l'état et les propriétés des éléments aux technologies d'assistance.
-      </c-text>
+      </p>
 
       <div class="aria-principles">
         <div class="principle-card">
-          <c-text tag="h3">🏷️ Rôles</c-text>
-          <c-text tag="p">Définissent ce qu'est un élément (button, navigation, alert...)</c-text>
-          <code class="aria-example"><span class="attr">role</span>=<span class="value">"button"</span></code>
+          <h3>🏷️ Rôles</h3>
+          <p>Définissent ce qu'est un élément (button, navigation, alert...)</p>
+          <code>role="button"</code>
         </div>
         <div class="principle-card">
-          <c-text tag="h3">📊 États</c-text>
-          <c-text tag="p">Décrivent l'état actuel d'un élément (checked, expanded, disabled...)</c-text>
-          <code class="aria-example"><span class="attr">aria-expanded</span>=<span class="value">"true"</span></code>
+          <h3>📊 États</h3>
+          <p>Décrivent l'état actuel d'un élément (checked, expanded, disabled...)</p>
+          <code>aria-expanded="true"</code>
         </div>
         <div class="principle-card">
-          <c-text tag="h3">🔧 Propriétés</c-text>
-          <c-text tag="p">Fournissent des informations supplémentaires (label, describedby, controls...)</c-text>
-          <code class="aria-example"><span class="attr">aria-label</span>=<span class="value">"Menu principal"</span></code>
+          <h3>🔧 Propriétés</h3>
+          <p>Fournissent des informations supplémentaires (label, describedby, controls...)</p>
+          <code>aria-label="Menu principal"</code>
         </div>
       </div>
 
       <div class="aria-golden-rules">
-        <c-text tag="h3">⚠️ Les 5 règles d'or d'ARIA</c-text>
+        <h3>⚠️ Les 5 règles d'or d'ARIA</h3>
         <ol>
           <li><strong class="rule-number">Première règle :</strong> Ne pas utiliser ARIA si vous pouvez utiliser HTML natif</li>
           <li><strong class="rule-number">Deuxième règle :</strong> Ne pas changer la sémantique native sauf si nécessaire</li>
@@ -55,31 +55,31 @@
           <div class="accordion-bad">
             <div class="accordion-item">
               <div class="accordion-header" @click="toggleBadAccordion(0)">
-                <c-text>Qu'est-ce que l'accessibilité web ?</c-text>
-                <c-text class="accordion-icon">{{ badAccordionOpen[0] ? '−' : '+' }}</c-text>
+                <span>Qu'est-ce que l'accessibilité web ?</span>
+                <span class="accordion-icon">{{ badAccordionOpen[0] ? '−' : '+' }}</span>
               </div>
               <div v-if="badAccordionOpen[0]" class="accordion-content">
-                <c-text>L'accessibilité web consiste à rendre les sites et applications utilisables par tous, y compris les personnes en situation de handicap.</c-text>
+                <p>L'accessibilité web consiste à rendre les sites et applications utilisables par tous, y compris les personnes en situation de handicap.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <div class="accordion-header" @click="toggleBadAccordion(1)">
-                <c-text>Pourquoi est-ce important ?</c-text>
-                <c-text class="accordion-icon">{{ badAccordionOpen[1] ? '−' : '+' }}</c-text>
+                <span>Pourquoi est-ce important ?</span>
+                <span class="accordion-icon">{{ badAccordionOpen[1] ? '−' : '+' }}</span>
               </div>
               <div v-if="badAccordionOpen[1]" class="accordion-content">
-                <c-text>15% de la population mondiale vit avec un handicap (Source : <a href="https://www.un.org/fr/observances/day-of-persons-with-disabilities/background" target="_blank" rel="noopener">Nations Unies</a>). L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale.</c-text>
+                <p>15% de la population mondiale vit avec un handicap (Source : <a href="https://www.un.org/fr/observances/day-of-persons-with-disabilities/background" target="_blank" rel="noopener">Nations Unies</a>). L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale.</p>
               </div>
             </div>
 
             <div class="accordion-item">
               <div class="accordion-header" @click="toggleBadAccordion(2)">
-                <c-text>Comment commencer ?</c-text>
-                <c-text class="accordion-icon">{{ badAccordionOpen[2] ? '−' : '+' }}</c-text>
+                <span>Comment commencer ?</span>
+                <span class="accordion-icon">{{ badAccordionOpen[2] ? '−' : '+' }}</span>
               </div>
               <div v-if="badAccordionOpen[2]" class="accordion-content">
-                <c-text>Commencez par apprendre les guidelines WCAG, utilisez des outils d'audit, et testez avec de vrais utilisateurs.</c-text>
+                <p>Commencez par apprendre les guidelines WCAG, utilisez des outils d'audit, et testez avec de vrais utilisateurs.</p>
               </div>
             </div>
           </div>
@@ -99,15 +99,36 @@
       <template #good>
         <div class="accordion-demo">
           <h4>Avec ARIA correct</h4>
-          <c-accordion
-            v-for="(item, index) in accordionItems"
-            :key="index"
-            :title="item.title"
-            :expanded="goodAccordionOpen[index]"
-            @header-click="toggleGoodAccordion(index)"
-          >
-            <c-text>{{ item.content }}</c-text>
-          </c-accordion>
+          <div class="accordion-good">
+            <div
+              v-for="(item, index) in accordionItems"
+              :key="index"
+              class="accordion-item"
+            >
+              <button
+                :id="`accordion-button-${index}`"
+                class="accordion-header"
+                :aria-expanded="goodAccordionOpen[index] ? 'true' : 'false'"
+                :aria-controls="`accordion-panel-${index}`"
+                @click="toggleGoodAccordion(index)"
+                @keydown.enter="toggleGoodAccordion(index)"
+                @keydown.space.prevent="toggleGoodAccordion(index)"
+                @keydown="handleAccordionKeydown($event, index)"
+              >
+                <span>{{ item.title }}</span>
+                <span class="accordion-icon">{{ goodAccordionOpen[index] ? '−' : '+' }}</span>
+              </button>
+              <div
+                v-if="goodAccordionOpen[index]"
+                :id="`accordion-panel-${index}`"
+                role="region"
+                :aria-labelledby="`accordion-button-${index}`"
+                class="accordion-content"
+              >
+                <p>{{ item.content }}</p>
+              </div>
+            </div>
+          </div>
           <div class="code-block">
             <pre><code>&lt;!-- Good: Complete ARIA with keyboard navigation --&gt;
 &lt;button
@@ -132,16 +153,16 @@
     </ExampleToggle>
 
     <section class="tabindex-section">
-      <c-text tag="h2" class="section-title">Tabindex et navigation clavier</c-text>
-      <c-text tag="p">
+      <h2 class="section-title">Tabindex et navigation clavier</h2>
+      <p>
         L'attribut <code class="inline-code">tabindex</code> contrôle si un élément peut recevoir le focus clavier et dans quel ordre.
-      </c-text>
+      </p>
 
       <div class="tabindex-values">
         <div class="tabindex-card">
-          <c-text tag="h3">✅ tabindex="0"</c-text>
-          <c-text tag="p">L'élément est focusable dans l'ordre naturel du DOM</c-text>
-          <code class="aria-example"><span class="attr">tabindex</span>=<span class="value">"0"</span></code>
+          <h3>✅ tabindex="0"</h3>
+          <p>L'élément est focusable dans l'ordre naturel du DOM</p>
+          <code>tabindex="0"</code>
           <div class="code-block">
             <pre><code>&lt;!-- Good: Interactive element focusable --&gt;
 &lt;div role="button" aria-label="Custom action" tabindex="0"&gt;
@@ -151,9 +172,9 @@
         </div>
 
         <div class="tabindex-card">
-          <c-text tag="h3">⚠️ tabindex="-1"</c-text>
-          <c-text tag="p">Focusable par JavaScript mais pas par Tab</c-text>
-          <code class="aria-example"><span class="attr">tabindex</span>=<span class="value">"-1"</span></code>
+          <h3>⚠️ tabindex="-1"</h3>
+          <p>Focusable par JavaScript mais pas par Tab</p>
+          <code>tabindex="-1"</code>
           <div class="code-block">
             <pre><code>&lt;!-- Good: For programmatic focus --&gt;
 &lt;div role="alert" aria-live="assertive" tabindex="-1"&gt;
@@ -163,9 +184,9 @@
         </div>
 
         <div class="tabindex-card bad">
-          <c-text tag="h3">❌ tabindex > 0</c-text>
-          <c-text tag="p">Change l'ordre de navigation (à éviter !)</c-text>
-          <code class="aria-example bad-example"><span class="attr">tabindex</span>=<span class="value">"5"</span></code>
+          <h3>❌ tabindex > 0</h3>
+          <p>Change l'ordre de navigation (à éviter !)</p>
+          <code>tabindex="5"</code>
           <div class="code-block">
             <pre><code>&lt;!-- Bad: Breaks natural tab order --&gt;
 &lt;button tabindex="3"&gt;Third&lt;/button&gt;
@@ -176,7 +197,7 @@
       </div>
 
       <div class="tabindex-best-practices">
-        <c-text tag="h3">📋 Bonnes pratiques tabindex</c-text>
+        <h3>📋 Bonnes pratiques tabindex</h3>
         <ul>
           <li>Utilisez <code class="inline-code">tabindex="0"</code> pour rendre les éléments custom interactifs focusables</li>
           <li>Utilisez <code class="inline-code">tabindex="-1"</code> pour le focus programmatique (modals, alerts)</li>
@@ -187,12 +208,12 @@
 
       <!-- Interactive examples -->
       <div class="focus-examples">
-        <c-text tag="h3">🎯 Exemples interactifs</c-text>
-        <c-text tag="p">Testez la navigation au clavier (Tab/Shift+Tab) avec ces éléments :</c-text>
+        <h3>🎯 Exemples interactifs</h3>
+        <p>Testez la navigation au clavier (Tab/Shift+Tab) avec ces éléments :</p>
 
         <div class="focus-demo-grid">
           <div class="focus-demo-section">
-            <c-text tag="h4">✅ Éléments focusables</c-text>
+            <h4>✅ Éléments focusables</h4>
 
             <!-- Native focusable elements -->
             <button class="demo-button">Bouton natif</button>
@@ -214,7 +235,7 @@
           </div>
 
           <div class="focus-demo-section">
-            <c-text tag="h4">❌ Éléments non-focusables</c-text>
+            <h4>❌ Éléments non-focusables</h4>
 
             <!-- Non-focusable elements -->
             <div class="demo-text">Texte simple (div)</div>
@@ -238,7 +259,7 @@
         </div>
 
         <div class="focus-tips">
-          <c-text tag="h4">💡 Conseils pour tester</c-text>
+          <h4>💡 Conseils pour tester</h4>
           <ul>
             <li>Utilisez <kbd>Tab</kbd> pour naviguer vers l'avant</li>
             <li>Utilisez <kbd>Shift + Tab</kbd> pour naviguer vers l'arrière</li>
@@ -285,7 +306,7 @@
         <div class="dropdown-demo">
           <h4>Menu avec ARIA</h4>
           <div class="dropdown-good">
-            <c-button
+            <button
               class="dropdown-trigger"
               aria-haspopup="true"
               :aria-expanded="goodDropdownOpen"
@@ -293,57 +314,51 @@
               @click="toggleGoodDropdown"
               @keydown="handleDropdownTriggerKeydown"
               ref="dropdownTrigger"
-              append-icon="chevron-down"
             >
-              Actions
-            </c-button>
-            <c-popin
-              :show="goodDropdownOpen"
-              @close="closeGoodDropdown"
-              aria-labelledby="dropdown-trigger"
+              Actions <span aria-hidden="true">▼</span>
+            </button>
+            <div
+              v-show="goodDropdownOpen"
+              class="dropdown-popin"
+              @click.self="closeGoodDropdown"
             >
-              <template #title>Actions</template>
               <div
                 id="dropdown-menu-good"
                 class="dropdown-menu"
                 role="menu"
                 @keydown="handleDropdownMenuKeydown"
               >
-                <c-button
+                <button
                   role="menuitem"
                   class="dropdown-item"
                   @click="handleGoodAction('edit')"
                   ref="firstMenuItem"
-                  prepend-icon="edit"
                 >
                   Modifier
-                </c-button>
-                <c-button
+                </button>
+                <button
                   role="menuitem"
                   class="dropdown-item"
                   @click="handleGoodAction('copy')"
-                  prepend-icon="copy"
                 >
                   Copier
-                </c-button>
-                <c-button
+                </button>
+                <button
                   role="menuitem"
                   class="dropdown-item"
                   @click="handleGoodAction('delete')"
-                  prepend-icon="trash"
                 >
                   Supprimer
-                </c-button>
-                <c-button
+                </button>
+                <button
                   role="menuitem"
                   class="dropdown-item"
                   @click="handleGoodAction('share')"
-                  prepend-icon="share"
                 >
                   Partager
-                </c-button>
+                </button>
               </div>
-            </c-popin>
+            </div>
           </div>
           <div class="code-block">
             <pre><code>&lt;!-- Good: ARIA attributes and focus management --&gt;
@@ -412,48 +427,48 @@
             <thead>
               <tr>
                 <th scope="col">
-                  <c-button
+                  <button
                     class="sort-button"
                     @click="sortGoodTable('name')"
                     :aria-sort="getSortState('name')"
                     aria-describedby="sort-instructions"
                   >
                     Nom
-                    <c-icon :name="getSortIcon('name')" />
-                  </c-button>
+                    <span aria-hidden="true">{{ getSortIcon('name') === 'chevron-up' ? '↑' : getSortIcon('name') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
                 </th>
                 <th scope="col">
-                  <c-button
+                  <button
                     class="sort-button"
                     @click="sortGoodTable('email')"
                     :aria-sort="getSortState('email')"
                     aria-describedby="sort-instructions"
                   >
                     Email
-                    <c-icon :name="getSortIcon('email')" />
-                  </c-button>
+                    <span aria-hidden="true">{{ getSortIcon('email') === 'chevron-up' ? '↑' : getSortIcon('email') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
                 </th>
                 <th scope="col">
-                  <c-button
+                  <button
                     class="sort-button"
                     @click="sortGoodTable('role')"
                     :aria-sort="getSortState('role')"
                     aria-describedby="sort-instructions"
                   >
                     Rôle
-                    <c-icon :name="getSortIcon('role')" />
-                  </c-button>
+                    <span aria-hidden="true">{{ getSortIcon('role') === 'chevron-up' ? '↑' : getSortIcon('role') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
                 </th>
                 <th scope="col">
-                  <c-button
+                  <button
                     class="sort-button"
                     @click="sortGoodTable('status')"
                     :aria-sort="getSortState('status')"
                     aria-describedby="sort-instructions"
                   >
                     Statut
-                    <c-icon :name="getSortIcon('status')" />
-                  </c-button>
+                    <span aria-hidden="true">{{ getSortIcon('status') === 'chevron-up' ? '↑' : getSortIcon('status') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
                 </th>
               </tr>
             </thead>
@@ -463,7 +478,7 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
                 <td>
-                  <c-badge :status="user.status.toLowerCase()">{{ user.status }}</c-badge>
+                  <span class="status-badge" :class="'status-' + user.status.toLowerCase()">{{ user.status }}</span>
                 </td>
               </tr>
             </tbody>
@@ -770,14 +785,14 @@
             </div>
 
             <div class="form-field">
-              <c-button
+              <button
                 aria-label="Rechercher"
                 @click="handleSearch"
-                prepend-icon="search"
                 class="good-icon-button"
               >
+                <span aria-hidden="true">🔍</span>
                 <span class="sr-only">Rechercher</span>
-              </c-button>
+              </button>
             </div>
 
             <div class="form-field">
@@ -855,13 +870,14 @@
             </div>
 
             <div class="form-actions">
-              <c-button
+              <button
                 @click="submitForm"
                 :disabled="!formValid"
                 aria-describedby="submit-status"
+                class="form-submit-button"
               >
                 Soumettre
-              </c-button>
+              </button>
               <span id="submit-status" class="sr-only" aria-live="polite">
                 {{ submitStatus }}
               </span>
@@ -975,7 +991,7 @@ function focusPrevAccordionHeader(currentIndex) {
 }
 
 function focusAccordionHeader(index) {
-  const header = document.getElementById(`accordion-header-${index}`)
+  const header = document.getElementById(`accordion-button-${index}`)
   if (header) header.focus()
 }
 
@@ -1276,13 +1292,16 @@ header {
 
 h1 {
   font-size: 2.5rem;
+  font-weight: 700;
   color: var(--color-text);
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .lead {
   font-size: 1.25rem;
   color: var(--color-text-secondary);
+  line-height: 1.6;
 }
 
 /* Accordion styles */
@@ -1290,7 +1309,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1300,7 +1319,7 @@ h1 {
 
 .accordion-item {
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   margin-bottom: 0.5rem;
   overflow: hidden;
 }
@@ -1313,6 +1332,7 @@ h1 {
   width: 100%;
   padding: 1rem 1.5rem;
   background: var(--color-bg-secondary);
+  color: var(--color-text);
   border: none;
   cursor: pointer;
   display: flex;
@@ -1359,7 +1379,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -1373,7 +1393,7 @@ h1 {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   font-weight: 500;
   display: flex;
@@ -1398,7 +1418,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10;
   margin-top: 0.25rem;
@@ -1430,11 +1450,23 @@ h1 {
 }
 
 .dropdown-item:first-child {
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: 0.625rem 0.5rem 0 0;
 }
 
 .dropdown-item:last-child {
   border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.dropdown-good {
+  position: relative;
+}
+
+.dropdown-popin {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  margin-top: 0.25rem;
 }
 
 /* Table styles */
@@ -1442,7 +1474,7 @@ h1 {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   overflow-x: auto;
 }
@@ -1500,7 +1532,7 @@ h1 {
 
 .status {
   padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -1524,6 +1556,29 @@ h1 {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   font-style: italic;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.status-actif {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.status-badge.status-inactif {
+  background: var(--color-text-secondary);
+  color: white;
+}
+
+.status-badge.status-suspendu {
+  background: var(--color-error-light);
+  color: var(--color-error);
 }
 
 .sr-only {
@@ -1562,7 +1617,7 @@ h1 {
   padding: 1.5rem;
   background: var(--color-bg);
   color: var(--color-text);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   min-height: 300px;
 }
 
@@ -1586,7 +1641,7 @@ h1 {
 .live-controls select {
   padding: 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   background: var(--color-bg);
   color: var(--color-text);
 }
@@ -1596,7 +1651,7 @@ h1 {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -1615,13 +1670,13 @@ h1 {
   padding: 1rem;
   background: var(--color-bg-secondary);
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .live-region-polite,
 .live-region-assertive {
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   margin-bottom: 0.5rem;
   min-height: 50px;
 }
@@ -1645,7 +1700,7 @@ h1 {
 .live-status {
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   margin-top: 1rem;
 }
 
@@ -1668,7 +1723,7 @@ h1 {
   padding: 1.5rem;
   background: var(--color-bg);
   color: var(--color-text);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .icon-buttons-demo h4 {
@@ -1695,8 +1750,9 @@ h1 {
   height: 48px;
   padding: 0;
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   background: var(--color-bg);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -1705,8 +1761,9 @@ h1 {
 }
 
 .icon-button:hover {
-  background: var(--color-primary-light);
-  border-color: var(--color-text);
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
   transform: translateY(-2px);
 }
 
@@ -1725,8 +1782,9 @@ h1 {
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   background: var(--color-bg);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s;
   font-weight: 500;
@@ -1735,7 +1793,7 @@ h1 {
 .text-icon-button:hover {
   background: var(--color-primary);
   color: white;
-  border-color: var(--color-text);
+  border-color: var(--color-primary);
 }
 
 .text-icon-button .icon {
@@ -1750,7 +1808,7 @@ h1 {
   margin-bottom: 1.5rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .button-example h5 {
@@ -1763,7 +1821,7 @@ h1 {
   margin-top: 1.5rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .problems-list h5,
@@ -1783,11 +1841,35 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
-/* Section titles - all h2 white */
+/* Section titles */
 .section-title,
 h2 {
-  color: white !important;
+  color: var(--color-text);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+h3 {
+  color: var(--color-text);
+  font-size: 1.3rem;
+  font-weight: 600;
   margin-bottom: 1rem;
+}
+
+h4 {
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+h5 {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 /* ARIA Introduction Section */
@@ -1795,12 +1877,19 @@ h2 {
   margin-bottom: 3rem;
   padding: 2rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .aria-intro p {
   line-height: 1.6;
   margin-bottom: 1.5rem;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.aria-intro strong {
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 .aria-principles {
@@ -1813,7 +1902,7 @@ h2 {
 .principle-card {
   padding: 1.5rem;
   background: var(--color-bg);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 2px solid var(--color-border);
 }
 
@@ -1821,49 +1910,26 @@ h2 {
   color: var(--color-text);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .principle-card p {
   margin-bottom: 1rem;
   font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
 }
 
 .principle-card code {
   display: block;
-  padding: 0.5rem;
-  background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
-  font-family: monospace;
-}
-
-/* ARIA code examples with better contrast */
-.aria-example {
-  display: inline-block;
   padding: 0.5rem 0.75rem;
   background: #2d3748;
-  border-radius: 0.25rem;
-  font-family: 'Monaco', 'Courier New', monospace;
-}
-
-.aria-example .attr {
   color: #93c5fd;
+  border-radius: 0.625rem;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
 }
 
-.aria-example .value {
-  color: #86efac;
-}
-
-.aria-example.bad-example {
-  background: #7f1d1d;
-}
-
-.aria-example.bad-example .attr {
-  color: #fca5a5;
-}
-
-.aria-example.bad-example .value {
-  color: #fbbf24;
-}
 
 /* Inline code */
 .inline-code,
@@ -1872,7 +1938,7 @@ code.inline-code {
   padding: 0.2rem 0.4rem;
   background: #374151;
   color: #93c5fd;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-family: monospace;
   font-size: 0.9em;
 }
@@ -1881,7 +1947,7 @@ code.inline-code {
   margin-top: 2rem;
   padding: 1.5rem;
   background: var(--color-warning-light);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border-left: 4px solid var(--color-warning);
 }
 
@@ -1897,10 +1963,11 @@ code.inline-code {
 .aria-golden-rules li {
   margin-bottom: 0.75rem;
   line-height: 1.5;
+  color: var(--color-text);
 }
 
 .aria-golden-rules strong.rule-number {
-  color: white;
+  color: var(--color-text);
   font-weight: bold;
 }
 
@@ -1909,7 +1976,13 @@ code.inline-code {
   margin-bottom: 3rem;
   padding: 2rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
+}
+
+.tabindex-section > p {
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .tabindex-values {
@@ -1922,7 +1995,7 @@ code.inline-code {
 .tabindex-card {
   padding: 1.5rem;
   background: var(--color-bg);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 2px solid var(--color-border);
 }
 
@@ -1935,6 +2008,7 @@ code.inline-code {
   color: var(--color-text);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .tabindex-card.bad h3 {
@@ -1944,13 +2018,15 @@ code.inline-code {
 .tabindex-card p {
   margin-bottom: 1rem;
   font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
 }
 
 .tabindex-best-practices {
   margin-top: 2rem;
   padding: 1.5rem;
   background: var(--color-info-light);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border-left: 4px solid var(--color-info);
 }
 
@@ -1965,13 +2041,15 @@ code.inline-code {
 
 .tabindex-best-practices li {
   margin-bottom: 0.5rem;
+  color: var(--color-text);
+  line-height: 1.5;
 }
 
 /* Form ARIA Demo Styles */
 .form-aria-demo {
   padding: 1.5rem;
   background: var(--color-bg);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .form-aria-demo h4 {
@@ -1982,7 +2060,7 @@ code.inline-code {
 .code-block {
   margin: 1.5rem 0;
   background: #1e1e1e;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   overflow-x: auto;
 }
@@ -2013,7 +2091,7 @@ code.inline-code {
   width: 100%;
   padding: 0.75rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 1rem;
 }
 
@@ -2042,7 +2120,7 @@ code.inline-code {
   padding: 0.5rem;
   background: var(--color-error-light);
   color: var(--color-error);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
 }
 
@@ -2052,7 +2130,7 @@ code.inline-code {
   border: 2px solid var(--color-primary);
   background: var(--color-primary);
   color: white;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   font-size: 1rem;
 }
@@ -2080,7 +2158,7 @@ code.inline-code {
 
 fieldset {
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -2095,11 +2173,37 @@ legend {
   margin-top: 2rem;
 }
 
+.form-submit-button {
+  padding: 0.75rem 2rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-submit-button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.form-submit-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.form-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .aria-attributes-list {
   margin-top: 2rem;
   padding: 1.5rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .aria-attributes-list h5 {
@@ -2128,7 +2232,7 @@ legend {
 .aria-attributes-list code {
   background: var(--color-bg);
   padding: 0.2rem 0.4rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-family: monospace;
   color: var(--color-text);
 }
@@ -2138,7 +2242,7 @@ legend {
   margin-top: 2rem;
   padding: 2rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .focus-demo-grid {
@@ -2151,13 +2255,13 @@ legend {
 .focus-demo-section {
   padding: 1.5rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   background: var(--color-bg);
 }
 
 .focus-demo-section h4 {
   margin-bottom: 1rem;
-  color: white;
+  color: var(--color-text);
 }
 
 .demo-button,
@@ -2167,7 +2271,7 @@ legend {
   margin: 0.5rem;
   padding: 0.75rem 1rem;
   border: 2px solid var(--color-primary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s;
@@ -2208,20 +2312,21 @@ legend {
 }
 
 .custom-menuitem {
-  background: var(--color-warning);
+  background: #9d5f00;
   color: white;
-  border-color: var(--color-warning);
+  border-color: #9d5f00;
 }
 
 .custom-menuitem:hover {
-  background: var(--color-warning-dark);
+  background: #7a4a00;
+  color: white;
 }
 
 .demo-input {
   margin: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   width: auto;
   max-width: 200px;
 }
@@ -2253,7 +2358,7 @@ legend {
   margin: 0.5rem;
   padding: 0.5rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   color: var(--color-text-secondary);
 }
 
@@ -2272,7 +2377,7 @@ legend {
   background: var(--color-warning-light);
   color: var(--color-warning);
   border: 2px solid var(--color-warning);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   transition: all 0.2s;
 }
 
@@ -2285,7 +2390,7 @@ legend {
   margin-top: 2rem;
   padding: 1.5rem;
   background: var(--color-info-light);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border-left: 4px solid var(--color-info);
 }
 
@@ -2308,7 +2413,7 @@ legend {
   padding: 0.2rem 0.4rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-family: monospace;
   font-size: 0.9em;
   font-weight: bold;

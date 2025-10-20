@@ -189,7 +189,7 @@ onUnmounted(() => {
 .example-toggle {
   margin-bottom: 2rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   overflow: hidden;
 }
 
@@ -231,7 +231,7 @@ onUnmounted(() => {
   height: 32px;
   background: transparent;
   border: 1px solid var(--color-border);
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.2s;
@@ -268,7 +268,7 @@ onUnmounted(() => {
   margin-top: 4px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   min-width: 180px;
@@ -283,7 +283,7 @@ onUnmounted(() => {
   padding: 0.5rem 0.75rem;
   background: transparent;
   border: none;
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   text-align: left;
   color: var(--color-text);
   font-size: 0.875rem;

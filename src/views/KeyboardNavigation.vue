@@ -276,7 +276,7 @@ function handleKeydown(e) {
     background: var(--color-primary);
     color: white;
     text-decoration: none;
-    border-radius: 0.25rem;
+    border-radius: 0.625rem;
   }
 
   .skip-link:focus {
@@ -604,13 +604,13 @@ function handleMenuKeydown(event) {
 }
 
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -626,7 +626,7 @@ h1 {
   gap: 1rem;
   background: var(--color-bg-secondary);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   margin-bottom: 2rem;
 }
 
@@ -648,7 +648,7 @@ kbd {
   background: var(--color-bg);
   color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -657,7 +657,7 @@ kbd {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -674,7 +674,7 @@ kbd {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-decoration: none;
 }
 
@@ -685,7 +685,7 @@ kbd {
 .input-no-focus {
   padding: 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .input-no-focus:focus {
@@ -698,7 +698,7 @@ kbd {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   text-decoration: none;
 }
 
@@ -710,7 +710,7 @@ kbd {
 .input-good-focus {
   padding: 0.75rem;
   border: 2px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .input-good-focus:focus-visible {
@@ -723,7 +723,7 @@ kbd {
 .skip-demo {
   background: var(--color-bg);
   color: var(--color-text);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
   overflow: hidden;
 }
@@ -741,7 +741,7 @@ kbd {
   background: var(--color-primary);
   color: white;
   text-decoration: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   transition: top 0.2s;
 }
 
@@ -774,7 +774,7 @@ kbd {
   padding: 0.5rem;
   text-decoration: none;
   color: var(--color-primary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .demo-nav a:hover {
@@ -795,7 +795,7 @@ kbd {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 }
 
@@ -815,7 +815,7 @@ kbd {
 .modal-content-bad, .modal-content-good {
   background: var(--color-bg);
   color: var(--color-text);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
@@ -839,7 +839,7 @@ kbd {
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.25rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .close-btn:focus-visible {
@@ -852,7 +852,7 @@ kbd {
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.25rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   color: var(--color-text);
 }
 
@@ -872,7 +872,7 @@ kbd {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   margin-top: 1rem;
 }
 
@@ -886,7 +886,7 @@ kbd {
 .modal-footer button {
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 }
 
@@ -934,7 +934,7 @@ kbd {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -944,14 +944,14 @@ kbd {
   gap: 0.25rem;
   margin: 1rem 0;
   background: var(--color-bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 0.5rem;
 }
 
 .menu-item-bad, .menu-item-good {
   padding: 0.75rem 1rem;
   cursor: pointer;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   transition: background-color 0.2s;
 }
 
@@ -987,7 +987,7 @@ kbd {
 .code-block {
   background: #1e1e1e;
   color: #e0e0e0;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   margin-top: 1rem;
   overflow-x: auto;

@@ -666,7 +666,7 @@ h1 {
   background: var(--color-bg-secondary);
   color: var(--color-text);
   border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -678,7 +678,7 @@ h1 {
   width: 200px;
   height: 150px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   margin-bottom: 1rem;
 }
 
@@ -708,7 +708,7 @@ h1 {
   padding: 0.75rem;
   background: var(--color-success-light);
   border: 1px solid var(--color-success);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   color: var(--color-success-dark);
   margin-top: 0.5rem;
 }
@@ -741,7 +741,7 @@ h1 {
   width: 80px;
   height: 60px;
   object-fit: cover;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   cursor: pointer;
   border: 2px solid transparent;
 }
@@ -753,7 +753,7 @@ h1 {
 .thumbnail-btn {
   padding: 0;
   border: 2px solid transparent;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   background: none;
   cursor: pointer;
 }
@@ -762,7 +762,7 @@ h1 {
   width: 80px;
   height: 60px;
   object-fit: cover;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   display: block;
 }
 
@@ -785,7 +785,7 @@ h1 {
   max-width: 400px;
   height: 300px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid var(--color-border);
 }
 
@@ -793,7 +793,7 @@ h1 {
   margin-top: 1rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -817,7 +817,7 @@ h1 {
   bottom: 0;
   background: var(--color-bg-secondary);
   border: 2px dashed var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -830,7 +830,7 @@ h1 {
   margin-top: 1rem;
   padding: 1rem;
   background: var(--color-info-light);
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
 }
 
@@ -877,7 +877,7 @@ h1 {
 .code-block {
   background: #1e1e1e;
   color: #e0e0e0;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   padding: 1rem;
   margin-top: 1rem;
   overflow-x: auto;

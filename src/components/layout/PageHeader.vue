@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const props = defineProps({
@@ -65,14 +65,6 @@ const currentPage = computed(() => {
 
 const headingId = computed(() => {
   return `page-heading-${route.path.replace(/\//g, '-') || 'home'}`
-})
-
-// Focus management on route change
-onMounted(() => {
-  const heading = document.getElementById(headingId.value)
-  if (heading) {
-    heading.focus()
-  }
 })
 </script>
 
@@ -112,7 +104,7 @@ onMounted(() => {
   color: var(--color-primary);
   text-decoration: none;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -153,7 +145,7 @@ onMounted(() => {
 .page-title:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 4px;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
 }
 
 .page-description {
