@@ -370,6 +370,7 @@ onUnmounted(() => {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: 0;
   }
 
   .dropdown-content {
@@ -385,6 +386,19 @@ onUnmounted(() => {
   .bad-example {
     border-right: none;
     border-bottom: 2px solid var(--color-border);
+  }
+
+  .example-content {
+    padding: 0;
+  }
+
+  .card.example {
+    padding: 0;
+  }
+
+  .example-label {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 }
 

@@ -494,8 +494,8 @@
           </form>
         </div>
 
-        <div class="code-block" data-no-highlight="true">
-            <pre><code data-highlighted="true">&lt;!-- ✅ Bon : Groupes logiques avec aria-labelledby --&gt;
+        <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : Groupes logiques avec aria-labelledby --&gt;
 &lt;form&gt;
   &lt;h4&gt;Préférences de contact&lt;/h4&gt;
 
@@ -1355,7 +1355,7 @@ fieldset legend {
 .form-fieldset-good h5 {
   font-weight: 600;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--color-text);
   font-size: 1.1rem;
 }
 

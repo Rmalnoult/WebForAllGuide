@@ -244,12 +244,12 @@ watch(() => route.path, (newPath) => {
   opacity: 0.8;
 }
 
-/* Mobile burger button */
+/* Mobile burger button - stays fixed while scrolling */
 .burger-button {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  z-index: 1002;
+  z-index: 1002; /* Above sidebar (1000) and backdrop (999) */
   display: none;
   width: 3rem;
   height: 3rem;
