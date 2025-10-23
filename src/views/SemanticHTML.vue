@@ -328,7 +328,7 @@ function toggleModal() {
 
 <style scoped>
 .semantic-html {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 

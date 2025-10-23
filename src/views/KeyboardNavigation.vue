@@ -599,7 +599,7 @@ function handleMenuKeydown(event) {
 
 <style scoped>
 .keyboard-navigation {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 

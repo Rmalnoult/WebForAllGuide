@@ -17,8 +17,10 @@
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxhcHRvcCBNYWNCb29rPC90ZXh0Pgo8L3N2Zz4=" alt="image" />
             <h3>MacBook Pro 16"</h3>
             <p class="price">2 499 €</p>
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMkw5IDlINUwxMCAxNEwyMCA5SDE2TDEzIDJIMTJaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPgo=" alt="star.png" />
-            <span>4.8/5 (127 avis)</span>
+            <div class="rating">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMi41TDE0LjA5IDguMjZMMjAuMTggOS4yN0wxNi4wOSAxMy4xNEwxNy4xOCAxOS4xOEwxMiAxNi4yN0w2LjgyIDE5LjE4TDcuOTEgMTMuMTRMMy44MiA5LjI3TDkuOTEgOC4yNkwxMiAyLjVaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPg==" alt="star.png" />
+              <span>4.8/5 (127 avis)</span>
+            </div>
           </article>
 
           <div class="notification">
@@ -46,8 +48,10 @@
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxhcHRvcCBNYWNCb29rPC90ZXh0Pgo8L3N2Zz4=" alt="MacBook Pro 16 pouces, vue de face, écran ouvert montrant l'interface macOS" />
             <h3>MacBook Pro 16"</h3>
             <p class="price">2 499 €</p>
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMkw5IDlINUwxMCAxNEwyMCA5SDE2TDEzIDJIMTJaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPgo=" alt="" />
-            <span><span class="sr-only">Note de </span>4.8/5 <span class="sr-only">étoiles, basée sur </span>(127 avis)</span>
+            <div class="rating">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMi41TDE0LjA5IDguMjZMMjAuMTggOS4yN0wxNi4wOSAxMy4xNEwxNy4xOCAxOS4xOEwxMiAxNi4yN0w2LjgyIDE5LjE4TDcuOTEgMTMuMTRMMy44MiA5LjI3TDkuOTEgOC4yNkwxMiAyLjVaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPg==" alt="" />
+              <span><span class="sr-only">Note de </span>4.8/5 <span class="sr-only">étoiles, basée sur </span>(127 avis)</span>
+            </div>
           </article>
 
           <div class="notification">
@@ -77,118 +81,6 @@
 - Images informatives : alt descriptif du contenu/fonction
 - Images décoratives : alt="" (vide)
 - Éviter les mots comme "image", "photo", "icône" --&gt;</code></pre>
-        </div>
-      </template>
-
-    </ExampleToggle>
-
-    <ExampleToggle
-      title="Galerie d'images accessible"
-      explanation="Une galerie d'images doit permettre la navigation au clavier et fournir des descriptions contextuelles pour chaque image."
-    >
-      <template #bad>
-        <div class="gallery-demo">
-          <h3>Galerie produit</h3>
-          <div class="gallery-bad">
-            <div class="thumbnails-bad">
-              <img
-                v-for="(image, index) in galleryImages"
-                :key="index"
-                :src="image.thumb"
-                @click="selectedBadImage = index"
-                :class="{ active: selectedBadImage === index }"
-              />
-            </div>
-            <div class="main-image-bad">
-              <img :src="galleryImages[selectedBadImage].full" />
-            </div>
-          </div>
-        </div>
-
-        <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais : galerie non accessible au clavier --&gt;
-&lt;div class="thumbnails"&gt;
-  &lt;img v-for="image in images"
-       :src="image.thumb"
-       @click="selectImage(index)"
-       :class="{ active: selected === index }" /&gt;
-&lt;/div&gt;
-&lt;div class="main-image"&gt;
-  &lt;img :src="images[selected].full" /&gt;
-&lt;/div&gt;
-
-&lt;!-- Problèmes :
-- Pas de navigation au clavier
-- Pas de rôles ARIA
-- Images sans descriptions alternatives
-- Pas de focus management --&gt;</code></pre>
-        </div>
-      </template>
-
-      <template #good>
-        <div class="gallery-demo">
-          <h3>Galerie produit</h3>
-          <div class="gallery-good">
-            <div class="thumbnails-good" role="tablist" aria-label="Images du produit">
-              <button
-                v-for="(image, index) in galleryImages"
-                :key="index"
-                :id="`tab-${index}`"
-                role="tab"
-                :aria-selected="selectedGoodImage === index"
-                :aria-controls="`panel-${index}`"
-                :tabindex="selectedGoodImage === index ? 0 : -1"
-                @click="selectGoodImage(index)"
-                @keydown="handleGalleryKeydown($event, index)"
-                class="thumbnail-btn"
-                :class="{ active: selectedGoodImage === index }"
-              >
-                <img :src="image.thumb" :alt="`${image.alt} - Miniature`" />
-              </button>
-            </div>
-            <div class="main-image-good">
-              <div
-                :id="`panel-${selectedGoodImage}`"
-                role="tabpanel"
-                :aria-labelledby="`tab-${selectedGoodImage}`"
-              >
-                <img
-                  :src="galleryImages[selectedGoodImage].full"
-                  :alt="galleryImages[selectedGoodImage].alt"
-                />
-                <p class="image-description">{{ galleryImages[selectedGoodImage].description }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon : galerie accessible avec navigation clavier --&gt;
-&lt;div role="tablist" aria-label="Images du produit"&gt;
-  &lt;button v-for="(image, index) in images"
-          :id="`tab-${index}`"
-          role="tab"
-          :aria-selected="selected === index"
-          :aria-controls="`panel-${index}`"
-          :tabindex="selected === index ? 0 : -1"
-          @click="selectImage(index)"
-          @keydown="handleKeydown($event, index)"&gt;
-    &lt;img :src="image.thumb" :alt="`${image.alt} - Miniature`" /&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-
-&lt;div :id="`panel-${selected}`"
-     role="tabpanel"
-     :aria-labelledby="`tab-${selected}`"&gt;
-  &lt;img :src="images[selected].full" :alt="images[selected].alt" /&gt;
-  &lt;p&gt;&#123;&#123; images[selected].description &#125;&#125;&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- Bonnes pratiques :
-- Pattern tablist/tab/tabpanel ARIA
-- Navigation avec flèches, Home, End
-- Focus management avec tabindex
-- Descriptions détaillées pour chaque image --&gt;</code></pre>
         </div>
       </template>
 
@@ -568,73 +460,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 
 // Initialize syntax highlighting
 useSyntaxHighlight()
-
-// Gallery states
-const selectedBadImage = ref(0)
-const selectedGoodImage = ref(0)
-
-const galleryImages = [
-  {
-    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZhY2U8L3RleHQ+Cjwvc3ZnPg==",
-    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgRmFjZTwvdGV4dD4KPC9zdmc+",
-    alt: "MacBook Pro vue de face, écran fermé",
-    description: "Vue frontale du MacBook Pro 16 pouces avec l'écran fermé, montrant le design épuré en aluminium."
-  },
-  {
-    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk9wZW48L3RleHQ+Cjwvc3ZnPg==",
-    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgT3BlbjwvdGV4dD4KPC9zdmc+",
-    alt: "MacBook Pro ouvert montrant l'écran et le clavier",
-    description: "MacBook Pro ouvert à 90 degrés, écran allumé affichant le bureau macOS, clavier et trackpad visibles."
-  },
-  {
-    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNvdGU8L3RleHQ+Cjwvc3ZnPg==",
-    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgQ290ZTwvdGV4dD4KPC9zdmc+",
-    alt: "MacBook Pro vue de côté montrant l'épaisseur",
-    description: "Vue latérale du MacBook Pro fermé, mettant en évidence son profil fin et ses ports."
-  }
-]
-
-function selectGoodImage(index) {
-  selectedGoodImage.value = index
-}
-
-function handleGalleryKeydown(event, index) {
-  switch (event.key) {
-    case 'ArrowLeft':
-      event.preventDefault()
-      const prevIndex = index === 0 ? galleryImages.length - 1 : index - 1
-      selectGoodImage(prevIndex)
-      document.getElementById(`tab-${prevIndex}`).focus()
-      break
-    case 'ArrowRight':
-      event.preventDefault()
-      const nextIndex = (index + 1) % galleryImages.length
-      selectGoodImage(nextIndex)
-      document.getElementById(`tab-${nextIndex}`).focus()
-      break
-    case 'Home':
-      event.preventDefault()
-      selectGoodImage(0)
-      document.getElementById('tab-0').focus()
-      break
-    case 'End':
-      event.preventDefault()
-      selectGoodImage(galleryImages.length - 1)
-      document.getElementById(`tab-${galleryImages.length - 1}`).focus()
-      break
-  }
-}
 </script>
 
 <style scoped>
 .media-accessible {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -694,11 +529,18 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
-.product-card img:nth-child(4) {
-  width: 16px;
-  height: 16px;
-  display: inline;
-  margin-right: 0.5rem;
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1;
+}
+
+.rating img {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0;
+  margin-bottom: 0 !important;
 }
 
 .notification {
@@ -716,86 +558,6 @@ h1 {
 .notification img {
   width: 20px;
   height: 20px;
-}
-
-/* Gallery demo styles */
-.gallery-demo {
-  /* Remove card styles to avoid nested cards */
-  color: var(--color-text);
-}
-
-.gallery-bad, .gallery-good {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.thumbnails-bad, .thumbnails-good {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.thumbnails-bad img {
-  width: 80px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  border: 2px solid transparent;
-}
-
-.thumbnails-bad img.active {
-  border-color: var(--color-text);
-}
-
-.thumbnail-btn {
-  padding: 0;
-  border: 2px solid transparent;
-  border-radius: 0.625rem;
-  background: none;
-  cursor: pointer;
-}
-
-.thumbnail-btn img {
-  width: 80px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 0.625rem;
-  display: block;
-}
-
-.thumbnail-btn.active {
-  border-color: var(--color-text);
-}
-
-.thumbnail-btn:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-.main-image-bad, .main-image-good {
-  display: flex;
-  flex-direction: column;
-}
-
-.main-image-bad img, .main-image-good img {
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 0.625rem;
-  border: 1px solid var(--color-border);
-}
-
-.image-description {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: var(--color-bg-secondary);
-  border-radius: 0.625rem;
-  font-size: 0.9rem;
-  line-height: 1.4;
 }
 
 /* Video demo styles */
@@ -897,15 +659,6 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  .gallery-bad, .gallery-good {
-    grid-template-columns: 1fr;
-  }
-
-  .thumbnails-bad, .thumbnails-good {
-    flex-direction: row;
-    justify-content: center;
-  }
-
   .chart-data {
     font-size: 0.8rem;
   }

@@ -3,7 +3,7 @@
     <header>
       <h1>ARIA</h1>
       <p class="lead">
-        Créer des interfaces interactives accessibles avec les bonnes attributions ARIA
+        Enrichir la sémantique des composants complexes pour les rendre accessibles
       </p>
     </header>
 
@@ -34,14 +34,10 @@
       </div>
 
       <div class="aria-golden-rules">
-        <h3>⚠️ Les 5 règles d'or d'ARIA</h3>
-        <ol>
-          <li><strong class="rule-number">Première règle :</strong> Ne pas utiliser ARIA si vous pouvez utiliser HTML natif</li>
-          <li><strong class="rule-number">Deuxième règle :</strong> Ne pas changer la sémantique native sauf si nécessaire</li>
-          <li><strong class="rule-number">Troisième règle :</strong> Tous les éléments ARIA doivent être utilisables au clavier</li>
-          <li><strong class="rule-number">Quatrième règle :</strong> Ne pas cacher d'éléments focusables avec aria-hidden</li>
-          <li><strong class="rule-number">Cinquième règle :</strong> Tous les éléments interactifs doivent avoir un nom accessible</li>
-        </ol>
+        <h3>⚠️ Règle d'or d'ARIA</h3>
+        <p class="golden-rule-text">
+          <strong>Ne pas utiliser ARIA si vous pouvez utiliser HTML natif</strong>
+        </p>
       </div>
     </section>
 
@@ -132,6 +128,7 @@
           <div class="code-block">
             <pre><code>&lt;!-- Good: Complete ARIA with keyboard navigation --&gt;
 &lt;button
+  id="accordion-button-1"
   aria-expanded="false"
   aria-controls="panel-1"
   @click="toggle"
@@ -142,7 +139,7 @@
 &lt;div
   id="panel-1"
   role="region"
-  aria-labelledby="button-1"
+  aria-labelledby="accordion-button-1"
   :hidden="!open"
 &gt;
   Content
@@ -381,6 +378,116 @@
           </div>
         </div>
       </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Galerie d'images accessible"
+      explanation="Une galerie d'images doit permettre la navigation au clavier et fournir des descriptions contextuelles pour chaque image. Le pattern ARIA tablist/tab/tabpanel est parfait pour ce cas d'usage."
+    >
+      <template #bad>
+        <div class="gallery-demo">
+          <h4>Galerie produit</h4>
+          <div class="gallery-bad">
+            <div class="thumbnails-bad">
+              <img
+                v-for="(image, index) in galleryImages"
+                :key="index"
+                :src="image.thumb"
+                @click="selectedBadImage = index"
+                :class="{ active: selectedBadImage === index }"
+              />
+            </div>
+            <div class="main-image-bad">
+              <img :src="galleryImages[selectedBadImage].full" />
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- ❌ Mauvais : galerie non accessible au clavier --&gt;
+&lt;div class="thumbnails"&gt;
+  &lt;img v-for="image in images"
+       :src="image.thumb"
+       @click="selectImage(index)"
+       :class="{ active: selected === index }" /&gt;
+&lt;/div&gt;
+&lt;div class="main-image"&gt;
+  &lt;img :src="images[selected].full" /&gt;
+&lt;/div&gt;
+
+&lt;!-- Problèmes :
+- Pas de navigation au clavier
+- Pas de rôles ARIA
+- Images sans descriptions alternatives
+- Pas de focus management --&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="gallery-demo">
+          <h4>Galerie produit</h4>
+          <div class="gallery-good">
+            <div class="thumbnails-good" role="tablist" aria-label="Images du produit">
+              <button
+                v-for="(image, index) in galleryImages"
+                :key="index"
+                :id="`gallery-tab-${index}`"
+                role="tab"
+                :aria-selected="selectedGoodImage === index"
+                :aria-controls="`gallery-panel-${index}`"
+                :tabindex="selectedGoodImage === index ? 0 : -1"
+                @click="selectGoodImage(index)"
+                @keydown="handleGalleryKeydown($event, index)"
+                class="thumbnail-btn"
+                :class="{ active: selectedGoodImage === index }"
+              >
+                <img :src="image.thumb" :alt="`${image.alt} - Miniature`" />
+              </button>
+            </div>
+            <div class="main-image-good">
+              <div
+                :id="`gallery-panel-${selectedGoodImage}`"
+                role="tabpanel"
+                :aria-labelledby="`gallery-tab-${selectedGoodImage}`"
+              >
+                <img
+                  :src="galleryImages[selectedGoodImage].full"
+                  :alt="galleryImages[selectedGoodImage].alt"
+                />
+                <p class="image-description">{{ galleryImages[selectedGoodImage].description }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : galerie accessible avec navigation clavier --&gt;
+&lt;div role="tablist" aria-label="Images du produit"&gt;
+  &lt;button v-for="(image, index) in images"
+          :id="`tab-${index}`"
+          role="tab"
+          :aria-selected="selected === index"
+          :aria-controls="`panel-${index}`"
+          :tabindex="selected === index ? 0 : -1"
+          @click="selectImage(index)"
+          @keydown="handleKeydown($event, index)"&gt;
+    &lt;img :src="image.thumb" :alt="`${image.alt} - Miniature`" /&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div :id="`panel-${selected}`"
+     role="tabpanel"
+     :aria-labelledby="`tab-${selected}`"&gt;
+  &lt;img :src="images[selected].full" :alt="images[selected].alt" /&gt;
+  &lt;p&gt;&#123;&#123; images[selected].description &#125;&#125;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Bonnes pratiques :
+- Pattern tablist/tab/tabpanel ARIA
+- Navigation avec flèches, Home, End
+- Focus management avec tabindex
+- Descriptions détaillées pour chaque image --&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
     </ExampleToggle>
 
     <ExampleToggle
@@ -1130,6 +1237,31 @@ const assertiveLiveContent = ref('')
 const liveType = ref('polite')
 let liveCounter = 0
 
+// Gallery states
+const selectedBadImage = ref(0)
+const selectedGoodImage = ref(0)
+
+const galleryImages = [
+  {
+    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZhY2U8L3RleHQ+Cjwvc3ZnPg==",
+    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgRmFjZTwvdGV4dD4KPC9zdmc+",
+    alt: "MacBook Pro vue de face, écran fermé",
+    description: "Vue frontale du MacBook Pro 16 pouces avec l'écran fermé, montrant le design épuré en aluminium."
+  },
+  {
+    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk9wZW48L3RleHQ+Cjwvc3ZnPg==",
+    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgT3BlbjwvdGV4dD4KPC9zdmc+",
+    alt: "MacBook Pro ouvert montrant l'écran et le clavier",
+    description: "MacBook Pro ouvert à 90 degrés, écran allumé affichant le bureau macOS, clavier et trackpad visibles."
+  },
+  {
+    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNvdGU8L3RleHQ+Cjwvc3ZnPg==",
+    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgQ290ZTwvdGV4dD4KPC9zdmc+",
+    alt: "MacBook Pro vue de côté montrant l'épaisseur",
+    description: "Vue latérale du MacBook Pro fermé, mettant en évidence son profil fin et ses ports."
+  }
+]
+
 function updateBadLiveContent() {
   liveCounter++
   badLiveContent.value = `Compteur mis à jour : ${liveCounter}`
@@ -1277,11 +1409,43 @@ function focusAlert() {
     }, 2000)
   }
 }
+
+// Gallery functions
+function selectGoodImage(index) {
+  selectedGoodImage.value = index
+}
+
+function handleGalleryKeydown(event, index) {
+  switch (event.key) {
+    case 'ArrowLeft':
+      event.preventDefault()
+      const prevIndex = index === 0 ? galleryImages.length - 1 : index - 1
+      selectGoodImage(prevIndex)
+      document.getElementById(`gallery-tab-${prevIndex}`).focus()
+      break
+    case 'ArrowRight':
+      event.preventDefault()
+      const nextIndex = (index + 1) % galleryImages.length
+      selectGoodImage(nextIndex)
+      document.getElementById(`gallery-tab-${nextIndex}`).focus()
+      break
+    case 'Home':
+      event.preventDefault()
+      selectGoodImage(0)
+      document.getElementById('gallery-tab-0').focus()
+      break
+    case 'End':
+      event.preventDefault()
+      selectGoodImage(galleryImages.length - 1)
+      document.getElementById(`gallery-tab-${galleryImages.length - 1}`).focus()
+      break
+  }
+}
 </script>
 
 <style scoped>
 .aria-components {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -1956,19 +2120,16 @@ code.inline-code {
   margin-bottom: 1rem;
 }
 
-.aria-golden-rules ol {
-  margin-left: 1.5rem;
+.golden-rule-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0;
 }
 
-.aria-golden-rules li {
-  margin-bottom: 0.75rem;
-  line-height: 1.5;
+.golden-rule-text strong {
   color: var(--color-text);
-}
-
-.aria-golden-rules strong.rule-number {
-  color: var(--color-text);
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* Tabindex Section */
@@ -2423,6 +2584,100 @@ legend {
   .focus-demo-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+}
+
+/* Gallery demo styles */
+.gallery-demo {
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+}
+
+.gallery-bad, .gallery-good {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.thumbnails-bad, .thumbnails-good {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.thumbnails-bad img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnails-bad img.active {
+  border-color: var(--color-primary);
+}
+
+.thumbnail-btn {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 0.625rem;
+  background: none;
+  cursor: pointer;
+}
+
+.thumbnail-btn img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  display: block;
+}
+
+.thumbnail-btn.active {
+  border-color: var(--color-primary);
+}
+
+.thumbnail-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.main-image-bad, .main-image-good {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-image-bad img, .main-image-good img {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+}
+
+.image-description {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .gallery-bad, .gallery-good {
+    grid-template-columns: 1fr;
+  }
+
+  .thumbnails-bad, .thumbnails-good {
+    flex-direction: row;
+    justify-content: center;
   }
 }
 </style>

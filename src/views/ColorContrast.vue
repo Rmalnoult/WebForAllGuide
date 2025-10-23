@@ -780,7 +780,7 @@ const goodTheme = ref('light')
 
 <style scoped>
 .color-contrast {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 

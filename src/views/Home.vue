@@ -211,6 +211,26 @@
         <strong>💡 Conseil pro :</strong> Utilisez ces outils en complément, pas en remplacement des tests utilisateurs réels.
         Aucun outil automatique ne peut détecter 100% des problèmes d'accessibilité.
       </div>
+
+      <div class="featured-tool">
+        <div class="tool-card game-card">
+          <div class="tool-header">
+            <span class="tool-icon" aria-hidden="true">🎮</span>
+            <h3>Accessible Game Jam</h3>
+            <span class="featured-badge">Interactif</span>
+          </div>
+          <p class="tool-description">Testez vos connaissances sur l'accessibilité web de manière interactive ! Un jeu pour apprendre en s'amusant.</p>
+          <div class="tool-features">
+            <span class="tool-feature">✓ Quiz interactif</span>
+            <span class="tool-feature">✓ Cas pratiques</span>
+            <span class="tool-feature">✓ Apprentissage ludique</span>
+          </div>
+          <a href="https://accessible-game-jam.com/" class="tool-link game-link" target="_blank" rel="noopener">
+            Jouer maintenant
+            <span aria-hidden="true">🎯</span>
+          </a>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="screen-readers-title">
@@ -320,16 +340,10 @@
 <script setup>
 const quickLinks = [
   {
-    path: '/semantic-html',
-    icon: '📝',
-    title: 'HTML Sémantique',
-    description: 'Structure, titres, boutons vs liens'
-  },
-  {
-    path: '/keyboard-navigation',
-    icon: '⌨️',
-    title: 'Navigation Clavier',
-    description: 'Focus visible, trap, modal accessible'
+    path: '/color-contrast',
+    icon: '🎨',
+    title: 'Contrastes',
+    description: 'WCAG, daltonisme, thèmes'
   },
   {
     path: '/media-accessible',
@@ -338,10 +352,16 @@ const quickLinks = [
     description: 'Alt text, vidéos avec sous-titres'
   },
   {
-    path: '/color-contrast',
-    icon: '🎨',
-    title: 'Contrastes',
-    description: 'WCAG, daltonisme, thèmes'
+    path: '/aria-components',
+    icon: '🔄',
+    title: 'ARIA',
+    description: 'Accordion, toast, tableau triable'
+  },
+  {
+    path: '/keyboard-navigation',
+    icon: '⌨️',
+    title: 'Navigation Clavier',
+    description: 'Focus visible, trap, modal accessible'
   },
   {
     path: '/accessible-forms',
@@ -350,10 +370,10 @@ const quickLinks = [
     description: 'Labels, validation, messages'
   },
   {
-    path: '/aria-components',
-    icon: '🔄',
-    title: 'ARIA',
-    description: 'Accordion, toast, tableau triable'
+    path: '/semantic-html',
+    icon: '📝',
+    title: 'HTML Sémantique',
+    description: 'Structure, titres, boutons vs liens'
   },
   {
     path: '/performance',
@@ -366,7 +386,7 @@ const quickLinks = [
 
 <style scoped>
 .home {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -722,6 +742,44 @@ kbd {
 
 .pro-tip strong {
   color: var(--color-warning-dark);
+}
+
+/* Featured tool section */
+.featured-tool {
+  margin-top: 2rem;
+}
+
+.game-card {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-info-light) 50%, var(--color-success-light) 100%);
+  border: 2px solid var(--color-primary);
+  position: relative;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.featured-badge {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.game-link {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+
+.game-link:hover {
+  background-color: var(--color-primary-dark);
+  color: white;
 }
 
 /* Screen readers section */

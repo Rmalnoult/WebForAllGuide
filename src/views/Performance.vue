@@ -191,21 +191,25 @@
                 <option value="200">200%</option>
               </select>
             </label>
+            <div class="zoom-indicator">
+              📏 Taille du texte : <strong>{{ zoomLevel }}%</strong>
+              <span v-if="zoomLevel >= 150" class="zoom-warning">⚠️ La mise en page s'adapte automatiquement</span>
+            </div>
           </div>
 
           <div class="layout-good" :style="{ fontSize: `${zoomLevel}%` }">
             <h4>Interface adaptative</h4>
-            <div class="flexible-layout">
-              <nav class="sidebar-good" :class="{ collapsed: sidebarCollapsed }">
+            <div class="flexible-layout" :class="{ 'zoom-large': zoomLevel >= 150 }">
+              <nav class="sidebar-good" :class="{ collapsed: sidebarCollapsed || zoomLevel >= 150 }">
                 <button
                   class="sidebar-toggle"
                   @click="sidebarCollapsed = !sidebarCollapsed"
-                  :aria-expanded="!sidebarCollapsed"
+                  :aria-expanded="!sidebarCollapsed && zoomLevel < 150"
                   aria-controls="main-nav"
                 >
-                  {{ sidebarCollapsed ? '☰' : '✕' }}
+                  {{ (sidebarCollapsed || zoomLevel >= 150) ? '☰' : '✕' }}
                 </button>
-                <div id="main-nav" class="nav-content" v-show="!sidebarCollapsed">
+                <div id="main-nav" class="nav-content" v-show="!sidebarCollapsed && zoomLevel < 150">
                   <h5>Menu</h5>
                   <ul>
                     <li><a href="#">Accueil</a></li>
@@ -229,12 +233,12 @@
                 <div class="cards-good">
                   <article class="card-good">
                     <h6>Produit 1</h6>
-                    <p>Description qui s'adapte à la taille</p>
+                    <p>Description adaptative</p>
                     <div class="price-good">19.99€</div>
                   </article>
                   <article class="card-good">
                     <h6>Produit 2</h6>
-                    <p>Description qui s'adapte à la taille</p>
+                    <p>Description adaptative</p>
                     <div class="price-good">24.99€</div>
                   </article>
                 </div>
@@ -463,7 +467,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   width: 100%; /* Fluide */
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 .nav-menu {
@@ -521,32 +525,46 @@ button {
     </ExampleToggle>
 
     <ExampleToggle
-      title="Optimisation des ressources et lazy loading"
-      explanation="Charger les ressources de manière intelligente pour optimiser les performances, surtout sur connexions lentes ou appareils limités."
+      title="Lazy Loading : charger uniquement les ressources visibles"
+      explanation="Le lazy loading (chargement différé) permet de charger les images et ressources uniquement quand l'utilisateur en a besoin, plutôt que tout télécharger d'un coup au chargement de la page."
     >
       <template #bad>
         <div class="loading-demo">
           <div class="interface-bad">
-            <h4>Chargement non optimisé</h4>
+            <h4>❌ Tout charger d'un coup (Eager Loading)</h4>
             <div class="content-example-bad">
-              <p>❌ Problèmes de performance :</p>
-              <ul>
-                <li>🖼️ Images HD chargées immédiatement (5MB chacune)</li>
-                <li>📹 Vidéos préchargées en arrière-plan</li>
-                <li>📦 Bundle JavaScript monolithique (2MB)</li>
-                <li>🔄 Pas de mise en cache</li>
+              <p class="problem-explanation">
+                <strong>Exemple concret :</strong> Un site e-commerce avec 50 produits charge toutes les images immédiatement, même celles en bas de page que l'utilisateur ne verra peut-être jamais.
+              </p>
+
+              <p class="technical-term">
+                <strong>📚 Terme technique :</strong> <em>Eager Loading</em> = chargement immédiat de toutes les ressources
+              </p>
+
+              <ul class="simple-list">
+                <li>📥 <strong>Problème 1 :</strong> 50 images × 200 Ko = 10 Mo téléchargés immédiatement</li>
+                <li>⏱️ <strong>Problème 2 :</strong> Temps d'attente de 8-15 secondes avant de voir la page</li>
+                <li>📱 <strong>Problème 3 :</strong> Consomme inutilement le forfait data mobile</li>
+                <li>🔋 <strong>Problème 4 :</strong> Sollicite le processeur et vide la batterie</li>
               </ul>
-              <div class="loading-simulation">
-                <div class="loading-bar-bad">
-                  <div class="loading-progress" style="width: 100%; background: #dc3545;"></div>
+
+              <div class="visual-example bad">
+                <div class="website-example">
+                  <div class="resource-item loaded">📄 HTML (20 Ko)</div>
+                  <div class="resource-item loaded">🎨 CSS (50 Ko)</div>
+                  <div class="resource-item loaded">⚙️ JavaScript (200 Ko)</div>
+                  <div class="resource-item loaded">🖼️ Image 1 visible (200 Ko)</div>
+                  <div class="resource-item loaded">🖼️ Image 2 visible (200 Ko)</div>
+                  <div class="resource-item loaded unnecessary">🖼️ Image 3 en bas de page (200 Ko)</div>
+                  <div class="resource-item loaded unnecessary">🖼️ Image 4 en bas de page (200 Ko)</div>
+                  <div class="resource-item loaded unnecessary">🖼️ Image 5 en bas de page (200 Ko)</div>
                 </div>
-                <span class="loading-text">Chargement... 15.3 MB / 15.3 MB</span>
-              </div>
-              <div class="resource-list-bad">
-                <div class="resource-item">image1-hd.jpg - 5.2 MB ⏳</div>
-                <div class="resource-item">image2-hd.jpg - 4.8 MB ⏳</div>
-                <div class="resource-item">video-bg.mp4 - 3.1 MB ⏳</div>
-                <div class="resource-item">app.bundle.js - 2.2 MB ⏳</div>
+                <div class="wait-time bad">
+                  ⏱️ Temps de chargement total : <strong>8 secondes</strong>
+                </div>
+                <div class="data-usage bad">
+                  📊 Données consommées : <strong>1.27 Mo</strong> (dont 600 Ko inutiles)
+                </div>
               </div>
             </div>
           </div>
@@ -556,73 +574,91 @@ button {
       <template #good>
         <div class="loading-demo">
           <div class="interface-good">
-            <h4>Chargement optimisé</h4>
+            <h4>✅ Chargement progressif (Lazy Loading + Cache)</h4>
             <div class="content-example-good">
-              <p>✅ Optimisations actives :</p>
-              <ul>
-                <li>🖼️ Images lazy loading avec placeholder (50KB → 500KB)</li>
-                <li>📹 Vidéos chargées à la demande</li>
-                <li>📦 Code splitting et chunks (200KB initial)</li>
-                <li>💾 Service Worker avec cache intelligent</li>
-              </ul>
+              <p class="solution-explanation">
+                <strong>Exemple concret :</strong> Le même site e-commerce charge d'abord le contenu visible, puis les images suivantes uniquement quand l'utilisateur scroll.
+              </p>
 
-              <div class="loading-controls">
-                <label>
+              <p class="technical-term">
+                <strong>📚 Termes techniques :</strong>
+                <em>Lazy Loading</em> = chargement différé •
+                <em>Cache HTTP</em> = mémoire temporaire du navigateur
+              </p>
+
+              <div class="loading-controls-simple">
+                <h5>Testez les optimisations :</h5>
+                <label class="checkbox-card">
                   <input type="checkbox" v-model="lazyLoadImages" @change="updateLoadingStrategy">
-                  Lazy loading des images
+                  <div class="checkbox-content">
+                    <span class="checkbox-icon">👁️</span>
+                    <span class="checkbox-label">
+                      <strong>Lazy Loading activé</strong>
+                      <small>Charge les images au scroll (attribut loading="lazy")</small>
+                    </span>
+                  </div>
                 </label>
-                <label>
+
+                <label class="checkbox-card">
                   <input type="checkbox" v-model="cacheEnabled" @change="updateLoadingStrategy">
-                  Cache activé
-                </label>
-                <label>
-                  Qualité d'image :
-                  <select v-model="imageQuality" @change="updateLoadingStrategy">
-                    <option value="auto">Auto (selon connexion)</option>
-                    <option value="low">Basse (data saver)</option>
-                    <option value="high">Haute</option>
-                  </select>
+                  <div class="checkbox-content">
+                    <span class="checkbox-icon">💾</span>
+                    <span class="checkbox-label">
+                      <strong>Cache HTTP activé</strong>
+                      <small>Stocke en mémoire pour ne pas re-télécharger (Cache-Control)</small>
+                    </span>
+                  </div>
                 </label>
               </div>
 
-              <div class="loading-simulation">
-                <div class="loading-bar-good">
-                  <div class="loading-progress" :style="{ width: loadingProgress + '%', background: '#28a745' }"></div>
+              <div class="visual-example good">
+                <div class="website-example">
+                  <div class="resource-item loaded">📄 HTML (20 Ko) - Chargé</div>
+                  <div class="resource-item loaded">🎨 CSS (50 Ko) - Chargé</div>
+                  <div class="resource-item loaded">⚙️ JavaScript (200 Ko) - Chargé</div>
+                  <div class="resource-item loaded">🖼️ Image 1 visible (200 Ko) - Chargé</div>
+                  <div class="resource-item loaded">🖼️ Image 2 visible (200 Ko) - Chargé</div>
+                  <div class="resource-item" :class="{ 'lazy-loaded': lazyLoadImages }">
+                    🖼️ Image 3 {{ lazyLoadImages ? '(chargée au scroll)' : '(non chargée encore)' }}
+                  </div>
+                  <div class="resource-item" :class="{ 'lazy-loaded': lazyLoadImages }">
+                    🖼️ Image 4 {{ lazyLoadImages ? '(chargée au scroll)' : '(non chargée encore)' }}
+                  </div>
+                  <div class="resource-item" :class="{ cached: cacheEnabled }">
+                    🖼️ Image déjà vue {{ cacheEnabled ? '(en cache, 0 Ko)' : '(à re-télécharger)' }}
+                  </div>
                 </div>
-                <span class="loading-text">{{ loadingProgress < 100 ? `Chargement initial... ${(loadingProgress * 2).toFixed(0)} KB / 200 KB` : 'Prêt - Ressources chargées à la demande' }}</span>
+                <div class="wait-time good">
+                  ⏱️ Temps de chargement initial : <strong>{{ lazyLoadImages ? '2 secondes' : '5 secondes' }}</strong>
+                </div>
+                <div class="data-usage good" v-if="lazyLoadImages || cacheEnabled">
+                  📊 Données économisées : <strong>{{ cacheEnabled && lazyLoadImages ? '600 Ko (47%)' : '200 Ko (16%)' }}</strong>
+                </div>
               </div>
 
-              <div class="resource-list-good">
-                <div class="resource-item" :class="{ loaded: loadingProgress > 25 }">
-                  <span>app.core.js - 50 KB</span>
-                  <span class="status">{{ loadingProgress > 25 ? '✅' : '⏳' }}</span>
-                </div>
-                <div class="resource-item" :class="{ loaded: loadingProgress > 50 }">
-                  <span>styles.critical.css - 15 KB</span>
-                  <span class="status">{{ loadingProgress > 50 ? '✅' : '⏳' }}</span>
-                </div>
-                <div class="resource-item" :class="{ 'lazy-loaded': lazyLoadImages }">
-                  <span>images - {{ lazyLoadImages ? 'Chargées au scroll' : '500 KB' }}</span>
-                  <span class="status">{{ lazyLoadImages ? '⏸️' : '⏳' }}</span>
-                </div>
-                <div class="resource-item cached" v-if="cacheEnabled">
-                  <span>Depuis le cache - 0 KB</span>
-                  <span class="status">⚡</span>
-                </div>
-              </div>
-
-              <div class="performance-metrics">
-                <div class="metric">
-                  <span class="metric-label">First Paint:</span>
-                  <span class="metric-value" :class="{ good: lazyLoadImages }">{{ lazyLoadImages ? '0.8s' : '3.2s' }}</span>
-                </div>
-                <div class="metric">
-                  <span class="metric-label">Interactivité:</span>
-                  <span class="metric-value" :class="{ good: cacheEnabled }">{{ cacheEnabled ? '1.2s' : '4.5s' }}</span>
-                </div>
-                <div class="metric">
-                  <span class="metric-label">Data usage:</span>
-                  <span class="metric-value good">{{ imageQuality === 'low' ? '~200 KB' : imageQuality === 'auto' ? '~500 KB' : '~2 MB' }}</span>
+              <div class="real-world-benefits">
+                <h5>💡 Impact sur l'accessibilité :</h5>
+                <div class="benefit-grid">
+                  <div class="benefit-item">
+                    <span class="benefit-icon">🚀</span>
+                    <strong>Rapidité (FCP)</strong>
+                    <p>First Contentful Paint plus rapide = page visible immédiatement</p>
+                  </div>
+                  <div class="benefit-item">
+                    <span class="benefit-icon">📱</span>
+                    <strong>Données mobiles</strong>
+                    <p>Essentiel pour les utilisateurs avec forfait limité ou réseau lent (3G)</p>
+                  </div>
+                  <div class="benefit-item">
+                    <span class="benefit-icon">🔋</span>
+                    <strong>Batterie</strong>
+                    <p>Moins de transfert réseau = économie d'énergie significative</p>
+                  </div>
+                  <div class="benefit-item">
+                    <span class="benefit-icon">♿</span>
+                    <strong>Vieux appareils</strong>
+                    <p>Moins de ressources à traiter = fonctionne sur matériel ancien</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -631,70 +667,28 @@ button {
       </template>
 
       <div class="code-block">
-        <h5>Code d'exemple</h5>
+        <h5>Pour les développeurs : exemples de code</h5>
         <div class="code-example">
-          <h6>❌ Mauvais : Chargement non optimisé</h6>
-          <pre><code>&lt;!-- HTML qui charge tout immédiatement --&gt;
-&lt;img src="/images/large-image.jpg" alt="Image"&gt;
-&lt;video src="video-3mb.mp4" autoplay preload="auto"&gt;&lt;/video&gt;
+          <h6>❌ Tout charger d'un coup</h6>
+          <pre><code>&lt;!-- Toutes les images se chargent immédiatement --&gt;
+&lt;img src="photo-tres-lourde-5mo.jpg" alt="Photo"&gt;
+&lt;img src="autre-photo-4mo.jpg" alt="Autre photo"&gt;
+&lt;img src="encore-une-3mo.jpg" alt="Encore une photo"&gt;
 
-&lt;!-- JavaScript monolithique --&gt;
-&lt;script src="app-bundle-2mb.js"&gt;&lt;/script&gt;
+&lt;!-- Résultat : 12 Mo à télécharger avant de voir la page ! --&gt;</code></pre>
 
-/* CSS avec ressources lourdes */
-.background {
-  background-image: url('heavy-bg-2mb.jpg');
-}
-
-<!-- Pas de mise en cache -->
-&lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
-
-          <h6>✅ Bon : Chargement optimisé et intelligent</h6>
-          <pre><code>&lt;!-- HTML avec lazy loading --&gt;
-&lt;img src="placeholder-50kb.jpg"
-     data-src="optimized-image-500kb.webp"
-     alt="Image"
+          <h6>✅ Charger intelligemment</h6>
+          <pre><code>&lt;!-- L'attribut loading="lazy" charge l'image seulement quand elle est visible --&gt;
+&lt;img src="photo-optimisee-500ko.webp"
+     alt="Photo"
      loading="lazy"&gt;
 
-&lt;video preload="none" poster="thumbnail.jpg"&gt;
-  &lt;source src="video-compressed.webm" type="video/webm"&gt;
-  &lt;source src="video-compressed.mp4" type="video/mp4"&gt;
-&lt;/video&gt;
+&lt;!-- Les autres images ne se chargeront que si l'utilisateur scroll jusque là --&gt;
+&lt;img src="autre-photo-500ko.webp"
+     alt="Autre photo"
+     loading="lazy"&gt;
 
-&lt;!-- Code splitting et modules --&gt;
-&lt;script type="module"&gt;
-  // Chargement à la demande
-  import('./feature-module.js').then(module => {
-    module.init();
-  });
-&lt;/script&gt;
-
-/* CSS avec media queries pour les ressources */
-@media (min-width: 768px) {
-  .background {
-    background-image: url('bg-optimized.webp');
-  }
-}
-
-&lt;!-- Service Worker pour la mise en cache --&gt;
-&lt;script&gt;
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-&lt;/script&gt;
-
-&lt;!-- Optimisation des ressources critiques --&gt;
-&lt;link rel="preload" href="critical.css" as="style"&gt;
-&lt;link rel="prefetch" href="non-critical.js"&gt;
-
-&lt;!-- Responsive images avec srcset --&gt;
-&lt;img srcset="image-320.webp 320w,
-             image-768.webp 768w,
-             image-1200.webp 1200w"
-     sizes="(max-width: 768px) 100vw, 50vw"
-     src="image-768.webp"
-     alt="Description"
-     loading="lazy"&gt;</code></pre>
+&lt;!-- Résultat : 500 Ko au début, le reste seulement si nécessaire ! --&gt;</code></pre>
         </div>
       </div>
     </ExampleToggle>
@@ -830,7 +824,7 @@ watch(deviceType, (newType) => {
 
 <style scoped>
 .performance {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -1038,6 +1032,11 @@ h1 {
   justify-content: center;
   background: var(--color-bg-secondary);
   font-weight: 500;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.carousel-content .carousel-slide {
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .load-button, .pulse-button {
@@ -1070,7 +1069,9 @@ h1 {
 /* Reduced motion overrides */
 .reduced-motion .card-respectful,
 .reduced-motion .animated-button-good,
-.reduced-motion .spinner-good {
+.reduced-motion .spinner-good,
+.reduced-motion .carousel-content,
+.reduced-motion .carousel-content .carousel-slide {
   transition: none;
   animation: none;
 }
@@ -1108,6 +1109,28 @@ h1 {
   border-radius: 0.625rem;
 }
 
+.zoom-indicator {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--color-bg);
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.zoom-warning {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--color-warning);
+  color: white;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 .layout-bad, .layout-good {
   border: 2px solid var(--color-border);
   border-radius: 0.625rem;
@@ -1117,6 +1140,29 @@ h1 {
 .fixed-layout, .flexible-layout {
   display: flex;
   min-height: 300px;
+}
+
+.flexible-layout.zoom-large {
+  flex-direction: column;
+}
+
+.flexible-layout.zoom-large .sidebar-good {
+  width: 100%;
+  border-right: none;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.flexible-layout.zoom-large .cards-good {
+  grid-template-columns: 1fr;
+}
+
+.flexible-layout.zoom-large .toolbar-good {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.flexible-layout.zoom-large .toolbar-search {
+  max-width: none;
 }
 
 .sidebar-bad, .sidebar-good {
@@ -1722,6 +1768,273 @@ h1 {
   white-space: pre;
 }
 
+/* Lazy loading demo styles */
+.problem-explanation,
+.solution-explanation {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  border-left: 4px solid var(--color-primary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.technical-term {
+  background: var(--color-info-light);
+  padding: 1rem;
+  border-radius: 0.625rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  border-left: 4px solid var(--color-primary);
+}
+
+.technical-term em {
+  color: var(--color-primary);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.simple-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  padding: 1rem;
+}
+
+.simple-list li {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: var(--color-bg);
+  border-radius: 0.625rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.simple-list li:last-child {
+  margin-bottom: 0;
+}
+
+.visual-example {
+  background: var(--color-bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  margin: 1.5rem 0;
+  border: 2px solid var(--color-border);
+}
+
+.visual-example.bad {
+  border-color: var(--color-error);
+}
+
+.visual-example.good {
+  border-color: var(--color-success);
+}
+
+.website-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.resource-item {
+  padding: 0.75rem 1rem;
+  background: var(--color-bg);
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+  border: 2px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.resource-item.loaded {
+  opacity: 1;
+  border-color: var(--color-success);
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.resource-item.loaded.unnecessary {
+  border-color: var(--color-error);
+  background: rgba(220, 53, 69, 0.05);
+}
+
+.resource-item.lazy-loaded {
+  opacity: 1;
+  border-color: var(--color-warning);
+  background: rgba(255, 193, 7, 0.1);
+}
+
+.resource-item.cached {
+  opacity: 1;
+  border-color: var(--color-primary);
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.wait-time {
+  padding: 1rem;
+  border-radius: 0.625rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.wait-time.bad {
+  background: rgba(220, 53, 69, 0.1);
+  border: 2px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.wait-time.good {
+  background: rgba(40, 167, 69, 0.1);
+  border: 2px solid var(--color-success);
+  color: var(--color-success);
+}
+
+.data-usage {
+  padding: 1rem;
+  border-radius: 0.625rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.data-usage.bad {
+  background: rgba(220, 53, 69, 0.1);
+  border: 2px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.data-usage.good {
+  background: rgba(0, 123, 255, 0.1);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.loading-controls-simple {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.loading-controls-simple h5 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.checkbox-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkbox-card:hover {
+  border-color: var(--color-primary);
+  background: rgba(0, 123, 255, 0.05);
+}
+
+.checkbox-card input[type="checkbox"] {
+  margin-right: 1rem;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-card input[type="checkbox"]:checked + .checkbox-content {
+  color: var(--color-primary);
+}
+
+.checkbox-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.checkbox-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.checkbox-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checkbox-label strong {
+  font-size: 1rem;
+  display: block;
+}
+
+.checkbox-label small {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  display: block;
+}
+
+.real-world-benefits {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.real-world-benefits h5 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.benefit-item {
+  background: var(--color-bg);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+
+.benefit-item:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.benefit-item strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.benefit-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
 /* Respect user's reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -1735,6 +2048,14 @@ h1 {
   }
 
   .sidebar-good {
+    transition: none;
+  }
+
+  .benefit-item:hover {
+    transform: none;
+  }
+
+  .resource-item {
     transition: none;
   }
 }

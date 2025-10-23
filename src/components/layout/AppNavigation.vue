@@ -41,13 +41,13 @@ const focusedNavIndex = ref(0)
 
 const navItems = [
   { path: '/', label: 'Accueil', icon: '🏠', description: 'Page d\'accueil et présentation' },
-  { path: '/semantic-html', label: 'HTML Sémantique', icon: '📝', description: 'Structure et éléments HTML' },
-  { path: '/keyboard-navigation', label: 'Navigation Clavier', icon: '⌨️', description: 'Focus et raccourcis' },
-  { path: '/media-accessible', label: 'Images & Médias', icon: '🖼️', description: 'Alt text et sous-titres' },
   { path: '/color-contrast', label: 'Contrastes & Couleurs', icon: '🎨', description: 'Ratios WCAG et daltonisme' },
-  { path: '/accessible-forms', label: 'Formulaires', icon: '📋', description: 'Labels et validation' },
+  { path: '/media-accessible', label: 'Images & Médias', icon: '🖼️', description: 'Alt text et sous-titres' },
+  { path: '/performance', label: 'Performance', icon: '⚡', description: 'Optimisation et adaptabilité' },
+  { path: '/semantic-html', label: 'HTML Sémantique', icon: '📝', description: 'Structure et éléments HTML' },
   { path: '/aria-components', label: 'ARIA', icon: '🔄', description: 'Attributs et composants ARIA' },
-  { path: '/performance', label: 'Performance', icon: '⚡', description: 'Optimisation et adaptabilité' }
+  { path: '/keyboard-navigation', label: 'Navigation Clavier', icon: '⌨️', description: 'Focus et raccourcis' },
+  { path: '/accessible-forms', label: 'Formulaires', icon: '📋', description: 'Labels et validation' }
 ]
 
 const announceNavigation = (label) => {
