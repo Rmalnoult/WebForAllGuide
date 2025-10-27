@@ -275,7 +275,7 @@ watch(() => route.path, (newPath) => {
   border-right: none;
   border-bottom: none;
   border-radius: 0;
-  transition: color 0.2s;
+  transition: color 0.2s, background-color 0.2s;
   cursor: pointer;
   width: 100%;
   text-align: center;
@@ -284,13 +284,15 @@ watch(() => route.path, (newPath) => {
 }
 
 .about-button:hover {
-  color: var(--color-primary);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .about-button:focus {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
-  color: var(--color-primary);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .about-button:focus-visible {

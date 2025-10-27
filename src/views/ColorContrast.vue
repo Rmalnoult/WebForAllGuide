@@ -763,6 +763,101 @@
         </div>
       </template>
     </ExampleToggle>
+
+    <ExampleToggle
+      title="Liens - Soulignement et identification"
+      explanation="Les liens doivent être identifiables sans dépendre uniquement de la couleur. Le soulignement, les différences de motifs ou d'autres indicateurs visuels sont essentiels."
+    >
+      <template #bad>
+        <div class="link-demo">
+          <h4>Liens basés uniquement sur la couleur</h4>
+          <div class="link-content-bad">
+            <p>
+              L'accessibilité web est essentielle pour créer des sites inclusifs.
+              <a href="#" class="link-bad">En savoir plus sur l'accessibilité</a>
+              peut vous aider à comprendre les meilleures pratiques.
+              Les <a href="#" class="link-bad">directives WCAG</a> fournissent
+              un cadre complet pour améliorer l'accessibilité.
+            </p>
+            <p>
+              Visitez notre <a href="#" class="link-bad">page de ressources</a>
+              pour trouver des outils et tutoriels.
+            </p>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="link-demo">
+          <h4>Liens avec soulignement et indicateurs visuels</h4>
+          <div class="link-content-good">
+            <p>
+              L'accessibilité web est essentielle pour créer des sites inclusifs.
+              <a href="#" class="link-good">En savoir plus sur l'accessibilité</a>
+              peut vous aider à comprendre les meilleures pratiques.
+              Les <a href="#" class="link-good">directives WCAG</a> fournissent
+              un cadre complet pour améliorer l'accessibilité.
+            </p>
+            <p>
+              Visitez notre <a href="#" class="link-good">page de ressources</a>
+              pour trouver des outils et tutoriels.
+            </p>
+          </div>
+        </div>
+      </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Seulement la couleur différencie --&gt;
+&lt;style&gt;
+  a {
+    color: blue;
+    text-decoration: none; /* Pas de soulignement ! */
+  }
+
+  a:hover {
+    color: darkblue; /* Changement de couleur seulement */
+  }
+&lt;/style&gt;
+
+&lt;p&gt;
+  Visitez notre &lt;a href="#"&gt;page de ressources&lt;/a&gt;
+  pour en savoir plus.
+&lt;/p&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: Couleur + soulignement + focus visible --&gt;
+&lt;style&gt;
+  a {
+    color: #0066CC;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
+  }
+
+  a:hover, a:focus {
+    background: #E6F2FF;
+    outline: 2px solid #0066CC;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Indicateur de focus visible */
+  a:focus {
+    outline-offset: 4px;
+  }
+&lt;/style&gt;
+
+&lt;p&gt;
+  Visitez notre &lt;a href="#"&gt;page de ressources&lt;/a&gt;
+  pour en savoir plus.
+&lt;/p&gt;</code></pre>
+        </div>
+      </template>
+    </ExampleToggle>
   </div>
 </template>
 
@@ -1419,5 +1514,66 @@ h1 {
   .code-block code {
     color: #e2e8f0;
   }
+}
+
+/* Link demo styles */
+.link-demo {
+  color: var(--color-text);
+}
+
+.link-content-bad, .link-content-good {
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.link-content-bad p, .link-content-good p {
+  margin-bottom: 1rem;
+}
+
+.link-content-bad p:last-child, .link-content-good p:last-child {
+  margin-bottom: 0;
+}
+
+/* Bad link - only color difference */
+.link-bad {
+  color: blue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-bad:hover {
+  color: darkblue;
+}
+
+.link-bad:focus {
+  outline: none;
+  color: darkblue;
+}
+
+/* Good link - underline + color + focus */
+.link-good {
+  color: #0066CC;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+  cursor: pointer;
+}
+
+.link-good:hover {
+  background: #E6F2FF;
+  outline: 2px solid #0066CC;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.link-good:focus {
+  background: #E6F2FF;
+  outline: 2px solid #0066CC;
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 </style>

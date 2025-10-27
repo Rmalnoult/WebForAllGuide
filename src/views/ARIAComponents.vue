@@ -42,6 +42,225 @@
     </section>
 
     <ExampleToggle
+      title="Formulaires avec attributs ARIA"
+      explanation="Les attributs ARIA enrichissent les formulaires en fournissant des labels, descriptions et états aux technologies d'assistance."
+    >
+      <template #bad>
+        <div class="form-aria-demo">
+          <h4>Formulaire sans ARIA</h4>
+          <p>❌ Formulaire inaccessible sans attributs ARIA appropriés :</p>
+
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : pas de label, pas de description --&gt;
+&lt;input type="text" placeholder="Votre email"&gt;
+
+&lt;!-- Mauvais : icône non accessible --&gt;
+&lt;button&gt;
+  &lt;span class="icon"&gt;🔍&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Mauvais : erreur non associée, pas d'autocomplete --&gt;
+&lt;input type="password"&gt;
+&lt;div class="error"&gt;Mot de passe trop court&lt;/div&gt;</code></pre>
+          </div>
+
+          <form class="bad-form-aria">
+            <div class="form-field">
+              <input type="text" placeholder="Votre email" class="bad-input">
+            </div>
+
+            <div class="form-field">
+              <button class="bad-icon-button">
+                <span>🔍</span>
+              </button>
+            </div>
+
+            <div class="form-field">
+              <input type="password" placeholder="Mot de passe" class="bad-input error-input" autocomplete="current-password">
+              <div class="error-message">Mot de passe trop court</div>
+            </div>
+
+            <div class="form-field">
+              <div class="checkbox-group">
+                <input type="checkbox" id="bad-terms">
+                <span>J'accepte les conditions</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="form-aria-demo">
+          <h4>Formulaire avec ARIA</h4>
+          <p>✅ Formulaire accessible avec attributs ARIA appropriés :</p>
+
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : aria-label pour champ sans label visible --&gt;
+&lt;input
+  type="text"
+  aria-label="Adresse email"
+  aria-describedby="email-desc"
+  aria-required="true"&gt;
+&lt;span id="email-desc"&gt;Format : nom@exemple.com&lt;/span&gt;
+
+&lt;!-- Bon : bouton avec aria-label --&gt;
+&lt;button aria-label="Rechercher"&gt;
+  &lt;span aria-hidden="true"&gt;🔍&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Bon : erreur associée avec aria-describedby --&gt;
+&lt;input
+  type="password"
+  aria-label="Mot de passe"
+  aria-invalid="true"
+  aria-describedby="pwd-error"
+  autocomplete="new-password"&gt;
+&lt;div id="pwd-error" role="alert"&gt;
+  Mot de passe trop court
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <form class="good-form-aria">
+            <div class="form-field">
+              <label for="good-email" class="sr-only">Adresse email</label>
+              <input
+                type="email"
+                id="good-email"
+                aria-label="Adresse email"
+                aria-describedby="email-desc"
+                aria-required="true"
+                :aria-invalid="emailInvalid"
+                v-model="formEmail"
+                @blur="validateEmail"
+                placeholder="Votre email"
+                class="good-input"
+                autocomplete="email"
+              >
+              <span id="email-desc" class="field-hint">Format : nom@exemple.com</span>
+              <div v-if="emailError" id="email-error" role="alert" class="error-message">
+                {{ emailError }}
+              </div>
+            </div>
+
+            <div class="form-field">
+              <button
+                aria-label="Rechercher"
+                @click="handleSearch"
+                class="good-icon-button"
+              >
+                <span aria-hidden="true">🔍</span>
+                <span class="sr-only">Rechercher</span>
+              </button>
+            </div>
+
+            <div class="form-field">
+              <label for="good-password" class="sr-only">Mot de passe</label>
+              <input
+                type="password"
+                id="good-password"
+                aria-label="Mot de passe"
+                aria-describedby="pwd-requirements pwd-error"
+                aria-required="true"
+                :aria-invalid="passwordInvalid"
+                v-model="formPassword"
+                @input="validatePassword"
+                placeholder="Mot de passe"
+                class="good-input"
+                :class="{ 'error': passwordInvalid }"
+                autocomplete="new-password"
+              >
+              <div id="pwd-requirements" class="field-hint">
+                Minimum 8 caractères avec chiffres et lettres
+              </div>
+              <div v-if="passwordError" id="pwd-error" role="alert" class="error-message">
+                {{ passwordError }}
+              </div>
+            </div>
+
+            <div class="form-field">
+              <fieldset role="group" aria-labelledby="options-legend">
+                <legend id="options-legend">Options de notification</legend>
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="good-email-notif"
+                    v-model="emailNotifications"
+                    aria-describedby="email-notif-desc"
+                  >
+                  <label for="good-email-notif">Notifications par email</label>
+                </div>
+                <span id="email-notif-desc" class="field-hint">
+                  Recevez les mises à jour importantes par email
+                </span>
+
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="good-sms-notif"
+                    v-model="smsNotifications"
+                    aria-describedby="sms-notif-desc"
+                  >
+                  <label for="good-sms-notif">Notifications par SMS</label>
+                </div>
+                <span id="sms-notif-desc" class="field-hint">
+                  Recevez les alertes urgentes par SMS
+                </span>
+              </fieldset>
+            </div>
+
+            <div class="form-field">
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="good-terms"
+                  v-model="termsAccepted"
+                  aria-required="true"
+                  :aria-invalid="!termsAccepted && formSubmitted"
+                  aria-describedby="terms-error"
+                >
+                <label for="good-terms">
+                  J'accepte les <a href="#" aria-label="Lire les conditions d'utilisation">conditions d'utilisation</a>
+                </label>
+              </div>
+              <div v-if="!termsAccepted && formSubmitted" id="terms-error" role="alert" class="error-message">
+                Vous devez accepter les conditions
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                @click="submitForm"
+                :disabled="!formValid"
+                aria-describedby="submit-status"
+                class="form-submit-button"
+              >
+                Soumettre
+              </button>
+              <span id="submit-status" class="sr-only" aria-live="polite">
+                {{ submitStatus }}
+              </span>
+            </div>
+          </form>
+
+          <div class="aria-attributes-list">
+            <h5>Attributs ARIA utilisés :</h5>
+            <ul>
+              <li><code>aria-label</code> : Fournit un label accessible</li>
+              <li><code>aria-describedby</code> : Associe une description détaillée</li>
+              <li><code>aria-required</code> : Indique un champ obligatoire</li>
+              <li><code>aria-invalid</code> : Signale un champ invalide</li>
+              <li><code>aria-labelledby</code> : Référence un label existant</li>
+              <li><code>role="alert"</code> : Annonce immédiatement les erreurs</li>
+              <li><code>aria-hidden</code> : Cache les éléments décoratifs</li>
+              <li><code>aria-live</code> : Annonce les changements dynamiques</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
       title="Accordéon accessible"
       explanation="Un accordéon doit utiliser les attributs ARIA appropriés, supporter la navigation clavier et annoncer les changements d'état."
     >
@@ -790,218 +1009,225 @@
     </ExampleToggle>
 
     <ExampleToggle
-      title="Formulaires avec attributs ARIA"
-      explanation="Les attributs ARIA enrichissent les formulaires en fournissant des labels, descriptions et états aux technologies d'assistance."
+      title="Combobox / Recherche avec suggestions"
+      explanation="Une recherche avec suggestions (combobox) doit être navigable au clavier, annoncer les résultats et permettre la sélection."
     >
       <template #bad>
-        <div class="form-aria-demo">
-          <h4>Formulaire sans ARIA</h4>
-          <p>❌ Formulaire inaccessible sans attributs ARIA appropriés :</p>
-
-          <div class="code-block">
-            <pre><code>&lt;!-- Mauvais : pas de label, pas de description --&gt;
-&lt;input type="text" placeholder="Votre email"&gt;
-
-&lt;!-- Mauvais : icône non accessible --&gt;
-&lt;button&gt;
-  &lt;span class="icon"&gt;🔍&lt;/span&gt;
-&lt;/button&gt;
-
-&lt;!-- Mauvais : erreur non associée, pas d'autocomplete --&gt;
-&lt;input type="password"&gt;
-&lt;div class="error"&gt;Mot de passe trop court&lt;/div&gt;</code></pre>
-          </div>
-
-          <form class="bad-form-aria">
-            <div class="form-field">
-              <input type="text" placeholder="Votre email" class="bad-input">
-            </div>
-
-            <div class="form-field">
-              <button class="bad-icon-button">
-                <span>🔍</span>
-              </button>
-            </div>
-
-            <div class="form-field">
-              <input type="password" placeholder="Mot de passe" class="bad-input error-input" autocomplete="current-password">
-              <div class="error-message">Mot de passe trop court</div>
-            </div>
-
-            <div class="form-field">
-              <div class="checkbox-group">
-                <input type="checkbox" id="bad-terms">
-                <span>J'accepte les conditions</span>
+        <div class="combobox-demo">
+          <h4>Sans ARIA ni navigation clavier</h4>
+          <div class="search-container-bad">
+            <input
+              type="text"
+              v-model="searchQueryBad"
+              @input="filterSuggestionsBad"
+              placeholder="Rechercher un pays..."
+              class="search-input-bad"
+            >
+            <div v-if="suggestionsBad.length" class="suggestions-bad">
+              <div
+                v-for="(item, index) in suggestionsBad"
+                :key="index"
+                @click="selectBad(item)"
+                class="suggestion-item-bad"
+              >
+                {{ item }}
               </div>
             </div>
-          </form>
+          </div>
+          <p v-if="selectedBad" class="selected-value-bad">
+            Sélectionné : {{ selectedBad }}
+          </p>
         </div>
       </template>
 
       <template #good>
-        <div class="form-aria-demo">
-          <h4>Formulaire avec ARIA</h4>
-          <p>✅ Formulaire accessible avec attributs ARIA appropriés :</p>
+        <div class="combobox-demo">
+          <h4>Avec ARIA et navigation clavier</h4>
+          <div class="search-container-good">
+            <label for="country-search-good" id="search-label-good">
+              Rechercher un pays
+            </label>
+            <input
+              id="country-search-good"
+              type="text"
+              role="combobox"
+              v-model="searchQueryGood"
+              @input="filterSuggestionsGood"
+              @keydown.down.prevent="selectNextGood"
+              @keydown.up.prevent="selectPrevGood"
+              @keydown.enter="confirmSelectionGood"
+              @keydown.escape="closeSuggestionsGood"
+              :aria-expanded="suggestionsGood.length > 0"
+              aria-autocomplete="list"
+              aria-controls="suggestions-list-good"
+              :aria-activedescendant="selectedIndexGood >= 0 ? `option-good-${selectedIndexGood}` : ''"
+              placeholder="Tapez pour rechercher..."
+              class="search-input-good"
+            >
+            <ul
+              v-show="suggestionsGood.length"
+              id="suggestions-list-good"
+              role="listbox"
+              class="suggestions-good"
+            >
+              <li
+                v-for="(item, i) in suggestionsGood"
+                :key="i"
+                role="option"
+                :id="`option-good-${i}`"
+                :aria-selected="i === selectedIndexGood"
+                :class="{ active: i === selectedIndexGood }"
+                @click="selectGood(item)"
+                class="suggestion-item-good"
+              >
+                {{ item }}
+              </li>
+            </ul>
+            <div role="status" aria-live="polite" class="sr-only">
+              {{ suggestionsGood.length }} résultat{{ suggestionsGood.length > 1 ? 's' : '' }} disponible{{ suggestionsGood.length > 1 ? 's' : '' }}
+            </div>
+          </div>
+          <p v-if="selectedGood" class="selected-value-good">
+            Sélectionné : {{ selectedGood }}
+          </p>
+        </div>
+      </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Pas d'ARIA, pas de navigation clavier --&gt;
+&lt;input type="text" @input="showSuggestions"&gt;
+&lt;div v-if="suggestions.length"&gt;
+  &lt;div v-for="item in suggestions" @click="select(item)"&gt;
+    {{ item }}
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: ARIA complet + navigation clavier --&gt;
+&lt;label for="search" id="search-label"&gt;Rechercher un pays&lt;/label&gt;
+&lt;input
+  id="search"
+  role="combobox"
+  :aria-expanded="showSuggestions"
+  aria-autocomplete="list"
+  aria-controls="suggestions-list"
+  :aria-activedescendant="selectedId"
+  @keydown.down="selectNext"
+  @keydown.up="selectPrev"
+  @keydown.enter="confirmSelection"
+&gt;
+
+&lt;ul id="suggestions-list" role="listbox" v-show="showSuggestions"&gt;
+  &lt;li
+    v-for="(item, i) in suggestions"
+    role="option"
+    :id="`option-${i}`"
+    :aria-selected="i === selectedIndex"
+  &gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div role="status" aria-live="polite"&gt;
+  {{ suggestions.length }} résultats disponibles
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Notifications Toast (Live Regions)"
+      explanation="Les notifications dynamiques doivent être annoncées aux lecteurs d'écran sans voler le focus. Utilisez role='status' pour les infos et role='alert' pour les erreurs."
+    >
+      <template #bad>
+        <div class="toast-demo">
+          <h4>Sans aria-live</h4>
+          <p>❌ Les notifications ne sont pas annoncées aux lecteurs d'écran</p>
 
           <div class="code-block">
-            <pre><code>&lt;!-- Bon : aria-label pour champ sans label visible --&gt;
-&lt;input
-  type="text"
-  aria-label="Adresse email"
-  aria-describedby="email-desc"
-  aria-required="true"&gt;
-&lt;span id="email-desc"&gt;Format : nom@exemple.com&lt;/span&gt;
-
-&lt;!-- Bon : bouton avec aria-label --&gt;
-&lt;button aria-label="Rechercher"&gt;
-  &lt;span aria-hidden="true"&gt;🔍&lt;/span&gt;
-&lt;/button&gt;
-
-&lt;!-- Bon : erreur associée avec aria-describedby --&gt;
-&lt;input
-  type="password"
-  aria-label="Mot de passe"
-  aria-invalid="true"
-  aria-describedby="pwd-error"
-  autocomplete="new-password"&gt;
-&lt;div id="pwd-error" role="alert"&gt;
-  Mot de passe trop court
+            <pre><code>&lt;!-- Mauvais : pas annoncé aux lecteurs d'écran --&gt;
+&lt;div v-if="showToast" class="toast"&gt;
+  {{ message }}
 &lt;/div&gt;</code></pre>
           </div>
 
-          <form class="good-form-aria">
-            <div class="form-field">
-              <label for="good-email" class="sr-only">Adresse email</label>
-              <input
-                type="email"
-                id="good-email"
-                aria-label="Adresse email"
-                aria-describedby="email-desc"
-                aria-required="true"
-                :aria-invalid="emailInvalid"
-                v-model="formEmail"
-                @blur="validateEmail"
-                placeholder="Votre email"
-                class="good-input"
-                autocomplete="email"
-              >
-              <span id="email-desc" class="field-hint">Format : nom@exemple.com</span>
-              <div v-if="emailError" id="email-error" role="alert" class="error-message">
-                {{ emailError }}
-              </div>
-            </div>
+          <button @click="showBadToast" class="toast-button">
+            Afficher notification
+          </button>
 
-            <div class="form-field">
-              <button
-                aria-label="Rechercher"
-                @click="handleSearch"
-                class="good-icon-button"
-              >
-                <span aria-hidden="true">🔍</span>
-                <span class="sr-only">Rechercher</span>
-              </button>
-            </div>
+          <div v-if="badToastVisible" class="toast-bad">
+            {{ badToastMessage }}
+          </div>
+        </div>
+      </template>
 
-            <div class="form-field">
-              <label for="good-password" class="sr-only">Mot de passe</label>
-              <input
-                type="password"
-                id="good-password"
-                aria-label="Mot de passe"
-                aria-describedby="pwd-requirements pwd-error"
-                aria-required="true"
-                :aria-invalid="passwordInvalid"
-                v-model="formPassword"
-                @input="validatePassword"
-                placeholder="Mot de passe"
-                class="good-input"
-                :class="{ 'error': passwordInvalid }"
-                autocomplete="new-password"
-              >
-              <div id="pwd-requirements" class="field-hint">
-                Minimum 8 caractères avec chiffres et lettres
-              </div>
-              <div v-if="passwordError" id="pwd-error" role="alert" class="error-message">
-                {{ passwordError }}
-              </div>
-            </div>
+      <template #good>
+        <div class="toast-demo">
+          <h4>Avec aria-live approprié</h4>
+          <p>✅ Les notifications sont correctement annoncées</p>
 
-            <div class="form-field">
-              <fieldset role="group" aria-labelledby="options-legend">
-                <legend id="options-legend">Options de notification</legend>
-                <div class="checkbox-group">
-                  <input
-                    type="checkbox"
-                    id="good-email-notif"
-                    v-model="emailNotifications"
-                    aria-describedby="email-notif-desc"
-                  >
-                  <label for="good-email-notif">Notifications par email</label>
-                </div>
-                <span id="email-notif-desc" class="field-hint">
-                  Recevez les mises à jour importantes par email
-                </span>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : notification info (polite) --&gt;
+&lt;div
+  v-if="showToast"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  class="toast"
+&gt;
+  &lt;p&gt;{{ message }}&lt;/p&gt;
+  &lt;button @click="dismiss" aria-label="Fermer notification"&gt;✕&lt;/button&gt;
+&lt;/div&gt;
 
-                <div class="checkbox-group">
-                  <input
-                    type="checkbox"
-                    id="good-sms-notif"
-                    v-model="smsNotifications"
-                    aria-describedby="sms-notif-desc"
-                  >
-                  <label for="good-sms-notif">Notifications par SMS</label>
-                </div>
-                <span id="sms-notif-desc" class="field-hint">
-                  Recevez les alertes urgentes par SMS
-                </span>
-              </fieldset>
-            </div>
+&lt;!-- Bon : alerte erreur (assertive) --&gt;
+&lt;div
+  v-if="showError"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  class="toast error"
+&gt;
+  &lt;p&gt;{{ errorMessage }}&lt;/p&gt;
+  &lt;button @click="dismiss" aria-label="Fermer alerte"&gt;✕&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
 
-            <div class="form-field">
-              <div class="checkbox-group">
-                <input
-                  type="checkbox"
-                  id="good-terms"
-                  v-model="termsAccepted"
-                  aria-required="true"
-                  :aria-invalid="!termsAccepted && formSubmitted"
-                  aria-describedby="terms-error"
-                >
-                <label for="good-terms">
-                  J'accepte les <a href="#" aria-label="Lire les conditions d'utilisation">conditions d'utilisation</a>
-                </label>
-              </div>
-              <div v-if="!termsAccepted && formSubmitted" id="terms-error" role="alert" class="error-message">
-                Vous devez accepter les conditions
-              </div>
-            </div>
+          <div class="toast-buttons">
+            <button @click="showGoodInfo" class="toast-button info">
+              Info (polite)
+            </button>
+            <button @click="showGoodError" class="toast-button error">
+              Erreur (assertive)
+            </button>
+          </div>
 
-            <div class="form-actions">
-              <button
-                @click="submitForm"
-                :disabled="!formValid"
-                aria-describedby="submit-status"
-                class="form-submit-button"
-              >
-                Soumettre
-              </button>
-              <span id="submit-status" class="sr-only" aria-live="polite">
-                {{ submitStatus }}
-              </span>
-            </div>
-          </form>
+          <div
+            v-if="goodToastVisible"
+            :role="goodToastType === 'error' ? 'alert' : 'status'"
+            :aria-live="goodToastType === 'error' ? 'assertive' : 'polite'"
+            aria-atomic="true"
+            :class="['toast-good', goodToastType]"
+          >
+            <p>{{ goodToastMessage }}</p>
+            <button
+              @click="dismissGoodToast"
+              :aria-label="`Fermer ${goodToastType === 'error' ? 'alerte' : 'notification'}`"
+              class="toast-close"
+            >
+              ✕
+            </button>
+          </div>
 
-          <div class="aria-attributes-list">
-            <h5>Attributs ARIA utilisés :</h5>
+          <div class="toast-info">
+            <h5>Différences :</h5>
             <ul>
-              <li><code>aria-label</code> : Fournit un label accessible</li>
-              <li><code>aria-describedby</code> : Associe une description détaillée</li>
-              <li><code>aria-required</code> : Indique un champ obligatoire</li>
-              <li><code>aria-invalid</code> : Signale un champ invalide</li>
-              <li><code>aria-labelledby</code> : Référence un label existant</li>
-              <li><code>role="alert"</code> : Annonce immédiatement les erreurs</li>
-              <li><code>aria-hidden</code> : Cache les éléments décoratifs</li>
-              <li><code>aria-live</code> : Annonce les changements dynamiques</li>
+              <li><code>role="status"</code> + <code>aria-live="polite"</code> : Pour les notifications informatives, n'interrompt pas la lecture en cours</li>
+              <li><code>role="alert"</code> + <code>aria-live="assertive"</code> : Pour les erreurs critiques, interrompt immédiatement</li>
+              <li><code>aria-atomic="true"</code> : Annonce tout le contenu de la notification</li>
             </ul>
           </div>
         </div>
@@ -1243,20 +1469,20 @@ const selectedGoodImage = ref(0)
 
 const galleryImages = [
   {
-    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZhY2U8L3RleHQ+Cjwvc3ZnPg==",
-    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgRmFjZTwvdGV4dD4KPC9zdmc+",
+    thumb: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=80&h=60&fit=crop&crop=center",
+    full: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=600&fit=crop&crop=center",
     alt: "MacBook Pro vue de face, écran fermé",
     description: "Vue frontale du MacBook Pro 16 pouces avec l'écran fermé, montrant le design épuré en aluminium."
   },
   {
-    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk9wZW48L3RleHQ+Cjwvc3ZnPg==",
-    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgT3BlbjwvdGV4dD4KPC9zdmc+",
+    thumb: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=80&h=60&fit=crop&crop=center",
+    full: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&h=600&fit=crop&crop=center",
     alt: "MacBook Pro ouvert montrant l'écran et le clavier",
     description: "MacBook Pro ouvert à 90 degrés, écran allumé affichant le bureau macOS, clavier et trackpad visibles."
   },
   {
-    thumb: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA4MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNvdGU8L3RleHQ+Cjwvc3ZnPg==",
-    full: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzlmYTJhNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY0Jvb2sgQ290ZTwvdGV4dD4KPC9zdmc+",
+    thumb: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=80&h=60&fit=crop&crop=center",
+    full: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop&crop=center",
     alt: "MacBook Pro vue de côté montrant l'épaisseur",
     description: "Vue latérale du MacBook Pro fermé, mettant en évidence son profil fin et ses ports."
   }
@@ -1440,6 +1666,135 @@ function handleGalleryKeydown(event, index) {
       document.getElementById(`gallery-tab-${galleryImages.length - 1}`).focus()
       break
   }
+}
+
+// Combobox / Autocomplete state
+const countries = [
+  'Afghanistan', 'Albanie', 'Algérie', 'Allemagne', 'Andorre', 'Angola', 'Argentine', 'Arménie', 'Australie', 'Autriche',
+  'Belgique', 'Brésil', 'Bulgarie',
+  'Canada', 'Chine', 'Colombie', 'Croatie', 'Cuba',
+  'Danemark',
+  'Égypte', 'Espagne', 'Estonie', 'États-Unis',
+  'Finlande', 'France',
+  'Grèce',
+  'Hongrie',
+  'Inde', 'Indonésie', 'Irlande', 'Islande', 'Israël', 'Italie',
+  'Japon', 'Jordanie',
+  'Kenya',
+  'Lettonie', 'Lituanie', 'Luxembourg',
+  'Madagascar', 'Malte', 'Maroc', 'Mexique', 'Monaco',
+  'Nigéria', 'Norvège', 'Nouvelle-Zélande',
+  'Pakistan', 'Pays-Bas', 'Pérou', 'Pologne', 'Portugal',
+  'Roumanie', 'Royaume-Uni', 'Russie',
+  'Sénégal', 'Serbie', 'Singapour', 'Slovaquie', 'Slovénie', 'Suède', 'Suisse',
+  'Thaïlande', 'Tunisie', 'Turquie',
+  'Ukraine',
+  'Vietnam'
+]
+
+const searchQueryBad = ref('')
+const suggestionsBad = ref([])
+const selectedBad = ref('')
+
+const searchQueryGood = ref('')
+const suggestionsGood = ref([])
+const selectedIndexGood = ref(-1)
+const selectedGood = ref('')
+
+function filterSuggestionsBad() {
+  if (!searchQueryBad.value.trim()) {
+    suggestionsBad.value = []
+    return
+  }
+  suggestionsBad.value = countries.filter(country =>
+    country.toLowerCase().includes(searchQueryBad.value.toLowerCase())
+  ).slice(0, 8)
+}
+
+function selectBad(item) {
+  selectedBad.value = item
+  searchQueryBad.value = item
+  suggestionsBad.value = []
+}
+
+function filterSuggestionsGood() {
+  selectedIndexGood.value = -1
+  if (!searchQueryGood.value.trim()) {
+    suggestionsGood.value = []
+    return
+  }
+  suggestionsGood.value = countries.filter(country =>
+    country.toLowerCase().includes(searchQueryGood.value.toLowerCase())
+  ).slice(0, 8)
+}
+
+function selectNextGood() {
+  if (suggestionsGood.value.length === 0) return
+  selectedIndexGood.value = selectedIndexGood.value < suggestionsGood.value.length - 1
+    ? selectedIndexGood.value + 1
+    : 0
+}
+
+function selectPrevGood() {
+  if (suggestionsGood.value.length === 0) return
+  selectedIndexGood.value = selectedIndexGood.value > 0
+    ? selectedIndexGood.value - 1
+    : suggestionsGood.value.length - 1
+}
+
+function confirmSelectionGood() {
+  if (selectedIndexGood.value >= 0 && suggestionsGood.value[selectedIndexGood.value]) {
+    selectGood(suggestionsGood.value[selectedIndexGood.value])
+  }
+}
+
+function selectGood(item) {
+  selectedGood.value = item
+  searchQueryGood.value = item
+  suggestionsGood.value = []
+  selectedIndexGood.value = -1
+}
+
+function closeSuggestionsGood() {
+  suggestionsGood.value = []
+  selectedIndexGood.value = -1
+}
+
+// Toast Notifications state
+const badToastVisible = ref(false)
+const badToastMessage = ref('')
+const goodToastVisible = ref(false)
+const goodToastMessage = ref('')
+const goodToastType = ref('info')
+
+function showBadToast() {
+  badToastMessage.value = 'Notification non accessible (non annoncée)'
+  badToastVisible.value = true
+  setTimeout(() => {
+    badToastVisible.value = false
+  }, 3000)
+}
+
+function showGoodInfo() {
+  goodToastMessage.value = 'Opération réussie ! Vos modifications ont été enregistrées.'
+  goodToastType.value = 'info'
+  goodToastVisible.value = true
+  setTimeout(() => {
+    goodToastVisible.value = false
+  }, 5000)
+}
+
+function showGoodError() {
+  goodToastMessage.value = 'Erreur : Impossible de sauvegarder les modifications.'
+  goodToastType.value = 'error'
+  goodToastVisible.value = true
+  setTimeout(() => {
+    goodToastVisible.value = false
+  }, 5000)
+}
+
+function dismissGoodToast() {
+  goodToastVisible.value = false
 }
 </script>
 
@@ -2678,6 +3033,245 @@ legend {
   .thumbnails-bad, .thumbnails-good {
     flex-direction: row;
     justify-content: center;
+  }
+}
+
+/* Combobox / Autocomplete styles */
+.combobox-demo {
+  color: var(--color-text);
+}
+
+.combobox-demo h4 {
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.search-container-bad, .search-container-good {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search-container-good label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.search-input-bad, .search-input-good {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.search-input-bad:focus, .search-input-good:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+.suggestions-bad, .suggestions-good {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestions-bad {
+  padding: 0;
+}
+
+.suggestions-good {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.suggestion-item-bad, .suggestion-item-good {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.suggestion-item-bad:hover {
+  background: var(--color-bg-secondary);
+}
+
+.suggestion-item-good:hover, .suggestion-item-good.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.suggestion-item-good.active {
+  font-weight: 500;
+}
+
+.selected-value-bad, .selected-value-good {
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.selected-value-good {
+  background: #e6f2ff;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Toast Notifications */
+.toast-demo {
+  position: relative;
+  min-height: 200px;
+}
+
+.toast-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.toast-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.toast-button.info {
+  background: #e6f2ff;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.toast-button.info:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.toast-button.error {
+  background: #ffe6e6;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.toast-button.error:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.toast-bad, .toast-good {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast-bad {
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.toast-good {
+  background: #e6f2ff;
+  border: 2px solid var(--color-primary);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toast-good.error {
+  background: #ffe6e6;
+  border-color: #dc2626;
+}
+
+.toast-good p {
+  margin: 0;
+  flex: 1;
+}
+
+.toast-close {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}
+
+.toast-info {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.toast-info h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.toast-info ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.toast-info li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 </style>
