@@ -1,11 +1,9 @@
 <template>
   <div class="color-contrast">
-    <header>
-      <h1>Contrastes & Couleurs</h1>
-      <p class="lead">
-        Assurer une lisibilité optimale pour tous les utilisateurs
-      </p>
-    </header>
+    <PageHeader
+      title="Contrastes & Couleurs"
+      description="Assurer une lisibilité optimale pour tous les utilisateurs"
+    />
 
     <section aria-labelledby="wcag-stats-title" class="wcag-stats-section">
       <h2 id="wcag-stats-title" class="visually-hidden">Critères WCAG EN 301 549</h2>
@@ -863,6 +861,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

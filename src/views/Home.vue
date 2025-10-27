@@ -338,6 +338,81 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
+
+// FAQ Schema.org structured data for better SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que l'accessibilité web ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'accessibilité web garantit que les sites et applications sont utilisables par tous, y compris les personnes en situation de handicap. Elle suit les normes WCAG (Web Content Accessibility Guidelines) et bénéficie à tous les utilisateurs : personnes avec handicap visuel, auditif, moteur ou cognitif, mais aussi seniors, utilisateurs mobiles, ou situations temporaires (bras cassé, environnement bruyant)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi l'accessibilité web est-elle importante ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15% de la population mondiale vit avec un handicap, et 94.8% des sites web contiennent des erreurs d'accessibilité. L'accessibilité est à la fois une obligation légale (Directive Européenne 2025, ADA aux États-Unis), une responsabilité éthique, et un avantage business : elle améliore le SEO, élargit votre audience, et améliore l'expérience pour tous."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelles sont les normes WCAG ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les WCAG (Web Content Accessibility Guidelines) sont des normes internationales du W3C définissant comment rendre le contenu web accessible. Elles comprennent trois niveaux : A (basique), AA (standard recommandé), et AAA (niveau avancé). Le niveau AA est généralement requis par la loi et couvre : perceptibilité, utilisabilité, compréhensibilité et robustesse."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment tester l'accessibilité de mon site ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Utilisez plusieurs méthodes complémentaires : outils automatisés (WAVE, axe DevTools, Lighthouse), tests manuels au clavier (navigation avec Tab, Enter, Escape), tests avec lecteurs d'écran (NVDA, JAWS, VoiceOver), vérification des contrastes de couleurs, et idéalement tests avec de vrais utilisateurs en situation de handicap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que l'effet 'curb cut' en accessibilité ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'effet 'curb cut' (rampe de trottoir) démontre qu'une amélioration conçue pour les personnes handicapées profite à tous. Les rampes de trottoir aident les fauteuils roulants, mais aussi les poussettes, valises, vélos. En web : les sous-titres aident les sourds, mais aussi les environnements bruyants ; la navigation clavier aide les handicaps moteurs, mais aussi les power users."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les éléments clés de l'accessibilité web ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les éléments essentiels incluent : HTML sémantique (header, nav, main, footer), navigation clavier complète, textes alternatifs pour les images, contrastes de couleurs suffisants (4.5:1 minimum), labels explicites sur les formulaires, ARIA pour les composants dynamiques, respect des préférences utilisateur (reduced-motion, high-contrast), et structure de page claire avec landmarks."
+      }
+    }
+  ]
+}
+
+let scriptElement = null
+
+onMounted(() => {
+  // Inject FAQ schema into document head
+  scriptElement = document.createElement('script')
+  scriptElement.type = 'application/ld+json'
+  scriptElement.textContent = JSON.stringify(faqSchema)
+  document.head.appendChild(scriptElement)
+})
+
+onUnmounted(() => {
+  // Clean up when component unmounts
+  if (scriptElement && scriptElement.parentNode) {
+    scriptElement.parentNode.removeChild(scriptElement)
+  }
+})
+
 const quickLinks = [
   {
     path: '/color-contrast',

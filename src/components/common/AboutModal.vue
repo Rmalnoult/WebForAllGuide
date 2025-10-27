@@ -8,8 +8,10 @@
       <section class="about-section">
         <h3 class="section-title">🌱 Un site respectueux de votre vie privée</h3>
         <p>
-          Ce site n'utilise pas de cookies. Aucune donnée personnelle n'est collectée.
-          Aucun mouchard. Aucun tracker. Aucune pub.
+          Aucune donnée personnelle n'est collectée ni partagée. Aucun cookie n'est utilisé. Aucune pub.
+        </p>
+          <p>
+          Ce site utilise <strong>Plausible Analytics</strong>, un service d'analyse respectueux de la vie privée, pour mesurer le trafic.
         </p>
         <p>
           Oui, c'est possible de créer un site web sans transformer vos données en produit.
@@ -20,7 +22,7 @@
       <section class="about-section author-section">
         <h3 class="section-title">👨‍💻 À propos de l'auteur</h3>
         <p>
-          Ce site a été créé par <strong>Romain Malnoult</strong>, Tech Lead Design System & Accessibilité.
+          Ce site a été créé par <strong>Romain Malnoult</strong>, Design System & Accessibility Developer.
         </p>
         <p>
           Passionné par l'accessibilité numérique et convaincu qu'un web inclusif
@@ -48,12 +50,16 @@
         </a>
       </section>
 
+
       <!-- Section Tech -->
       <section class="about-section tech-section">
         <h3 class="section-title">⚡ Technologies</h3>
         <p>
-          Ce site est construit avec Vue.js et démontre l'implémentation
-          concrète des normes WCAG et des bonnes pratiques d'accessibilité.
+          Ce site est construit avec <strong>Vue.js 3</strong> et démontre l'implémentation
+          concrète des normes <strong>WCAG 2.1</strong> (niveau AA) et des bonnes pratiques d'accessibilité.
+        </p>
+        <p class="tech-stack">
+          <strong>Stack technique :</strong> Vue.js 3, Vue Router, Vite, Playwright (tests), axe-core (audit accessibilité)
         </p>
       </section>
     </div>
@@ -160,12 +166,52 @@ const isOpen = computed({
   flex-shrink: 0;
 }
 
+/* Features section */
+.features-section {
+  background: var(--color-bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.features-list li {
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.features-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.features-list strong {
+  color: var(--color-primary);
+}
+
 /* Tech section */
 .tech-section {
   font-size: 0.95rem;
   color: var(--color-text-secondary);
   padding-top: 1.5rem;
   border-top: 2px solid var(--color-border);
+}
+
+.tech-stack {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
 }
 
 /* Animations */

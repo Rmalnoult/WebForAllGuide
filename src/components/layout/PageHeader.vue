@@ -1,17 +1,31 @@
 <template>
   <header class="page-header" role="banner">
-    <!-- Breadcrumb navigation -->
+    <!-- Breadcrumb navigation with schema.org markup -->
     <nav aria-label="Fil d'Ariane" class="breadcrumb">
-      <ol>
-        <li>
-          <router-link to="/" aria-label="Retour à l'accueil">
-            <span aria-hidden="true">🏠</span>
-            Accueil
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <router-link
+            to="/"
+            aria-label="Retour à l'accueil"
+            itemprop="item"
+          >
+            <span itemprop="name">Accueil</span>
           </router-link>
+          <meta itemprop="position" content="1" />
         </li>
-        <li v-if="currentPage" aria-current="page">
+        <li
+          v-if="currentPage"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
           <span aria-hidden="true">›</span>
-          {{ currentPage }}
+          <span itemprop="name" aria-current="page">{{ currentPage }}</span>
+          <meta itemprop="position" content="2" />
         </li>
       </ol>
     </nav>
@@ -77,7 +91,7 @@ const headingId = computed(() => {
 
 /* Breadcrumb navigation */
 .breadcrumb {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .breadcrumb ol {
@@ -87,6 +101,7 @@ const headingId = computed(() => {
   margin: 0;
   padding: 0;
   font-size: 0.875rem;
+  gap: 0.5rem;
 }
 
 .breadcrumb li {
@@ -95,47 +110,39 @@ const headingId = computed(() => {
   gap: 0.5rem;
 }
 
-.breadcrumb li + li::before {
-  content: "";
-  margin-right: 0.5rem;
-}
-
 .breadcrumb a {
-  color: var(--color-primary);
+  color: var(--color-text);
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.625rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  transition: background-color 0.2s;
+  transition: color 0.2s;
 }
 
 .breadcrumb a:hover {
-  background: var(--color-hover);
+  color: var(--color-primary);
   text-decoration: underline;
 }
 
 .breadcrumb a:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
+  border-radius: 0.25rem;
 }
 
 .breadcrumb [aria-current="page"] {
-  color: var(--color-text);
-  font-weight: 600;
+  color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
 /* Page title */
 .page-title-wrapper {
-  margin: 1.5rem 0;
+  margin: 0.5rem 0 1.5rem 0;
 }
 
 .page-title {
   font-size: 2.5rem;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
+  font-weight: 700;
 }
 
 .page-title:focus {

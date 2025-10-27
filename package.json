@@ -1,7 +1,8 @@
 {
-  "name": "a11y-demo",
+  "name": "a11y-guide",
+  "description": "Guide pratique interactif des bonnes pratiques d'accessibilité web avec Vue.js 3",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

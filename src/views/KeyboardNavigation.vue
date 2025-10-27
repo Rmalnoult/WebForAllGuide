@@ -1,11 +1,9 @@
 <template>
   <div class="keyboard-navigation">
-    <header>
-      <h1>Navigation Clavier</h1>
-      <p class="lead">
-        Permettre à tous les utilisateurs de naviguer efficacement sans souris
-      </p>
-    </header>
+    <PageHeader
+      title="Navigation Clavier"
+      description="Permettre à tous les utilisateurs de naviguer efficacement sans souris"
+    />
 
     <section aria-labelledby="keyboard-shortcuts-title">
       <h2 id="keyboard-shortcuts-title">Raccourcis clavier</h2>
@@ -481,6 +479,7 @@ function handleKeydown(e) {
 
 <script setup>
 import { ref, nextTick } from 'vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

@@ -1,11 +1,9 @@
 <template>
   <div class="aria-components">
-    <header>
-      <h1>ARIA</h1>
-      <p class="lead">
-        Enrichir la sémantique des composants complexes pour les rendre accessibles
-      </p>
-    </header>
+    <PageHeader
+      title="ARIA"
+      description="Enrichir la sémantique des composants complexes pour les rendre accessibles"
+    />
 
     <section class="aria-intro">
       <h2 class="section-title">Qu'est-ce que ARIA ?</h2>
@@ -1238,6 +1236,7 @@
 
 <script setup>
 import { ref, computed, nextTick } from 'vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

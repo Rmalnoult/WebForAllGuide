@@ -1,11 +1,9 @@
 <template>
   <div class="media-accessible">
-    <header>
-      <h1>Images & Médias Accessibles</h1>
-      <p class="lead">
-        Rendre les contenus visuels compréhensibles pour tous les utilisateurs
-      </p>
-    </header>
+    <PageHeader
+      title="Images & Médias Accessibles"
+      description="Rendre les contenus visuels compréhensibles pour tous les utilisateurs"
+    />
 
     <ExampleToggle
       title="Textes alternatifs pour les images"
@@ -460,6 +458,7 @@
 </template>
 
 <script setup>
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

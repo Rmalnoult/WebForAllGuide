@@ -1,11 +1,9 @@
 <template>
   <div class="semantic-html">
-    <header>
-      <h1>HTML Sémantique</h1>
-      <p class="lead">
-        Utiliser les bons éléments HTML pour structurer le contenu de manière compréhensible
-      </p>
-    </header>
+    <PageHeader
+      title="HTML Sémantique"
+      description="Utiliser les bons éléments HTML pour structurer le contenu de manière compréhensible"
+    />
 
     <ExampleToggle
       title="Structure de page"
@@ -300,6 +298,7 @@
 </template>
 
 <script setup>
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

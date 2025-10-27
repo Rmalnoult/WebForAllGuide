@@ -1,11 +1,9 @@
 <template>
   <div class="accessible-forms">
-    <header>
-      <h1>Formulaires Accessibles</h1>
-      <p class="lead">
-        Créer des formulaires utilisables par tous avec une expérience claire et guidée
-      </p>
-    </header>
+    <PageHeader
+      title="Formulaires Accessibles"
+      description="Créer des formulaires utilisables par tous avec une expérience claire et guidée"
+    />
 
     <ExampleToggle
       title="Labels et associations"
@@ -875,6 +873,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

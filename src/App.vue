@@ -99,6 +99,7 @@ watch(() => route.path, (newPath) => {
       :aria-expanded="isMobileMenuOpen"
       aria-controls="main-nav"
       aria-label="Menu de navigation"
+      aria-describedby="burger-desc"
       @click="toggleMobileMenu"
     >
       <span class="burger-icon" aria-hidden="true">
@@ -106,7 +107,9 @@ watch(() => route.path, (newPath) => {
         <span class="burger-line"></span>
         <span class="burger-line"></span>
       </span>
-      <span class="sr-only">{{ isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu' }}</span>
+      <span id="burger-desc" class="sr-only">
+        {{ isMobileMenuOpen ? 'Fermer le menu de navigation principal' : 'Ouvrir le menu de navigation principal' }}
+      </span>
     </button>
 
     <div class="app-layout">
@@ -212,12 +215,12 @@ watch(() => route.path, (newPath) => {
 
 .app-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
   min-height: 100vh;
 }
 
 .app-sidebar {
-  background: #0C0C0C;
+  background: var(--color-sidebar-bg);
   border-right: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -256,24 +259,24 @@ watch(() => route.path, (newPath) => {
   left: 1rem;
   z-index: 1002; /* Above sidebar (1000) and backdrop (999) */
   display: none;
-  width: 3rem;
-  height: 3rem;
+  width: var(--burger-size);
+  height: var(--burger-size);
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: var(--color-burger-bg) !important;
   border: 2px solid var(--color-border);
-  border-radius: 0.625rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
   transition: left 0.3s ease-in-out, background-color 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .burger-button:hover {
-  background: rgba(248, 248, 248, 0.98) !important;
+  background: var(--color-burger-hover) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .burger-button:active {
-  background: rgba(240, 240, 240, 0.98) !important;
+  background: var(--color-burger-active) !important;
   transform: scale(0.98);
 }
 
@@ -293,7 +296,7 @@ watch(() => route.path, (newPath) => {
 
 .burger-line {
   display: block;
-  height: 2px;
+  height: var(--burger-line-height);
   background: var(--color-text);
   border-radius: 2px;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -301,8 +304,8 @@ watch(() => route.path, (newPath) => {
 
 /* Burger animation when open - move to right side of menu */
 .mobile-menu-open .burger-button {
-  left: calc(280px - 3rem - 1rem);
-  background: rgba(255, 255, 255, 0.98) !important;
+  left: calc(var(--sidebar-width) - var(--burger-size) - 1rem);
+  background: var(--color-burger-hover) !important;
 }
 
 .mobile-menu-open .burger-button:hover {
@@ -310,7 +313,7 @@ watch(() => route.path, (newPath) => {
 }
 
 .mobile-menu-open .burger-button:active {
-  background: rgba(240, 240, 240, 1) !important;
+  background: var(--color-burger-active) !important;
 }
 
 .mobile-menu-open .burger-line:nth-child(1) {
@@ -330,7 +333,7 @@ watch(() => route.path, (newPath) => {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-backdrop);
   z-index: 999;
   backdrop-filter: blur(2px);
 }
@@ -354,7 +357,7 @@ watch(() => route.path, (newPath) => {
     top: 0;
     left: 0;
     height: 100vh;
-    width: 280px;
+    width: var(--sidebar-width);
     max-width: 80vw;
     z-index: 1000;
     transform: translateX(-100%);
@@ -368,7 +371,7 @@ watch(() => route.path, (newPath) => {
   }
 
   .app-main {
-    padding: 5rem 1rem 2rem;
+    padding: var(--header-height) 1rem 2rem;
   }
 }
 

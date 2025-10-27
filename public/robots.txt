@@ -1,10 +1,6 @@
-# robots.txt pour Guide Accessibilité Web
-
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
 
 # Sitemap
 Sitemap: https://a11y-demo.romainmalnoult.dev/sitemap.xml
-
-# Crawl-delay (optionnel, pour éviter de surcharger le serveur)
-Crawl-delay: 1

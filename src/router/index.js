@@ -1,12 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+// Eager load home page for fast initial paint
 import Home from '../views/Home.vue'
-import SemanticHTML from '../views/SemanticHTML.vue'
-import KeyboardNavigation from '../views/KeyboardNavigation.vue'
-import MediaAccessible from '../views/MediaAccessible.vue'
-import ColorContrast from '../views/ColorContrast.vue'
-import AccessibleForms from '../views/AccessibleForms.vue'
-import ARIAComponents from '../views/ARIAComponents.vue'
-import Performance from '../views/Performance.vue'
+
+// Lazy load all other pages for better performance
+const SemanticHTML = () => import('../views/SemanticHTML.vue')
+const KeyboardNavigation = () => import('../views/KeyboardNavigation.vue')
+const MediaAccessible = () => import('../views/MediaAccessible.vue')
+const ColorContrast = () => import('../views/ColorContrast.vue')
+const AccessibleForms = () => import('../views/AccessibleForms.vue')
+const ARIAComponents = () => import('../views/ARIAComponents.vue')
+const Performance = () => import('../views/Performance.vue')
 
 const router = createRouter({
   history: createWebHistory(),

@@ -1,11 +1,9 @@
 <template>
   <div class="performance">
-    <header>
-      <h1>Performance & Adaptabilité</h1>
-      <p class="lead">
-        Créer des interfaces qui s'adaptent aux préférences et besoins de chaque utilisateur
-      </p>
-    </header>
+    <PageHeader
+      title="Performance & Adaptabilité"
+      description="Créer des interfaces qui s'adaptent aux préférences et besoins de chaque utilisateur"
+    />
 
     <ExampleToggle
       title="Respect des préférences de mouvement"
@@ -697,6 +695,7 @@ button {
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 

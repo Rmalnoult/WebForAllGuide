@@ -86,6 +86,21 @@
   /* Bordures */
   --border-radius: var(--ds-border-radius-m);
   --border-radius-lg: var(--ds-border-radius-l);
+
+  /* Layout-specific colors */
+  --color-sidebar-bg: #0C0C0C;
+  --color-sidebar-text: #FFFFFF;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.1);
+  --color-backdrop: rgba(0, 0, 0, 0.5);
+  --color-burger-bg: rgba(255, 255, 255, 0.95);
+  --color-burger-hover: rgba(248, 248, 248, 0.98);
+  --color-burger-active: rgba(240, 240, 240, 0.98);
+
+  /* Layout dimensions */
+  --sidebar-width: 280px;
+  --header-height: 5rem;
+  --burger-size: 3rem;
+  --burger-line-height: 2px;
 }
 
 /* Disable dark mode - always use light theme */
