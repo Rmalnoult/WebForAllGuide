@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import AppNavigation from './components/layout/AppNavigation.vue'
+import AboutModal from './components/common/AboutModal.vue'
 import { useUserPreferences } from './composables/useA11y'
 import { useKeyboardShortcuts } from './composables/useKeyboardShortcuts'
 import { useSEO } from './composables/useSEO'
@@ -12,6 +13,7 @@ useSEO() // Initialize SEO management
 const route = useRoute()
 const routeAnnouncement = ref('')
 const isMobileMenuOpen = ref(false)
+const showAboutModal = ref(false)
 
 const appClass = computed(() => {
   const classes = ['app']
@@ -123,7 +125,7 @@ watch(() => route.path, (newPath) => {
         role="complementary"
         aria-label="Barre latérale de navigation"
       >
-        <AppNavigation />
+        <AppNavigation @open-about="showAboutModal = true" />
       </aside>
 
       <!-- Main content area -->
@@ -154,6 +156,9 @@ watch(() => route.path, (newPath) => {
         </footer>
       </main>
     </div>
+
+    <!-- About Modal -->
+    <AboutModal v-model="showAboutModal" />
   </div>
 </template>
 

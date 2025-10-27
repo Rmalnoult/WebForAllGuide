@@ -24,6 +24,15 @@
         </router-link>
       </li>
     </ul>
+
+    <!-- About button -->
+    <button
+      class="about-button"
+      @click="$emit('open-about')"
+      aria-label="À propos de ce site"
+    >
+      À propos de ce site
+    </button>
   </nav>
 </template>
 
@@ -34,6 +43,9 @@ import { useAnnounce } from '../../composables/useA11y'
 
 const route = useRoute()
 const { announce } = useAnnounce()
+
+// Define emits
+const emit = defineEmits(['open-about'])
 
 // Navigation refs and state
 const navItemRefs = ref([])
@@ -129,6 +141,8 @@ watch(() => route.path, (newPath) => {
   padding: 1rem;
   min-height: 100vh;
   border-right: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-header {
@@ -248,6 +262,42 @@ watch(() => route.path, (newPath) => {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* About button */
+.about-button {
+  display: block;
+  padding: 0.75rem 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-border);
+  color: #B8B5B0;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+  transition: color 0.2s;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.about-button:hover {
+  color: var(--color-primary);
+}
+
+.about-button:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  color: var(--color-primary);
+}
+
+.about-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
 @media (max-width: 768px) {
   .app-nav {
     padding-top: 4.5rem;
@@ -255,7 +305,8 @@ watch(() => route.path, (newPath) => {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .app-nav a {
+  .app-nav a,
+  .about-button {
     transition: none;
   }
 }
