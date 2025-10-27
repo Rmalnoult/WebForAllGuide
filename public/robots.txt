@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://a11y-demo.romainmalnoult.dev/sitemap.xml
+Sitemap: https://webforallguide.com/sitemap.xml

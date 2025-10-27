@@ -1,0 +1,3281 @@
+<script setup>
+const { getPageSEO } = useSEOConfig()
+const seo = getPageSEO('/aria-components')
+
+useHead(seo)
+
+import { ref, computed, nextTick } from 'vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
+import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+// Initialize syntax highlighting
+useSyntaxHighlight()
+
+// Accordion state
+const badAccordionOpen = ref([false, false, false])
+const goodAccordionOpen = ref([false, false, false])
+
+const accordionItems = [
+  {
+    title: "Qu'est-ce que l'accessibilité web ?",
+    content: "L'accessibilité web consiste à rendre les sites et applications utilisables par tous, y compris les personnes en situation de handicap."
+  },
+  {
+    title: "Pourquoi est-ce important ?",
+    content: "15% de la population mondiale vit avec un handicap (Source : Nations Unies). L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale."
+  },
+  {
+    title: "Comment commencer ?",
+    content: "Commencez par apprendre les guidelines WCAG, utilisez des outils d'audit, et testez avec de vrais utilisateurs."
+  }
+]
+
+// Dropdown state
+const badDropdownOpen = ref(false)
+const goodDropdownOpen = ref(false)
+const dropdownTrigger = ref(null)
+const firstMenuItem = ref(null)
+
+// Table state
+const badSortColumn = ref('name')
+const badSortDirection = ref('asc')
+const goodSortColumn = ref('name')
+const goodSortDirection = ref('asc')
+const tableStatusMessage = ref('')
+
+const users = [
+  { id: 1, name: 'Alice Martin', email: 'alice@example.com', role: 'Admin', status: 'Actif' },
+  { id: 2, name: 'Bob Dupont', email: 'bob@example.com', role: 'Utilisateur', status: 'Inactif' },
+  { id: 3, name: 'Charlie Leroy', email: 'charlie@example.com', role: 'Modérateur', status: 'Actif' },
+  { id: 4, name: 'Diana Moreau', email: 'diana@example.com', role: 'Utilisateur', status: 'Suspendu' }
+]
+
+// Accordion functions
+function toggleBadAccordion(index) {
+  badAccordionOpen.value[index] = !badAccordionOpen.value[index]
+}
+
+function toggleGoodAccordion(index) {
+  goodAccordionOpen.value[index] = !goodAccordionOpen.value[index]
+}
+
+function handleAccordionKeydown(event, index) {
+  switch (event.key) {
+    case 'ArrowDown':
+      event.preventDefault()
+      focusNextAccordionHeader(index)
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      focusPrevAccordionHeader(index)
+      break
+    case 'Home':
+      event.preventDefault()
+      focusAccordionHeader(0)
+      break
+    case 'End':
+      event.preventDefault()
+      focusAccordionHeader(accordionItems.length - 1)
+      break
+  }
+}
+
+function focusNextAccordionHeader(currentIndex) {
+  const nextIndex = currentIndex === accordionItems.length - 1 ? 0 : currentIndex + 1
+  focusAccordionHeader(nextIndex)
+}
+
+function focusPrevAccordionHeader(currentIndex) {
+  const prevIndex = currentIndex === 0 ? accordionItems.length - 1 : currentIndex - 1
+  focusAccordionHeader(prevIndex)
+}
+
+function focusAccordionHeader(index) {
+  const header = document.getElementById(`accordion-button-${index}`)
+  if (header) header.focus()
+}
+
+// Dropdown functions
+function toggleGoodDropdown() {
+  goodDropdownOpen.value = !goodDropdownOpen.value
+  if (goodDropdownOpen.value) {
+    nextTick(() => {
+      firstMenuItem.value?.focus()
+    })
+  }
+}
+
+function closeGoodDropdown() {
+  goodDropdownOpen.value = false
+  dropdownTrigger.value?.focus()
+}
+
+function handleDropdownTriggerKeydown(event) {
+  switch (event.key) {
+    case 'ArrowDown':
+    case 'Enter':
+    case ' ':
+      event.preventDefault()
+      toggleGoodDropdown()
+      break
+    case 'Escape':
+      closeGoodDropdown()
+      break
+  }
+}
+
+function handleDropdownMenuKeydown(event) {
+  const menuItems = document.querySelectorAll('#dropdown-menu-good button')
+  const currentIndex = Array.from(menuItems).indexOf(event.target)
+
+  switch (event.key) {
+    case 'ArrowDown':
+      event.preventDefault()
+      const nextIndex = currentIndex === menuItems.length - 1 ? 0 : currentIndex + 1
+      menuItems[nextIndex].focus()
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      const prevIndex = currentIndex === 0 ? menuItems.length - 1 : currentIndex - 1
+      menuItems[prevIndex].focus()
+      break
+    case 'Escape':
+      event.preventDefault()
+      closeGoodDropdown()
+      break
+    case 'Home':
+      event.preventDefault()
+      menuItems[0].focus()
+      break
+    case 'End':
+      event.preventDefault()
+      menuItems[menuItems.length - 1].focus()
+      break
+  }
+}
+
+function handleAction(action) {
+  alert(`Action: ${action}`)
+  badDropdownOpen.value = false
+}
+
+function handleGoodAction(action) {
+  alert(`Action: ${action}`)
+  closeGoodDropdown()
+}
+
+// Table functions
+function sortBadTable(column) {
+  if (badSortColumn.value === column) {
+    badSortDirection.value = badSortDirection.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    badSortColumn.value = column
+    badSortDirection.value = 'asc'
+  }
+}
+
+function sortGoodTable(column) {
+  if (goodSortColumn.value === column) {
+    goodSortDirection.value = goodSortDirection.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    goodSortColumn.value = column
+    goodSortDirection.value = 'asc'
+  }
+
+  // Announce sort change
+  const direction = goodSortDirection.value === 'asc' ? 'croissant' : 'décroissant'
+  tableStatusMessage.value = `Tableau trié par ${column} en ordre ${direction}`
+}
+
+const sortedBadUsers = computed(() => {
+  return [...users].sort((a, b) => {
+    const aValue = a[badSortColumn.value]
+    const bValue = b[badSortColumn.value]
+
+    if (badSortDirection.value === 'asc') {
+      return aValue.localeCompare(bValue)
+    } else {
+      return bValue.localeCompare(aValue)
+    }
+  })
+})
+
+const sortedGoodUsers = computed(() => {
+  return [...users].sort((a, b) => {
+    const aValue = a[goodSortColumn.value]
+    const bValue = b[goodSortColumn.value]
+
+    if (goodSortDirection.value === 'asc') {
+      return aValue.localeCompare(bValue)
+    } else {
+      return bValue.localeCompare(aValue)
+    }
+  })
+})
+
+function getSortState(column) {
+  if (goodSortColumn.value !== column) return 'none'
+  return goodSortDirection.value === 'asc' ? 'ascending' : 'descending'
+}
+
+function getSortIcon(column) {
+  if (goodSortColumn.value !== column) return 'chevrons-up-down'
+  return goodSortDirection.value === 'asc' ? 'chevron-up' : 'chevron-down'
+}
+
+// Aria-live demo state
+const badLiveContent = ref('')
+const politeLiveContent = ref('')
+const assertiveLiveContent = ref('')
+const liveType = ref('polite')
+let liveCounter = 0
+
+// Gallery states
+const selectedBadImage = ref(0)
+const selectedGoodImage = ref(0)
+
+const galleryImages = [
+  {
+    thumb: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=80&h=60&fit=crop&crop=center",
+    full: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=600&fit=crop&crop=center",
+    alt: "MacBook Pro vue de face, écran fermé",
+    description: "Vue frontale du MacBook Pro 16 pouces avec l'écran fermé, montrant le design épuré en aluminium."
+  },
+  {
+    thumb: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=80&h=60&fit=crop&crop=center",
+    full: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&h=600&fit=crop&crop=center",
+    alt: "MacBook Pro ouvert montrant l'écran et le clavier",
+    description: "MacBook Pro ouvert à 90 degrés, écran allumé affichant le bureau macOS, clavier et trackpad visibles."
+  },
+  {
+    thumb: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=80&h=60&fit=crop&crop=center",
+    full: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop&crop=center",
+    alt: "MacBook Pro vue de côté montrant l'épaisseur",
+    description: "Vue latérale du MacBook Pro fermé, mettant en évidence son profil fin et ses ports."
+  }
+]
+
+function updateBadLiveContent() {
+  liveCounter++
+  badLiveContent.value = `Compteur mis à jour : ${liveCounter}`
+}
+
+function clearBadLiveContent() {
+  badLiveContent.value = ''
+  liveCounter = 0
+}
+
+function updateGoodLiveContent(type) {
+  liveCounter++
+  const message = type === 'alert'
+    ? `⚠️ ALERTE : Action requise! (Message ${liveCounter})`
+    : `ℹ️ Information : Le compteur est à ${liveCounter}`
+
+  if (type === 'alert' || liveType.value === 'assertive') {
+    assertiveLiveContent.value = message
+    setTimeout(() => { assertiveLiveContent.value = '' }, 5000)
+  } else {
+    politeLiveContent.value = message
+    setTimeout(() => { politeLiveContent.value = '' }, 5000)
+  }
+}
+
+function clearGoodLiveContent() {
+  politeLiveContent.value = ''
+  assertiveLiveContent.value = ''
+  liveCounter = 0
+}
+
+// Form ARIA demo variables
+const formEmail = ref('')
+const formPassword = ref('')
+const emailNotifications = ref(true)
+const smsNotifications = ref(false)
+const termsAccepted = ref(false)
+const formSubmitted = ref(false)
+
+const emailInvalid = ref(false)
+const emailError = ref('')
+const passwordInvalid = ref(false)
+const passwordError = ref('')
+const submitStatus = ref('')
+
+const formValid = computed(() => {
+  return formEmail.value &&
+         formPassword.value &&
+         !emailInvalid.value &&
+         !passwordInvalid.value &&
+         termsAccepted.value
+})
+
+function validateEmail() {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!formEmail.value) {
+    emailInvalid.value = true
+    emailError.value = 'L\'email est requis'
+  } else if (!emailRegex.test(formEmail.value)) {
+    emailInvalid.value = true
+    emailError.value = 'Format d\'email invalide'
+  } else {
+    emailInvalid.value = false
+    emailError.value = ''
+  }
+}
+
+function validatePassword() {
+  if (!formPassword.value) {
+    passwordInvalid.value = true
+    passwordError.value = 'Le mot de passe est requis'
+  } else if (formPassword.value.length < 8) {
+    passwordInvalid.value = true
+    passwordError.value = 'Le mot de passe doit contenir au moins 8 caractères'
+  } else if (!/\d/.test(formPassword.value) || !/[a-zA-Z]/.test(formPassword.value)) {
+    passwordInvalid.value = true
+    passwordError.value = 'Le mot de passe doit contenir des lettres et des chiffres'
+  } else {
+    passwordInvalid.value = false
+    passwordError.value = ''
+  }
+}
+
+function handleSearch() {
+  alert('Recherche lancée')
+}
+
+function submitForm() {
+  formSubmitted.value = true
+  validateEmail()
+  validatePassword()
+
+  if (formValid.value) {
+    submitStatus.value = 'Formulaire soumis avec succès'
+    alert('Formulaire soumis avec succès!')
+  } else {
+    submitStatus.value = 'Veuillez corriger les erreurs avant de soumettre'
+  }
+}
+
+// Focus demo refs and functions
+const alertElement = ref(null)
+
+function handleCustomButtonClick() {
+  alert('Bouton personnalisé cliqué!')
+}
+
+function handleCustomButtonKeydown(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleCustomButtonClick()
+  }
+}
+
+function handleTabClick() {
+  alert('Onglet sélectionné!')
+}
+
+function handleTabKeydown(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleTabClick()
+  }
+}
+
+function handleMenuClick() {
+  alert('Option de menu sélectionnée!')
+}
+
+function handleMenuKeydown(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleMenuClick()
+  }
+}
+
+function focusAlert() {
+  if (alertElement.value) {
+    alertElement.value.focus()
+    alertElement.value.textContent = 'Message d\'alerte maintenant focusé!'
+    setTimeout(() => {
+      if (alertElement.value) {
+        alertElement.value.textContent = 'Message d\'alerte (tabindex="-1")'
+      }
+    }, 2000)
+  }
+}
+
+// Gallery functions
+function selectGoodImage(index) {
+  selectedGoodImage.value = index
+}
+
+function handleGalleryKeydown(event, index) {
+  switch (event.key) {
+    case 'ArrowLeft':
+      event.preventDefault()
+      const prevIndex = index === 0 ? galleryImages.length - 1 : index - 1
+      selectGoodImage(prevIndex)
+      document.getElementById(`gallery-tab-${prevIndex}`).focus()
+      break
+    case 'ArrowRight':
+      event.preventDefault()
+      const nextIndex = (index + 1) % galleryImages.length
+      selectGoodImage(nextIndex)
+      document.getElementById(`gallery-tab-${nextIndex}`).focus()
+      break
+    case 'Home':
+      event.preventDefault()
+      selectGoodImage(0)
+      document.getElementById('gallery-tab-0').focus()
+      break
+    case 'End':
+      event.preventDefault()
+      selectGoodImage(galleryImages.length - 1)
+      document.getElementById(`gallery-tab-${galleryImages.length - 1}`).focus()
+      break
+  }
+}
+
+// Combobox / Autocomplete state
+const countries = [
+  'Afghanistan', 'Albanie', 'Algérie', 'Allemagne', 'Andorre', 'Angola', 'Argentine', 'Arménie', 'Australie', 'Autriche',
+  'Belgique', 'Brésil', 'Bulgarie',
+  'Canada', 'Chine', 'Colombie', 'Croatie', 'Cuba',
+  'Danemark',
+  'Égypte', 'Espagne', 'Estonie', 'États-Unis',
+  'Finlande', 'France',
+  'Grèce',
+  'Hongrie',
+  'Inde', 'Indonésie', 'Irlande', 'Islande', 'Israël', 'Italie',
+  'Japon', 'Jordanie',
+  'Kenya',
+  'Lettonie', 'Lituanie', 'Luxembourg',
+  'Madagascar', 'Malte', 'Maroc', 'Mexique', 'Monaco',
+  'Nigéria', 'Norvège', 'Nouvelle-Zélande',
+  'Pakistan', 'Pays-Bas', 'Pérou', 'Pologne', 'Portugal',
+  'Roumanie', 'Royaume-Uni', 'Russie',
+  'Sénégal', 'Serbie', 'Singapour', 'Slovaquie', 'Slovénie', 'Suède', 'Suisse',
+  'Thaïlande', 'Tunisie', 'Turquie',
+  'Ukraine',
+  'Vietnam'
+]
+
+const searchQueryBad = ref('')
+const suggestionsBad = ref([])
+const selectedBad = ref('')
+
+const searchQueryGood = ref('')
+const suggestionsGood = ref([])
+const selectedIndexGood = ref(-1)
+const selectedGood = ref('')
+
+function filterSuggestionsBad() {
+  if (!searchQueryBad.value.trim()) {
+    suggestionsBad.value = []
+    return
+  }
+  suggestionsBad.value = countries.filter(country =>
+    country.toLowerCase().includes(searchQueryBad.value.toLowerCase())
+  ).slice(0, 8)
+}
+
+function selectBad(item) {
+  selectedBad.value = item
+  searchQueryBad.value = item
+  suggestionsBad.value = []
+}
+
+function filterSuggestionsGood() {
+  selectedIndexGood.value = -1
+  if (!searchQueryGood.value.trim()) {
+    suggestionsGood.value = []
+    return
+  }
+  suggestionsGood.value = countries.filter(country =>
+    country.toLowerCase().includes(searchQueryGood.value.toLowerCase())
+  ).slice(0, 8)
+}
+
+function selectNextGood() {
+  if (suggestionsGood.value.length === 0) return
+  selectedIndexGood.value = selectedIndexGood.value < suggestionsGood.value.length - 1
+    ? selectedIndexGood.value + 1
+    : 0
+}
+
+function selectPrevGood() {
+  if (suggestionsGood.value.length === 0) return
+  selectedIndexGood.value = selectedIndexGood.value > 0
+    ? selectedIndexGood.value - 1
+    : suggestionsGood.value.length - 1
+}
+
+function confirmSelectionGood() {
+  if (selectedIndexGood.value >= 0 && suggestionsGood.value[selectedIndexGood.value]) {
+    selectGood(suggestionsGood.value[selectedIndexGood.value])
+  }
+}
+
+function selectGood(item) {
+  selectedGood.value = item
+  searchQueryGood.value = item
+  suggestionsGood.value = []
+  selectedIndexGood.value = -1
+}
+
+function closeSuggestionsGood() {
+  suggestionsGood.value = []
+  selectedIndexGood.value = -1
+}
+
+// Toast Notifications state
+const badToastVisible = ref(false)
+const badToastMessage = ref('')
+const goodToastVisible = ref(false)
+const goodToastMessage = ref('')
+const goodToastType = ref('info')
+
+function showBadToast() {
+  badToastMessage.value = 'Notification non accessible (non annoncée)'
+  badToastVisible.value = true
+  setTimeout(() => {
+    badToastVisible.value = false
+  }, 3000)
+}
+
+function showGoodInfo() {
+  goodToastMessage.value = 'Opération réussie ! Vos modifications ont été enregistrées.'
+  goodToastType.value = 'info'
+  goodToastVisible.value = true
+  setTimeout(() => {
+    goodToastVisible.value = false
+  }, 5000)
+}
+
+function showGoodError() {
+  goodToastMessage.value = 'Erreur : Impossible de sauvegarder les modifications.'
+  goodToastType.value = 'error'
+  goodToastVisible.value = true
+  setTimeout(() => {
+    goodToastVisible.value = false
+  }, 5000)
+}
+
+function dismissGoodToast() {
+  goodToastVisible.value = false
+}
+</script>
+
+<template>
+  <div class="aria-components">
+    <PageHeader
+      title="ARIA"
+      description="Enrichir la sémantique des composants complexes pour les rendre accessibles"
+    />
+
+    <section class="aria-intro">
+      <h2 class="section-title">Qu'est-ce que ARIA ?</h2>
+      <p>
+        <strong>ARIA (Accessible Rich Internet Applications)</strong> est une spécification du W3C qui permet d'améliorer
+        l'accessibilité des applications web dynamiques. ARIA fournit des attributs supplémentaires pour décrire
+        le rôle, l'état et les propriétés des éléments aux technologies d'assistance.
+      </p>
+
+      <div class="aria-principles">
+        <div class="principle-card">
+          <h3>🏷️ Rôles</h3>
+          <p>Définissent ce qu'est un élément (button, navigation, alert...)</p>
+          <code>role="button"</code>
+        </div>
+        <div class="principle-card">
+          <h3>📊 États</h3>
+          <p>Décrivent l'état actuel d'un élément (checked, expanded, disabled...)</p>
+          <code>aria-expanded="true"</code>
+        </div>
+        <div class="principle-card">
+          <h3>🔧 Propriétés</h3>
+          <p>Fournissent des informations supplémentaires (label, describedby, controls...)</p>
+          <code>aria-label="Menu principal"</code>
+        </div>
+      </div>
+
+      <div class="aria-golden-rules">
+        <h3>⚠️ Règle d'or d'ARIA</h3>
+        <p class="golden-rule-text">
+          <strong>Ne pas utiliser ARIA si vous pouvez utiliser HTML natif</strong>
+        </p>
+      </div>
+    </section>
+
+    <ExampleToggle
+      title="Formulaires avec attributs ARIA"
+      explanation="Les attributs ARIA enrichissent les formulaires en fournissant des labels, descriptions et états aux technologies d'assistance."
+    >
+      <template #bad>
+        <div class="form-aria-demo">
+          <h4>Formulaire sans ARIA</h4>
+          <p>❌ Formulaire inaccessible sans attributs ARIA appropriés :</p>
+
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : pas de label, pas de description --&gt;
+&lt;input type="text" placeholder="Votre email"&gt;
+
+&lt;!-- Mauvais : icône non accessible --&gt;
+&lt;button&gt;
+  &lt;span class="icon"&gt;🔍&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Mauvais : erreur non associée, pas d'autocomplete --&gt;
+&lt;input type="password"&gt;
+&lt;div class="error"&gt;Mot de passe trop court&lt;/div&gt;</code></pre>
+          </div>
+
+          <form class="bad-form-aria">
+            <div class="form-field">
+              <input type="text" placeholder="Votre email" class="bad-input">
+            </div>
+
+            <div class="form-field">
+              <button class="bad-icon-button">
+                <span>🔍</span>
+              </button>
+            </div>
+
+            <div class="form-field">
+              <input type="password" placeholder="Mot de passe" class="bad-input error-input" autocomplete="current-password">
+              <div class="error-message">Mot de passe trop court</div>
+            </div>
+
+            <div class="form-field">
+              <div class="checkbox-group">
+                <input type="checkbox" id="bad-terms">
+                <span>J'accepte les conditions</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="form-aria-demo">
+          <h4>Formulaire avec ARIA</h4>
+          <p>✅ Formulaire accessible avec attributs ARIA appropriés :</p>
+
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : aria-label pour champ sans label visible --&gt;
+&lt;input
+  type="text"
+  aria-label="Adresse email"
+  aria-describedby="email-desc"
+  aria-required="true"&gt;
+&lt;span id="email-desc"&gt;Format : nom@exemple.com&lt;/span&gt;
+
+&lt;!-- Bon : bouton avec aria-label --&gt;
+&lt;button aria-label="Rechercher"&gt;
+  &lt;span aria-hidden="true"&gt;🔍&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Bon : erreur associée avec aria-describedby --&gt;
+&lt;input
+  type="password"
+  aria-label="Mot de passe"
+  aria-invalid="true"
+  aria-describedby="pwd-error"
+  autocomplete="new-password"&gt;
+&lt;div id="pwd-error" role="alert"&gt;
+  Mot de passe trop court
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <form class="good-form-aria">
+            <div class="form-field">
+              <label for="good-email" class="sr-only">Adresse email</label>
+              <input
+                type="email"
+                id="good-email"
+                aria-label="Adresse email"
+                aria-describedby="email-desc"
+                aria-required="true"
+                :aria-invalid="emailInvalid"
+                v-model="formEmail"
+                @blur="validateEmail"
+                placeholder="Votre email"
+                class="good-input"
+                autocomplete="email"
+              >
+              <span id="email-desc" class="field-hint">Format : nom@exemple.com</span>
+              <div v-if="emailError" id="email-error" role="alert" class="error-message">
+                {{ emailError }}
+              </div>
+            </div>
+
+            <div class="form-field">
+              <button
+                aria-label="Rechercher"
+                @click="handleSearch"
+                class="good-icon-button"
+              >
+                <span aria-hidden="true">🔍</span>
+                <span class="sr-only">Rechercher</span>
+              </button>
+            </div>
+
+            <div class="form-field">
+              <label for="good-password" class="sr-only">Mot de passe</label>
+              <input
+                type="password"
+                id="good-password"
+                aria-label="Mot de passe"
+                aria-describedby="pwd-requirements pwd-error"
+                aria-required="true"
+                :aria-invalid="passwordInvalid"
+                v-model="formPassword"
+                @input="validatePassword"
+                placeholder="Mot de passe"
+                class="good-input"
+                :class="{ 'error': passwordInvalid }"
+                autocomplete="new-password"
+              >
+              <div id="pwd-requirements" class="field-hint">
+                Minimum 8 caractères avec chiffres et lettres
+              </div>
+              <div v-if="passwordError" id="pwd-error" role="alert" class="error-message">
+                {{ passwordError }}
+              </div>
+            </div>
+
+            <div class="form-field">
+              <fieldset role="group" aria-labelledby="options-legend">
+                <legend id="options-legend">Options de notification</legend>
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="good-email-notif"
+                    v-model="emailNotifications"
+                    aria-describedby="email-notif-desc"
+                  >
+                  <label for="good-email-notif">Notifications par email</label>
+                </div>
+                <span id="email-notif-desc" class="field-hint">
+                  Recevez les mises à jour importantes par email
+                </span>
+
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="good-sms-notif"
+                    v-model="smsNotifications"
+                    aria-describedby="sms-notif-desc"
+                  >
+                  <label for="good-sms-notif">Notifications par SMS</label>
+                </div>
+                <span id="sms-notif-desc" class="field-hint">
+                  Recevez les alertes urgentes par SMS
+                </span>
+              </fieldset>
+            </div>
+
+            <div class="form-field">
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="good-terms"
+                  v-model="termsAccepted"
+                  aria-required="true"
+                  :aria-invalid="!termsAccepted && formSubmitted"
+                  aria-describedby="terms-error"
+                >
+                <label for="good-terms">
+                  J'accepte les <a href="#" aria-label="Lire les conditions d'utilisation">conditions d'utilisation</a>
+                </label>
+              </div>
+              <div v-if="!termsAccepted && formSubmitted" id="terms-error" role="alert" class="error-message">
+                Vous devez accepter les conditions
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                @click="submitForm"
+                :disabled="!formValid"
+                aria-describedby="submit-status"
+                class="form-submit-button"
+              >
+                Soumettre
+              </button>
+              <span id="submit-status" class="sr-only" aria-live="polite">
+                {{ submitStatus }}
+              </span>
+            </div>
+          </form>
+
+          <div class="aria-attributes-list">
+            <h5>Attributs ARIA utilisés :</h5>
+            <ul>
+              <li><code>aria-label</code> : Fournit un label accessible</li>
+              <li><code>aria-describedby</code> : Associe une description détaillée</li>
+              <li><code>aria-required</code> : Indique un champ obligatoire</li>
+              <li><code>aria-invalid</code> : Signale un champ invalide</li>
+              <li><code>aria-labelledby</code> : Référence un label existant</li>
+              <li><code>role="alert"</code> : Annonce immédiatement les erreurs</li>
+              <li><code>aria-hidden</code> : Cache les éléments décoratifs</li>
+              <li><code>aria-live</code> : Annonce les changements dynamiques</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Accordéon accessible"
+      explanation="Un accordéon doit utiliser les attributs ARIA appropriés, supporter la navigation clavier et annoncer les changements d'état."
+    >
+      <template #bad>
+        <div class="accordion-demo">
+          <h4>Sans attributs ARIA</h4>
+          <div class="accordion-bad">
+            <div class="accordion-item">
+              <div class="accordion-header" @click="toggleBadAccordion(0)">
+                <span>Qu'est-ce que l'accessibilité web ?</span>
+                <span class="accordion-icon">{{ badAccordionOpen[0] ? '−' : '+' }}</span>
+              </div>
+              <div v-if="badAccordionOpen[0]" class="accordion-content">
+                <p>L'accessibilité web consiste à rendre les sites et applications utilisables par tous, y compris les personnes en situation de handicap.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" @click="toggleBadAccordion(1)">
+                <span>Pourquoi est-ce important ?</span>
+                <span class="accordion-icon">{{ badAccordionOpen[1] ? '−' : '+' }}</span>
+              </div>
+              <div v-if="badAccordionOpen[1]" class="accordion-content">
+                <p>15% de la population mondiale vit avec un handicap (Source : <a href="https://www.un.org/fr/observances/day-of-persons-with-disabilities/background" target="_blank" rel="noopener">Nations Unies</a>). L'accessibilité améliore l'expérience pour tous et est souvent une obligation légale.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" @click="toggleBadAccordion(2)">
+                <span>Comment commencer ?</span>
+                <span class="accordion-icon">{{ badAccordionOpen[2] ? '−' : '+' }}</span>
+              </div>
+              <div v-if="badAccordionOpen[2]" class="accordion-content">
+                <p>Commencez par apprendre les guidelines WCAG, utilisez des outils d'audit, et testez avec de vrais utilisateurs.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bad: No ARIA attributes, no keyboard navigation --&gt;
+&lt;div class="accordion-header" @click="toggle"&gt;
+  &lt;span&gt;Title&lt;/span&gt;
+  &lt;span&gt;+&lt;/span&gt;
+&lt;/div&gt;
+&lt;div v-if="open"&gt;
+  Content
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="accordion-demo">
+          <h4>Avec ARIA correct</h4>
+          <div class="accordion-good">
+            <div
+              v-for="(item, index) in accordionItems"
+              :key="index"
+              class="accordion-item"
+            >
+              <button
+                :id="`accordion-button-${index}`"
+                class="accordion-header"
+                :aria-expanded="goodAccordionOpen[index] ? 'true' : 'false'"
+                :aria-controls="`accordion-panel-${index}`"
+                @click="toggleGoodAccordion(index)"
+                @keydown.enter="toggleGoodAccordion(index)"
+                @keydown.space.prevent="toggleGoodAccordion(index)"
+                @keydown="handleAccordionKeydown($event, index)"
+              >
+                <span>{{ item.title }}</span>
+                <span class="accordion-icon">{{ goodAccordionOpen[index] ? '−' : '+' }}</span>
+              </button>
+              <div
+                v-if="goodAccordionOpen[index]"
+                :id="`accordion-panel-${index}`"
+                role="region"
+                :aria-labelledby="`accordion-button-${index}`"
+                class="accordion-content"
+              >
+                <p>{{ item.content }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Good: Complete ARIA with keyboard navigation --&gt;
+&lt;button
+  id="accordion-button-1"
+  aria-expanded="false"
+  aria-controls="panel-1"
+  @click="toggle"
+  @keydown.enter="toggle"
+&gt;
+  Title
+&lt;/button&gt;
+&lt;div
+  id="panel-1"
+  role="region"
+  aria-labelledby="accordion-button-1"
+  :hidden="!open"
+&gt;
+  Content
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <section class="tabindex-section">
+      <h2 class="section-title">Tabindex et navigation clavier</h2>
+      <p>
+        L'attribut <code class="inline-code">tabindex</code> contrôle si un élément peut recevoir le focus clavier et dans quel ordre.
+      </p>
+
+      <div class="tabindex-values">
+        <div class="tabindex-card">
+          <h3>✅ tabindex="0"</h3>
+          <p>L'élément est focusable dans l'ordre naturel du DOM</p>
+          <code>tabindex="0"</code>
+          <div class="code-block">
+            <pre><code>&lt;!-- Good: Interactive element focusable --&gt;
+&lt;div role="button" aria-label="Custom action" tabindex="0"&gt;
+  Custom button
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="tabindex-card">
+          <h3>⚠️ tabindex="-1"</h3>
+          <p>Focusable par JavaScript mais pas par Tab</p>
+          <code>tabindex="-1"</code>
+          <div class="code-block">
+            <pre><code>&lt;!-- Good: For programmatic focus --&gt;
+&lt;div role="alert" aria-live="assertive" tabindex="-1"&gt;
+  Error message
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="tabindex-card bad">
+          <h3>❌ tabindex > 0</h3>
+          <p>Change l'ordre de navigation (à éviter !)</p>
+          <code>tabindex="5"</code>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bad: Breaks natural tab order --&gt;
+&lt;button tabindex="3"&gt;Third&lt;/button&gt;
+&lt;button tabindex="1"&gt;First&lt;/button&gt;
+&lt;button tabindex="2"&gt;Second&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabindex-best-practices">
+        <h3>📋 Bonnes pratiques tabindex</h3>
+        <ul>
+          <li>Utilisez <code class="inline-code">tabindex="0"</code> pour rendre les éléments custom interactifs focusables</li>
+          <li>Utilisez <code class="inline-code">tabindex="-1"</code> pour le focus programmatique (modals, alerts)</li>
+          <li>N'utilisez JAMAIS de valeurs positives - respectez l'ordre du DOM</li>
+          <li>Les éléments natifs interactifs (<code class="inline-code">&lt;button&gt;</code>, <code class="inline-code">&lt;a&gt;</code>, <code class="inline-code">&lt;input&gt;</code>) n'ont pas besoin de tabindex</li>
+        </ul>
+      </div>
+
+      <!-- Interactive examples -->
+      <div class="focus-examples">
+        <h3>🎯 Exemples interactifs</h3>
+        <p>Testez la navigation au clavier (Tab/Shift+Tab) avec ces éléments :</p>
+
+        <div class="focus-demo-grid">
+          <div class="focus-demo-section">
+            <h4>✅ Éléments focusables</h4>
+
+            <!-- Native focusable elements -->
+            <button class="demo-button">Bouton natif</button>
+            <input type="text" placeholder="Champ de texte" class="demo-input" />
+            <a href="#demo" class="demo-link">Lien</a>
+
+            <!-- Custom focusable elements -->
+            <div role="button" aria-label="Bouton personnalisé" tabindex="0" class="custom-button" @click="handleCustomButtonClick" @keydown="handleCustomButtonKeydown">
+              Bouton custom (div)
+            </div>
+
+            <div role="tab" aria-selected="false" aria-controls="panel-1" tabindex="0" class="custom-tab" @click="handleTabClick" @keydown="handleTabKeydown">
+              Onglet personnalisé
+            </div>
+
+            <div role="menuitem" aria-label="Option de menu" tabindex="0" class="custom-menuitem" @click="handleMenuClick" @keydown="handleMenuKeydown">
+              Option de menu
+            </div>
+          </div>
+
+          <div class="focus-demo-section">
+            <h4>❌ Éléments non-focusables</h4>
+
+            <!-- Non-focusable elements -->
+            <div class="demo-text">Texte simple (div)</div>
+            <span class="demo-span">Texte inline (span)</span>
+            <p class="demo-paragraph">Paragraphe</p>
+
+            <!-- Disabled elements -->
+            <button disabled class="demo-button">Bouton désactivé</button>
+            <input type="text" disabled placeholder="Champ désactivé" class="demo-input" />
+
+            <!-- Hidden from screen readers -->
+            <div aria-hidden="true" class="demo-hidden">Élément aria-hidden</div>
+
+            <!-- Programmatically focusable only -->
+            <div role="alert" aria-live="polite" tabindex="-1" class="demo-alert" ref="alertElement">
+              Message d'alerte (tabindex="-1")
+            </div>
+
+            <button @click="focusAlert" class="demo-button">Focus sur l'alerte</button>
+          </div>
+        </div>
+
+        <div class="focus-tips">
+          <h4>💡 Conseils pour tester</h4>
+          <ul>
+            <li>Utilisez <kbd>Tab</kbd> pour naviguer vers l'avant</li>
+            <li>Utilisez <kbd>Shift + Tab</kbd> pour naviguer vers l'arrière</li>
+            <li>Utilisez <kbd>Espace</kbd> ou <kbd>Entrée</kbd> pour activer les éléments</li>
+            <li>Observez l'indicateur de focus (contour bleu)</li>
+            <li>Notez quels éléments peuvent ou ne peuvent pas recevoir le focus</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <ExampleToggle
+      title="Menu déroulant accessible"
+      explanation="Un menu déroulant doit supporter la navigation clavier, fermer avec Échap, et maintenir le focus de manière appropriée."
+    >
+      <template #bad>
+        <div class="dropdown-demo">
+          <h4>Menu sans ARIA</h4>
+          <div class="dropdown-bad">
+            <div class="dropdown-trigger" @click="badDropdownOpen = !badDropdownOpen">
+              Actions {{ badDropdownOpen ? '▲' : '▼' }}
+            </div>
+            <div v-if="badDropdownOpen" class="dropdown-menu">
+              <div class="dropdown-item" @click="handleAction('edit')">Modifier</div>
+              <div class="dropdown-item" @click="handleAction('copy')">Copier</div>
+              <div class="dropdown-item" @click="handleAction('delete')">Supprimer</div>
+              <div class="dropdown-item" @click="handleAction('share')">Partager</div>
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Bad: No menu role, no focus trap --&gt;
+&lt;div @click="open = !open"&gt;
+  Actions ▼
+&lt;/div&gt;
+&lt;div v-if="open"&gt;
+  &lt;div @click="action"&gt;Edit&lt;/div&gt;
+  &lt;div @click="action"&gt;Delete&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="dropdown-demo">
+          <h4>Menu avec ARIA</h4>
+          <div class="dropdown-good">
+            <button
+              class="dropdown-trigger"
+              aria-haspopup="true"
+              :aria-expanded="goodDropdownOpen"
+              :aria-controls="goodDropdownOpen ? 'dropdown-menu-good' : undefined"
+              @click="toggleGoodDropdown"
+              @keydown="handleDropdownTriggerKeydown"
+              ref="dropdownTrigger"
+            >
+              Actions <span aria-hidden="true">▼</span>
+            </button>
+            <div
+              v-show="goodDropdownOpen"
+              class="dropdown-popin"
+              @click.self="closeGoodDropdown"
+            >
+              <div
+                id="dropdown-menu-good"
+                class="dropdown-menu"
+                role="menu"
+                @keydown="handleDropdownMenuKeydown"
+              >
+                <button
+                  role="menuitem"
+                  class="dropdown-item"
+                  @click="handleGoodAction('edit')"
+                  ref="firstMenuItem"
+                >
+                  Modifier
+                </button>
+                <button
+                  role="menuitem"
+                  class="dropdown-item"
+                  @click="handleGoodAction('copy')"
+                >
+                  Copier
+                </button>
+                <button
+                  role="menuitem"
+                  class="dropdown-item"
+                  @click="handleGoodAction('delete')"
+                >
+                  Supprimer
+                </button>
+                <button
+                  role="menuitem"
+                  class="dropdown-item"
+                  @click="handleGoodAction('share')"
+                >
+                  Partager
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- Good: ARIA attributes and focus management --&gt;
+&lt;button
+  aria-haspopup="true"
+  aria-expanded="false"
+  aria-controls="menu"
+  @keydown.escape="close"
+&gt;
+  Actions
+&lt;/button&gt;
+&lt;div
+  id="menu"
+  role="menu"
+  v-if="open"
+&gt;
+  &lt;button role="menuitem"&gt;Edit&lt;/button&gt;
+  &lt;button role="menuitem"&gt;Delete&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Galerie d'images accessible"
+      explanation="Une galerie d'images doit permettre la navigation au clavier et fournir des descriptions contextuelles pour chaque image. Le pattern ARIA tablist/tab/tabpanel est parfait pour ce cas d'usage."
+    >
+      <template #bad>
+        <div class="gallery-demo">
+          <h4>Galerie produit</h4>
+          <div class="gallery-bad">
+            <div class="thumbnails-bad">
+              <img
+                v-for="(image, index) in galleryImages"
+                :key="index"
+                :src="image.thumb"
+                @click="selectedBadImage = index"
+                :class="{ active: selectedBadImage === index }"
+              />
+            </div>
+            <div class="main-image-bad">
+              <img :src="galleryImages[selectedBadImage].full" />
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- ❌ Mauvais : galerie non accessible au clavier --&gt;
+&lt;div class="thumbnails"&gt;
+  &lt;img v-for="image in images"
+       :src="image.thumb"
+       @click="selectImage(index)"
+       :class="{ active: selected === index }" /&gt;
+&lt;/div&gt;
+&lt;div class="main-image"&gt;
+  &lt;img :src="images[selected].full" /&gt;
+&lt;/div&gt;
+
+&lt;!-- Problèmes :
+- Pas de navigation au clavier
+- Pas de rôles ARIA
+- Images sans descriptions alternatives
+- Pas de focus management --&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="gallery-demo">
+          <h4>Galerie produit</h4>
+          <div class="gallery-good">
+            <div class="thumbnails-good" role="tablist" aria-label="Images du produit">
+              <button
+                v-for="(image, index) in galleryImages"
+                :key="index"
+                :id="`gallery-tab-${index}`"
+                role="tab"
+                :aria-selected="selectedGoodImage === index"
+                :aria-controls="`gallery-panel-${index}`"
+                :tabindex="selectedGoodImage === index ? 0 : -1"
+                @click="selectGoodImage(index)"
+                @keydown="handleGalleryKeydown($event, index)"
+                class="thumbnail-btn"
+                :class="{ active: selectedGoodImage === index }"
+              >
+                <img :src="image.thumb" :alt="`${image.alt} - Miniature`" />
+              </button>
+            </div>
+            <div class="main-image-good">
+              <div
+                :id="`gallery-panel-${selectedGoodImage}`"
+                role="tabpanel"
+                :aria-labelledby="`gallery-tab-${selectedGoodImage}`"
+              >
+                <img
+                  :src="galleryImages[selectedGoodImage].full"
+                  :alt="galleryImages[selectedGoodImage].alt"
+                />
+                <p class="image-description">{{ galleryImages[selectedGoodImage].description }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block">
+            <pre><code>&lt;!-- ✅ Bon : galerie accessible avec navigation clavier --&gt;
+&lt;div role="tablist" aria-label="Images du produit"&gt;
+  &lt;button v-for="(image, index) in images"
+          :id="`tab-${index}`"
+          role="tab"
+          :aria-selected="selected === index"
+          :aria-controls="`panel-${index}`"
+          :tabindex="selected === index ? 0 : -1"
+          @click="selectImage(index)"
+          @keydown="handleKeydown($event, index)"&gt;
+    &lt;img :src="image.thumb" :alt="`${image.alt} - Miniature`" /&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div :id="`panel-${selected}`"
+     role="tabpanel"
+     :aria-labelledby="`tab-${selected}`"&gt;
+  &lt;img :src="images[selected].full" :alt="images[selected].alt" /&gt;
+  &lt;p&gt;&#123;&#123; images[selected].description &#125;&#125;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Bonnes pratiques :
+- Pattern tablist/tab/tabpanel ARIA
+- Navigation avec flèches, Home, End
+- Focus management avec tabindex
+- Descriptions détaillées pour chaque image --&gt;</code></pre>
+          </div>
+        </div>
+      </template>
+
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Tableau triable accessible"
+      explanation="Un tableau triable doit indiquer l'état de tri courant, permettre la navigation clavier, et annoncer les changements aux lecteurs d'écran."
+    >
+      <template #bad>
+        <div class="table-demo">
+          <table class="table-bad">
+            <thead>
+              <tr>
+                <th @click="sortBadTable('name')">
+                  Nom {{ badSortColumn === 'name' ? (badSortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </th>
+                <th @click="sortBadTable('email')">
+                  Email {{ badSortColumn === 'email' ? (badSortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </th>
+                <th @click="sortBadTable('role')">
+                  Rôle {{ badSortColumn === 'role' ? (badSortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </th>
+                <th @click="sortBadTable('status')">
+                  Statut {{ badSortColumn === 'status' ? (badSortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in sortedBadUsers" :key="user.id">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="table-demo">
+          <div id="table-status" class="sr-only" aria-live="polite" aria-atomic="true">
+            {{ tableStatusMessage }}
+          </div>
+          <table class="table-good" role="table" aria-label="Liste des utilisateurs">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <button
+                    class="sort-button"
+                    @click="sortGoodTable('name')"
+                    :aria-sort="getSortState('name')"
+                    aria-describedby="sort-instructions"
+                  >
+                    Nom
+                    <span aria-hidden="true">{{ getSortIcon('name') === 'chevron-up' ? '↑' : getSortIcon('name') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button
+                    class="sort-button"
+                    @click="sortGoodTable('email')"
+                    :aria-sort="getSortState('email')"
+                    aria-describedby="sort-instructions"
+                  >
+                    Email
+                    <span aria-hidden="true">{{ getSortIcon('email') === 'chevron-up' ? '↑' : getSortIcon('email') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button
+                    class="sort-button"
+                    @click="sortGoodTable('role')"
+                    :aria-sort="getSortState('role')"
+                    aria-describedby="sort-instructions"
+                  >
+                    Rôle
+                    <span aria-hidden="true">{{ getSortIcon('role') === 'chevron-up' ? '↑' : getSortIcon('role') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button
+                    class="sort-button"
+                    @click="sortGoodTable('status')"
+                    :aria-sort="getSortState('status')"
+                    aria-describedby="sort-instructions"
+                  >
+                    Statut
+                    <span aria-hidden="true">{{ getSortIcon('status') === 'chevron-up' ? '↑' : getSortIcon('status') === 'chevron-down' ? '↓' : '↕' }}</span>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in sortedGoodUsers" :key="user.id">
+                <th scope="row">{{ user.name }}</th>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <span class="status-badge" :class="'status-' + user.status.toLowerCase()">{{ user.status }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="sort-instructions" class="table-instructions">
+            Cliquez sur les en-têtes de colonnes pour trier le tableau. Utilisez Tab pour naviguer entre les boutons de tri.
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Zones dynamiques aria-live"
+      explanation="Les zones aria-live permettent d'annoncer des changements de contenu aux lecteurs d'écran. 'polite' attend la fin de l'annonce en cours, 'assertive' interrompt immédiatement."
+    >
+      <template #bad>
+        <div class="aria-live-demo">
+          <h4>Sans aria-live</h4>
+          <p>Les changements ne sont pas annoncés</p>
+
+          <div class="live-controls">
+            <button @click="updateBadLiveContent">
+              Mettre à jour le compteur
+            </button>
+            <button @click="clearBadLiveContent">
+              Effacer
+            </button>
+          </div>
+
+          <div class="live-region-bad">
+            <p>{{ badLiveContent }}</p>
+          </div>
+
+          <div class="live-status">
+            <p><strong>Problèmes :</strong></p>
+            <ul>
+              <li>Les changements ne sont pas annoncés</li>
+              <li>Les utilisateurs de lecteurs d'écran ne savent pas que le contenu a changé</li>
+              <li>Aucune indication de l'importance du message</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="aria-live-demo">
+          <h4>Avec aria-live approprié</h4>
+          <p>Les changements sont annoncés selon leur priorité</p>
+
+          <div class="live-controls">
+            <label for="live-type">Type de région :</label>
+            <select id="live-type" v-model="liveType">
+              <option value="polite">Polite (attend)</option>
+              <option value="assertive">Assertive (interrompt)</option>
+              <option value="off">Off (silencieux)</option>
+            </select>
+
+            <button @click="updateGoodLiveContent('info')">
+              Info (polite)
+            </button>
+            <button @click="updateGoodLiveContent('alert')">
+              Alerte (assertive)
+            </button>
+            <button @click="clearGoodLiveContent">
+              Effacer
+            </button>
+          </div>
+
+          <div class="live-regions">
+            <div
+              class="live-region-polite"
+              aria-live="polite"
+              aria-atomic="true"
+              role="status"
+            >
+              <p v-if="politeLiveContent">{{ politeLiveContent }}</p>
+            </div>
+
+            <div
+              class="live-region-assertive"
+              aria-live="assertive"
+              aria-atomic="true"
+              role="alert"
+            >
+              <p v-if="assertiveLiveContent">{{ assertiveLiveContent }}</p>
+            </div>
+          </div>
+
+          <div class="live-status">
+            <p><strong>Avantages :</strong></p>
+            <ul>
+              <li>Les messages importants interrompent avec aria-live="assertive"</li>
+              <li>Les messages informatifs attendent avec aria-live="polite"</li>
+              <li>aria-atomic="true" annonce tout le contenu de la région</li>
+              <li>Les rôles appropriés (status, alert) donnent plus de contexte</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Boutons avec icônes accessibles"
+      explanation="Les boutons qui contiennent uniquement des icônes doivent avoir un aria-label ou du texte masqué visuellement pour être compris par les lecteurs d'écran."
+    >
+      <template #bad>
+        <div class="icon-buttons-demo">
+          <h4>Boutons sans description</h4>
+          <p>Ces boutons n'ont aucune indication textuelle :</p>
+
+          <div class="button-group">
+            <button class="icon-button">
+              <span class="icon">🗑️</span>
+            </button>
+            <button class="icon-button">
+              <span class="icon">✏️</span>
+            </button>
+            <button class="icon-button">
+              <span class="icon">⭐</span>
+            </button>
+            <button class="icon-button">
+              <span class="icon">🔍</span>
+            </button>
+            <button class="icon-button">
+              <span class="icon">⚙️</span>
+            </button>
+          </div>
+
+          <div class="problems-list">
+            <h5>Problèmes :</h5>
+            <ul>
+              <li>Les lecteurs d'écran annoncent juste "bouton"</li>
+              <li>Impossible de savoir l'action sans voir l'icône</li>
+              <li>Les émojis peuvent être mal interprétés</li>
+              <li>Aucun tooltip au survol</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="icon-buttons-demo">
+          <h4>Boutons accessibles</h4>
+          <p>Plusieurs approches pour rendre les icônes accessibles :</p>
+
+          <div class="button-examples">
+            <div class="button-example">
+              <h5>1. Avec aria-label</h5>
+              <div class="button-group">
+                <button class="icon-button" aria-label="Supprimer l'élément">
+                  <span class="icon" aria-hidden="true">🗑️</span>
+                </button>
+                <button class="icon-button" aria-label="Modifier l'élément">
+                  <span class="icon" aria-hidden="true">✏️</span>
+                </button>
+                <button class="icon-button" aria-label="Ajouter aux favoris">
+                  <span class="icon" aria-hidden="true">⭐</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="button-example">
+              <h5>2. Avec texte visible</h5>
+              <div class="button-group">
+                <button class="text-icon-button">
+                  <span class="icon" aria-hidden="true">🔍</span>
+                  <span>Rechercher</span>
+                </button>
+                <button class="text-icon-button">
+                  <span class="icon" aria-hidden="true">⚙️</span>
+                  <span>Paramètres</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="button-example">
+              <h5>3. Avec texte masqué visuellement</h5>
+              <div class="button-group">
+                <button class="icon-button">
+                  <span class="icon" aria-hidden="true">💾</span>
+                  <span class="sr-only">Enregistrer</span>
+                </button>
+                <button class="icon-button" title="Partager">
+                  <span class="icon" aria-hidden="true">📤</span>
+                  <span class="sr-only">Partager</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="best-practices">
+            <h5>Bonnes pratiques :</h5>
+            <ul>
+              <li>Toujours fournir un texte alternatif (aria-label, texte masqué, ou texte visible)</li>
+              <li>Utiliser aria-hidden="true" sur les icônes décoratives</li>
+              <li>Ajouter des tooltips avec l'attribut title</li>
+              <li>Préférer le texte visible quand l'espace le permet</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Combobox / Recherche avec suggestions"
+      explanation="Une recherche avec suggestions (combobox) doit être navigable au clavier, annoncer les résultats et permettre la sélection."
+    >
+      <template #bad>
+        <div class="combobox-demo">
+          <h4>Sans ARIA ni navigation clavier</h4>
+          <div class="search-container-bad">
+            <input
+              type="text"
+              v-model="searchQueryBad"
+              @input="filterSuggestionsBad"
+              placeholder="Rechercher un pays..."
+              class="search-input-bad"
+            >
+            <div v-if="suggestionsBad.length" class="suggestions-bad">
+              <div
+                v-for="(item, index) in suggestionsBad"
+                :key="index"
+                @click="selectBad(item)"
+                class="suggestion-item-bad"
+              >
+                {{ item }}
+              </div>
+            </div>
+          </div>
+          <p v-if="selectedBad" class="selected-value-bad">
+            Sélectionné : {{ selectedBad }}
+          </p>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="combobox-demo">
+          <h4>Avec ARIA et navigation clavier</h4>
+          <div class="search-container-good">
+            <label for="country-search-good" id="search-label-good">
+              Rechercher un pays
+            </label>
+            <input
+              id="country-search-good"
+              type="text"
+              role="combobox"
+              v-model="searchQueryGood"
+              @input="filterSuggestionsGood"
+              @keydown.down.prevent="selectNextGood"
+              @keydown.up.prevent="selectPrevGood"
+              @keydown.enter="confirmSelectionGood"
+              @keydown.escape="closeSuggestionsGood"
+              :aria-expanded="suggestionsGood.length > 0"
+              aria-autocomplete="list"
+              aria-controls="suggestions-list-good"
+              :aria-activedescendant="selectedIndexGood >= 0 ? `option-good-${selectedIndexGood}` : ''"
+              placeholder="Tapez pour rechercher..."
+              class="search-input-good"
+            >
+            <ul
+              v-show="suggestionsGood.length"
+              id="suggestions-list-good"
+              role="listbox"
+              class="suggestions-good"
+            >
+              <li
+                v-for="(item, i) in suggestionsGood"
+                :key="i"
+                role="option"
+                :id="`option-good-${i}`"
+                :aria-selected="i === selectedIndexGood"
+                :class="{ active: i === selectedIndexGood }"
+                @click="selectGood(item)"
+                class="suggestion-item-good"
+              >
+                {{ item }}
+              </li>
+            </ul>
+            <div role="status" aria-live="polite" class="sr-only">
+              {{ suggestionsGood.length }} résultat{{ suggestionsGood.length > 1 ? 's' : '' }} disponible{{ suggestionsGood.length > 1 ? 's' : '' }}
+            </div>
+          </div>
+          <p v-if="selectedGood" class="selected-value-good">
+            Sélectionné : {{ selectedGood }}
+          </p>
+        </div>
+      </template>
+
+      <template #bad-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ❌ Mauvais: Pas d'ARIA, pas de navigation clavier --&gt;
+&lt;input type="text" @input="showSuggestions"&gt;
+&lt;div v-if="suggestions.length"&gt;
+  &lt;div v-for="item in suggestions" @click="select(item)"&gt;
+    {{ item }}
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+
+      <template #good-code>
+        <div class="code-block">
+          <pre><code>&lt;!-- ✅ Bon: ARIA complet + navigation clavier --&gt;
+&lt;label for="search" id="search-label"&gt;Rechercher un pays&lt;/label&gt;
+&lt;input
+  id="search"
+  role="combobox"
+  :aria-expanded="showSuggestions"
+  aria-autocomplete="list"
+  aria-controls="suggestions-list"
+  :aria-activedescendant="selectedId"
+  @keydown.down="selectNext"
+  @keydown.up="selectPrev"
+  @keydown.enter="confirmSelection"
+&gt;
+
+&lt;ul id="suggestions-list" role="listbox" v-show="showSuggestions"&gt;
+  &lt;li
+    v-for="(item, i) in suggestions"
+    role="option"
+    :id="`option-${i}`"
+    :aria-selected="i === selectedIndex"
+  &gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div role="status" aria-live="polite"&gt;
+  {{ suggestions.length }} résultats disponibles
+&lt;/div&gt;</code></pre>
+        </div>
+      </template>
+    </ExampleToggle>
+
+    <ExampleToggle
+      title="Notifications Toast (Live Regions)"
+      explanation="Les notifications dynamiques doivent être annoncées aux lecteurs d'écran sans voler le focus. Utilisez role='status' pour les infos et role='alert' pour les erreurs."
+    >
+      <template #bad>
+        <div class="toast-demo">
+          <h4>Sans aria-live</h4>
+          <p>❌ Les notifications ne sont pas annoncées aux lecteurs d'écran</p>
+
+          <div class="code-block">
+            <pre><code>&lt;!-- Mauvais : pas annoncé aux lecteurs d'écran --&gt;
+&lt;div v-if="showToast" class="toast"&gt;
+  {{ message }}
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <button @click="showBadToast" class="toast-button">
+            Afficher notification
+          </button>
+
+          <div v-if="badToastVisible" class="toast-bad">
+            {{ badToastMessage }}
+          </div>
+        </div>
+      </template>
+
+      <template #good>
+        <div class="toast-demo">
+          <h4>Avec aria-live approprié</h4>
+          <p>✅ Les notifications sont correctement annoncées</p>
+
+          <div class="code-block">
+            <pre><code>&lt;!-- Bon : notification info (polite) --&gt;
+&lt;div
+  v-if="showToast"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  class="toast"
+&gt;
+  &lt;p&gt;{{ message }}&lt;/p&gt;
+  &lt;button @click="dismiss" aria-label="Fermer notification"&gt;✕&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Bon : alerte erreur (assertive) --&gt;
+&lt;div
+  v-if="showError"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  class="toast error"
+&gt;
+  &lt;p&gt;{{ errorMessage }}&lt;/p&gt;
+  &lt;button @click="dismiss" aria-label="Fermer alerte"&gt;✕&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <div class="toast-buttons">
+            <button @click="showGoodInfo" class="toast-button info">
+              Info (polite)
+            </button>
+            <button @click="showGoodError" class="toast-button error">
+              Erreur (assertive)
+            </button>
+          </div>
+
+          <div
+            v-if="goodToastVisible"
+            :role="goodToastType === 'error' ? 'alert' : 'status'"
+            :aria-live="goodToastType === 'error' ? 'assertive' : 'polite'"
+            aria-atomic="true"
+            :class="['toast-good', goodToastType]"
+          >
+            <p>{{ goodToastMessage }}</p>
+            <button
+              @click="dismissGoodToast"
+              :aria-label="`Fermer ${goodToastType === 'error' ? 'alerte' : 'notification'}`"
+              class="toast-close"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="toast-info">
+            <h5>Différences :</h5>
+            <ul>
+              <li><code>role="status"</code> + <code>aria-live="polite"</code> : Pour les notifications informatives, n'interrompt pas la lecture en cours</li>
+              <li><code>role="alert"</code> + <code>aria-live="assertive"</code> : Pour les erreurs critiques, interrompt immédiatement</li>
+              <li><code>aria-atomic="true"</code> : Annonce tout le contenu de la notification</li>
+            </ul>
+          </div>
+        </div>
+      </template>
+    </ExampleToggle>
+  </div>
+</template>
+
+<style scoped>
+.aria-components {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+header {
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.lead {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Accordion styles */
+.accordion-demo {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+}
+
+.accordion-bad, .accordion-good {
+  max-width: 600px;
+}
+
+.accordion-item {
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+  background: var(--color-primary-light);
+}
+
+.accordion-header:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -3px;
+}
+
+.accordion-bad .accordion-header {
+  background: var(--color-bg-secondary);
+}
+
+.accordion-icon {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.accordion-content {
+  padding: 1.5rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.accordion-content p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+
+/* Dropdown styles */
+.dropdown-demo {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+}
+
+.dropdown-bad, .dropdown-good {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-trigger:hover {
+  background: var(--color-primary-dark);
+}
+
+.dropdown-trigger:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  margin-top: 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-item:hover {
+  background: var(--color-bg-secondary);
+}
+
+.dropdown-item:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.dropdown-item:first-child {
+  border-radius: 0.625rem 0.5rem 0 0;
+}
+
+.dropdown-item:last-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.dropdown-good {
+  position: relative;
+}
+
+.dropdown-popin {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  margin-top: 0.25rem;
+}
+
+/* Table styles */
+.table-demo {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+.table-bad, .table-good {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.table-bad th, .table-bad td,
+.table-good th, .table-good td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table-bad th {
+  background: var(--color-bg-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.table-bad th:hover {
+  background: var(--color-primary-light);
+}
+
+.sort-button {
+  width: 100%;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.sort-button:hover {
+  background: var(--color-primary-light);
+}
+
+.sort-button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.sort-icon {
+  margin-left: 0.5rem;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-actif {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.status-inactif {
+  background: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.status-suspendu {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.table-instructions {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.status-actif {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.status-badge.status-inactif {
+  background: var(--color-text-secondary);
+  color: white;
+}
+
+.status-badge.status-suspendu {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-header,
+  .dropdown-item,
+  .sort-button {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-demo {
+    padding: 1rem;
+  }
+
+  .table-bad th, .table-bad td,
+  .table-good th, .table-good td {
+    padding: 0.5rem;
+  }
+}
+
+/* Aria-live demo styles */
+.aria-live-demo {
+  padding: 1.5rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: 0.625rem;
+  min-height: 300px;
+}
+
+.aria-live-demo h4 {
+  margin-top: 0;
+  color: var(--color-text);
+}
+
+.live-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.live-controls label {
+  font-weight: 500;
+}
+
+.live-controls select {
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.live-controls button {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.live-controls button:hover {
+  background: var(--color-primary-dark);
+}
+
+.live-region-bad,
+.live-regions {
+  min-height: 60px;
+  margin-bottom: 1rem;
+}
+
+.live-region-bad {
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+}
+
+.live-region-polite,
+.live-region-assertive {
+  padding: 1rem;
+  border-radius: 0.625rem;
+  margin-bottom: 0.5rem;
+  min-height: 50px;
+}
+
+.live-region-polite {
+  background: var(--color-info-light);
+  border: 2px solid var(--color-info);
+}
+
+.live-region-assertive {
+  background: var(--color-error-light);
+  border: 2px solid var(--color-error);
+}
+
+.live-region-polite p,
+.live-region-assertive p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.live-status {
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  margin-top: 1rem;
+}
+
+.live-status p {
+  margin: 0 0 0.5rem 0;
+}
+
+.live-status ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.live-status li {
+  margin-bottom: 0.25rem;
+  color: var(--color-text);
+}
+
+/* Icon buttons demo styles */
+.icon-buttons-demo {
+  padding: 1.5rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: 0.625rem;
+}
+
+.icon-buttons-demo h4 {
+  margin-top: 0;
+  color: var(--color-text);
+}
+
+.icon-buttons-demo h5 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.icon-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.icon-button .icon {
+  font-size: 1.5rem;
+}
+
+.text-icon-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.text-icon-button:hover {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.text-icon-button .icon {
+  font-size: 1.25rem;
+}
+
+.button-examples {
+  margin-top: 1rem;
+}
+
+.button-example {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.button-example h5 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.problems-list,
+.best-practices {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.problems-list h5,
+.best-practices h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.problems-list ul,
+.best-practices ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.problems-list li,
+.best-practices li {
+  margin-bottom: 0.5rem;
+}
+
+/* Section titles */
+.section-title,
+h2 {
+  color: var(--color-text);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+h3 {
+  color: var(--color-text);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+h5 {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* ARIA Introduction Section */
+.aria-intro {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.aria-intro p {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.aria-intro strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.aria-principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.principle-card {
+  padding: 1.5rem;
+  background: var(--color-bg);
+  border-radius: 0.625rem;
+  border: 2px solid var(--color-border);
+}
+
+.principle-card h3 {
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.principle-card p {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.principle-card code {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  background: #2d3748;
+  color: #93c5fd;
+  border-radius: 0.625rem;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+
+/* Inline code */
+.inline-code,
+code.inline-code {
+  display: inline;
+  padding: 0.2rem 0.4rem;
+  background: #374151;
+  color: #93c5fd;
+  border-radius: 0.625rem;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.aria-golden-rules {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-warning-light);
+  border-radius: 0.625rem;
+  border-left: 4px solid var(--color-warning);
+}
+
+.aria-golden-rules h3 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.golden-rule-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.golden-rule-text strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* Tabindex Section */
+.tabindex-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.tabindex-section > p {
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.tabindex-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.tabindex-card {
+  padding: 1.5rem;
+  background: var(--color-bg);
+  border-radius: 0.625rem;
+  border: 2px solid var(--color-border);
+}
+
+.tabindex-card.bad {
+  border-color: var(--color-error);
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.tabindex-card h3 {
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tabindex-card.bad h3 {
+  color: var(--color-error);
+}
+
+.tabindex-card p {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.tabindex-best-practices {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-info-light);
+  border-radius: 0.625rem;
+  border-left: 4px solid var(--color-info);
+}
+
+.tabindex-best-practices h3 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.tabindex-best-practices ul {
+  margin-left: 1.5rem;
+}
+
+.tabindex-best-practices li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* Form ARIA Demo Styles */
+.form-aria-demo {
+  padding: 1.5rem;
+  background: var(--color-bg);
+  border-radius: 0.625rem;
+}
+
+.form-aria-demo h4 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  margin: 1.5rem 0;
+  background: #1e1e1e;
+  border-radius: 0.625rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  color: #d4d4d4;
+}
+
+.code-block code {
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.bad-form-aria,
+.good-form-aria {
+  margin-top: 1.5rem;
+}
+
+.bad-form-aria .form-field,
+.good-form-aria .form-field {
+  margin-bottom: 1.5rem;
+}
+
+.bad-input,
+.good-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  font-size: 1rem;
+}
+
+.bad-input.error-input {
+  border-color: var(--color-error);
+}
+
+.good-input:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.good-input.error {
+  border-color: var(--color-error);
+}
+
+.field-hint {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.error-message {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-error-light);
+  color: var(--color-error);
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+}
+
+.bad-icon-button,
+.good-icon-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.bad-icon-button:hover,
+.good-icon-button:hover {
+  background: var(--color-primary-dark);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 0 0.5rem;
+}
+
+.form-actions {
+  margin-top: 2rem;
+}
+
+.form-submit-button {
+  padding: 0.75rem 2rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-submit-button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.form-submit-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.form-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aria-attributes-list {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.aria-attributes-list h5 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.aria-attributes-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.aria-attributes-list li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.aria-attributes-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-text);
+}
+
+.aria-attributes-list code {
+  background: var(--color-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.625rem;
+  font-family: monospace;
+  color: var(--color-text);
+}
+
+/* Focus demo styles */
+.focus-examples {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.focus-demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.focus-demo-section {
+  padding: 1.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: var(--color-bg);
+}
+
+.focus-demo-section h4 {
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.demo-button,
+.custom-button,
+.custom-tab,
+.custom-menuitem {
+  margin: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.demo-button {
+  background: var(--color-primary);
+  color: white;
+}
+
+.demo-button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.demo-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.custom-button {
+  background: var(--color-info);
+  color: white;
+  border-color: var(--color-info);
+}
+
+.custom-button:hover {
+  background: var(--color-info-dark);
+}
+
+.custom-tab {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.custom-tab:hover {
+  background: var(--color-hover);
+}
+
+.custom-menuitem {
+  background: #9d5f00;
+  color: white;
+  border-color: #9d5f00;
+}
+
+.custom-menuitem:hover {
+  background: #7a4a00;
+  color: white;
+}
+
+.demo-input {
+  margin: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  width: auto;
+  max-width: 200px;
+}
+
+.demo-input:focus {
+  border-color: var(--color-text);
+}
+
+.demo-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.demo-link {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+.demo-link:hover {
+  color: var(--color-primary-dark);
+}
+
+.demo-text,
+.demo-span,
+.demo-paragraph {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  color: var(--color-text-secondary);
+}
+
+.demo-hidden {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.demo-alert {
+  margin: 0.5rem;
+  padding: 0.75rem;
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  border: 2px solid var(--color-warning);
+  border-radius: 0.625rem;
+  transition: all 0.2s;
+}
+
+.demo-alert:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.focus-tips {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--color-info-light);
+  border-radius: 0.625rem;
+  border-left: 4px solid var(--color-info);
+}
+
+.focus-tips h4 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.focus-tips ul {
+  margin-left: 1.5rem;
+}
+
+.focus-tips li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.focus-tips kbd {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  font-family: monospace;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .focus-demo-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Gallery demo styles */
+.gallery-demo {
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+}
+
+.gallery-bad, .gallery-good {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.thumbnails-bad, .thumbnails-good {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.thumbnails-bad img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnails-bad img.active {
+  border-color: var(--color-primary);
+}
+
+.thumbnail-btn {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 0.625rem;
+  background: none;
+  cursor: pointer;
+}
+
+.thumbnail-btn img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  display: block;
+}
+
+.thumbnail-btn.active {
+  border-color: var(--color-primary);
+}
+
+.thumbnail-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.main-image-bad, .main-image-good {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-image-bad img, .main-image-good img {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+}
+
+.image-description {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .gallery-bad, .gallery-good {
+    grid-template-columns: 1fr;
+  }
+
+  .thumbnails-bad, .thumbnails-good {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* Combobox / Autocomplete styles */
+.combobox-demo {
+  color: var(--color-text);
+}
+
+.combobox-demo h4 {
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.search-container-bad, .search-container-good {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search-container-good label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.search-input-bad, .search-input-good {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.search-input-bad:focus, .search-input-good:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+.suggestions-bad, .suggestions-good {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestions-bad {
+  padding: 0;
+}
+
+.suggestions-good {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.suggestion-item-bad, .suggestion-item-good {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.suggestion-item-bad:hover {
+  background: var(--color-bg-secondary);
+}
+
+.suggestion-item-good:hover, .suggestion-item-good.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.suggestion-item-good.active {
+  font-weight: 500;
+}
+
+.selected-value-bad, .selected-value-good {
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.selected-value-good {
+  background: #e6f2ff;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Toast Notifications */
+.toast-demo {
+  position: relative;
+  min-height: 200px;
+}
+
+.toast-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.toast-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.toast-button.info {
+  background: #e6f2ff;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.toast-button.info:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.toast-button.error {
+  background: #ffe6e6;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.toast-button.error:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.toast-bad, .toast-good {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast-bad {
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.toast-good {
+  background: #e6f2ff;
+  border: 2px solid var(--color-primary);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toast-good.error {
+  background: #ffe6e6;
+  border-color: #dc2626;
+}
+
+.toast-good p {
+  margin: 0;
+  flex: 1;
+}
+
+.toast-close {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}
+
+.toast-info {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 0.625rem;
+}
+
+.toast-info h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.toast-info ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.toast-info li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+</style>

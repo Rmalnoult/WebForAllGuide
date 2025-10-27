@@ -1,0 +1,160 @@
+/* Syntax Highlighting with accessible colors */
+
+/* Base styles for code blocks */
+.code-block {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 0.625rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border: 1px solid #334155;
+  position: relative;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+}
+
+.code-block code {
+  white-space: pre;
+  word-wrap: normal;
+  display: block;
+}
+
+/* Syntax highlighting with high contrast colors */
+
+/* HTML Tags */
+.tag,
+.tag-name {
+  color: #fb7185; /* Rose - good contrast */
+}
+
+.tag-bracket {
+  color: #94a3b8; /* Slate gray - good contrast */
+}
+
+/* Attributes */
+.attr-name {
+  color: #c4b5fd; /* Light purple - excellent contrast */
+}
+
+.attr-value {
+  color: #86efac; /* Light green - excellent contrast */
+}
+
+.attr-equals {
+  color: #e2e8f0;
+}
+
+/* Vue.js specific attributes */
+.vue-event,
+.vue-directive {
+  color: #fbbf24; /* Amber - excellent contrast for @ directives */
+  font-weight: 500;
+}
+
+.vue-bind {
+  color: #60a5fa; /* Light blue - excellent contrast for : bindings */
+  font-weight: 500;
+}
+
+/* Comments */
+.comment {
+  color: #94a3b8; /* Lighter gray - good contrast */
+  font-style: italic;
+}
+
+/* Strings */
+.string {
+  color: #86efac; /* Light green - excellent contrast */
+}
+
+/* Keywords */
+.keyword {
+  color: #fda4af; /* Light rose - good contrast */
+  font-weight: 500;
+}
+
+/* Functions */
+.function {
+  color: #7dd3fc; /* Light cyan - excellent contrast */
+}
+
+/* Numbers */
+.number {
+  color: #fdba74; /* Light orange - excellent contrast */
+}
+
+/* CSS specific */
+.selector {
+  color: #fb7185;
+}
+
+.property {
+  color: #7dd3fc; /* Light cyan - excellent contrast */
+}
+
+.value {
+  color: #86efac;
+}
+
+.unit {
+  color: #fdba74;
+}
+
+.pseudo {
+  color: #c4b5fd;
+}
+
+.at-rule {
+  color: #fcd34d; /* Light yellow - excellent contrast */
+}
+
+/* JavaScript specific */
+.variable {
+  color: #e2e8f0;
+}
+
+.operator {
+  color: #67e8f9; /* Cyan - excellent contrast */
+}
+
+.boolean {
+  color: #fdba74;
+}
+
+.null {
+  color: #fb7185;
+}
+
+/* Copy button */
+.code-block .copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 0.625rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.code-block:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: #475569;
+}
+
+.copy-button:active {
+  background: #64748b;
+}

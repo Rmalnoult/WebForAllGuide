@@ -12,6 +12,16 @@ dist
 dist-ssr
 *.local
 
+# Nuxt build artifacts
+.nuxt
+.output
+.nitro
+
+# Old Vue/Vite files (no longer used after Nuxt migration)
+src/
+index.html
+vite.config.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

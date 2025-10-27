@@ -1,9 +1,9 @@
 # Guide Pratique d'Accessibilité Web
 
-> Guide interactif et complet des bonnes pratiques d'accessibilité web, démontrant l'implémentation concrète des standards WCAG 2.1 niveau AA avec Vue.js 3.
+> Guide interactif et complet des bonnes pratiques d'accessibilité web, démontrant l'implémentation concrète des standards WCAG 2.1 niveau AA avec Nuxt 3 (Vue.js).
 
+[![Nuxt](https://img.shields.io/badge/Nuxt-3.19-00DC82?logo=nuxt.js&logoColor=white)](https://nuxt.com/)
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.5-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
-[![Vite](https://img.shields.io/badge/Vite-7.1-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Playwright](https://img.shields.io/badge/Playwright-1.55-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG-2.1%20AA-005A9C)](https://www.w3.org/WAI/WCAG21/quickref/)
 
@@ -29,7 +29,7 @@
 
 ## 🎯 Aperçu
 
-Cette application Vue.js 3 est un guide pratique et interactif des bonnes pratiques d'accessibilité web. Elle permet aux développeurs, designers et décideurs de découvrir, comprendre et apprendre à implémenter l'accessibilité numérique à travers des exemples concrets et comparatifs.
+Cette application Nuxt 3 est un guide pratique et interactif des bonnes pratiques d'accessibilité web. Construite avec Vue.js, elle permet aux développeurs, designers et décideurs de découvrir, comprendre et apprendre à implémenter l'accessibilité numérique à travers des exemples concrets et comparatifs.
 
 ### Objectifs
 
@@ -149,11 +149,10 @@ pnpm install
 ```
 
 Cette commande installe :
-- **Vue 3** : framework JavaScript réactif
-- **Vue Router** : gestion de la navigation
+- **Nuxt 3** : framework Vue.js fullstack avec SSR
+- **Vue 3** : framework JavaScript réactif (intégré à Nuxt)
 - **@vueuse/core** : utilitaires composables Vue
 - **html2canvas** : export d'images
-- **Vite** : bundler ultra-rapide
 - **Playwright** : tests end-to-end
 - **axe-playwright** : tests d'accessibilité automatisés
 
@@ -173,9 +172,9 @@ pnpm exec playwright install
 pnpm run dev
 ```
 
-L'application sera accessible à : **http://localhost:5173**
+L'application sera accessible à : **http://localhost:3000**
 
-Le serveur Vite offre :
+Le serveur de développement Nuxt offre :
 - ⚡ Hot Module Replacement (HMR) instantané
 - 🔍 Rapport d'erreurs détaillés dans le navigateur
 - 🎨 Support CSS avec auto-prefixing
@@ -808,7 +807,8 @@ Tech Lead Design System & Accessibilité
 
 ## 🙏 Remerciements
 
-- **Vue.js Team** pour le framework incroyable
+- **Nuxt Team** pour le framework fullstack incroyable
+- **Vue.js Team** pour le framework réactif
 - **Deque Systems** pour axe-core et les outils d'accessibilité
 - **W3C WAI** pour les guidelines et standards
 - **La communauté a11y** pour le partage de connaissances

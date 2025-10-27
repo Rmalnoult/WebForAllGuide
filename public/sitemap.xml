@@ -6,7 +6,7 @@
 
   <!-- Page d'accueil - Priorité maximale -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/</loc>
+    <loc>https://webforallguide.com/</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- HTML Sémantique -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/semantic-html</loc>
+    <loc>https://webforallguide.com/semantic-html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -22,7 +22,7 @@
 
   <!-- Navigation Clavier -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/keyboard-navigation</loc>
+    <loc>https://webforallguide.com/keyboard-navigation</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -30,7 +30,7 @@
 
   <!-- Images et Médias -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/media-accessible</loc>
+    <loc>https://webforallguide.com/media-accessible</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -38,7 +38,7 @@
 
   <!-- Contrastes et Couleurs -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/color-contrast</loc>
+    <loc>https://webforallguide.com/color-contrast</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -46,7 +46,7 @@
 
   <!-- Formulaires Accessibles -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/accessible-forms</loc>
+    <loc>https://webforallguide.com/accessible-forms</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -54,7 +54,7 @@
 
   <!-- Composants ARIA -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/aria-components</loc>
+    <loc>https://webforallguide.com/aria-components</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -62,7 +62,7 @@
 
   <!-- Performance et Adaptabilité -->
   <url>
-    <loc>https://a11y-demo.romainmalnoult.dev/performance</loc>
+    <loc>https://webforallguide.com/performance</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

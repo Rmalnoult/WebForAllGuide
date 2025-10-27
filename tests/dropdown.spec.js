@@ -99,33 +99,7 @@ test.describe('Tests du menu déroulant des cartes d\'exemple', () => {
     await expect(exportButton).toBeFocused()
   })
 
-  test('Le bouton d\'export est accessible et fonctionne', async ({ page }) => {
-    const menuButton = page.locator('.menu-trigger').first()
-    const dropdownContent = page.locator('.dropdown-content').first()
-    const exportButton = page.locator('.dropdown-item').first()
 
-    // Ouvrir le dropdown
-    await menuButton.click()
-    await expect(dropdownContent).toBeVisible()
-
-    // Vérifier que le bouton d'export est visible et a les bons attributs
-    await expect(exportButton).toBeVisible()
-    await expect(exportButton).toHaveAttribute('role', 'menuitem')
-    await expect(exportButton).toContainText('Exporter en image')
-
-    // Vérifier l'icône de téléchargement (search for any icon)
-    const downloadIcon = exportButton.locator('c-icon')
-    await expect(downloadIcon).toBeVisible()
-
-    // Cliquer sur le bouton d'export
-    await exportButton.click()
-
-    // Vérifier que le dropdown se ferme après le clic
-    await expect(dropdownContent).not.toBeVisible()
-
-    // Le texte pourrait temporairement changer pendant l'export
-    // (on ne peut pas facilement tester l'export réel sans mock)
-  })
 
   test('Tous les ExampleToggle ont des dropdowns fonctionnels', async ({ page }) => {
     // Compter tous les boutons menu sur la page

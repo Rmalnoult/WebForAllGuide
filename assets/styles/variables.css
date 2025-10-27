@@ -1,0 +1,155 @@
+:root {
+  /* Design System - Base tokens */
+  --ds-spacing-xs: 0.25rem;
+  --ds-spacing-s: 0.5rem;
+  --ds-spacing-m: 1rem;
+  --ds-spacing-l: 1.5rem;
+  --ds-spacing-xl: 2rem;
+
+  --ds-border-radius-m: 0.625rem;
+  --ds-border-radius-l: 0.625rem;
+
+  /* Light theme colors */
+  --color-primary: #1441D0;  /* Custom blue for better brand differentiation */
+  --color-primary-dark: #0F34A5;
+  --color-primary-darker: #0A2780;
+  --color-primary-light: #E8ECFA;
+  --color-primary-disabled: rgba(20, 65, 208, 0.4);
+
+  /* Design System colors */
+  --ds-color-interactive-background-brand: #1441D0;
+  --ds-color-interactive-background-button-filled-main-hover: #0F34A5;
+  --ds-color-interactive-background-button-filled-main-pressed: #0A2780;
+  --ds-color-interactive-background-button-filled-main-active: #1441D0;
+  --ds-color-interactive-background-button-filled-main-disabled: rgba(20, 65, 208, 0.4);
+  --ds-color-interactive-border-focus: #1441D0;
+
+  /* DS functional colors */
+  --ds-color-functional-success: #067a06;
+  --ds-color-functional-negative: #d11a2a;
+  --ds-color-functional-warning: #9d5f00;
+
+  /* DS content colors */
+  --ds-color-content-primary: #122940;  /* Main text color as requested */
+  --ds-color-content-secondary: #4a5568;
+
+  /* DS surface colors */
+  --ds-color-surface-primary: #EFEFEF;  /* Background as requested - light gray */
+  --ds-color-surface-secondary: #F2F5F8;  /* Cards - darker for better input contrast */
+  --ds-color-surface-tertiary: #e2e8f0;
+
+  --color-success: var(--ds-color-functional-success);
+  --color-success-light: #E6F5EC;
+
+  --color-error: var(--ds-color-functional-negative);
+  --color-error-light: #FCE8EA;
+
+  --color-warning: var(--ds-color-functional-warning);
+  --color-warning-light: #FFF3CD;
+
+  --color-info: #1441D0;
+  --color-info-dark: #0F34A5;
+  --color-info-darker: #0A2780;
+  --color-info-light: #E8ECFA;
+
+  --color-text: var(--ds-color-content-primary);
+  --color-text-secondary: var(--ds-color-content-secondary);
+
+  --color-bg: #ffffff;  /* White background for examples */
+  --color-bg-secondary: var(--ds-color-surface-secondary);
+
+  --color-border: var(--ds-color-surface-tertiary);
+  --color-hover: rgba(0, 0, 0, 0.05);
+  --color-focus: var(--ds-color-interactive-background-brand);
+
+  /* High contrast color for text links only */
+  --color-link: #0F34A5;  /* Better contrast for light background */
+  --color-link-hover: #0A2780;
+  --color-link-visited: #081D60;
+
+  /* Espacements */
+  --spacing-xs: var(--ds-spacing-xs);
+  --spacing-sm: var(--ds-spacing-s);
+  --spacing-md: var(--ds-spacing-m);
+  --spacing-lg: var(--ds-spacing-l);
+  --spacing-xl: var(--ds-spacing-xl);
+
+  /* Typographie */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+
+  /* Bordures */
+  --border-radius: var(--ds-border-radius-m);
+  --border-radius-lg: var(--ds-border-radius-l);
+
+  /* Layout-specific colors */
+  --color-sidebar-bg: #0C0C0C;
+  --color-sidebar-text: #FFFFFF;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.1);
+  --color-backdrop: rgba(0, 0, 0, 0.5);
+  --color-burger-bg: rgba(255, 255, 255, 0.95);
+  --color-burger-hover: rgba(248, 248, 248, 0.98);
+  --color-burger-active: rgba(240, 240, 240, 0.98);
+
+  /* Layout dimensions */
+  --sidebar-width: 280px;
+  --header-height: 5rem;
+  --burger-size: 3rem;
+  --burger-line-height: 2px;
+}
+
+/* Disable dark mode - always use light theme */
+/* Commenting out dark mode to always use light theme
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #0970e6;
+    --color-primary-dark: #4A9FFF;
+    --color-primary-light: #1A3A52;
+
+    --color-success: #52C41A;
+    --color-success-light: #1B3A1B;
+
+    --color-error: #FF6B6B;
+    --color-error-light: #3A1B1B;
+
+    --color-warning: #FAAD14;
+    --color-warning-light: #3A2E1B;
+
+    --color-info: #0970e6;
+    --color-info-dark: #4A9FFF;
+    --color-info-light: #1A2A3A;
+
+    --color-text: #F8F9FA;
+    --color-text-secondary: #ADB5BD;
+
+    --color-bg: #212529;
+    --color-bg-secondary: #343A40;
+
+    --color-border: #495057;
+    --color-hover: rgba(255, 255, 255, 0.1);
+    --color-focus: #0970e6;
+
+    --color-link: #4A9FFF;
+    --color-link-hover: #6BB2FF;
+    --color-link-visited: #3A8FEF;
+  }
+}
+*/
+
+/* Mode haut contraste */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary: #1441D0;
+    --color-success: #008000;
+    --color-error: #FF0000;
+    --color-warning: #FFA500;
+    --color-text: #000000;
+    --color-bg: #FFFFFF;
+    --color-border: #000000;
+  }
+}
