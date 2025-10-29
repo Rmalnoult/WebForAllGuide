@@ -94,6 +94,15 @@ Cette application Nuxt 3 est un guide pratique et interactif des bonnes pratique
    - Statistiques d'accessibilité
    - Effet "curb cut" expliqué
 
+### Internationalisation (i18n)
+
+- 🇫🇷 **Français** : Version par défaut (route `/`)
+- 🇬🇧 **English** : Version anglaise (route `/en/`)
+- **Language Switcher** : Drapeaux cliquables en bas de la sidebar
+- **Persistance** : Cookie de préférence linguistique
+- **SEO bilingue** : Meta tags, hreflang, sitemap multilingue
+- **SSG** : Génération statique de toutes les pages FR et EN
+
 ### Fonctionnalités interactives
 
 - **Toggle Good/Bad** : Basculer entre exemples accessibles et inaccessibles
@@ -264,17 +273,36 @@ test('page should be accessible', async ({ page }) => {
 
 ## 🏗️ Build de production
 
-### Créer un build optimisé
+### Build SSR (Server-Side Rendering)
+
+Pour un déploiement avec serveur Node.js :
 
 ```bash
 pnpm run build
 ```
 
-Cette commande génère un dossier `/dist` contenant :
+Cette commande génère :
 - 📦 Bundles JavaScript minifiés avec code splitting
 - 🎨 CSS optimisé et minifié
-- 🖼️ Assets optimisés et avec hash de cache
-- 📄 Fichier HTML avec preloading des ressources
+- 🖼️ Assets optimisés avec hash de cache
+- 🌐 **16 routes i18n** (8 pages × 2 langues)
+- 🚀 Server entry point pour Nitro
+
+### Build SSG (Static Site Generation) - **Recommandé pour i18n**
+
+Pour un site 100% statique bilingue :
+
+```bash
+pnpm run generate
+```
+
+Cette commande génère dans `/dist` :
+- 📄 **16 fichiers HTML pré-rendus** (FR + EN)
+  - `/index.html`, `/semantic-html/index.html`, etc. (FR)
+  - `/en/index.html`, `/en/semantic-html/index.html`, etc. (EN)
+- 🎯 Routes optimisées pour SEO multilingue
+- ⚡ Performance maximale (pas de SSR runtime)
+- 🌍 Déployable sur n'importe quel hébergeur statique
 
 ### Prévisualiser le build
 
@@ -282,7 +310,9 @@ Cette commande génère un dossier `/dist` contenant :
 pnpm run preview
 ```
 
-Le build sera servi localement sur http://localhost:4173
+Serveur local sur http://localhost:4173 avec :
+- Version FR : http://localhost:4173/
+- Version EN : http://localhost:4173/en/
 
 ### Métriques de performance
 

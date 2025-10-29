@@ -1,6 +1,6 @@
 <template>
   <nav
-    aria-label="Navigation principale"
+    :aria-label="$t('navigation.ariaLabel')"
     class="app-nav"
     role="navigation"
     @keydown="handleNavKeydown"
@@ -29,20 +29,26 @@
     <button
       class="about-button"
       @click="$emit('open-about')"
-      aria-label="À propos de ce site"
+      :aria-label="$t('navigation.aboutButtonAria')"
     >
-      À propos de ce site
+      {{ $t('navigation.aboutButton') }}
     </button>
+
+    <!-- Language Switcher -->
+    <LanguageSwitcher />
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick, watch } from 'vue'
+import { ref, onMounted, nextTick, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAnnounce } from '../../composables/useA11y'
+import LanguageSwitcher from '../common/LanguageSwitcher.vue'
 
 const route = useRoute()
 const { announce } = useAnnounce()
+const { t } = useI18n()
+const localePath = useLocalePath()
 
 // Define emits
 const emit = defineEmits(['open-about'])
@@ -51,24 +57,72 @@ const emit = defineEmits(['open-about'])
 const navItemRefs = ref([])
 const focusedNavIndex = ref(0)
 
-const navItems = [
-  { path: '/', label: 'Accueil', icon: '🏠', description: 'Page d\'accueil et présentation' },
-  { path: '/color-contrast', label: 'Contrastes & Couleurs', icon: '🎨', description: 'Ratios WCAG et daltonisme' },
-  { path: '/media-accessible', label: 'Images & Médias', icon: '🖼️', description: 'Alt text et sous-titres' },
-  { path: '/performance', label: 'Performance', icon: '⚡', description: 'Optimisation et adaptabilité' },
-  { path: '/semantic-html', label: 'HTML Sémantique', icon: '📝', description: 'Structure et éléments HTML' },
-  { path: '/aria-components', label: 'ARIA', icon: '🔄', description: 'Attributs et composants ARIA' },
-  { path: '/keyboard-navigation', label: 'Navigation Clavier', icon: '⌨️', description: 'Focus et raccourcis' },
-  { path: '/accessible-forms', label: 'Formulaires', icon: '📋', description: 'Labels et validation' }
-]
+const navItems = computed(() => [
+  {
+    path: localePath('/'),
+    label: t('navigation.home.label'),
+    icon: '🏠',
+    description: t('navigation.home.description'),
+    key: 'home'
+  },
+  {
+    path: localePath('/color-contrast'),
+    label: t('navigation.colorContrast.label'),
+    icon: '🎨',
+    description: t('navigation.colorContrast.description'),
+    key: 'colorContrast'
+  },
+  {
+    path: localePath('/media-accessible'),
+    label: t('navigation.mediaAccessible.label'),
+    icon: '🖼️',
+    description: t('navigation.mediaAccessible.description'),
+    key: 'mediaAccessible'
+  },
+  {
+    path: localePath('/performance'),
+    label: t('navigation.performance.label'),
+    icon: '⚡',
+    description: t('navigation.performance.description'),
+    key: 'performance'
+  },
+  {
+    path: localePath('/semantic-html'),
+    label: t('navigation.semanticHtml.label'),
+    icon: '📝',
+    description: t('navigation.semanticHtml.description'),
+    key: 'semanticHtml'
+  },
+  {
+    path: localePath('/aria-components'),
+    label: t('navigation.ariaComponents.label'),
+    icon: '🔄',
+    description: t('navigation.ariaComponents.description'),
+    key: 'ariaComponents'
+  },
+  {
+    path: localePath('/keyboard-navigation'),
+    label: t('navigation.keyboardNavigation.label'),
+    icon: '⌨️',
+    description: t('navigation.keyboardNavigation.description'),
+    key: 'keyboardNavigation'
+  },
+  {
+    path: localePath('/accessible-forms'),
+    label: t('navigation.accessibleForms.label'),
+    icon: '📋',
+    description: t('navigation.accessibleForms.description'),
+    key: 'accessibleForms'
+  }
+])
 
 const announceNavigation = (label) => {
-  announce(`Navigation vers ${label}`)
+  announce(t('navigation.navigateTo', { page: label }))
 }
 
 // Keyboard navigation for menu items
 function handleNavKeydown(event) {
-  const itemCount = navItems.length
+  const itemCount = navItems.value.length
 
   switch (event.key) {
     case 'ArrowDown':
@@ -89,14 +143,14 @@ function handleNavKeydown(event) {
       event.preventDefault()
       focusedNavIndex.value = 0
       focusNavItem(0)
-      announce('Début de la navigation')
+      announce(t('navigation.navStart'))
       break
 
     case 'End':
       event.preventDefault()
       focusedNavIndex.value = itemCount - 1
       focusNavItem(itemCount - 1)
-      announce('Fin de la navigation')
+      announce(t('navigation.navEnd'))
       break
 
     case 'Enter':
@@ -120,7 +174,7 @@ async function focusNavItem(index) {
 
 // Set initial focus based on current route
 onMounted(() => {
-  const currentIndex = navItems.findIndex(item => item.path === route.path)
+  const currentIndex = navItems.value.findIndex(item => item.path === route.path)
   if (currentIndex >= 0) {
     focusedNavIndex.value = currentIndex
   }
@@ -128,7 +182,7 @@ onMounted(() => {
 
 // Update focus when route changes
 watch(() => route.path, (newPath) => {
-  const currentIndex = navItems.findIndex(item => item.path === newPath)
+  const currentIndex = navItems.value.findIndex(item => item.path === newPath)
   if (currentIndex >= 0) {
     focusedNavIndex.value = currentIndex
   }

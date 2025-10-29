@@ -1,7 +1,7 @@
 <template>
   <header class="page-header" role="banner">
     <!-- Breadcrumb navigation with schema.org markup -->
-    <nav aria-label="Fil d'Ariane" class="breadcrumb">
+    <nav :aria-label="$t('navigation.breadcrumb')" class="breadcrumb">
       <ol itemscope itemtype="https://schema.org/BreadcrumbList">
         <li
           itemprop="itemListElement"
@@ -9,11 +9,11 @@
           itemtype="https://schema.org/ListItem"
         >
           <router-link
-            to="/"
-            aria-label="Retour à l'accueil"
+            :to="localePath('/')"
+            :aria-label="$t('navigation.backToHome')"
             itemprop="item"
           >
-            <span itemprop="name">Accueil</span>
+            <span itemprop="name">{{ $t('navigation.home.label') }}</span>
           </router-link>
           <meta itemprop="position" content="1" />
         </li>
@@ -63,18 +63,23 @@ const props = defineProps({
 })
 
 const route = useRoute()
+const { t } = useI18n()
+const localePath = useLocalePath()
 
 const currentPage = computed(() => {
+  // Remove locale prefix from path for matching
+  const cleanPath = route.path.replace(/^\/en/, '')
+
   const pages = {
-    '/semantic-html': 'HTML Sémantique',
-    '/keyboard-navigation': 'Navigation Clavier',
-    '/media-accessible': 'Images et Médias',
-    '/color-contrast': 'Contrastes et Couleurs',
-    '/accessible-forms': 'Formulaires',
-    '/aria-components': 'ARIA',
-    '/performance': 'Performance'
+    '/semantic-html': t('navigation.semanticHtml.label'),
+    '/keyboard-navigation': t('navigation.keyboardNavigation.label'),
+    '/media-accessible': t('navigation.mediaAccessible.label'),
+    '/color-contrast': t('navigation.colorContrast.label'),
+    '/accessible-forms': t('navigation.accessibleForms.label'),
+    '/aria-components': t('navigation.ariaComponents.label'),
+    '/performance': t('navigation.performance.label')
   }
-  return pages[route.path] || ''
+  return pages[cleanPath] || ''
 })
 
 const headingId = computed(() => {

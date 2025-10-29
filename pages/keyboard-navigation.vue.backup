@@ -443,7 +443,7 @@ function handleFocusTrap(event) {
 &lt;/div&gt;</code></pre>
           </div>
 
-          <div class="code-block language-javascript" data-no-highlight="true">
+          <div class="code-block language-javascript">
             <pre><code>// {{ $t('pages.keyboardNavigation.codeExamples.listNavigation.arrowNavigationComment') }}
 function handleKeydown(e) {
   switch(e.key) {
@@ -796,12 +796,12 @@ input:focus-visible {
 &lt;/div&gt;</code></pre>
           </div>
 
-          <div class="code-block language-javascript" data-no-highlight="true">
+          <div class="code-block language-javascript">
             <pre><code>// {{ $t('pages.keyboardNavigation.codeExamples.modalTrap.focusTrapComment') }} :
-// - {{ $t('pages.keyboardNavigation.codeExamples.modalTrap.autoFocus') }}
-// - {{ $t('pages.keyboardNavigation.codeExamples.modalTrap.trapFocus') }}
-// - {{ $t('pages.keyboardNavigation.codeExamples.modalTrap.closeOnEscape') }}
-// - {{ $t('pages.keyboardNavigation.codeExamples.modalTrap.returnFocus') }}
+// - Focus automatique sur premier élément
+// - Piège à focus (Tab/Shift+Tab)
+// - Fermeture par Échap
+// - Retour du focus à l'élément déclencheur
 
 function handleFocusTrap(event) {
   const focusableElements = modalContent.querySelectorAll(

@@ -1,4 +1,5 @@
 <script setup>
+const { t } = useI18n()
 const { getPageSEO } = useSEOConfig()
 const seo = getPageSEO('/media-accessible')
 
@@ -15,96 +16,86 @@ useSyntaxHighlight()
 <template>
   <div class="media-accessible">
     <PageHeader
-      title="Images & Médias Accessibles"
-      description="Rendre les contenus visuels compréhensibles pour tous les utilisateurs"
+      :title="t('pages.mediaAccessible.title')"
+      :description="t('pages.mediaAccessible.description')"
     />
 
     <ExampleToggle
-      title="Textes alternatifs pour les images"
-      explanation="Les textes alternatifs permettent aux lecteurs d'écran de décrire les images. Ils doivent être descriptifs pour les images informatives, vides pour les images décoratives."
+      :title="t('pages.mediaAccessible.altText.title')"
+      :explanation="t('pages.mediaAccessible.altText.explanation')"
     >
       <template #bad>
         <div class="images-demo">
           <article class="product-card">
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxhcHRvcCBNYWNCb29rPC90ZXh0Pgo8L3N2Zz4=" alt="image" />
-            <h3>MacBook Pro 16"</h3>
-            <p class="price">2 499 €</p>
+            <h3>{{ t('pages.mediaAccessible.altText.product.name') }}</h3>
+            <p class="price">{{ t('pages.mediaAccessible.altText.product.price') }}</p>
             <div class="rating">
               <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMi41TDE0LjA5IDguMjZMMjAuMTggOS4yN0wxNi4wOSAxMy4xNEwxNy4xOCAxOS4xOEwxMiAxNi4yN0w2LjgyIDE5LjE4TDcuOTEgMTMuMTRMMy44MiA5LjI3TDkuOTEgOC4yNkwxMiAyLjVaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPg==" alt="star.png" />
-              <span>4.8/5 (127 avis)</span>
+              <span>{{ t('pages.mediaAccessible.altText.product.rating') }} ({{ t('pages.mediaAccessible.altText.product.reviews') }})</span>
             </div>
           </article>
 
           <div class="notification">
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIgZmlsbD0iIzEwYjk4MSIvPgogIDxwYXRoIGQ9Ik05IDEyTDExIDE0TDE1IDEwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPC9zdmc+" alt="success.svg" />
-            Commande confirmée !
+            {{ t('pages.mediaAccessible.altText.notification') }}
           </div>
         </div>
 
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais : textes alternatifs non descriptifs --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.altText.badComment') }} --&gt;
 &lt;img src="laptop.jpg" alt="image" /&gt;
 &lt;img src="star-icon.svg" alt="star.png" /&gt;
-&lt;img src="success-icon.svg" alt="success.svg" /&gt;
-
-&lt;!-- Problèmes :
-- alt="image" n'est pas descriptif
-- alt="star.png" décrit le fichier, pas le contenu
-- Les icônes décoratives ont un alt non vide --&gt;</code></pre>
+&lt;img src="success-icon.svg" alt="success.svg" /&gt;</code></pre>
         </div>
       </template>
 
       <template #good>
         <div class="images-demo">
           <article class="product-card">
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxhcHRvcCBNYWNCb29rPC90ZXh0Pgo8L3N2Zz4=" alt="MacBook Pro 16 pouces, vue de face, écran ouvert montrant l'interface macOS" />
-            <h3>MacBook Pro 16"</h3>
-            <p class="price">2 499 €</p>
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxhcHRvcCBNYWNCb29rPC90ZXh0Pgo8L3N2Zz4=" :alt="t('pages.mediaAccessible.altText.product.alt')" />
+            <h3>{{ t('pages.mediaAccessible.altText.product.name') }}</h3>
+            <p class="price">{{ t('pages.mediaAccessible.altText.product.price') }}</p>
             <div class="rating">
               <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgMi41TDE0LjA5IDguMjZMMjAuMTggOS4yN0wxNi4wOSAxMy4xNEwxNy4xOCAxOS4xOEwxMiAxNi4yN0w2LjgyIDE5LjE4TDcuOTEgMTMuMTRMMy44MiA5LjI3TDkuOTEgOC4yNkwxMiAyLjVaIiBmaWxsPSIjZjU5ZTBiIi8+Cjwvc3ZnPg==" alt="" />
-              <span><span class="sr-only">Note de </span>4.8/5 <span class="sr-only">étoiles, basée sur </span>(127 avis)</span>
+              <span><span class="sr-only">{{ t('pages.mediaAccessible.altText.product.ratingAlt') }} </span>{{ t('pages.mediaAccessible.altText.product.rating') }} <span class="sr-only">{{ t('pages.mediaAccessible.altText.product.stars') }} </span>({{ t('pages.mediaAccessible.altText.product.reviews') }})</span>
             </div>
           </article>
 
           <div class="notification">
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIgZmlsbD0iIzEwYjk4MSIvPgogIDxwYXRoIGQ9Ik05IDEyTDExIDE0TDE1IDEwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPC9zdmc+" alt="" />
-            Commande confirmée !
+            {{ t('pages.mediaAccessible.altText.notification') }}
           </div>
         </div>
 
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon : textes alternatifs descriptifs --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.altText.goodComment') }} --&gt;
 &lt;img src="laptop.jpg"
      alt="MacBook Pro 16 pouces, vue de face,
           écran ouvert montrant l'interface macOS" /&gt;
 
-&lt;!-- Icône décorative : alt vide, .sr-only pour contexte --&gt;
+&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.altText.decorativeIcon') }} --&gt;
 &lt;img src="star-icon.svg" alt="" /&gt;
 &lt;span&gt;
   &lt;span class="sr-only"&gt;Note de &lt;/span&gt;4.8/5
   &lt;span class="sr-only"&gt; étoiles&lt;/span&gt; (127 avis)
 &lt;/span&gt;
 
-&lt;!-- Icône décorative dans notification --&gt;
+&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.altText.decorativeNotification') }} --&gt;
 &lt;img src="success-icon.svg" alt="" /&gt;
-&lt;span&gt;Commande confirmée !&lt;/span&gt;
-
-&lt;!-- Bonnes pratiques :
-- Images informatives : alt descriptif du contenu/fonction
-- Images décoratives : alt="" (vide)
-- Éviter les mots comme "image", "photo", "icône" --&gt;</code></pre>
+&lt;span&gt;Commande confirmée !&lt;/span&gt;</code></pre>
         </div>
       </template>
 
     </ExampleToggle>
 
     <ExampleToggle
-      title="Vidéo accessible"
-      explanation="Les vidéos doivent avoir des sous-titres, des contrôles accessibles au clavier, et ne pas démarrer automatiquement."
+      :title="t('pages.mediaAccessible.video.title')"
+      :explanation="t('pages.mediaAccessible.video.explanation')"
     >
       <template #bad>
         <div class="video-demo">
-          <h3>Présentation du produit</h3>
+          <h3>{{ t('pages.mediaAccessible.video.heading') }}</h3>
           <div class="video-container-bad">
             <video
               width="100%"
@@ -114,35 +105,28 @@ useSyntaxHighlight()
               muted
             >
               <source src="data:video/mp4;base64," type="video/mp4">
-              Votre navigateur ne supporte pas la vidéo.
+              {{ t('pages.mediaAccessible.video.good.fallback') }}
             </video>
             <div class="video-placeholder">
-              📹 Vidéo de démonstration
+              📹 {{ t('pages.mediaAccessible.video.bad.placeholder') }}
               <br>
-              <small>(Lecture automatique, pas de sous-titres)</small>
+              <small>{{ t('pages.mediaAccessible.video.bad.note') }}</small>
             </div>
           </div>
         </div>
 
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais : vidéo avec lecture automatique --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.video.badComment') }} --&gt;
 &lt;video width="100%" height="200" autoplay loop muted&gt;
   &lt;source src="demo.mp4" type="video/mp4"&gt;
   Votre navigateur ne supporte pas la vidéo.
-&lt;/video&gt;
-
-&lt;!-- Problèmes :
-- autoplay peut désorienter les utilisateurs
-- Pas de sous-titres (captions)
-- Pas de description audio
-- Contrôles non explicites
-- Pas d'alternative textuelle --&gt;</code></pre>
+&lt;/video&gt;</code></pre>
         </div>
       </template>
 
       <template #good>
         <div class="video-demo">
-          <h3>Présentation du produit</h3>
+          <h3>{{ t('pages.mediaAccessible.video.heading') }}</h3>
           <div class="video-container-good">
             <video
               width="100%"
@@ -165,43 +149,42 @@ useSyntaxHighlight()
                 srclang="fr"
                 label="Description audio"
               >
-              Votre navigateur ne supporte pas la vidéo.
-              <a href="transcript.html">Consulter la transcription</a>
+              {{ t('pages.mediaAccessible.video.good.fallback') }}
+              <a href="transcript.html">{{ t('pages.mediaAccessible.video.good.transcriptLink') }}</a>
             </video>
             <div class="video-placeholder">
-              📹 Vidéo de démonstration du MacBook Pro
+              📹 {{ t('pages.mediaAccessible.video.good.placeholder') }}
               <br>
-              <small>(Contrôles accessibles, sous-titres disponibles)</small>
+              <small>{{ t('pages.mediaAccessible.video.good.note') }}</small>
             </div>
             <div id="video-description" class="video-description">
-              Vidéo de 2 minutes présentant les fonctionnalités du MacBook Pro 16 pouces.
-              Sous-titres en français disponibles.
+              {{ t('pages.mediaAccessible.video.good.description') }}
             </div>
           </div>
         </div>
 
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon : vidéo accessible avec sous-titres et contrôles --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.video.goodComment') }} --&gt;
 &lt;video width="100%" height="200"
        controls
        preload="metadata"
        aria-describedby="video-description"&gt;
   &lt;source src="demo.mp4" type="video/mp4"&gt;
 
-  &lt;!-- Sous-titres pour les malentendants --&gt;
+  &lt;!-- {{ $t('pages.mediaAccessible.codeExamples.video.subtitles') }} --&gt;
   &lt;track kind="captions"
          src="captions.vtt"
          srclang="fr"
          label="Français"
          default&gt;
 
-  &lt;!-- Descriptions audio pour les malvoyants --&gt;
+  &lt;!-- {{ $t('pages.mediaAccessible.codeExamples.video.audioDescriptions') }} --&gt;
   &lt;track kind="descriptions"
          src="descriptions.vtt"
          srclang="fr"
          label="Description audio"&gt;
 
-  &lt;!-- Fallback avec lien vers transcription --&gt;
+  &lt;!-- {{ $t('pages.mediaAccessible.codeExamples.video.fallback') }} --&gt;
   Votre navigateur ne supporte pas la vidéo.
   &lt;a href="transcript.html"&gt;Consulter la transcription&lt;/a&gt;
 &lt;/video&gt;
@@ -209,24 +192,18 @@ useSyntaxHighlight()
 &lt;div id="video-description"&gt;
   Vidéo de 2 minutes présentant les fonctionnalités du MacBook Pro.
   Sous-titres en français disponibles.
-&lt;/div&gt;
-
-&lt;!-- Bonnes pratiques :
-- controls : contrôles natifs accessibles
-- preload="metadata" : pas de lecture automatique
-- Sous-titres (captions) et descriptions audio
-- Transcription alternative disponible --&gt;</code></pre>
+&lt;/div&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>
 
     <ExampleToggle
-      title="Graphiques et données visuelles"
-      explanation="Les graphiques doivent être accompagnés de descriptions textuelles et de données alternatives pour les utilisateurs qui ne peuvent pas les voir."
+      :title="t('pages.mediaAccessible.charts.title')"
+      :explanation="t('pages.mediaAccessible.charts.explanation')"
     >
       <template #bad>
         <div class="chart-demo">
-          <h3>Ventes trimestrielles</h3>
+          <h3>{{ t('pages.mediaAccessible.charts.heading') }}</h3>
           <div class="chart-bad">
             <svg width="300" height="150" viewBox="0 0 300 150">
               <rect
@@ -262,7 +239,7 @@ useSyntaxHighlight()
         </div>
 
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais : graphique sans description ni données alternatives --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.charts.badComment') }} --&gt;
 &lt;svg width="300" height="150" viewBox="0 0 300 150"&gt;
   &lt;rect
     x="50"
@@ -292,19 +269,13 @@ useSyntaxHighlight()
     height="100"
     fill="#3b82f6"
   /&gt;
-&lt;/svg&gt;
-
-&lt;!-- Problèmes :
-- Pas de role="img"
-- Pas de titre ni description
-- Données non accessibles aux lecteurs d'écran
-- Pas d'alternative textuelle --&gt;</code></pre>
+&lt;/svg&gt;</code></pre>
         </div>
       </template>
 
       <template #good>
         <div class="chart-demo">
-          <h3>Ventes trimestrielles</h3>
+          <h3>{{ t('pages.mediaAccessible.charts.heading') }}</h3>
           <div class="chart-good">
             <svg
               width="300"
@@ -314,10 +285,9 @@ useSyntaxHighlight()
               aria-labelledby="chart-title"
               aria-describedby="chart-desc"
             >
-              <title id="chart-title">Graphique en barres des ventes trimestrielles</title>
+              <title id="chart-title">{{ t('pages.mediaAccessible.charts.chartTitle') }}</title>
               <desc id="chart-desc">
-                Évolution croissante des ventes sur 4 trimestres :
-                Q1: 40k€, Q2: 60k€, Q3: 80k€, Q4: 100k€
+                {{ t('pages.mediaAccessible.charts.chartDesc') }}
               </desc>
               <rect
                 x="50"
@@ -348,7 +318,7 @@ useSyntaxHighlight()
                 fill="#3b82f6"
               />
 
-              <!-- Labels -->
+              <!-- {{ $t('pages.mediaAccessible.codeExamples.charts.labels') }} -->
               <text x="70" y="130" text-anchor="middle" font-size="12">Q1</text>
               <text x="130" y="130" text-anchor="middle" font-size="12">Q2</text>
               <text x="190" y="130" text-anchor="middle" font-size="12">Q3</text>
@@ -356,34 +326,34 @@ useSyntaxHighlight()
             </svg>
 
             <table class="chart-data">
-              <caption>Données détaillées des ventes trimestrielles</caption>
+              <caption>{{ t('pages.mediaAccessible.charts.table.caption') }}</caption>
               <thead>
                 <tr>
-                  <th scope="col">Trimestre</th>
-                  <th scope="col">Ventes (k€)</th>
-                  <th scope="col">Évolution</th>
+                  <th scope="col">{{ t('pages.mediaAccessible.charts.table.columns.quarter') }}</th>
+                  <th scope="col">{{ t('pages.mediaAccessible.charts.table.columns.sales') }}</th>
+                  <th scope="col">{{ t('pages.mediaAccessible.charts.table.columns.evolution') }}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">Q1 2025</th>
-                  <td>40</td>
-                  <td>-</td>
+                  <th scope="row">{{ t('pages.mediaAccessible.charts.table.data.q1.quarter') }}</th>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q1.sales') }}</td>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q1.evolution') }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Q2 2025</th>
-                  <td>60</td>
-                  <td>+50%</td>
+                  <th scope="row">{{ t('pages.mediaAccessible.charts.table.data.q2.quarter') }}</th>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q2.sales') }}</td>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q2.evolution') }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Q3 2025</th>
-                  <td>80</td>
-                  <td>+33%</td>
+                  <th scope="row">{{ t('pages.mediaAccessible.charts.table.data.q3.quarter') }}</th>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q3.sales') }}</td>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q3.evolution') }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Q4 2025</th>
-                  <td>100</td>
-                  <td>+25%</td>
+                  <th scope="row">{{ t('pages.mediaAccessible.charts.table.data.q4.quarter') }}</th>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q4.sales') }}</td>
+                  <td>{{ t('pages.mediaAccessible.charts.table.data.q4.evolution') }}</td>
                 </tr>
               </tbody>
             </table>
@@ -391,7 +361,7 @@ useSyntaxHighlight()
         </div>
 
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon : graphique accessible avec données alternatives --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.charts.goodComment') }} --&gt;
 &lt;svg width="300" height="150"
      role="img"
      aria-labelledby="chart-title"
@@ -403,7 +373,7 @@ useSyntaxHighlight()
     Q1: 40k€, Q2: 60k€, Q3: 80k€, Q4: 100k€
   &lt;/desc&gt;
 
-  &lt;!-- Barres du graphique --&gt;
+  &lt;!-- {{ $t('pages.mediaAccessible.codeExamples.charts.bars') }} --&gt;
   &lt;rect
     x="50"
     y="100"
@@ -433,14 +403,14 @@ useSyntaxHighlight()
     fill="#3b82f6"
   /&gt;
 
-  &lt;!-- Labels accessibles --&gt;
+  &lt;!-- {{ $t('pages.mediaAccessible.codeExamples.charts.accessibleLabels') }} --&gt;
   &lt;text x="70" y="130"&gt;Q1&lt;/text&gt;
   &lt;text x="130" y="130"&gt;Q2&lt;/text&gt;
   &lt;text x="190" y="130"&gt;Q3&lt;/text&gt;
   &lt;text x="250" y="130"&gt;Q4&lt;/text&gt;
 &lt;/svg&gt;
 
-&lt;!-- Table alternative avec toutes les données --&gt;
+&lt;!-- {{ $t('pages.mediaAccessible.codeExamples.charts.alternativeTable') }} --&gt;
 &lt;table&gt;
   &lt;caption&gt;Données détaillées des ventes trimestrielles&lt;/caption&gt;
   &lt;thead&gt;
@@ -456,15 +426,9 @@ useSyntaxHighlight()
       &lt;td&gt;40&lt;/td&gt;
       &lt;td&gt;-&lt;/td&gt;
     &lt;/tr&gt;
-    &lt;!-- ... autres lignes --&gt;
+    &lt;!-- {{ $t('pages.mediaAccessible.codeExamples.charts.otherRows') }} --&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;!-- Bonnes pratiques :
-- role="img" pour indiquer que le SVG est une image
-- &lt;title&gt; et &lt;desc&gt; pour décrire le graphique
-- Table alternative avec toutes les données
-- Labels textuels dans le SVG --&gt;</code></pre>
+&lt;/table&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>

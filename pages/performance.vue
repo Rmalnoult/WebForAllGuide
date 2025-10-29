@@ -1,13 +1,15 @@
 <script setup>
-const { getPageSEO } = useSEOConfig()
-const seo = getPageSEO('/performance')
-
-useHead(seo)
-
 import { ref, computed, onMounted, watch } from 'vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+const { t } = useI18n()
+
+const { getPageSEO } = useSEOConfig()
+const seo = getPageSEO('/performance')
+
+useHead(seo)
 
 // Initialize syntax highlighting
 useSyntaxHighlight()
@@ -42,6 +44,40 @@ const loadingProgress = ref(0)
 
 const statusMessage = ref('')
 
+// Computed properties for dynamic translations
+const zoomOptions = computed(() => [
+  { value: '100', label: '100% (normal)' },
+  { value: '125', label: '125%' },
+  { value: '150', label: '150%' },
+  { value: '175', label: '175%' },
+  { value: '200', label: '200%' }
+])
+
+const deviceOptions = computed(() => [
+  { value: 'desktop', label: t('pages.performance.responsive.devices.desktop') },
+  { value: 'tablet', label: t('pages.performance.responsive.devices.tablet') },
+  { value: 'mobile', label: t('pages.performance.responsive.devices.mobile') }
+])
+
+const loadingButtonText = computed(() =>
+  isLoading.value ? t('pages.performance.motion.good.stopLoad') : t('pages.performance.motion.good.load')
+)
+
+const pulseButtonText = computed(() =>
+  showPulse.value ? t('pages.performance.motion.good.stopPulse') : t('pages.performance.motion.good.pulse')
+)
+
+const loadingTimeText = computed(() =>
+  lazyLoadImages.value ? t('pages.performance.lazyLoading.good.timeFast') : t('pages.performance.lazyLoading.good.timeSlow')
+)
+
+const dataSavingsText = computed(() => {
+  if (cacheEnabled.value && lazyLoadImages.value) {
+    return t('pages.performance.lazyLoading.good.savings.both')
+  }
+  return t('pages.performance.lazyLoading.good.savings.single')
+})
+
 // Functions
 function updateMotionPreference() {
   // This would normally be handled by CSS @media (prefers-reduced-motion)
@@ -50,7 +86,7 @@ function updateMotionPreference() {
 
 function showFeedback() {
   buttonClicked.value = true
-  statusMessage.value = 'Bouton cliqué !'
+  statusMessage.value = t('pages.performance.motion.good.button')
   setTimeout(() => {
     buttonClicked.value = false
     statusMessage.value = ''
@@ -137,28 +173,28 @@ watch(deviceType, (newType) => {
 <template>
   <div class="performance">
     <PageHeader
-      title="Performance & Adaptabilité"
-      description="Créer des interfaces qui s'adaptent aux préférences et besoins de chaque utilisateur"
+      :title="$t('pages.performance.title')"
+      :description="$t('pages.performance.description')"
     />
 
     <ExampleToggle
-      title="Respect des préférences de mouvement"
-      explanation="Les utilisateurs peuvent configurer leur système pour réduire les animations. Il faut respecter cette préférence pour éviter les nausées et distractions."
+      :title="$t('pages.performance.motion.title')"
+      :explanation="$t('pages.performance.motion.explanation')"
     >
       <template #bad>
         <div class="motion-demo">
-          <h4>Animations par défaut</h4>
+          <h4>{{ $t('pages.performance.motion.bad.heading') }}</h4>
           <div class="motion-examples-bad">
             <div class="animated-card card-bounce">
-              <h5>Carte qui rebondit</h5>
-              <p>Cette animation se déclenche constamment</p>
-              <button class="animated-button">Clic moi !</button>
+              <h5>{{ $t('pages.performance.motion.bad.card.title') }}</h5>
+              <p>{{ $t('pages.performance.motion.bad.card.description') }}</p>
+              <button class="animated-button">{{ $t('pages.performance.motion.bad.button') }}</button>
             </div>
 
             <div class="animated-elements">
               <div class="spinner-bad"></div>
               <div class="pulse-bad"></div>
-              <div class="slide-bad">Glissement permanent</div>
+              <div class="slide-bad">{{ $t('pages.performance.motion.bad.slide') }}</div>
             </div>
 
             <div class="auto-carousel">
@@ -175,7 +211,7 @@ watch(deviceType, (newType) => {
 
       <template #good>
         <div class="motion-demo">
-          <h4>Animations respectueuses</h4>
+          <h4>{{ $t('pages.performance.motion.good.heading') }}</h4>
           <div class="motion-controls">
             <label>
               <input
@@ -183,37 +219,37 @@ watch(deviceType, (newType) => {
                 v-model="reducedMotionOverride"
                 @change="updateMotionPreference"
               >
-              Simuler "Réduire les animations" (prefers-reduced-motion)
+              {{ $t('pages.performance.motion.good.simulate') }}
             </label>
           </div>
 
           <div class="motion-examples-good" :class="{ 'reduced-motion': useReducedMotion }">
             <div class="animated-card card-respectful" @mouseenter="cardHovered = true" @mouseleave="cardHovered = false">
-              <h5>Carte respectueuse</h5>
-              <p>Animation légère au survol uniquement</p>
+              <h5>{{ $t('pages.performance.motion.good.card.title') }}</h5>
+              <p>{{ $t('pages.performance.motion.good.card.description') }}</p>
               <button class="animated-button-good" @click="showFeedback">
-                Clic moi !
+                {{ $t('pages.performance.motion.good.button') }}
               </button>
-              <div v-if="buttonClicked" class="feedback-message">Merci !</div>
+              <div v-if="buttonClicked" class="feedback-message">{{ $t('pages.performance.motion.good.feedback') }}</div>
             </div>
 
             <div class="animated-elements-good">
               <div class="spinner-good" :class="{ loading: isLoading }"></div>
               <button @click="toggleLoading" class="load-button">
-                {{ isLoading ? 'Arrêter' : 'Charger' }}
+                {{ loadingButtonText }}
               </button>
               <div class="pulse-good" v-if="showPulse"></div>
               <button @click="togglePulse" class="pulse-button">
-                {{ showPulse ? 'Arrêter pulsation' : 'Démarrer pulsation' }}
+                {{ pulseButtonText }}
               </button>
             </div>
 
             <div class="controlled-carousel">
-              <button @click="prevSlide" aria-label="Slide précédent">‹</button>
+              <button @click="prevSlide" :aria-label="$t('pages.performance.motion.good.prev')">‹</button>
               <div class="carousel-content">
-                <div class="carousel-slide">Slide {{ currentSlide + 1 }}</div>
+                <div class="carousel-slide">{{ $t('pages.performance.motion.good.slide') }} {{ currentSlide + 1 }}</div>
               </div>
-              <button @click="nextSlide" aria-label="Slide suivant">›</button>
+              <button @click="nextSlide" :aria-label="$t('pages.performance.motion.good.next')">›</button>
             </div>
           </div>
         </div>
@@ -223,22 +259,22 @@ watch(deviceType, (newType) => {
         <h5>Code d'exemple</h5>
         <div class="code-example">
           <h6>❌ Mauvais : Animations sans respect des préférences</h6>
-          <pre><code><!-- CSS qui force les animations -->
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.motion.badComment') }} --&gt;
 .animated-card {
-  animation: bounce 2s infinite; /* Toujours actif */
+  animation: bounce 2s infinite; /* {{ $t('pages.performance.codeExamples.motion.alwaysActive') }} */
 }
 
 .pulse-element {
-  animation: pulse 1.5s infinite; /* Pas de contrôle utilisateur */
+  animation: pulse 1.5s infinite; /* {{ $t('pages.performance.codeExamples.motion.noUserControl') }} */
 }
 
-<!-- HTML sans contrôles -->
+&lt;!-- {{ $t('pages.performance.codeExamples.motion.htmlNoControls') }} --&gt;
 &lt;div class="auto-carousel"&gt;
-  <!-- Carousel qui défile automatiquement sans possibilité d'arrêt -->
+  &lt;!-- {{ $t('pages.performance.codeExamples.motion.autoCarousel') }} --&gt;
 &lt;/div&gt;</code></pre>
 
           <h6>✅ Bon : Respect de prefers-reduced-motion</h6>
-          <pre><code><!-- CSS qui respecte les préférences utilisateur -->
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.motion.goodComment') }} --&gt;
 .animated-card {
   transition: transform 0.3s ease;
 }
@@ -247,7 +283,7 @@ watch(deviceType, (newType) => {
   transform: translateY(-2px);
 }
 
-/* Respect des préférences système */
+/* {{ $t('pages.performance.codeExamples.motion.systemPreferences') }} */
 @media (prefers-reduced-motion: reduce) {
   .animated-card {
     transition: none;
@@ -257,11 +293,11 @@ watch(deviceType, (newType) => {
   }
 }
 
-<!-- HTML avec contrôles utilisateur -->
+&lt;!-- {{ $t('pages.performance.codeExamples.motion.htmlWithControls') }} --&gt;
 &lt;div class="controlled-carousel"&gt;
   &lt;button aria-label="Slide précédent"&gt;‹&lt;/button&gt;
   &lt;div class="carousel-content"&gt;
-    <!-- Contenu contrôlé par l'utilisateur -->
+    &lt;!-- {{ $t('pages.performance.codeExamples.motion.userControlledContent') }} --&gt;
   &lt;/div&gt;
   &lt;button aria-label="Slide suivant"&gt;›&lt;/button&gt;
 &lt;/div&gt;</code></pre>
@@ -270,40 +306,40 @@ watch(deviceType, (newType) => {
     </ExampleToggle>
 
     <ExampleToggle
-      title="Support du zoom et des grandes tailles de police"
-      explanation="L'interface doit rester fonctionnelle et lisible jusqu'à 200% de zoom. Les textes doivent s'adapter aux préférences de taille de police de l'utilisateur."
+      :title="$t('pages.performance.zoom.title')"
+      :explanation="$t('pages.performance.zoom.explanation')"
     >
       <template #bad>
         <div class="zoom-demo">
           <div class="layout-bad">
-            <h4>Interface fixe</h4>
+            <h4>{{ $t('pages.performance.zoom.bad.heading') }}</h4>
             <div class="fixed-layout">
               <div class="sidebar-bad">
-                <h5>Menu</h5>
+                <h5>{{ $t('pages.performance.zoom.bad.menu') }}</h5>
                 <ul>
-                  <li><a href="#">Accueil</a></li>
-                  <li><a href="#">Produits</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.home') }}</a></li>
+                  <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.products') }}</a></li>
+                  <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.services') }}</a></li>
+                  <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.contact') }}</a></li>
                 </ul>
               </div>
               <div class="content-bad">
                 <div class="toolbar-bad">
-                  <button>Nouveau</button>
-                  <button>Modifier</button>
-                  <button>Supprimer</button>
-                  <input type="search" placeholder="Rechercher...">
+                  <button>{{ $t('pages.performance.zoom.bad.toolbar.new') }}</button>
+                  <button>{{ $t('pages.performance.zoom.bad.toolbar.edit') }}</button>
+                  <button>{{ $t('pages.performance.zoom.bad.toolbar.delete') }}</button>
+                  <input type="search" :placeholder="$t('pages.performance.zoom.bad.toolbar.search')">
                 </div>
                 <div class="cards-bad">
                   <div class="card-bad">
-                    <h6>Produit 1</h6>
-                    <p>Description courte</p>
-                    <div class="price-bad">19.99€</div>
+                    <h6>{{ $t('pages.performance.zoom.bad.cards.product1.title') }}</h6>
+                    <p>{{ $t('pages.performance.zoom.bad.cards.product1.description') }}</p>
+                    <div class="price-bad">{{ $t('pages.performance.zoom.bad.cards.product1.price') }}</div>
                   </div>
                   <div class="card-bad">
-                    <h6>Produit 2</h6>
-                    <p>Description courte</p>
-                    <div class="price-bad">24.99€</div>
+                    <h6>{{ $t('pages.performance.zoom.bad.cards.product2.title') }}</h6>
+                    <p>{{ $t('pages.performance.zoom.bad.cards.product2.description') }}</p>
+                    <div class="price-bad">{{ $t('pages.performance.zoom.bad.cards.product2.price') }}</div>
                   </div>
                 </div>
               </div>
@@ -316,23 +352,21 @@ watch(deviceType, (newType) => {
         <div class="zoom-demo">
           <div class="zoom-controls">
             <label>
-              Simuler le zoom :
+              {{ $t('pages.performance.zoom.simulate') }}
               <select v-model="zoomLevel" @change="updateZoom">
-                <option value="100">100% (normal)</option>
-                <option value="125">125%</option>
-                <option value="150">150%</option>
-                <option value="175">175%</option>
-                <option value="200">200%</option>
+                <option v-for="option in zoomOptions" :key="option.value" :value="option.value">
+                  {{ option.label }}
+                </option>
               </select>
             </label>
             <div class="zoom-indicator">
-              📏 Taille du texte : <strong>{{ zoomLevel }}%</strong>
-              <span v-if="zoomLevel >= 150" class="zoom-warning">⚠️ La mise en page s'adapte automatiquement</span>
+              📏 {{ $t('pages.performance.zoom.indicator') }} <strong>{{ zoomLevel }}%</strong>
+              <span v-if="zoomLevel >= 150" class="zoom-warning">⚠️ {{ $t('pages.performance.zoom.warning') }}</span>
             </div>
           </div>
 
           <div class="layout-good" :style="{ fontSize: `${zoomLevel}%` }">
-            <h4>Interface adaptative</h4>
+            <h4>{{ $t('pages.performance.zoom.good.heading') }}</h4>
             <div class="flexible-layout" :class="{ 'zoom-large': zoomLevel >= 150 }">
               <nav class="sidebar-good" :class="{ collapsed: sidebarCollapsed || zoomLevel >= 150 }">
                 <button
@@ -344,36 +378,36 @@ watch(deviceType, (newType) => {
                   {{ (sidebarCollapsed || zoomLevel >= 150) ? '☰' : '✕' }}
                 </button>
                 <div id="main-nav" class="nav-content" v-show="!sidebarCollapsed && zoomLevel < 150">
-                  <h5>Menu</h5>
+                  <h5>{{ $t('pages.performance.zoom.good.menu') }}</h5>
                   <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Produits</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.home') }}</a></li>
+                    <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.products') }}</a></li>
+                    <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.services') }}</a></li>
+                    <li><a href="#">{{ $t('pages.performance.zoom.bad.nav.contact') }}</a></li>
                   </ul>
                 </div>
               </nav>
               <main class="content-good">
                 <div class="toolbar-good">
                   <div class="toolbar-actions">
-                    <button>Nouveau</button>
-                    <button>Modifier</button>
-                    <button>Supprimer</button>
+                    <button>{{ $t('pages.performance.zoom.good.toolbar.new') }}</button>
+                    <button>{{ $t('pages.performance.zoom.good.toolbar.edit') }}</button>
+                    <button>{{ $t('pages.performance.zoom.good.toolbar.delete') }}</button>
                   </div>
                   <div class="toolbar-search">
-                    <input type="search" placeholder="Rechercher...">
+                    <input type="search" :placeholder="$t('pages.performance.zoom.good.toolbar.search')">
                   </div>
                 </div>
                 <div class="cards-good">
                   <article class="card-good">
-                    <h6>Produit 1</h6>
-                    <p>Description adaptative</p>
-                    <div class="price-good">19.99€</div>
+                    <h6>{{ $t('pages.performance.zoom.good.cards.product1.title') }}</h6>
+                    <p>{{ $t('pages.performance.zoom.good.cards.product1.description') }}</p>
+                    <div class="price-good">{{ $t('pages.performance.zoom.good.cards.product1.price') }}</div>
                   </article>
                   <article class="card-good">
-                    <h6>Produit 2</h6>
-                    <p>Description adaptative</p>
-                    <div class="price-good">24.99€</div>
+                    <h6>{{ $t('pages.performance.zoom.good.cards.product2.title') }}</h6>
+                    <p>{{ $t('pages.performance.zoom.good.cards.product2.description') }}</p>
+                    <div class="price-good">{{ $t('pages.performance.zoom.good.cards.product2.price') }}</div>
                   </article>
                 </div>
               </main>
@@ -386,38 +420,38 @@ watch(deviceType, (newType) => {
         <h5>Code d'exemple</h5>
         <div class="code-example">
           <h6>❌ Mauvais : Tailles fixes qui ne s'adaptent pas</h6>
-          <pre><code><!-- CSS avec dimensions fixes -->
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.zoom.badComment') }} --&gt;
 .sidebar {
-  width: 250px; /* Largeur fixe */
-  font-size: 14px; /* Taille fixe */
+  width: 250px; /* {{ $t('pages.performance.codeExamples.zoom.fixedWidth') }} */
+  font-size: 14px; /* {{ $t('pages.performance.codeExamples.zoom.fixedSize') }} */
 }
 
 .content {
-  max-width: 800px; /* Ne s'adapte pas au zoom */
-  overflow: hidden; /* Contenu coupé au zoom */
+  max-width: 800px; /* {{ $t('pages.performance.codeExamples.zoom.noAdapt') }} */
+  overflow: hidden; /* {{ $t('pages.performance.codeExamples.zoom.contentCut') }} */
 }
 
-<!-- HTML sans structure adaptative -->
+&lt;!-- {{ $t('pages.performance.codeExamples.zoom.htmlNoAdaptive') }} --&gt;
 &lt;div class="fixed-layout"&gt;
   &lt;div class="sidebar"&gt;Menu&lt;/div&gt;
   &lt;div class="content"&gt;Contenu fixe&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
           <h6>✅ Bon : Unités relatives et flexibilité</h6>
-          <pre><code><!-- CSS avec unités relatives -->
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.zoom.goodComment') }} --&gt;
 .sidebar {
-  width: 15rem; /* Unité relative au root font-size */
+  width: 15rem; /* {{ $t('pages.performance.codeExamples.zoom.relativeUnit') }} */
   min-width: 200px;
-  font-size: 1rem; /* S'adapte aux préférences */
+  font-size: 1rem; /* {{ $t('pages.performance.codeExamples.zoom.adaptToPreferences') }} */
 }
 
 .content {
-  flex: 1; /* Flexible */
-  max-width: none; /* Pas de limite fixe */
-  overflow-wrap: break-word; /* Gestion du contenu */
+  flex: 1; /* {{ $t('pages.performance.codeExamples.zoom.flexible') }} */
+  max-width: none; /* {{ $t('pages.performance.codeExamples.zoom.noFixedLimit') }} */
+  overflow-wrap: break-word; /* {{ $t('pages.performance.codeExamples.zoom.contentManagement') }} */
 }
 
-/* Support du zoom jusqu'à 200% */
+/* {{ $t('pages.performance.codeExamples.zoom.zoomSupport') }} */
 @media (max-width: 1024px) {
   .sidebar {
     width: 100%;
@@ -425,7 +459,7 @@ watch(deviceType, (newType) => {
   }
 }
 
-<!-- HTML avec structure flexible -->
+&lt;!-- {{ $t('pages.performance.codeExamples.zoom.htmlFlexible') }} --&gt;
 &lt;div class="flexible-layout"&gt;
   &lt;aside class="sidebar" aria-label="Navigation"&gt;
     &lt;button aria-expanded="false" aria-controls="nav-menu"&gt;
@@ -440,45 +474,45 @@ watch(deviceType, (newType) => {
     </ExampleToggle>
 
     <ExampleToggle
-      title="Design adaptatif et responsive"
-      explanation="L'interface doit fonctionner sur tous les appareils et orientations, avec des contrôles de taille appropriée pour le tactile."
+      :title="$t('pages.performance.responsive.title')"
+      :explanation="$t('pages.performance.responsive.explanation')"
     >
       <template #bad>
         <div class="responsive-demo">
           <div class="device-simulator-bad">
-            <h4>Interface fixe desktop</h4>
+            <h4>{{ $t('pages.performance.responsive.bad.heading') }}</h4>
             <div class="fixed-interface">
               <div class="header-bad">
-                <div class="logo-bad">Logo</div>
+                <div class="logo-bad">{{ $t('pages.performance.responsive.bad.logo') }}</div>
                 <div class="nav-bad">
-                  <a href="#">Accueil</a>
-                  <a href="#">À propos</a>
-                  <a href="#">Services</a>
-                  <a href="#">Portfolio</a>
-                  <a href="#">Blog</a>
-                  <a href="#">Contact</a>
+                  <a href="#">{{ $t('pages.performance.responsive.bad.nav.home') }}</a>
+                  <a href="#">{{ $t('pages.performance.responsive.bad.nav.about') }}</a>
+                  <a href="#">{{ $t('pages.performance.responsive.bad.nav.services') }}</a>
+                  <a href="#">{{ $t('pages.performance.responsive.bad.nav.portfolio') }}</a>
+                  <a href="#">{{ $t('pages.performance.responsive.bad.nav.blog') }}</a>
+                  <a href="#">{{ $t('pages.performance.responsive.bad.nav.contact') }}</a>
                 </div>
                 <div class="actions-bad">
-                  <button>Connexion</button>
-                  <button>Inscription</button>
+                  <button>{{ $t('pages.performance.responsive.bad.login') }}</button>
+                  <button>{{ $t('pages.performance.responsive.bad.signup') }}</button>
                 </div>
               </div>
               <div class="content-section-bad">
                 <div class="form-bad">
-                  <h5>Contactez-nous</h5>
+                  <h5>{{ $t('pages.performance.responsive.bad.form.heading') }}</h5>
                   <div class="form-row-bad">
-                    <input type="text" placeholder="Nom">
-                    <input type="email" placeholder="Email">
+                    <input type="text" :placeholder="$t('pages.performance.responsive.bad.form.name')">
+                    <input type="email" :placeholder="$t('pages.performance.responsive.bad.form.email')">
                   </div>
-                  <textarea placeholder="Message"></textarea>
+                  <textarea :placeholder="$t('pages.performance.responsive.bad.form.message')"></textarea>
                   <div class="form-actions-bad">
-                    <button>Annuler</button>
-                    <button>Envoyer</button>
+                    <button>{{ $t('pages.performance.responsive.bad.form.cancel') }}</button>
+                    <button>{{ $t('pages.performance.responsive.bad.form.send') }}</button>
                   </div>
                 </div>
                 <div class="info-bad">
-                  <h5>Nos coordonnées</h5>
-                  <p>123 Rue de la Paix<br>75001 Paris<br>+33 1 23 45 67 89</p>
+                  <h5>{{ $t('pages.performance.responsive.bad.info.heading') }}</h5>
+                  <p>{{ $t('pages.performance.responsive.bad.info.address') }}<br>{{ $t('pages.performance.responsive.bad.info.city') }}<br>{{ $t('pages.performance.responsive.bad.info.phone') }}</p>
                 </div>
               </div>
             </div>
@@ -490,20 +524,20 @@ watch(deviceType, (newType) => {
         <div class="responsive-demo">
           <div class="device-controls">
             <label>
-              Simuler l'appareil :
+              {{ $t('pages.performance.responsive.simulate') }}
               <select v-model="deviceType" @change="updateDevice">
-                <option value="desktop">Desktop (1200px+)</option>
-                <option value="tablet">Tablette (768px)</option>
-                <option value="mobile">Mobile (375px)</option>
+                <option v-for="option in deviceOptions" :key="option.value" :value="option.value">
+                  {{ option.label }}
+                </option>
               </select>
             </label>
           </div>
 
           <div class="device-simulator-good" :class="deviceType">
-            <h4>Interface adaptive</h4>
+            <h4>{{ $t('pages.performance.responsive.good.heading') }}</h4>
             <div class="responsive-interface">
               <header class="header-good">
-                <div class="logo-good">Logo</div>
+                <div class="logo-good">{{ $t('pages.performance.responsive.bad.logo') }}</div>
                 <button
                   v-if="deviceType !== 'desktop'"
                   class="menu-toggle"
@@ -511,7 +545,7 @@ watch(deviceType, (newType) => {
                   :aria-expanded="mobileMenuOpen"
                   aria-controls="responsive-nav"
                 >
-                  ☰ Menu
+                  ☰ {{ $t('pages.performance.responsive.good.menu') }}
                 </button>
                 <nav
                   id="responsive-nav"
@@ -519,41 +553,41 @@ watch(deviceType, (newType) => {
                   :class="{ open: mobileMenuOpen }"
                   v-show="deviceType === 'desktop' || mobileMenuOpen"
                 >
-                  <a href="#" @click="closeMenu">Accueil</a>
-                  <a href="#" @click="closeMenu">À propos</a>
-                  <a href="#" @click="closeMenu">Services</a>
-                  <a href="#" @click="closeMenu">Portfolio</a>
-                  <a href="#" @click="closeMenu">Blog</a>
-                  <a href="#" @click="closeMenu">Contact</a>
+                  <a href="#" @click="closeMenu">{{ $t('pages.performance.responsive.bad.nav.home') }}</a>
+                  <a href="#" @click="closeMenu">{{ $t('pages.performance.responsive.bad.nav.about') }}</a>
+                  <a href="#" @click="closeMenu">{{ $t('pages.performance.responsive.bad.nav.services') }}</a>
+                  <a href="#" @click="closeMenu">{{ $t('pages.performance.responsive.bad.nav.portfolio') }}</a>
+                  <a href="#" @click="closeMenu">{{ $t('pages.performance.responsive.bad.nav.blog') }}</a>
+                  <a href="#" @click="closeMenu">{{ $t('pages.performance.responsive.bad.nav.contact') }}</a>
                 </nav>
                 <div class="actions-good" v-if="deviceType === 'desktop'">
-                  <button>Connexion</button>
-                  <button>Inscription</button>
+                  <button>{{ $t('pages.performance.responsive.bad.login') }}</button>
+                  <button>{{ $t('pages.performance.responsive.bad.signup') }}</button>
                 </div>
               </header>
 
               <main class="content-section-good">
                 <section class="form-section-good">
-                  <h5>Contactez-nous</h5>
+                  <h5>{{ $t('pages.performance.responsive.good.form.heading') }}</h5>
                   <form class="form-good">
                     <div class="form-row-good">
-                      <input type="text" placeholder="Nom" aria-label="Votre nom">
-                      <input type="email" placeholder="Email" aria-label="Votre email">
+                      <input type="text" :placeholder="$t('pages.performance.responsive.bad.form.name')" :aria-label="$t('pages.performance.responsive.good.form.nameLabel')">
+                      <input type="email" :placeholder="$t('pages.performance.responsive.bad.form.email')" :aria-label="$t('pages.performance.responsive.good.form.emailLabel')">
                     </div>
-                    <textarea placeholder="Votre message" aria-label="Votre message"></textarea>
+                    <textarea :placeholder="$t('pages.performance.responsive.good.form.messageLabel')" :aria-label="$t('pages.performance.responsive.good.form.messageLabel')"></textarea>
                     <div class="form-actions-good">
-                      <button type="button">Annuler</button>
-                      <button type="submit">Envoyer</button>
+                      <button type="button">{{ $t('pages.performance.responsive.good.form.cancel') }}</button>
+                      <button type="submit">{{ $t('pages.performance.responsive.good.form.send') }}</button>
                     </div>
                   </form>
                 </section>
 
                 <aside class="info-good">
-                  <h5>Nos coordonnées</h5>
+                  <h5>{{ $t('pages.performance.responsive.good.info.heading') }}</h5>
                   <address>
-                    123 Rue de la Paix<br>
-                    75001 Paris<br>
-                    <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                    {{ $t('pages.performance.responsive.bad.info.address') }}<br>
+                    {{ $t('pages.performance.responsive.bad.info.city') }}<br>
+                    <a :href="`tel:${$t('pages.performance.responsive.bad.info.phone').replace(/\s/g, '')}`">{{ $t('pages.performance.responsive.bad.info.phone') }}</a>
                   </address>
                 </aside>
               </main>
@@ -566,28 +600,28 @@ watch(deviceType, (newType) => {
         <h5>Code d'exemple</h5>
         <div class="code-example">
           <h6>❌ Mauvais : Interface fixe non responsive</h6>
-          <pre><code><!-- CSS rigide -->
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.responsive.badComment') }} --&gt;
 .header {
   display: flex;
-  position: fixed; /* Problématique sur mobile */
-  width: 1200px; /* Largeur fixe */
+  position: fixed; /* {{ $t('pages.performance.codeExamples.responsive.fixedPosition') }} */
+  width: 1200px; /* {{ $t('pages.performance.codeExamples.responsive.fixedWidth') }} */
 }
 
 .nav-menu {
-  display: flex; /* Déborde sur mobile */
+  display: flex; /* {{ $t('pages.performance.codeExamples.responsive.overflow') }} */
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Toujours 2 colonnes */
+  grid-template-columns: 1fr 1fr; /* {{ $t('pages.performance.codeExamples.responsive.alwaysTwoColumns') }} */
 }
 
 button {
-  padding: 4px 8px; /* Trop petit pour le tactile */
+  padding: 4px 8px; /* {{ $t('pages.performance.codeExamples.responsive.tooSmallTouch') }} */
   min-width: auto;
 }
 
-<!-- HTML sans adaptabilité -->
+&lt;!-- {{ $t('pages.performance.codeExamples.responsive.htmlNoAdaptability') }} --&gt;
 &lt;header class="header"&gt;
   &lt;div class="logo"&gt;Logo&lt;/div&gt;
   &lt;nav class="nav-menu"&gt;
@@ -596,16 +630,16 @@ button {
 &lt;/header&gt;</code></pre>
 
           <h6>✅ Bon : Design responsive et adaptatif</h6>
-          <pre><code><!-- CSS responsive -->
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.responsive.goodComment') }} --&gt;
 .header {
   display: flex;
   flex-wrap: wrap;
-  width: 100%; /* Fluide */
+  width: 100%; /* {{ $t('pages.performance.codeExamples.responsive.fluid') }} */
   max-width: 100%;
 }
 
 .nav-menu {
-  display: none; /* Caché par défaut sur mobile */
+  display: none; /* {{ $t('pages.performance.codeExamples.responsive.hiddenByDefault') }} */
 }
 
 .nav-menu.open {
@@ -636,12 +670,12 @@ button {
 }
 
 button {
-  min-height: 44px; /* Target tactile minimum */
+  min-height: 44px; /* {{ $t('pages.performance.codeExamples.responsive.minTouchTarget') }} */
   min-width: 44px;
   padding: 0.75rem 1.5rem;
 }
 
-<!-- HTML avec navigation adaptative -->
+&lt;!-- {{ $t('pages.performance.codeExamples.responsive.htmlAdaptiveNav') }} --&gt;
 &lt;header class="header"&gt;
   &lt;div class="logo"&gt;Logo&lt;/div&gt;
   &lt;button class="menu-toggle"
@@ -659,45 +693,45 @@ button {
     </ExampleToggle>
 
     <ExampleToggle
-      title="Lazy Loading : charger uniquement les ressources visibles"
-      explanation="Le lazy loading (chargement différé) permet de charger les images et ressources uniquement quand l'utilisateur en a besoin, plutôt que tout télécharger d'un coup au chargement de la page."
+      :title="$t('pages.performance.lazyLoading.title')"
+      :explanation="$t('pages.performance.lazyLoading.explanation')"
     >
       <template #bad>
         <div class="loading-demo">
           <div class="interface-bad">
-            <h4>❌ Tout charger d'un coup (Eager Loading)</h4>
+            <h4>❌ {{ $t('pages.performance.lazyLoading.bad.heading') }}</h4>
             <div class="content-example-bad">
               <p class="problem-explanation">
-                <strong>Exemple concret :</strong> Un site e-commerce avec 50 produits charge toutes les images immédiatement, même celles en bas de page que l'utilisateur ne verra peut-être jamais.
+                <strong>{{ $t('pages.performance.lazyLoading.bad.problem') }}</strong>
               </p>
 
               <p class="technical-term">
-                <strong>📚 Terme technique :</strong> <em>Eager Loading</em> = chargement immédiat de toutes les ressources
+                <strong>📚 {{ $t('pages.performance.lazyLoading.bad.term') }}</strong>
               </p>
 
               <ul class="simple-list">
-                <li>📥 <strong>Problème 1 :</strong> 50 images × 200 Ko = 10 Mo téléchargés immédiatement</li>
-                <li>⏱️ <strong>Problème 2 :</strong> Temps d'attente de 8-15 secondes avant de voir la page</li>
-                <li>📱 <strong>Problème 3 :</strong> Consomme inutilement le forfait data mobile</li>
-                <li>🔋 <strong>Problème 4 :</strong> Sollicite le processeur et vide la batterie</li>
+                <li>📥 <strong>{{ $t('pages.performance.lazyLoading.bad.issues.problem1') }}</strong></li>
+                <li>⏱️ <strong>{{ $t('pages.performance.lazyLoading.bad.issues.problem2') }}</strong></li>
+                <li>📱 <strong>{{ $t('pages.performance.lazyLoading.bad.issues.problem3') }}</strong></li>
+                <li>🔋 <strong>{{ $t('pages.performance.lazyLoading.bad.issues.problem4') }}</strong></li>
               </ul>
 
               <div class="visual-example bad">
                 <div class="website-example">
-                  <div class="resource-item loaded">📄 HTML (20 Ko)</div>
-                  <div class="resource-item loaded">🎨 CSS (50 Ko)</div>
-                  <div class="resource-item loaded">⚙️ JavaScript (200 Ko)</div>
-                  <div class="resource-item loaded">🖼️ Image 1 visible (200 Ko)</div>
-                  <div class="resource-item loaded">🖼️ Image 2 visible (200 Ko)</div>
-                  <div class="resource-item loaded unnecessary">🖼️ Image 3 en bas de page (200 Ko)</div>
-                  <div class="resource-item loaded unnecessary">🖼️ Image 4 en bas de page (200 Ko)</div>
-                  <div class="resource-item loaded unnecessary">🖼️ Image 5 en bas de page (200 Ko)</div>
+                  <div class="resource-item loaded">📄 {{ $t('pages.performance.lazyLoading.bad.resources.html') }}</div>
+                  <div class="resource-item loaded">🎨 {{ $t('pages.performance.lazyLoading.bad.resources.css') }}</div>
+                  <div class="resource-item loaded">⚙️ {{ $t('pages.performance.lazyLoading.bad.resources.js') }}</div>
+                  <div class="resource-item loaded">🖼️ {{ $t('pages.performance.lazyLoading.bad.resources.img1') }}</div>
+                  <div class="resource-item loaded">🖼️ {{ $t('pages.performance.lazyLoading.bad.resources.img2') }}</div>
+                  <div class="resource-item loaded unnecessary">🖼️ {{ $t('pages.performance.lazyLoading.bad.resources.img3') }}</div>
+                  <div class="resource-item loaded unnecessary">🖼️ {{ $t('pages.performance.lazyLoading.bad.resources.img4') }}</div>
+                  <div class="resource-item loaded unnecessary">🖼️ {{ $t('pages.performance.lazyLoading.bad.resources.img5') }}</div>
                 </div>
                 <div class="wait-time bad">
-                  ⏱️ Temps de chargement total : <strong>8 secondes</strong>
+                  ⏱️ {{ $t('pages.performance.lazyLoading.bad.time') }}
                 </div>
                 <div class="data-usage bad">
-                  📊 Données consommées : <strong>1.27 Mo</strong> (dont 600 Ko inutiles)
+                  📊 {{ $t('pages.performance.lazyLoading.bad.data') }}
                 </div>
               </div>
             </div>
@@ -708,27 +742,25 @@ button {
       <template #good>
         <div class="loading-demo">
           <div class="interface-good">
-            <h4>✅ Chargement progressif (Lazy Loading + Cache)</h4>
+            <h4>✅ {{ $t('pages.performance.lazyLoading.good.heading') }}</h4>
             <div class="content-example-good">
               <p class="solution-explanation">
-                <strong>Exemple concret :</strong> Le même site e-commerce charge d'abord le contenu visible, puis les images suivantes uniquement quand l'utilisateur scroll.
+                <strong>{{ $t('pages.performance.lazyLoading.good.solution') }}</strong>
               </p>
 
               <p class="technical-term">
-                <strong>📚 Termes techniques :</strong>
-                <em>Lazy Loading</em> = chargement différé •
-                <em>Cache HTTP</em> = mémoire temporaire du navigateur
+                <strong>📚 {{ $t('pages.performance.lazyLoading.good.terms') }}</strong>
               </p>
 
               <div class="loading-controls-simple">
-                <h5>Testez les optimisations :</h5>
+                <h5>{{ $t('pages.performance.lazyLoading.good.controls.title') }}</h5>
                 <label class="checkbox-card">
                   <input type="checkbox" v-model="lazyLoadImages" @change="updateLoadingStrategy">
                   <div class="checkbox-content">
                     <span class="checkbox-icon">👁️</span>
                     <span class="checkbox-label">
-                      <strong>Lazy Loading activé</strong>
-                      <small>Charge les images au scroll (attribut loading="lazy")</small>
+                      <strong>{{ $t('pages.performance.lazyLoading.good.controls.lazyLoad.label') }}</strong>
+                      <small>{{ $t('pages.performance.lazyLoading.good.controls.lazyLoad.description') }}</small>
                     </span>
                   </div>
                 </label>
@@ -738,8 +770,8 @@ button {
                   <div class="checkbox-content">
                     <span class="checkbox-icon">💾</span>
                     <span class="checkbox-label">
-                      <strong>Cache HTTP activé</strong>
-                      <small>Stocke en mémoire pour ne pas re-télécharger (Cache-Control)</small>
+                      <strong>{{ $t('pages.performance.lazyLoading.good.controls.cache.label') }}</strong>
+                      <small>{{ $t('pages.performance.lazyLoading.good.controls.cache.description') }}</small>
                     </span>
                   </div>
                 </label>
@@ -747,51 +779,51 @@ button {
 
               <div class="visual-example good">
                 <div class="website-example">
-                  <div class="resource-item loaded">📄 HTML (20 Ko) - Chargé</div>
-                  <div class="resource-item loaded">🎨 CSS (50 Ko) - Chargé</div>
-                  <div class="resource-item loaded">⚙️ JavaScript (200 Ko) - Chargé</div>
-                  <div class="resource-item loaded">🖼️ Image 1 visible (200 Ko) - Chargé</div>
-                  <div class="resource-item loaded">🖼️ Image 2 visible (200 Ko) - Chargé</div>
+                  <div class="resource-item loaded">📄 {{ $t('pages.performance.lazyLoading.good.resources.html') }}</div>
+                  <div class="resource-item loaded">🎨 {{ $t('pages.performance.lazyLoading.good.resources.css') }}</div>
+                  <div class="resource-item loaded">⚙️ {{ $t('pages.performance.lazyLoading.good.resources.js') }}</div>
+                  <div class="resource-item loaded">🖼️ {{ $t('pages.performance.lazyLoading.good.resources.img1') }}</div>
+                  <div class="resource-item loaded">🖼️ {{ $t('pages.performance.lazyLoading.good.resources.img2') }}</div>
                   <div class="resource-item" :class="{ 'lazy-loaded': lazyLoadImages }">
-                    🖼️ Image 3 {{ lazyLoadImages ? '(chargée au scroll)' : '(non chargée encore)' }}
+                    🖼️ {{ $t('pages.performance.lazyLoading.good.resources.img3') }} {{ lazyLoadImages ? $t('pages.performance.lazyLoading.good.resources.lazy') : $t('pages.performance.lazyLoading.good.resources.notLoaded') }}
                   </div>
                   <div class="resource-item" :class="{ 'lazy-loaded': lazyLoadImages }">
-                    🖼️ Image 4 {{ lazyLoadImages ? '(chargée au scroll)' : '(non chargée encore)' }}
+                    🖼️ {{ $t('pages.performance.lazyLoading.good.resources.img4') }} {{ lazyLoadImages ? $t('pages.performance.lazyLoading.good.resources.lazy') : $t('pages.performance.lazyLoading.good.resources.notLoaded') }}
                   </div>
                   <div class="resource-item" :class="{ cached: cacheEnabled }">
-                    🖼️ Image déjà vue {{ cacheEnabled ? '(en cache, 0 Ko)' : '(à re-télécharger)' }}
+                    🖼️ {{ $t('pages.performance.lazyLoading.good.resources.imgCached') }} {{ cacheEnabled ? $t('pages.performance.lazyLoading.good.resources.cached') : $t('pages.performance.lazyLoading.good.resources.redownload') }}
                   </div>
                 </div>
                 <div class="wait-time good">
-                  ⏱️ Temps de chargement initial : <strong>{{ lazyLoadImages ? '2 secondes' : '5 secondes' }}</strong>
+                  ⏱️ {{ $t('pages.performance.lazyLoading.good.time') }} <strong>{{ loadingTimeText }}</strong>
                 </div>
                 <div class="data-usage good" v-if="lazyLoadImages || cacheEnabled">
-                  📊 Données économisées : <strong>{{ cacheEnabled && lazyLoadImages ? '600 Ko (47%)' : '200 Ko (16%)' }}</strong>
+                  📊 {{ $t('pages.performance.lazyLoading.good.dataSaved') }} <strong>{{ dataSavingsText }}</strong>
                 </div>
               </div>
 
               <div class="real-world-benefits">
-                <h5>💡 Impact sur l'accessibilité :</h5>
+                <h5>💡 {{ $t('pages.performance.lazyLoading.good.benefits.title') }}</h5>
                 <div class="benefit-grid">
                   <div class="benefit-item">
                     <span class="benefit-icon">🚀</span>
-                    <strong>Rapidité (FCP)</strong>
-                    <p>First Contentful Paint plus rapide = page visible immédiatement</p>
+                    <strong>{{ $t('pages.performance.lazyLoading.good.benefits.speed.label') }}</strong>
+                    <p>{{ $t('pages.performance.lazyLoading.good.benefits.speed.description') }}</p>
                   </div>
                   <div class="benefit-item">
                     <span class="benefit-icon">📱</span>
-                    <strong>Données mobiles</strong>
-                    <p>Essentiel pour les utilisateurs avec forfait limité ou réseau lent (3G)</p>
+                    <strong>{{ $t('pages.performance.lazyLoading.good.benefits.mobile.label') }}</strong>
+                    <p>{{ $t('pages.performance.lazyLoading.good.benefits.mobile.description') }}</p>
                   </div>
                   <div class="benefit-item">
                     <span class="benefit-icon">🔋</span>
-                    <strong>Batterie</strong>
-                    <p>Moins de transfert réseau = économie d'énergie significative</p>
+                    <strong>{{ $t('pages.performance.lazyLoading.good.benefits.battery.label') }}</strong>
+                    <p>{{ $t('pages.performance.lazyLoading.good.benefits.battery.description') }}</p>
                   </div>
                   <div class="benefit-item">
                     <span class="benefit-icon">♿</span>
-                    <strong>Vieux appareils</strong>
-                    <p>Moins de ressources à traiter = fonctionne sur matériel ancien</p>
+                    <strong>{{ $t('pages.performance.lazyLoading.good.benefits.devices.label') }}</strong>
+                    <p>{{ $t('pages.performance.lazyLoading.good.benefits.devices.description') }}</p>
                   </div>
                 </div>
               </div>
@@ -804,25 +836,25 @@ button {
         <h5>Pour les développeurs : exemples de code</h5>
         <div class="code-example">
           <h6>❌ Tout charger d'un coup</h6>
-          <pre><code>&lt;!-- Toutes les images se chargent immédiatement --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.lazyLoading.badComment') }} --&gt;
 &lt;img src="photo-tres-lourde-5mo.jpg" alt="Photo"&gt;
 &lt;img src="autre-photo-4mo.jpg" alt="Autre photo"&gt;
 &lt;img src="encore-une-3mo.jpg" alt="Encore une photo"&gt;
 
-&lt;!-- Résultat : 12 Mo à télécharger avant de voir la page ! --&gt;</code></pre>
+&lt;!-- {{ $t('pages.performance.codeExamples.lazyLoading.resultBefore') }} --&gt;</code></pre>
 
           <h6>✅ Charger intelligemment</h6>
-          <pre><code>&lt;!-- L'attribut loading="lazy" charge l'image seulement quand elle est visible --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.performance.codeExamples.lazyLoading.goodComment') }} --&gt;
 &lt;img src="photo-optimisee-500ko.webp"
      alt="Photo"
      loading="lazy"&gt;
 
-&lt;!-- Les autres images ne se chargeront que si l'utilisateur scroll jusque là --&gt;
+&lt;!-- {{ $t('pages.performance.codeExamples.lazyLoading.otherImagesOnScroll') }} --&gt;
 &lt;img src="autre-photo-500ko.webp"
      alt="Autre photo"
      loading="lazy"&gt;
 
-&lt;!-- Résultat : 500 Ko au début, le reste seulement si nécessaire ! --&gt;</code></pre>
+&lt;!-- {{ $t('pages.performance.codeExamples.lazyLoading.resultSmart') }} --&gt;</code></pre>
         </div>
       </div>
     </ExampleToggle>

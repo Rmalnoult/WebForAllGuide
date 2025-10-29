@@ -5,9 +5,6 @@ export default defineNuxtConfig({
   // Application configuration
   app: {
     head: {
-      htmlAttrs: {
-        lang: 'fr'
-      },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       link: [
@@ -96,11 +93,6 @@ export default defineNuxtConfig({
           additionalData: '@import "~/assets/styles/variables.css";'
         }
       }
-    },
-    resolve: {
-      alias: {
-        '@': '/Users/romainmalnoult/www/accessibility-talk/a11y-demo'
-      }
     }
   },
 
@@ -108,7 +100,40 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // Modules
-  modules: ['@nuxtjs/plausible'],
+  modules: ['@nuxtjs/i18n', '@nuxtjs/plausible'],
+
+  // i18n configuration
+  i18n: {
+    locales: [
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        name: 'Français',
+        file: 'fr.json'
+      },
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English',
+        file: 'en.json'
+      }
+    ],
+    lazy: true,
+    langDir: 'locales',
+    defaultLocale: 'fr',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      alwaysRedirect: false,
+      fallbackLocale: 'fr'
+    },
+    compilation: {
+      strictMessage: false,
+      escapeHtml: false
+    }
+  },
 
   // Plausible Analytics configuration
   plausible: {
@@ -126,6 +151,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: [
+        // French routes (default, no prefix)
         '/',
         '/semantic-html',
         '/keyboard-navigation',
@@ -133,7 +159,16 @@ export default defineNuxtConfig({
         '/color-contrast',
         '/accessible-forms',
         '/aria-components',
-        '/performance'
+        '/performance',
+        // English routes (with /en prefix)
+        '/en',
+        '/en/semantic-html',
+        '/en/keyboard-navigation',
+        '/en/media-accessible',
+        '/en/color-contrast',
+        '/en/accessible-forms',
+        '/en/aria-components',
+        '/en/performance'
       ],
       ignore: ['/about', '/contact', '/profile', '/semantic-h-t-m-l', '/a-r-i-a-components'],
       failOnError: false

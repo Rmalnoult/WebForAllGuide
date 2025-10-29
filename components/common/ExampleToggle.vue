@@ -13,7 +13,7 @@
           type="button"
           :aria-expanded="isDropdownOpen"
           aria-haspopup="true"
-          :aria-label="`Options pour l'exemple ${title}`"
+          :aria-label="$t('components.exampleToggle.optionsForExample', { title })"
           ref="triggerButton"
         >
           <span class="dots" aria-hidden="true">⋯</span>
@@ -40,7 +40,7 @@
             ref="exportMenuItem"
           >
             <span class="icon" aria-hidden="true">📥</span>
-            <span>{{ isExporting ? 'Export en cours...' : 'Exporter en image' }}</span>
+            <span>{{ isExporting ? $t('components.exampleToggle.exporting') : $t('components.exampleToggle.exportAsImage') }}</span>
           </button>
         </div>
       </div>
@@ -49,7 +49,7 @@
     <div class="examples-container">
       <div class="example bad-example card">
         <h3 class="example-label bad-label">
-          <span class="icon" aria-hidden="true">❌</span> Mauvais exemple
+          <span class="icon" aria-hidden="true">❌</span> {{ $t('components.exampleToggle.badExample') }}
         </h3>
         <div class="example-content">
           <slot name="bad"></slot>
@@ -58,7 +58,7 @@
 
       <div class="example good-example card">
         <h3 class="example-label good-label">
-          <span class="icon" aria-hidden="true">✅</span> Bon exemple
+          <span class="icon" aria-hidden="true">✅</span> {{ $t('components.exampleToggle.goodExample') }}
         </h3>
         <div class="example-content">
           <slot name="good"></slot>
@@ -67,7 +67,7 @@
     </div>
 
     <div v-if="explanation" class="example-explanation" role="note">
-      <p><strong>Explication :</strong> {{ explanation }}</p>
+      <p><strong>{{ $t('components.exampleToggle.explanation') }}</strong> {{ explanation }}</p>
     </div>
   </div>
 </template>

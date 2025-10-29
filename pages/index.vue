@@ -1,66 +1,44 @@
 <script setup>
+const { t } = useI18n()
+const localePath = useLocalePath()
 const { getPageSEO } = useSEOConfig()
 const seo = getPageSEO('/')
 
 useHead(seo)
 
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, computed } from 'vue'
 
 // FAQ Schema.org structured data for better SEO
-const faqSchema = {
+const faqSchema = computed(() => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Qu'est-ce que l'accessibilité web ?",
+      "name": t('pages.ariaComponents.faq.questions.q1.title'),
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'accessibilité web garantit que les sites et applications sont utilisables par tous, y compris les personnes en situation de handicap. Elle suit les normes WCAG (Web Content Accessibility Guidelines) et bénéficie à tous les utilisateurs : personnes avec handicap visuel, auditif, moteur ou cognitif, mais aussi seniors, utilisateurs mobiles, ou situations temporaires (bras cassé, environnement bruyant)."
+        "text": t('pages.ariaComponents.faq.questions.q1.content')
       }
     },
     {
       "@type": "Question",
-      "name": "Pourquoi l'accessibilité web est-elle importante ?",
+      "name": t('pages.ariaComponents.faq.questions.q2.title'),
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "15% de la population mondiale vit avec un handicap, et 94.8% des sites web contiennent des erreurs d'accessibilité. L'accessibilité est à la fois une obligation légale (Directive Européenne 2025, ADA aux États-Unis), une responsabilité éthique, et un avantage business : elle améliore le SEO, élargit votre audience, et améliore l'expérience pour tous."
+        "text": t('pages.ariaComponents.faq.questions.q2.content')
       }
     },
     {
       "@type": "Question",
-      "name": "Quelles sont les normes WCAG ?",
+      "name": t('pages.ariaComponents.faq.questions.q3.title'),
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Les WCAG (Web Content Accessibility Guidelines) sont des normes internationales du W3C définissant comment rendre le contenu web accessible. Elles comprennent trois niveaux : A (basique), AA (standard recommandé), et AAA (niveau avancé). Le niveau AA est généralement requis par la loi et couvre : perceptibilité, utilisabilité, compréhensibilité et robustesse."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Comment tester l'accessibilité de mon site ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Utilisez plusieurs méthodes complémentaires : outils automatisés (WAVE, axe DevTools, Lighthouse), tests manuels au clavier (navigation avec Tab, Enter, Escape), tests avec lecteurs d'écran (NVDA, JAWS, VoiceOver), vérification des contrastes de couleurs, et idéalement tests avec de vrais utilisateurs en situation de handicap."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Qu'est-ce que l'effet 'curb cut' en accessibilité ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "L'effet 'curb cut' (rampe de trottoir) démontre qu'une amélioration conçue pour les personnes handicapées profite à tous. Les rampes de trottoir aident les fauteuils roulants, mais aussi les poussettes, valises, vélos. En web : les sous-titres aident les sourds, mais aussi les environnements bruyants ; la navigation clavier aide les handicaps moteurs, mais aussi les power users."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quels sont les éléments clés de l'accessibilité web ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Les éléments essentiels incluent : HTML sémantique (header, nav, main, footer), navigation clavier complète, textes alternatifs pour les images, contrastes de couleurs suffisants (4.5:1 minimum), labels explicites sur les formulaires, ARIA pour les composants dynamiques, respect des préférences utilisateur (reduced-motion, high-contrast), et structure de page claire avec landmarks."
+        "text": t('pages.ariaComponents.faq.questions.q3.content')
       }
     }
   ]
-}
+}))
 
 let scriptElement = null
 
@@ -68,7 +46,7 @@ onMounted(() => {
   // Inject FAQ schema into document head
   scriptElement = document.createElement('script')
   scriptElement.type = 'application/ld+json'
-  scriptElement.textContent = JSON.stringify(faqSchema)
+  scriptElement.textContent = JSON.stringify(faqSchema.value)
   document.head.appendChild(scriptElement)
 })
 
@@ -79,77 +57,76 @@ onUnmounted(() => {
   }
 })
 
-const quickLinks = [
+const quickLinks = computed(() => [
   {
-    path: '/color-contrast',
+    path: localePath('/color-contrast'),
     icon: '🎨',
-    title: 'Contrastes',
-    description: 'WCAG, daltonisme, thèmes'
+    title: t('pages.home.quickNav.links.contrast.title'),
+    description: t('pages.home.quickNav.links.contrast.description')
   },
   {
-    path: '/media-accessible',
+    path: localePath('/media-accessible'),
     icon: '🖼️',
-    title: 'Images & Médias',
-    description: 'Alt text, vidéos avec sous-titres'
+    title: t('pages.home.quickNav.links.media.title'),
+    description: t('pages.home.quickNav.links.media.description')
   },
   {
-    path: '/aria-components',
+    path: localePath('/aria-components'),
     icon: '🔄',
-    title: 'ARIA',
-    description: 'Accordion, toast, tableau triable'
+    title: t('pages.home.quickNav.links.aria.title'),
+    description: t('pages.home.quickNav.links.aria.description')
   },
   {
-    path: '/keyboard-navigation',
+    path: localePath('/keyboard-navigation'),
     icon: '⌨️',
-    title: 'Navigation Clavier',
-    description: 'Focus visible, trap, modal accessible'
+    title: t('pages.home.quickNav.links.keyboard.title'),
+    description: t('pages.home.quickNav.links.keyboard.description')
   },
   {
-    path: '/accessible-forms',
+    path: localePath('/accessible-forms'),
     icon: '📋',
-    title: 'Formulaires',
-    description: 'Labels, validation, messages'
+    title: t('pages.home.quickNav.links.forms.title'),
+    description: t('pages.home.quickNav.links.forms.description')
   },
   {
-    path: '/semantic-html',
+    path: localePath('/semantic-html'),
     icon: '📝',
-    title: 'HTML Sémantique',
-    description: 'Structure, titres, boutons vs liens'
+    title: t('pages.home.quickNav.links.semantic.title'),
+    description: t('pages.home.quickNav.links.semantic.description')
   },
   {
-    path: '/performance',
+    path: localePath('/performance'),
     icon: '⚡',
-    title: 'Performance',
-    description: 'Reduced motion, zoom, adaptabilité'
+    title: t('pages.home.quickNav.links.performance.title'),
+    description: t('pages.home.quickNav.links.performance.description')
   }
-]
+])
 </script>
 
 <template>
   <div class="home">
     <header>
-      <h1>Guide Pratique de l'Accessibilité Web</h1>
+      <h1>{{ $t('pages.home.title') }}</h1>
       <p class="lead">
-        L'accessibilité, c'est garantir un web utilisable par tous : personnes en situation de handicap,
-        seniors, utilisateurs mobiles, connexions lentes, bras cassé, environnement bruyant, etc.
+        {{ $t('pages.home.lead') }}
       </p>
     </header>
 
     <section aria-labelledby="intro-title">
-      <h2 id="intro-title">Pourquoi l'accessibilité ?</h2>
+      <h2 id="intro-title">{{ $t('pages.home.whyAccessibility') }}</h2>
 
       <div class="stats-grid">
         <a href="https://www.un.org/fr/observances/day-of-persons-with-disabilities/background" class="stat-card stat-card-link" target="_blank" rel="noopener">
           <span class="stat-number">15%</span>
-          <span class="stat-label">de la population mondiale vit avec un handicap ↗</span>
+          <span class="stat-label">{{ $t('pages.home.stats.disability') }} ↗</span>
         </a>
         <a href="https://ec.europa.eu/social/main.jsp?catId=1202" class="stat-card stat-card-link" target="_blank" rel="noopener">
           <span class="stat-number">2025</span>
-          <span class="stat-label">Directive Accessibilité Europe ↗</span>
+          <span class="stat-label">{{ $t('pages.home.stats.directive') }} ↗</span>
         </a>
         <a href="https://webaim.org/projects/million/#intro" class="stat-card stat-card-link" target="_blank" rel="noopener">
           <span class="stat-number">94.8%</span>
-          <span class="stat-label">des sites ont des erreurs d'accessibilité ↗</span>
+          <span class="stat-label">{{ $t('pages.home.stats.errors') }} ↗</span>
         </a>
       </div>
     </section>
@@ -157,93 +134,85 @@ const quickLinks = [
     <section aria-labelledby="curb-cut-title">
       <div class="curb-cut-intro">
           <div class="curb-cut-text">
-            <h3 id="curb-cut-title">Quand on conçoit pour le handicap, on résout des problèmes que tout le monde rencontre</h3>
+            <h3 id="curb-cut-title">{{ $t('pages.home.curbCut.title') }}</h3>
             <p>
-              Les rampes de trottoir ont révolutionné la ville pour les fauteuils roulants,
-              mais aussi pour tous les piétons avec valises, poussettes ou vélos.
+              {{ $t('pages.home.curbCut.intro1') }}
             </p>
             <p>
-              Une amélioration pour certains profite à tous. Ce concept, né des rampes d'accès dans les rues,
-              s'applique parfaitement au web.
+              {{ $t('pages.home.curbCut.intro2') }}
             </p>
           </div>
           <div class="curb-cut-image">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Naked_Pictures_of_Bea_Arthur_0048.jpg/1920px-Naked_Pictures_of_Bea_Arthur_0048.jpg"
-              alt="Rampe de trottoir (curb cut) permettant l'accès depuis la rue au trottoir"
+              :alt="$t('pages.home.curbCut.imageCaption')"
               loading="lazy"
             />
-            <p class="image-caption">Exemple typique d'une rampe de trottoir (curb cut)</p>
+            <p class="image-caption">{{ $t('pages.home.curbCut.imageCaption') }}</p>
           </div>
         </div>
 
       <div class="curb-cut-examples">
         <div class="curb-cut-example">
-          <h4>♿ Rampes de trottoir</h4>
-          <p><strong>Conçues pour :</strong> Personnes en fauteuil roulant</p>
-          <p><strong>Bénéficient aussi à :</strong> Parents avec poussettes, cyclistes, livreurs avec diables,
-          personnes avec valises à roulettes, skateboards, trottinettes, personnes âgées</p>
+          <h4>♿ {{ $t('pages.home.curbCut.examples.ramps.title') }}</h4>
+          <p><strong>{{ $t('pages.ariaComponents.forms.bad.emailPlaceholder').split(' ')[0] }} :</strong> {{ $t('pages.home.curbCut.examples.ramps.designedFor') }}</p>
+          <p><strong>{{ $t('pages.home.curbCut.examples.ramps.benefitsAlso').split(',')[0] }} :</strong> {{ $t('pages.home.curbCut.examples.ramps.benefitsAlso') }}</p>
         </div>
 
         <div class="curb-cut-example">
-          <h4>🎬 Sous-titres vidéo</h4>
-          <p><strong>Conçus pour :</strong> Personnes sourdes ou malentendantes</p>
-          <p><strong>Bénéficient aussi à :</strong> Regarder des vidéos dans le métro, apprendre une langue étrangère,
-          suivre une conférence dans un environnement bruyant, comprendre des accents difficiles</p>
+          <h4>🎬 {{ $t('pages.home.curbCut.examples.captions.title') }}</h4>
+          <p><strong>Conçus pour :</strong> {{ $t('pages.home.curbCut.examples.captions.designedFor') }}</p>
+          <p><strong>Bénéficient aussi à :</strong> {{ $t('pages.home.curbCut.examples.captions.benefitsAlso') }}</p>
         </div>
 
         <div class="curb-cut-example">
-          <h4>⌨️ Navigation au clavier</h4>
-          <p><strong>Conçue pour :</strong> Personnes ne pouvant pas utiliser une souris</p>
-          <p><strong>Bénéficie aussi à :</strong> Développeurs utilisant des raccourcis, utilisateurs avec souris cassée,
-          power users préférant le clavier, personnes avec bras dans le plâtre</p>
+          <h4>⌨️ {{ $t('pages.home.curbCut.examples.keyboard.title') }}</h4>
+          <p><strong>Conçue pour :</strong> {{ $t('pages.home.curbCut.examples.keyboard.designedFor') }}</p>
+          <p><strong>Bénéficie aussi à :</strong> {{ $t('pages.home.curbCut.examples.keyboard.benefitsAlso') }}</p>
         </div>
 
         <div class="curb-cut-example">
-          <h4>📱 Commande vocale smartphone</h4>
-          <p><strong>Conçue pour :</strong> Personnes aveugles et avec handicap moteur</p>
-          <p><strong>Bénéficie aussi à :</strong> Messages en conduisant, sport avec écouteurs,
-          mains occupées par des outils, contrôle à distance, multitâche au bureau</p>
+          <h4>📱 {{ $t('pages.home.curbCut.examples.voice.title') }}</h4>
+          <p><strong>Conçue pour :</strong> {{ $t('pages.home.curbCut.examples.voice.designedFor') }}</p>
+          <p><strong>Bénéficie aussi à :</strong> {{ $t('pages.home.curbCut.examples.voice.benefitsAlso') }}</p>
         </div>
 
         <div class="curb-cut-example">
-          <h4>🪥 Brosse à dents électrique</h4>
-          <p><strong>Conçue pour :</strong> Personnes avec mobilité réduite ou arthrite (1954)</p>
-          <p><strong>Bénéficie aussi à :</strong> Meilleur brossage pour tous, recommandée par les dentistes,
-          enfants qui apprennent, personnes fatiguées, efficacité supérieure prouvée</p>
+          <h4>🪥 {{ $t('pages.home.curbCut.examples.toothbrush.title') }}</h4>
+          <p><strong>Conçue pour :</strong> {{ $t('pages.home.curbCut.examples.toothbrush.designedFor') }}</p>
+          <p><strong>Bénéficie aussi à :</strong> {{ $t('pages.home.curbCut.examples.toothbrush.benefitsAlso') }}</p>
         </div>
 
         <div class="curb-cut-example">
-          <h4>🎧 Livres audio</h4>
-          <p><strong>Conçus pour :</strong> Personnes aveugles (1932, American Foundation for the Blind)</p>
-          <p><strong>Bénéficient aussi à :</strong> Conducteurs, joggers, multitâche, dyslexiques,
-          enfants qui apprennent à lire, 1.3 milliard $ de ventes en 2020</p>
+          <h4>🎧 {{ $t('pages.home.curbCut.examples.audiobooks.title') }}</h4>
+          <p><strong>Conçus pour :</strong> {{ $t('pages.home.curbCut.examples.audiobooks.designedFor') }}</p>
+          <p><strong>Bénéficient aussi à :</strong> {{ $t('pages.home.curbCut.examples.audiobooks.benefitsAlso') }}</p>
         </div>
       </div>
 
       <p class="accessibility-quote">
-        <strong>L'accessibilité n'est pas une contrainte, c'est de l'innovation déguisée.</strong>
+        <strong>{{ $t('pages.home.curbCut.quote') }}</strong>
       </p>
     </section>
 
     <section aria-labelledby="tools-title">
-      <h2 id="tools-title">Outils gratuits pour tester l'accessibilité</h2>
-      <p>Ces outils vous aident à identifier et corriger les problèmes d'accessibilité :</p>
+      <h2 id="tools-title">{{ $t('pages.home.tools.title') }}</h2>
+      <p>{{ $t('pages.home.tools.intro') }}</p>
 
       <div class="tools-grid">
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">🌊</span>
-            <h3>WAVE</h3>
+            <h3>{{ $t('pages.home.tools.wave.name') }}</h3>
           </div>
-          <p class="tool-description">Extension navigateur qui visualise les erreurs d'accessibilité directement sur votre page</p>
+          <p class="tool-description">{{ $t('pages.home.tools.wave.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Analyse en temps réel</span>
-            <span class="tool-feature">✓ Visualisation des erreurs</span>
-            <span class="tool-feature">✓ Rapport détaillé</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.wave.features.realtime') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.wave.features.visualization') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.wave.features.report') }}</span>
           </div>
           <a href="https://wave.webaim.org/" class="tool-link" target="_blank" rel="noopener">
-            Installer WAVE
+            {{ $t('pages.home.tools.wave.link') }}
             <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -251,16 +220,16 @@ const quickLinks = [
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">🪓</span>
-            <h3>axe DevTools</h3>
+            <h3>{{ $t('pages.home.tools.axe.name') }}</h3>
           </div>
-          <p class="tool-description">Extension développeur intégrée aux DevTools, très précise et détaillée</p>
+          <p class="tool-description">{{ $t('pages.home.tools.axe.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Intégré aux DevTools</span>
-            <span class="tool-feature">✓ Tests automatisés</span>
-            <span class="tool-feature">✓ Suggestions de correction</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.axe.features.integrated') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.axe.features.automated') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.axe.features.suggestions') }}</span>
           </div>
           <a href="https://www.deque.com/axe/devtools/" class="tool-link" target="_blank" rel="noopener">
-            Installer axe DevTools
+            {{ $t('pages.home.tools.axe.link') }}
             <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -268,16 +237,16 @@ const quickLinks = [
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">🏮</span>
-            <h3>Lighthouse</h3>
+            <h3>{{ $t('pages.home.tools.lighthouse.name') }}</h3>
           </div>
-          <p class="tool-description">Audit intégré à Chrome DevTools, inclut un score d'accessibilité global</p>
+          <p class="tool-description">{{ $t('pages.home.tools.lighthouse.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Déjà dans Chrome</span>
-            <span class="tool-feature">✓ Score global</span>
-            <span class="tool-feature">✓ Recommandations</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.lighthouse.features.builtin') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.lighthouse.features.score') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.lighthouse.features.recommendations') }}</span>
           </div>
           <a href="https://developer.chrome.com/docs/lighthouse/accessibility/" class="tool-link" target="_blank" rel="noopener">
-            Guide Lighthouse
+            {{ $t('pages.home.tools.lighthouse.link') }}
             <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -285,16 +254,16 @@ const quickLinks = [
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">📚</span>
-            <h3>MDN Accessibility</h3>
+            <h3>{{ $t('pages.home.tools.mdn.name') }}</h3>
           </div>
-          <p class="tool-description">Documentation de référence complète sur l'accessibilité web</p>
+          <p class="tool-description">{{ $t('pages.home.tools.mdn.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Guides détaillés</span>
-            <span class="tool-feature">✓ Exemples pratiques</span>
-            <span class="tool-feature">✓ Mises à jour régulières</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.mdn.features.guides') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.mdn.features.examples') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.mdn.features.updates') }}</span>
           </div>
           <a href="https://developer.mozilla.org/fr/docs/Web/Accessibility" class="tool-link" target="_blank" rel="noopener">
-            Documentation MDN
+            {{ $t('pages.home.tools.mdn.link') }}
             <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -302,16 +271,16 @@ const quickLinks = [
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">🎨</span>
-            <h3>Colour Contrast Analyser</h3>
+            <h3>{{ $t('pages.home.tools.cca.name') }}</h3>
           </div>
-          <p class="tool-description">Application gratuite pour tester les contrastes de couleurs selon WCAG</p>
+          <p class="tool-description">{{ $t('pages.home.tools.cca.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Test en temps réel</span>
-            <span class="tool-feature">✓ Pipette de couleur</span>
-            <span class="tool-feature">✓ Ratios WCAG AA/AAA</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.cca.features.realtime') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.cca.features.picker') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.cca.features.ratios') }}</span>
           </div>
           <a href="https://www.tpgi.com/color-contrast-checker/" class="tool-link" target="_blank" rel="noopener">
-            Télécharger CCA
+            {{ $t('pages.home.tools.cca.link') }}
             <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -319,41 +288,40 @@ const quickLinks = [
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">🔍</span>
-            <h3>Accessibility Insights</h3>
+            <h3>{{ $t('pages.home.tools.insights.name') }}</h3>
           </div>
-          <p class="tool-description">Suite d'outils Microsoft pour tests manuels et automatiques approfondis</p>
+          <p class="tool-description">{{ $t('pages.home.tools.insights.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Tests guidés</span>
-            <span class="tool-feature">✓ Ordre de focus visuel</span>
-            <span class="tool-feature">✓ FastPass automatique</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.insights.features.guided') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.insights.features.focus') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.insights.features.fastpass') }}</span>
           </div>
           <a href="https://accessibilityinsights.io/" class="tool-link" target="_blank" rel="noopener">
-            Installer AI
+            {{ $t('pages.home.tools.insights.link') }}
             <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
 
       <div class="pro-tip">
-        <strong>💡 Conseil pro :</strong> Utilisez ces outils en complément, pas en remplacement des tests utilisateurs réels.
-        Aucun outil automatique ne peut détecter 100% des problèmes d'accessibilité.
+        <strong>💡 {{ $t('pages.home.tools.proTip').split(':')[0] }} :</strong> {{ $t('pages.home.tools.proTip').split(':').slice(1).join(':').trim() }}
       </div>
 
       <div class="featured-tool">
         <div class="tool-card game-card">
           <div class="tool-header">
             <span class="tool-icon" aria-hidden="true">🎮</span>
-            <h3>Accessible Game Jam</h3>
-            <span class="featured-badge">Interactif</span>
+            <h3>{{ $t('pages.home.tools.game.name') }}</h3>
+            <span class="featured-badge">{{ $t('pages.home.tools.game.badge') }}</span>
           </div>
-          <p class="tool-description">Testez vos connaissances sur l'accessibilité web de manière interactive ! Un jeu pour apprendre en s'amusant.</p>
+          <p class="tool-description">{{ $t('pages.home.tools.game.description') }}</p>
           <div class="tool-features">
-            <span class="tool-feature">✓ Quiz interactif</span>
-            <span class="tool-feature">✓ Cas pratiques</span>
-            <span class="tool-feature">✓ Apprentissage ludique</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.game.features.quiz') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.game.features.cases') }}</span>
+            <span class="tool-feature">✓ {{ $t('pages.home.tools.game.features.learning') }}</span>
           </div>
           <a href="https://accessible-game-jam.com/" class="tool-link game-link" target="_blank" rel="noopener">
-            Jouer maintenant
+            {{ $t('pages.home.tools.game.link') }}
             <span aria-hidden="true">🎯</span>
           </a>
         </div>
@@ -361,92 +329,92 @@ const quickLinks = [
     </section>
 
     <section aria-labelledby="screen-readers-title">
-      <h2 id="screen-readers-title">Lecteurs d'écran courants</h2>
-      <p>Comprendre les lecteurs d'écran les plus utilisés pour mieux tester vos interfaces :</p>
+      <h2 id="screen-readers-title">{{ $t('pages.home.screenReaders.title') }}</h2>
+      <p>{{ $t('pages.home.screenReaders.intro') }}</p>
 
       <div class="screen-readers-grid">
         <div class="screen-reader-card">
           <div class="screen-reader-header">
             <span class="screen-reader-icon" aria-hidden="true">🖥️</span>
-            <h3>NVDA</h3>
-            <span class="platform-tag">Windows</span>
+            <h3>{{ $t('pages.home.screenReaders.nvda.name') }}</h3>
+            <span class="platform-tag">{{ $t('pages.home.screenReaders.nvda.platform') }}</span>
           </div>
-          <p>Lecteur d'écran gratuit et open source, très populaire</p>
+          <p>{{ $t('pages.home.screenReaders.nvda.description') }}</p>
           <div class="screen-reader-stats">
-            <span class="stat">✓ Gratuit</span>
-            <span class="stat">41% d'usage</span>
+            <span class="stat">✓ {{ $t('pages.home.screenReaders.nvda.free') }}</span>
+            <span class="stat">{{ $t('pages.home.screenReaders.nvda.usage') }}</span>
           </div>
           <a href="https://www.nvaccess.org/" class="screen-reader-link" target="_blank" rel="noopener">
-            Télécharger NVDA
+            {{ $t('pages.home.screenReaders.nvda.link') }}
           </a>
         </div>
 
         <div class="screen-reader-card">
           <div class="screen-reader-header">
             <span class="screen-reader-icon" aria-hidden="true">🖥️</span>
-            <h3>JAWS</h3>
-            <span class="platform-tag">Windows</span>
+            <h3>{{ $t('pages.home.screenReaders.jaws.name') }}</h3>
+            <span class="platform-tag">{{ $t('pages.home.screenReaders.jaws.platform') }}</span>
           </div>
-          <p>Lecteur d'écran professionnel, leader historique du marché</p>
+          <p>{{ $t('pages.home.screenReaders.jaws.description') }}</p>
           <div class="screen-reader-stats">
-            <span class="stat">💰 Payant</span>
-            <span class="stat">40% d'usage</span>
+            <span class="stat">💰 {{ $t('pages.home.screenReaders.jaws.paid') }}</span>
+            <span class="stat">{{ $t('pages.home.screenReaders.jaws.usage') }}</span>
           </div>
           <a href="https://www.freedomscientific.com/products/software/jaws/" class="screen-reader-link" target="_blank" rel="noopener">
-            Site officiel JAWS
+            {{ $t('pages.home.screenReaders.jaws.link') }}
           </a>
         </div>
 
         <div class="screen-reader-card">
           <div class="screen-reader-header">
             <span class="screen-reader-icon" aria-hidden="true">🍎</span>
-            <h3>VoiceOver</h3>
-            <span class="platform-tag">macOS/iOS</span>
+            <h3>{{ $t('pages.home.screenReaders.voiceover.name') }}</h3>
+            <span class="platform-tag">{{ $t('pages.home.screenReaders.voiceover.platform') }}</span>
           </div>
-          <p>Lecteur d'écran intégré à tous les appareils Apple</p>
+          <p>{{ $t('pages.home.screenReaders.voiceover.description') }}</p>
           <div class="screen-reader-stats">
-            <span class="stat">✓ Intégré</span>
-            <span class="stat">8% d'usage</span>
+            <span class="stat">✓ {{ $t('pages.home.screenReaders.voiceover.builtin') }}</span>
+            <span class="stat">{{ $t('pages.home.screenReaders.voiceover.usage') }}</span>
           </div>
           <div class="shortcut-tip">
-            <strong>Raccourci :</strong> <kbd>Cmd</kbd> + <kbd>F5</kbd>
+            <strong>{{ $t('pages.home.screenReaders.voiceover.shortcut') }}</strong> <kbd>Cmd</kbd> + <kbd>F5</kbd>
           </div>
         </div>
 
         <div class="screen-reader-card">
           <div class="screen-reader-header">
             <span class="screen-reader-icon" aria-hidden="true">🤖</span>
-            <h3>TalkBack</h3>
-            <span class="platform-tag">Android</span>
+            <h3>{{ $t('pages.home.screenReaders.talkback.name') }}</h3>
+            <span class="platform-tag">{{ $t('pages.home.screenReaders.talkback.platform') }}</span>
           </div>
-          <p>Lecteur d'écran par défaut sur Android</p>
+          <p>{{ $t('pages.home.screenReaders.talkback.description') }}</p>
           <div class="screen-reader-stats">
-            <span class="stat">✓ Intégré</span>
-            <span class="stat">Usage mobile</span>
+            <span class="stat">✓ {{ $t('pages.home.screenReaders.talkback.builtin') }}</span>
+            <span class="stat">{{ $t('pages.home.screenReaders.talkback.usage') }}</span>
           </div>
           <div class="shortcut-tip">
-            <strong>Activation :</strong> Paramètres > Accessibilité
+            <strong>{{ $t('pages.home.screenReaders.talkback.activation') }}</strong>
           </div>
         </div>
       </div>
 
       <div class="testing-tip">
-        <h4>🧪 Comment tester avec un lecteur d'écran</h4>
+        <h4>🧪 {{ $t('pages.home.screenReaders.testing.title') }}</h4>
         <ol>
-          <li><strong>Fermez les yeux</strong> ou éteignez l'écran</li>
-          <li><strong>Naviguez uniquement au clavier</strong> (Tab, flèches, Entrée, Espace)</li>
-          <li><strong>Écoutez attentivement</strong> ce qui est annoncé</li>
-          <li><strong>Vérifiez que tout est compréhensible</strong> sans voir l'écran</li>
+          <li><strong>{{ $t('pages.home.screenReaders.testing.steps.close').split(' ')[0] }}</strong> {{ $t('pages.home.screenReaders.testing.steps.close').split(' ').slice(1).join(' ') }}</li>
+          <li><strong>{{ $t('pages.home.screenReaders.testing.steps.keyboard').split(' ')[0] }}</strong> {{ $t('pages.home.screenReaders.testing.steps.keyboard').split(' ').slice(1).join(' ') }}</li>
+          <li><strong>{{ $t('pages.home.screenReaders.testing.steps.listen').split(' ')[0] }}</strong> {{ $t('pages.home.screenReaders.testing.steps.listen').split(' ').slice(1).join(' ') }}</li>
+          <li><strong>{{ $t('pages.home.screenReaders.testing.steps.verify').split(' ')[0] }}</strong> {{ $t('pages.home.screenReaders.testing.steps.verify').split(' ').slice(1).join(' ') }}</li>
         </ol>
         <p class="testing-note">
-          <strong>Note :</strong> 15 minutes de test avec un lecteur d'écran valent plus que des heures d'audit automatique.
+          <strong>{{ $t('pages.home.screenReaders.testing.note').split(':')[0] }} :</strong> {{ $t('pages.home.screenReaders.testing.note').split(':').slice(1).join(':').trim() }}
         </p>
       </div>
     </section>
 
     <section aria-labelledby="nav-title">
-      <h2 id="nav-title">Navigation rapide</h2>
-      <p>Utilisez le menu latéral ou ces raccourcis pour explorer les exemples :</p>
+      <h2 id="nav-title">{{ $t('pages.home.quickNav.title') }}</h2>
+      <p>{{ $t('pages.home.quickNav.intro') }}</p>
 
       <nav aria-label="Navigation secondaire">
         <ul class="quick-nav">

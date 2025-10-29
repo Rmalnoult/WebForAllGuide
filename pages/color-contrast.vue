@@ -4,75 +4,85 @@ const seo = getPageSEO('/color-contrast')
 
 useHead(seo)
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import ExampleToggle from '@/components/common/ExampleToggle.vue'
 import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // Initialize syntax highlighting
 useSyntaxHighlight()
 
 const badTheme = ref('light')
 const goodTheme = ref('light')
+
+// Computed properties for chart data labels
+const chartMonths = computed(() => ({
+  jan: t('pages.colorContrast.colorblind.chart.months.jan'),
+  feb: t('pages.colorContrast.colorblind.chart.months.feb'),
+  mar: t('pages.colorContrast.colorblind.chart.months.mar')
+}))
 </script>
 
 <template>
   <div class="color-contrast">
     <PageHeader
-      title="Contrastes & Couleurs"
-      description="Assurer une lisibilité optimale pour tous les utilisateurs"
+      :title="$t('pages.colorContrast.title')"
+      :description="$t('pages.colorContrast.description')"
     />
 
     <section aria-labelledby="wcag-stats-title" class="wcag-stats-section">
-      <h2 id="wcag-stats-title" class="visually-hidden">Critères WCAG EN 301 549</h2>
+      <h2 id="wcag-stats-title" class="visually-hidden">{{ $t('pages.colorContrast.wcagStats.title') }}</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <span class="stat-number">4.5:1</span>
-          <span class="stat-label">Texte normal - Ratio de contraste minimum</span>
-          <span class="stat-detail">EN 301 549 / WCAG AA</span>
+          <span class="stat-number">{{ $t('pages.colorContrast.wcagStats.normalText.ratio') }}</span>
+          <span class="stat-label">{{ $t('pages.colorContrast.wcagStats.normalText.label') }}</span>
+          <span class="stat-detail">{{ $t('pages.colorContrast.wcagStats.normalText.detail') }}</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number">3:1</span>
-          <span class="stat-label">Texte large - Ratio de contraste minimum</span>
-          <span class="stat-detail">18pt+ ou 14pt+ gras</span>
+          <span class="stat-number">{{ $t('pages.colorContrast.wcagStats.largeText.ratio') }}</span>
+          <span class="stat-label">{{ $t('pages.colorContrast.wcagStats.largeText.label') }}</span>
+          <span class="stat-detail">{{ $t('pages.colorContrast.wcagStats.largeText.detail') }}</span>
         </div>
       </div>
     </section>
 
     <ExampleToggle
-      title="Contraste de texte"
-      explanation="Le ratio de contraste WCAG AA exige au minimum 4.5:1 pour le texte normal et 3:1 pour le texte large (18pt+ ou 14pt+ gras). Le niveau AAA est plus strict avec 7:1 et 4.5:1."
+      :title="$t('pages.colorContrast.textContrast.title')"
+      :explanation="$t('pages.colorContrast.textContrast.explanation')"
     >
       <template #bad>
         <div class="contrast-demo">
           <div class="text-samples-bad">
             <div class="sample sample-1">
-              <p class="light-gray-text">Texte gris clair sur blanc (2.2:1) - Échec</p>
+              <p class="light-gray-text">{{ $t('pages.colorContrast.textContrast.bad.sample1') }}</p>
               <small class="ratio">Ratio: 2.2:1</small>
             </div>
 
             <div class="sample sample-2">
-              <p class="medium-gray-text">Texte gris moyen sur blanc (3.8:1) - Échec</p>
+              <p class="medium-gray-text">{{ $t('pages.colorContrast.textContrast.bad.sample2') }}</p>
               <small class="ratio">Ratio: 3.8:1</small>
             </div>
 
             <div class="sample sample-3">
-              <p class="yellow-text">Texte jaune sur blanc (1.9:1) - Échec</p>
+              <p class="yellow-text">{{ $t('pages.colorContrast.textContrast.bad.sample3') }}</p>
               <small class="ratio">Ratio: 1.9:1</small>
             </div>
 
             <div class="sample sample-4 red-bg">
-              <p class="orange-on-red">Orange sur rouge (1.2:1) - Échec</p>
+              <p class="orange-on-red">{{ $t('pages.colorContrast.textContrast.bad.sample4') }}</p>
               <small class="ratio ratio-light">Ratio: 1.2:1</small>
             </div>
 
             <div class="sample sample-5 dark-bg">
-              <p class="dark-gray-on-dark">Gris foncé sur fond noir (2.5:1) - Échec</p>
+              <p class="dark-gray-on-dark">{{ $t('pages.colorContrast.textContrast.bad.sample5') }}</p>
               <small class="ratio">Ratio: 2.5:1</small>
             </div>
 
             <div class="sample sample-6 dark-bg">
-              <p class="blue-on-dark">Bleu sur fond sombre (1.8:1) - Échec</p>
+              <p class="blue-on-dark">{{ $t('pages.colorContrast.textContrast.bad.sample6') }}</p>
               <small class="ratio">Ratio: 1.8:1</small>
             </div>
           </div>
@@ -83,32 +93,32 @@ const goodTheme = ref('light')
         <div class="contrast-demo">
           <div class="text-samples-good">
             <div class="sample sample-1">
-              <p class="dark-gray-text">Texte gris foncé sur blanc (7.0:1) - Réussite AAA</p>
+              <p class="dark-gray-text">{{ $t('pages.colorContrast.textContrast.good.sample1') }}</p>
               <small class="ratio">Ratio: 7.0:1</small>
             </div>
 
             <div class="sample sample-2">
-              <p class="black-text">Texte noir sur blanc (21:1) - Réussite AAA</p>
+              <p class="black-text">{{ $t('pages.colorContrast.textContrast.good.sample2') }}</p>
               <small class="ratio">Ratio: 21:1</small>
             </div>
 
             <div class="sample sample-3">
-              <p class="blue-text">Texte bleu foncé sur blanc (5.9:1) - Réussite AA</p>
+              <p class="blue-text">{{ $t('pages.colorContrast.textContrast.good.sample3') }}</p>
               <small class="ratio">Ratio: 5.9:1</small>
             </div>
 
             <div class="sample sample-4 blue-bg">
-              <p class="white-on-blue">Blanc sur bleu foncé (8.6:1) - Réussite AAA</p>
+              <p class="white-on-blue">{{ $t('pages.colorContrast.textContrast.good.sample4') }}</p>
               <small class="ratio ratio-light">Ratio: 8.6:1</small>
             </div>
 
             <div class="sample sample-5 dark-bg">
-              <p class="white-on-black">Blanc sur fond noir (21:1) - Réussite AAA</p>
+              <p class="white-on-black">{{ $t('pages.colorContrast.textContrast.good.sample5') }}</p>
               <small class="ratio">Ratio: 21:1</small>
             </div>
 
             <div class="sample sample-6 dark-bg">
-              <p class="yellow-on-dark">Jaune sur fond sombre (12.3:1) - Réussite AAA</p>
+              <p class="yellow-on-dark">{{ $t('pages.colorContrast.textContrast.good.sample6') }}</p>
               <small class="ratio">Ratio: 12.3:1</small>
             </div>
           </div>
@@ -117,7 +127,7 @@ const goodTheme = ref('light')
 
       <template #bad-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais: Ratios de contraste insuffisants --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.textContrast.badComment') }} --&gt;
 &lt;style&gt;
   /* Texte gris clair - Ratio 2.2:1 (échec) */
   .light-text {
@@ -153,7 +163,7 @@ const goodTheme = ref('light')
 
       <template #good-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon: Ratios de contraste conformes WCAG --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.textContrast.goodComment') }} --&gt;
 &lt;style&gt;
   /* Texte gris foncé - Ratio 7.0:1 (AAA) */
   .accessible-text {
@@ -195,30 +205,30 @@ const goodTheme = ref('light')
     </ExampleToggle>
 
     <ExampleToggle
-      title="Information par la couleur"
-      explanation="L'information ne doit jamais reposer uniquement sur la couleur. Il faut toujours ajouter des indicateurs visuels supplémentaires (icônes, motifs, texte)."
+      :title="$t('pages.colorContrast.colorInfo.title')"
+      :explanation="$t('pages.colorContrast.colorInfo.explanation')"
     >
       <template #bad>
         <div class="color-info-demo">
           <div class="form-example-bad">
-            <h4>Formulaire d'inscription</h4>
+            <h4>{{ $t('pages.colorContrast.colorInfo.form.heading') }}</h4>
             <div class="form-group">
-              <label>Nom complet</label>
+              <label>{{ $t('pages.colorContrast.colorInfo.form.name') }}</label>
               <input type="text" class="input-error" value="Jo">
             </div>
             <div class="form-group">
-              <label>Email</label>
+              <label>{{ $t('pages.colorContrast.colorInfo.form.email') }}</label>
               <input type="email" class="input-valid" value="john@example.com">
             </div>
             <div class="form-group">
-              <label>Mot de passe</label>
+              <label>{{ $t('pages.colorContrast.colorInfo.form.password') }}</label>
               <input type="password" class="input-error" value="123" autocomplete="new-password">
             </div>
-            <p class="color-legend">🔴 Rouge = Erreur, 🟢 Vert = Valide</p>
+            <p class="color-legend">🔴 {{ $t('pages.colorContrast.colorInfo.form.legend') }}</p>
           </div>
 
           <div class="status-example-bad">
-            <h4>Statut des commandes</h4>
+            <h4>{{ $t('pages.colorContrast.colorInfo.orders.heading') }}</h4>
             <div class="order-list">
               <div class="order-item">
                 <span class="order-number">#1234</span>
@@ -240,52 +250,52 @@ const goodTheme = ref('light')
       <template #good>
         <div class="color-info-demo">
           <div class="form-example-good">
-            <h4>Formulaire d'inscription</h4>
+            <h4>{{ $t('pages.colorContrast.colorInfo.form.heading') }}</h4>
             <div class="form-group">
-              <label>Nom complet</label>
+              <label>{{ $t('pages.colorContrast.colorInfo.form.name') }}</label>
               <input type="text" class="input-error" value="Jo" aria-describedby="name-error">
               <div id="name-error" class="error-message">
-                ❌ Le nom doit contenir au moins 3 caractères
+                ❌ {{ $t('pages.colorContrast.colorInfo.form.errors.nameMin') }}
               </div>
             </div>
             <div class="form-group">
-              <label>Email</label>
+              <label>{{ $t('pages.colorContrast.colorInfo.form.email') }}</label>
               <input type="email" class="input-valid" value="john@example.com" aria-describedby="email-success">
               <div id="email-success" class="success-message">
-                ✅ Email valide
+                ✅ {{ $t('pages.colorContrast.colorInfo.form.success.email') }}
               </div>
             </div>
             <div class="form-group">
-              <label>Mot de passe</label>
+              <label>{{ $t('pages.colorContrast.colorInfo.form.password') }}</label>
               <input type="password" class="input-error" value="123" aria-describedby="password-error" autocomplete="new-password">
               <div id="password-error" class="error-message">
-                ❌ Le mot de passe doit contenir au moins 8 caractères
+                ❌ {{ $t('pages.colorContrast.colorInfo.form.errors.passwordMin') }}
               </div>
             </div>
           </div>
 
           <div class="status-example-good">
-            <h4>Statut des commandes</h4>
+            <h4>{{ $t('pages.colorContrast.colorInfo.orders.heading') }}</h4>
             <div class="order-list">
               <div class="order-item">
                 <span class="order-number">#1234</span>
                 <span class="status-pending">
                   <span class="status-icon" aria-hidden="true">⏳</span>
-                  En attente
+                  {{ $t('pages.colorContrast.colorInfo.orders.pending') }}
                 </span>
               </div>
               <div class="order-item">
                 <span class="order-number">#1235</span>
                 <span class="status-processing">
                   <span class="status-icon" aria-hidden="true">🚚</span>
-                  En cours
+                  {{ $t('pages.colorContrast.colorInfo.orders.processing') }}
                 </span>
               </div>
               <div class="order-item">
                 <span class="order-number">#1236</span>
                 <span class="status-delivered">
                   <span class="status-icon" aria-hidden="true">✅</span>
-                  Livrée
+                  {{ $t('pages.colorContrast.colorInfo.orders.delivered') }}
                 </span>
               </div>
             </div>
@@ -295,7 +305,7 @@ const goodTheme = ref('light')
 
       <template #bad-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais: Information uniquement par la couleur --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.badComment') }} --&gt;
 &lt;style&gt;
   .input-error {
     border: 2px solid red; /* Seulement la couleur rouge */
@@ -310,21 +320,21 @@ const goodTheme = ref('light')
   .status-completed { color: green; }
 &lt;/style&gt;
 
-&lt;!-- Formulaire sans indicateurs textuels --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.formNoIndicators') }} --&gt;
 &lt;input class="input-error" value="Jo"&gt;
 &lt;input class="input-valid" value="john@example.com"&gt;
 
-&lt;!-- Statuts sans texte explicite --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.statusNoText') }} --&gt;
 &lt;div class="order"&gt;
   &lt;span&gt;#1234&lt;/span&gt;
-  &lt;span class="status-pending"&gt;●&lt;/span&gt; &lt;!-- Seule la couleur --&gt;
+  &lt;span class="status-pending"&gt;●&lt;/span&gt; &lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.onlyColor') }} --&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </template>
 
       <template #good-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon: Couleur + texte + icônes + ARIA --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.goodComment') }} --&gt;
 &lt;style&gt;
   .input-error {
     border: 2px solid #e53e3e;
@@ -343,7 +353,7 @@ const goodTheme = ref('light')
   }
 &lt;/style&gt;
 
-&lt;!-- Formulaire avec messages explicites --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.formExplicitMessages') }} --&gt;
 &lt;input class="input-error"
        value="Jo"
        aria-describedby="name-error"&gt;
@@ -358,7 +368,7 @@ const goodTheme = ref('light')
   ✅ Email valide
 &lt;/div&gt;
 
-&lt;!-- Statuts avec texte et icônes --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorOnly.statusWithTextIcons') }} --&gt;
 &lt;div class="order"&gt;
   &lt;span&gt;#1234&lt;/span&gt;
   &lt;span class="status-pending"&gt;
@@ -371,36 +381,36 @@ const goodTheme = ref('light')
     </ExampleToggle>
 
     <ExampleToggle
-      title="Daltonisme et accessibilité"
-      explanation="Environ 8% des hommes et 0.5% des femmes sont daltoniens. Les combinaisons rouge-vert sont particulièrement problématiques."
+      :title="$t('pages.colorContrast.colorblind.title')"
+      :explanation="$t('pages.colorContrast.colorblind.explanation')"
     >
       <template #bad>
         <div class="colorblind-demo">
-          <h4>Graphique de performance</h4>
+          <h4>{{ $t('pages.colorContrast.colorblind.chart.title') }}</h4>
           <div class="chart-bad">
             <div class="legend-bad">
               <span class="legend-item">
-                <span class="legend-color red"></span> Échecs
+                <span class="legend-color red"></span> {{ $t('pages.colorContrast.colorblind.chart.legend.errors') }}
               </span>
               <span class="legend-item">
-                <span class="legend-color green"></span> Succès
+                <span class="legend-color green"></span> {{ $t('pages.colorContrast.colorblind.chart.legend.success') }}
               </span>
             </div>
             <div class="chart-bars">
               <div class="bar-group">
                 <div class="bar red-bar" style="height: 60px;"></div>
                 <div class="bar green-bar" style="height: 40px;"></div>
-                <span class="bar-label">Janvier</span>
+                <span class="bar-label">{{ chartMonths.jan }}</span>
               </div>
               <div class="bar-group">
                 <div class="bar red-bar" style="height: 30px;"></div>
                 <div class="bar green-bar" style="height: 70px;"></div>
-                <span class="bar-label">Février</span>
+                <span class="bar-label">{{ chartMonths.feb }}</span>
               </div>
               <div class="bar-group">
                 <div class="bar red-bar" style="height: 20px;"></div>
                 <div class="bar green-bar" style="height: 80px;"></div>
-                <span class="bar-label">Mars</span>
+                <span class="bar-label">{{ chartMonths.mar }}</span>
               </div>
             </div>
           </div>
@@ -409,33 +419,33 @@ const goodTheme = ref('light')
 
       <template #good>
         <div class="colorblind-demo">
-          <h4>Graphique de performance</h4>
+          <h4>{{ $t('pages.colorContrast.colorblind.chart.title') }}</h4>
           <div class="chart-good">
             <div class="legend-good">
               <span class="legend-item">
                 <span class="legend-color error-color"></span>
-                Échecs
+                {{ $t('pages.colorContrast.colorblind.chart.legend.errors') }}
               </span>
               <span class="legend-item">
                 <span class="legend-color success-color"></span>
-                Succès
+                {{ $t('pages.colorContrast.colorblind.chart.legend.success') }}
               </span>
             </div>
             <div class="chart-bars">
               <div class="bar-group">
-                <div class="bar error-bar striped" style="height: 60px;" title="Échecs: 60"></div>
-                <div class="bar success-bar dotted" style="height: 40px;" title="Succès: 40"></div>
-                <span class="bar-label">Janvier</span>
+                <div class="bar error-bar striped" style="height: 60px;" :title="$t('pages.colorContrast.colorblind.chart.legend.errors') + ': 60'"></div>
+                <div class="bar success-bar dotted" style="height: 40px;" :title="$t('pages.colorContrast.colorblind.chart.legend.success') + ': 40'"></div>
+                <span class="bar-label">{{ chartMonths.jan }}</span>
               </div>
               <div class="bar-group">
-                <div class="bar error-bar striped" style="height: 30px;" title="Échecs: 30"></div>
-                <div class="bar success-bar dotted" style="height: 70px;" title="Succès: 70"></div>
-                <span class="bar-label">Février</span>
+                <div class="bar error-bar striped" style="height: 30px;" :title="$t('pages.colorContrast.colorblind.chart.legend.errors') + ': 30'"></div>
+                <div class="bar success-bar dotted" style="height: 70px;" :title="$t('pages.colorContrast.colorblind.chart.legend.success') + ': 70'"></div>
+                <span class="bar-label">{{ chartMonths.feb }}</span>
               </div>
               <div class="bar-group">
-                <div class="bar error-bar striped" style="height: 20px;" title="Échecs: 20"></div>
-                <div class="bar success-bar dotted" style="height: 80px;" title="Succès: 80"></div>
-                <span class="bar-label">Mars</span>
+                <div class="bar error-bar striped" style="height: 20px;" :title="$t('pages.colorContrast.colorblind.chart.legend.errors') + ': 20'"></div>
+                <div class="bar success-bar dotted" style="height: 80px;" :title="$t('pages.colorContrast.colorblind.chart.legend.success') + ': 80'"></div>
+                <span class="bar-label">{{ chartMonths.mar }}</span>
               </div>
             </div>
           </div>
@@ -444,7 +454,7 @@ const goodTheme = ref('light')
 
       <template #bad-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais: Rouge/Vert indistinguables pour daltoniens --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorblind.badComment') }} --&gt;
 &lt;style&gt;
   .chart-legend {
     display: flex;
@@ -465,7 +475,7 @@ const goodTheme = ref('light')
   .data-success { background: #38a169; }
 &lt;/style&gt;
 
-&lt;!-- Légende basée uniquement sur les couleurs --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorblind.legendColorOnly') }} --&gt;
 &lt;div class="chart-legend"&gt;
   &lt;div class="legend-item"&gt;
     &lt;div class="legend-red"&gt;&lt;/div&gt;
@@ -477,7 +487,7 @@ const goodTheme = ref('light')
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- Barres sans différenciation visuelle --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorblind.barsNoVisualDiff') }} --&gt;
 &lt;div class="chart"&gt;
   &lt;div class="data-error" style="height: 60px"&gt;&lt;/div&gt;
   &lt;div class="data-success" style="height: 40px"&gt;&lt;/div&gt;
@@ -487,7 +497,7 @@ const goodTheme = ref('light')
 
       <template #good-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon: Couleurs distinctes + motifs + icônes --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorblind.goodComment') }} --&gt;
 &lt;style&gt;
   .chart-legend {
     display: flex;
@@ -528,7 +538,7 @@ const goodTheme = ref('light')
   }
 &lt;/style&gt;
 
-&lt;!-- Légende avec icônes explicites --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorblind.legendExplicitIcons') }} --&gt;
 &lt;div class="chart-legend"&gt;
   &lt;div class="legend-item"&gt;
     &lt;div class="legend-error"&gt;&lt;/div&gt;
@@ -542,7 +552,7 @@ const goodTheme = ref('light')
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- Barres avec motifs et tooltips --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.colorblind.barsWithPatternsTooltips') }} --&gt;
 &lt;div class="chart"&gt;
   &lt;div class="data-error"
        style="height: 60px"
@@ -556,8 +566,8 @@ const goodTheme = ref('light')
     </ExampleToggle>
 
     <ExampleToggle
-      title="Commutateur de thème accessible"
-      explanation="Un commutateur de thème doit maintenir les ratios de contraste, préserver la lisibilité, et respecter les préférences système de l'utilisateur."
+      :title="$t('pages.colorContrast.theme.title')"
+      :explanation="$t('pages.colorContrast.theme.explanation')"
     >
       <template #bad>
         <div class="theme-demo">
@@ -568,12 +578,12 @@ const goodTheme = ref('light')
             </div>
 
             <div :class="`demo-content-bad theme-${badTheme}`">
-              <h5>Contenu de la page</h5>
-              <p>Ce texte change de couleur selon le thème.</p>
-              <button class="demo-button-bad">Action</button>
+              <h5>{{ $t('pages.colorContrast.theme.bad.content') }}</h5>
+              <p>{{ $t('pages.colorContrast.theme.bad.description') }}</p>
+              <button class="demo-button-bad">{{ $t('pages.colorContrast.theme.bad.button') }}</button>
               <div class="demo-card-bad">
-                <h6>Carte d'information</h6>
-                <p>Information importante à lire.</p>
+                <h6>{{ $t('pages.colorContrast.theme.bad.card.title') }}</h6>
+                <p>{{ $t('pages.colorContrast.theme.bad.card.description') }}</p>
               </div>
             </div>
           </div>
@@ -584,7 +594,7 @@ const goodTheme = ref('light')
         <div class="theme-demo">
           <div class="theme-switcher-good">
             <fieldset class="theme-controls-good">
-              <legend>Choisir le thème</legend>
+              <legend>{{ $t('pages.colorContrast.theme.good.legend') }}</legend>
               <label>
                 <input
                   type="radio"
@@ -595,7 +605,7 @@ const goodTheme = ref('light')
                 >
                 <span class="theme-label">
                   <span aria-hidden="true">☀️</span>
-                  Clair
+                  {{ $t('pages.colorContrast.theme.good.light') }}
                 </span>
               </label>
               <label>
@@ -608,7 +618,7 @@ const goodTheme = ref('light')
                 >
                 <span class="theme-label">
                   <span aria-hidden="true">🌙</span>
-                  Sombre
+                  {{ $t('pages.colorContrast.theme.good.dark') }}
                 </span>
               </label>
               <label>
@@ -621,18 +631,18 @@ const goodTheme = ref('light')
                 >
                 <span class="theme-label">
                   <span aria-hidden="true">💻</span>
-                  Auto
+                  {{ $t('pages.colorContrast.theme.good.auto') }}
                 </span>
               </label>
             </fieldset>
 
             <div :class="`demo-content-good theme-${goodTheme}`">
-              <h5>Contenu de la page</h5>
-              <p>Ce texte maintient un bon contraste dans tous les thèmes.</p>
-              <button class="demo-button-good">Action</button>
+              <h5>{{ $t('pages.colorContrast.theme.good.content') }}</h5>
+              <p>{{ $t('pages.colorContrast.theme.good.description') }}</p>
+              <button class="demo-button-good">{{ $t('pages.colorContrast.theme.good.button') }}</button>
               <div class="demo-card-good">
-                <h6>Carte d'information</h6>
-                <p>Information importante toujours lisible.</p>
+                <h6>{{ $t('pages.colorContrast.theme.good.card.title') }}</h6>
+                <p>{{ $t('pages.colorContrast.theme.good.card.description') }}</p>
               </div>
             </div>
           </div>
@@ -641,7 +651,7 @@ const goodTheme = ref('light')
 
       <template #bad-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais: Contraste perdu, pas d'accessibilité --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.darkMode.badComment') }} --&gt;
 &lt;style&gt;
   .theme-toggle {
     display: flex;
@@ -681,7 +691,7 @@ const goodTheme = ref('light')
   }
 &lt;/style&gt;
 
-&lt;!-- Contrôles non accessibles --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.darkMode.controlsNotAccessible') }} --&gt;
 &lt;div class="theme-toggle"&gt;
   &lt;div class="theme-btn" onclick="setTheme('light')"&gt;☀️&lt;/div&gt;
   &lt;div class="theme-btn" onclick="setTheme('dark')"&gt;🌙&lt;/div&gt;
@@ -697,7 +707,7 @@ const goodTheme = ref('light')
 
       <template #good-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon: Contrastes maintenus, accessible, préférence système --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.darkMode.goodComment') }} --&gt;
 &lt;style&gt;
   .theme-controls {
     border: 1px solid #ccc;
@@ -751,7 +761,7 @@ const goodTheme = ref('light')
   }
 &lt;/style&gt;
 
-&lt;!-- Contrôles accessibles avec fieldset --&gt;
+&lt;!-- {{ $t('pages.colorContrast.codeExamples.darkMode.accessibleControlsFieldset') }} --&gt;
 &lt;fieldset class="theme-controls"&gt;
   &lt;legend&gt;Choisir le thème&lt;/legend&gt;
 
@@ -781,23 +791,21 @@ const goodTheme = ref('light')
     </ExampleToggle>
 
     <ExampleToggle
-      title="Liens - Soulignement et identification"
-      explanation="Les liens doivent être identifiables sans dépendre uniquement de la couleur. Le soulignement, les différences de motifs ou d'autres indicateurs visuels sont essentiels."
+      :title="$t('pages.colorContrast.links.title')"
+      :explanation="$t('pages.colorContrast.links.explanation')"
     >
       <template #bad>
         <div class="link-demo">
-          <h4>Liens basés uniquement sur la couleur</h4>
+          <h4>{{ $t('pages.colorContrast.links.heading') }}</h4>
           <div class="link-content-bad">
             <p>
-              L'accessibilité web est essentielle pour créer des sites inclusifs.
-              <a href="#" class="link-bad">En savoir plus sur l'accessibilité</a>
-              peut vous aider à comprendre les meilleures pratiques.
-              Les <a href="#" class="link-bad">directives WCAG</a> fournissent
-              un cadre complet pour améliorer l'accessibilité.
+              {{ $t('pages.colorContrast.links.intro') }}
+              <a href="#" class="link-bad">{{ $t('pages.colorContrast.links.learnMore') }}</a>
+              {{ $t('pages.colorContrast.links.bestPractices') }}
+              <a href="#" class="link-bad">{{ $t('pages.colorContrast.links.wcag') }}</a>
             </p>
             <p>
-              Visitez notre <a href="#" class="link-bad">page de ressources</a>
-              pour trouver des outils et tutoriels.
+              {{ $t('pages.colorContrast.links.resources') }}
             </p>
           </div>
         </div>
@@ -805,18 +813,16 @@ const goodTheme = ref('light')
 
       <template #good>
         <div class="link-demo">
-          <h4>Liens avec soulignement et indicateurs visuels</h4>
+          <h4>{{ $t('pages.colorContrast.links.heading') }}</h4>
           <div class="link-content-good">
             <p>
-              L'accessibilité web est essentielle pour créer des sites inclusifs.
-              <a href="#" class="link-good">En savoir plus sur l'accessibilité</a>
-              peut vous aider à comprendre les meilleures pratiques.
-              Les <a href="#" class="link-good">directives WCAG</a> fournissent
-              un cadre complet pour améliorer l'accessibilité.
+              {{ $t('pages.colorContrast.links.intro') }}
+              <a href="#" class="link-good">{{ $t('pages.colorContrast.links.learnMore') }}</a>
+              {{ $t('pages.colorContrast.links.bestPractices') }}
+              <a href="#" class="link-good">{{ $t('pages.colorContrast.links.wcag') }}</a>
             </p>
             <p>
-              Visitez notre <a href="#" class="link-good">page de ressources</a>
-              pour trouver des outils et tutoriels.
+              {{ $t('pages.colorContrast.links.resources') }}
             </p>
           </div>
         </div>
@@ -824,7 +830,7 @@ const goodTheme = ref('light')
 
       <template #bad-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ❌ Mauvais: Seulement la couleur différencie --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.linkContrast.badComment') }} --&gt;
 &lt;style&gt;
   a {
     color: blue;
@@ -845,7 +851,7 @@ const goodTheme = ref('light')
 
       <template #good-code>
         <div class="code-block">
-          <pre><code>&lt;!-- ✅ Bon: Couleur + soulignement + focus visible --&gt;
+          <pre><code>&lt;!-- {{ $t('pages.colorContrast.codeExamples.linkContrast.goodComment') }} --&gt;
 &lt;style&gt;
   a {
     color: #0066CC;

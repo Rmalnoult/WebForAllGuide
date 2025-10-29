@@ -1,4 +1,8 @@
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 const { getPageSEO } = useSEOConfig()
 const seo = getPageSEO('/semantic-html')
 
@@ -11,319 +15,449 @@ import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 // Initialize syntax highlighting
 useSyntaxHighlight()
 
+// Code block translations (defined locally to bypass i18n module loading issues)
+const codeTranslations = {
+  fr: {
+    pageStructure: {
+      badComment: 'Mauvais : divs sans sémantique',
+      goodComment: 'Bon : éléments HTML sémantiques',
+      siteTitle: 'Mon Site',
+      home: 'Accueil',
+      about: 'À propos',
+      mainNav: 'Navigation principale',
+      welcome: 'Bienvenue',
+      mainContent: 'Contenu principal...',
+      copyright: '© 2025 Mon Site'
+    },
+    headings: {
+      badComment: 'Mauvais : divs avec classes pour le style',
+      goodComment: 'Bon : hiérarchie de titres sémantiques',
+      intro: 'Introduction',
+      content: 'Contenu...',
+      section1: 'Section 1',
+      section2: 'Section 2',
+      subsection: 'Sous-section',
+      basicTechniques: 'Techniques de base',
+      semanticHTML: 'HTML sémantique',
+      structureElements: 'Éléments de structure',
+      cssAccessibility: 'CSS et accessibilité'
+    },
+    buttonsVsLinks: {
+      badComment: 'Mauvais : divs et spans cliquables',
+      goodComment: 'Bon : boutons pour actions, liens pour navigation',
+      save: 'Sauvegarder',
+      delete: 'Supprimer',
+      profile: 'Voir le profil',
+      moreInfo: 'Plus d\'infos'
+    },
+    lists: {
+      badComment: 'Mauvais : divs pour listes',
+      goodComment: 'Bon : ul et ol sémantiques',
+      ingredientsTitle: 'Ingrédients :',
+      eggs: '3 œufs',
+      milk: '2 cuillères à soupe de lait',
+      seasoning: 'Sel et poivre',
+      stepsTitle: 'Étapes :',
+      step1: 'Battre les œufs',
+      step2: 'Faire chauffer le beurre',
+      step3: 'Verser et cuire',
+      step1Full: 'Battre les œufs avec le lait',
+      step4: 'Plier en deux et servir'
+    }
+  },
+  en: {
+    pageStructure: {
+      badComment: 'Bad: divs without semantics',
+      goodComment: 'Good: semantic HTML elements',
+      siteTitle: 'My Site',
+      home: 'Home',
+      about: 'About',
+      mainNav: 'Main navigation',
+      welcome: 'Welcome',
+      mainContent: 'Main content...',
+      copyright: '© 2025 My Site'
+    },
+    headings: {
+      badComment: 'Bad: divs with classes for styling',
+      goodComment: 'Good: semantic headings hierarchy',
+      intro: 'Introduction',
+      content: 'Content...',
+      section1: 'Section 1',
+      section2: 'Section 2',
+      subsection: 'Subsection',
+      basicTechniques: 'Basic techniques',
+      semanticHTML: 'Semantic HTML',
+      structureElements: 'Structure elements',
+      cssAccessibility: 'CSS and accessibility'
+    },
+    buttonsVsLinks: {
+      badComment: 'Bad: clickable divs and spans',
+      goodComment: 'Good: buttons for actions, links for navigation',
+      save: 'Save',
+      delete: 'Delete',
+      profile: 'View profile',
+      moreInfo: 'More info'
+    },
+    lists: {
+      badComment: 'Bad: divs for lists',
+      goodComment: 'Good: semantic ul and ol',
+      ingredientsTitle: 'Ingredients:',
+      eggs: '3 eggs',
+      milk: '2 tablespoons of milk',
+      seasoning: 'Salt and pepper',
+      stepsTitle: 'Steps:',
+      step1: 'Beat the eggs',
+      step2: 'Heat the butter',
+      step3: 'Pour and cook',
+      step1Full: 'Beat the eggs with the milk',
+      step4: 'Fold in half and serve'
+    }
+  }
+}
+
+// Helper function to get translation based on current locale
+const tc = (key) => {
+  const currentLocale = locale.value
+  const keys = key.split('.')
+  let value = codeTranslations[currentLocale]
+
+  for (const k of keys) {
+    value = value?.[k]
+  }
+
+  return value || key
+}
+
+// Computed code blocks
+const codePageStructureBad = computed(() => `<!-- ${tc('pageStructure.badComment')} -->
+<div class="page-header">
+  <div class="site-title">${tc('pageStructure.siteTitle')}</div>
+  <div class="navigation">
+    <div>${tc('pageStructure.home')}</div>
+    <div>${tc('pageStructure.about')}</div>
+  </div>
+</div>
+<div class="page-content">
+  <div class="content-title">${tc('pageStructure.welcome')}</div>
+  <div>${tc('pageStructure.mainContent')}</div>
+</div>
+<div class="page-footer">
+  ${tc('pageStructure.copyright')}
+</div>`)
+
+const codePageStructureGood = computed(() => `<!-- ${tc('pageStructure.goodComment')} -->
+<header>
+  <h1>${tc('pageStructure.siteTitle')}</h1>
+  <nav aria-label="${tc('pageStructure.mainNav')}">
+    <ul>
+      <li><a href="/">${tc('pageStructure.home')}</a></li>
+      <li><a href="/about">${tc('pageStructure.about')}</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h1>${tc('pageStructure.welcome')}</h1>
+  <p>${tc('pageStructure.mainContent')}</p>
+</main>
+<footer>
+  <p>${tc('pageStructure.copyright')}</p>
+</footer>`)
+
+const codeHeadingsBad = computed(() => `<!-- ${tc('headings.badComment')} -->
+<div class="title-large">${tc('headings.intro')}</div>
+<p>${tc('headings.content')}</p>
+<div class="title-medium">${tc('headings.section1')}</div>
+<p>${tc('headings.content')}</p>
+<div class="title-medium">${tc('headings.section2')}</div>
+<p>${tc('headings.content')}</p>
+<div class="title-small">${tc('headings.subsection')}</div>
+<p>${tc('headings.content')}</p>`)
+
+const codeHeadingsGood = computed(() => `<!-- ${tc('headings.goodComment')} -->
+<h1>${tc('headings.intro')}</h1>
+<p>${tc('headings.content')}</p>
+<h2>${tc('headings.basicTechniques')}</h2>
+<p>${tc('headings.content')}</p>
+<h3>${tc('headings.semanticHTML')}</h3>
+<p>${tc('headings.content')}</p>
+<h4>${tc('headings.structureElements')}</h4>
+<p>${tc('headings.content')}</p>
+<h3>${tc('headings.cssAccessibility')}</h3>
+<p>${tc('headings.content')}</p>`)
+
+const codeButtonsVsLinksBad = computed(() => `<!-- ${tc('buttonsVsLinks.badComment')} -->
+<div @click="handleSave" style="cursor: pointer;">
+  💾 ${tc('buttonsVsLinks.save')}
+</div>
+<div @click="handleDelete" style="cursor: pointer;">
+  🗑️ ${tc('buttonsVsLinks.delete')}
+</div>
+<span @click="navigateToProfile" style="cursor: pointer;">
+  👤 ${tc('buttonsVsLinks.profile')}
+</span>`)
+
+const codeButtonsVsLinksGood = computed(() => `<!-- ${tc('buttonsVsLinks.goodComment')} -->
+<button type="button" @click="handleSave">
+  💾 ${tc('buttonsVsLinks.save')}
+</button>
+<button type="button" @click="handleDelete">
+  🗑️ ${tc('buttonsVsLinks.delete')}
+</button>
+<a href="/profile">
+  👤 ${tc('buttonsVsLinks.profile')}
+</a>
+<button type="button" @click="toggleModal">
+  ℹ️ ${tc('buttonsVsLinks.moreInfo')}
+</button>`)
+
+const codeListsBad = computed(() => `<!-- ${tc('lists.badComment')} -->
+<div class="list-title">${tc('lists.ingredientsTitle')}</div>
+<div>${tc('lists.eggs')}</div>
+<div>${tc('lists.milk')}</div>
+<div>${tc('lists.seasoning')}</div>
+
+<div class="list-title">${tc('lists.stepsTitle')}</div>
+<div>1. ${tc('lists.step1')}</div>
+<div>2. ${tc('lists.step2')}</div>
+<div>3. ${tc('lists.step3')}</div>`)
+
+const codeListsGood = computed(() => `<!-- ${tc('lists.goodComment')} -->
+<h3>${tc('lists.ingredientsTitle')}</h3>
+<ul>
+  <li>${tc('lists.eggs')}</li>
+  <li>${tc('lists.milk')}</li>
+  <li>${tc('lists.seasoning')}</li>
+</ul>
+
+<h3>${tc('lists.stepsTitle')}</h3>
+<ol>
+  <li>${tc('lists.step1Full')}</li>
+  <li>${tc('lists.step2')}</li>
+  <li>${tc('lists.step3')}</li>
+  <li>${tc('lists.step4')}</li>
+</ol>`)
+
 // Simulated action handlers
 function handleSave() {
-  alert('Sauvegardé !')
+  alert(t('pages.semanticHtml.buttonsVsLinks.alerts.saved'))
 }
 
 function handleDelete() {
-  if (confirm('Êtes-vous sûr de vouloir supprimer ?')) {
-    alert('Supprimé !')
+  if (confirm(t('pages.semanticHtml.buttonsVsLinks.alerts.deleteConfirm'))) {
+    alert(t('pages.semanticHtml.buttonsVsLinks.alerts.deleted'))
   }
 }
 
 function navigateToProfile() {
-  alert('Navigation vers le profil (simulated)')
+  alert(t('pages.semanticHtml.buttonsVsLinks.alerts.profile'))
 }
 
 function toggleModal() {
-  alert('Modal ouverte (simulated)')
+  alert(t('pages.semanticHtml.buttonsVsLinks.alerts.modal'))
 }
 </script>
 
 <template>
   <div class="semantic-html">
     <PageHeader
-      title="HTML Sémantique"
-      description="Utiliser les bons éléments HTML pour structurer le contenu de manière compréhensible"
+      :title="$t('pages.semanticHtml.title')"
+      :description="$t('pages.semanticHtml.description')"
     />
 
     <ExampleToggle
-      title="Structure de page"
-      explanation="Une structure sémantique claire aide les lecteurs d'écran à naviguer et comprendre le contenu. Les éléments de sectionnement (header, nav, main, footer) créent des repères importants."
+      :title="$t('pages.semanticHtml.pageStructure.title')"
+      :explanation="$t('pages.semanticHtml.pageStructure.explanation')"
     >
       <template #bad>
         <div class="page-structure">
           <div class="page-header">
-            <div class="site-title">Mon Site</div>
+            <div class="site-title">{{ $t('pages.semanticHtml.pageStructure.bad.siteTitle') }}</div>
             <div class="navigation">
-              <div class="nav-item">Accueil</div>
-              <div class="nav-item">À propos</div>
-              <div class="nav-item">Contact</div>
+              <div class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.home') }}</div>
+              <div class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.about') }}</div>
+              <div class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.contact') }}</div>
             </div>
           </div>
           <div class="page-content">
-            <div class="content-title">Bienvenue</div>
-            <div>Contenu principal de la page...</div>
+            <div class="content-title">{{ $t('pages.semanticHtml.pageStructure.bad.content.title') }}</div>
+            <div>{{ $t('pages.semanticHtml.pageStructure.bad.content.body') }}</div>
           </div>
           <div class="page-footer">
-            <div>© 2025 Mon Site</div>
+            <div>{{ $t('pages.semanticHtml.pageStructure.bad.footer') }}</div>
           </div>
         </div>
         <div class="code-block">
-          <pre><code>&lt;!-- Mauvais : divs génériques sans sémantique --&gt;
-&lt;div class="page-header"&gt;
-  &lt;div class="site-title"&gt;Mon Site&lt;/div&gt;
-  &lt;div class="navigation"&gt;
-    &lt;div&gt;Accueil&lt;/div&gt;
-    &lt;div&gt;À propos&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="page-content"&gt;
-  &lt;div class="content-title"&gt;Bienvenue&lt;/div&gt;
-  &lt;div&gt;Contenu principal...&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="page-footer"&gt;
-  © 2025 Mon Site
-&lt;/div&gt;</code></pre>
+          <pre><code>{{ codePageStructureBad }}</code></pre>
         </div>
       </template>
 
       <template #good>
         <div class="page-structure">
           <header class="page-header">
-            <h1 class="site-title">Mon Site</h1>
-            <nav aria-label="Navigation principale">
+            <h1 class="site-title">{{ $t('pages.semanticHtml.pageStructure.good.siteTitle') }}</h1>
+            <nav :aria-label="$t('pages.semanticHtml.pageStructure.good.navLabel')">
               <ul class="navigation">
-                <li><a href="/" class="nav-item">Accueil</a></li>
-                <li><a href="/about" class="nav-item">À propos</a></li>
-                <li><a href="/contact" class="nav-item">Contact</a></li>
+                <li><a href="/" class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.home') }}</a></li>
+                <li><a href="/about" class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.about') }}</a></li>
+                <li><a href="/contact" class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.contact') }}</a></li>
               </ul>
             </nav>
           </header>
           <main class="page-content">
-            <h1 class="content-title">Bienvenue</h1>
-            <p>Contenu principal de la page...</p>
+            <h1 class="content-title">{{ $t('pages.semanticHtml.pageStructure.good.content.title') }}</h1>
+            <p>{{ $t('pages.semanticHtml.pageStructure.good.content.body') }}</p>
           </main>
           <footer class="page-footer">
-            <p>© 2025 Mon Site</p>
+            <p>{{ $t('pages.semanticHtml.pageStructure.good.footer') }}</p>
           </footer>
         </div>
         <div class="code-block">
-          <pre><code>&lt;!-- Bon : éléments sémantiques avec rôles appropriés --&gt;
-&lt;header&gt;
-  &lt;h1&gt;Mon Site&lt;/h1&gt;
-  &lt;nav aria-label="Navigation principale"&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="/about"&gt;À propos&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/nav&gt;
-&lt;/header&gt;
-&lt;main&gt;
-  &lt;h1&gt;Bienvenue&lt;/h1&gt;
-  &lt;p&gt;Contenu principal...&lt;/p&gt;
-&lt;/main&gt;
-&lt;footer&gt;
-  &lt;p&gt;© 2025 Mon Site&lt;/p&gt;
-&lt;/footer&gt;</code></pre>
+          <pre><code>{{ codePageStructureGood }}</code></pre>
         </div>
       </template>
     </ExampleToggle>
 
     <ExampleToggle
-      title="Hiérarchie des titres"
-      explanation="Une hiérarchie logique des titres (h1 → h2 → h3) permet aux lecteurs d'écran de créer un plan de navigation et aux utilisateurs de comprendre la structure du contenu."
+      :title="$t('pages.semanticHtml.headings.title')"
+      :explanation="$t('pages.semanticHtml.headings.explanation')"
     >
       <template #bad>
         <article class="article-demo">
-          <div class="title-large">Introduction à l'accessibilité</div>
-          <p>L'accessibilité web est importante...</p>
+          <div class="title-large">{{ $t('pages.semanticHtml.headings.article.h1') }}</div>
+          <p>{{ $t('pages.semanticHtml.headings.article.intro') }}</p>
 
-          <div class="title-medium">Techniques de base</div>
-          <p>Voici quelques techniques...</p>
+          <div class="title-medium">{{ $t('pages.semanticHtml.headings.article.h2') }}</div>
+          <p>{{ $t('pages.semanticHtml.headings.article.techniques') }}</p>
 
-          <div class="title-medium">HTML sémantique</div>
-          <p>Le HTML sémantique...</p>
+          <div class="title-medium">{{ $t('pages.semanticHtml.headings.article.h3semantic') }}</div>
+          <p>{{ $t('pages.semanticHtml.headings.article.semantic') }}</p>
 
-          <div class="title-small">Éléments de structure</div>
-          <p>Les éléments comme header, nav...</p>
+          <div class="title-small">{{ $t('pages.semanticHtml.headings.article.h4') }}</div>
+          <p>{{ $t('pages.semanticHtml.headings.article.elements') }}</p>
 
-          <div class="title-medium">CSS et accessibilité</div>
-          <p>Le CSS peut améliorer...</p>
+          <div class="title-medium">{{ $t('pages.semanticHtml.headings.article.h3css') }}</div>
+          <p>{{ $t('pages.semanticHtml.headings.article.css') }}</p>
         </article>
         <div class="code-block">
-          <pre><code>&lt;!-- Mauvais : divs stylisées sans hiérarchie --&gt;
-&lt;div class="title-large"&gt;Introduction&lt;/div&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;div class="title-medium"&gt;Section 1&lt;/div&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;div class="title-medium"&gt;Section 2&lt;/div&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;div class="title-small"&gt;Sous-section&lt;/div&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;</code></pre>
+          <pre><code>{{ codeHeadingsBad }}</code></pre>
         </div>
       </template>
 
       <template #good>
         <article class="article-demo">
-          <h1>Introduction à l'accessibilité</h1>
-          <p>L'accessibilité web est importante...</p>
+          <h1>{{ $t('pages.semanticHtml.headings.article.h1') }}</h1>
+          <p>{{ $t('pages.semanticHtml.headings.article.intro') }}</p>
 
-          <h2>Techniques de base</h2>
-          <p>Voici quelques techniques...</p>
+          <h2>{{ $t('pages.semanticHtml.headings.article.h2') }}</h2>
+          <p>{{ $t('pages.semanticHtml.headings.article.techniques') }}</p>
 
-          <h3>HTML sémantique</h3>
-          <p>Le HTML sémantique...</p>
+          <h3>{{ $t('pages.semanticHtml.headings.article.h3semantic') }}</h3>
+          <p>{{ $t('pages.semanticHtml.headings.article.semantic') }}</p>
 
-          <h4>Éléments de structure</h4>
-          <p>Les éléments comme header, nav...</p>
+          <h4>{{ $t('pages.semanticHtml.headings.article.h4') }}</h4>
+          <p>{{ $t('pages.semanticHtml.headings.article.elements') }}</p>
 
-          <h3>CSS et accessibilité</h3>
-          <p>Le CSS peut améliorer...</p>
+          <h3>{{ $t('pages.semanticHtml.headings.article.h3css') }}</h3>
+          <p>{{ $t('pages.semanticHtml.headings.article.css') }}</p>
         </article>
         <div class="code-block">
-          <pre><code>&lt;!-- Bon : hiérarchie logique des titres --&gt;
-&lt;h1&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;h2&gt;Techniques de base&lt;/h2&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;h3&gt;HTML sémantique&lt;/h3&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;h4&gt;Éléments de structure&lt;/h4&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;
-&lt;h3&gt;CSS et accessibilité&lt;/h3&gt;
-&lt;p&gt;Contenu...&lt;/p&gt;</code></pre>
+          <pre><code>{{ codeHeadingsGood }}</code></pre>
         </div>
       </template>
     </ExampleToggle>
 
     <ExampleToggle
-      title="Boutons vs éléments cliquables"
-      explanation="Utiliser les bons éléments pour les actions : boutons pour les actions, liens pour la navigation. Cela garantit la bonne sémantique et les comportements clavier attendus."
+      :title="$t('pages.semanticHtml.buttonsVsLinks.title')"
+      :explanation="$t('pages.semanticHtml.buttonsVsLinks.explanation')"
     >
       <template #bad>
         <div class="actions-demo">
           <div class="action-item" @click="handleSave" style="cursor: pointer;">
-            💾 Sauvegarder
+            💾 {{ $t('pages.semanticHtml.buttonsVsLinks.actions.save') }}
           </div>
           <div class="action-item" @click="handleDelete" style="cursor: pointer;">
-            🗑️ Supprimer
+            🗑️ {{ $t('pages.semanticHtml.buttonsVsLinks.actions.delete') }}
           </div>
           <div class="action-item" @click="navigateToProfile" style="cursor: pointer;">
-            👤 Voir le profil
+            👤 {{ $t('pages.semanticHtml.buttonsVsLinks.actions.profile') }}
           </div>
           <span class="action-item" @click="toggleModal" style="cursor: pointer;">
-            ℹ️ Plus d'infos
+            ℹ️ {{ $t('pages.semanticHtml.buttonsVsLinks.actions.info') }}
           </span>
         </div>
         <div class="code-block">
-          <pre><code>&lt;!-- Mauvais : divs cliquables sans sémantique --&gt;
-&lt;div @click="handleSave" style="cursor: pointer;"&gt;
-  💾 Sauvegarder
-&lt;/div&gt;
-&lt;div @click="handleDelete" style="cursor: pointer;"&gt;
-  🗑️ Supprimer
-&lt;/div&gt;
-&lt;span @click="navigateToProfile" style="cursor: pointer;"&gt;
-  👤 Voir le profil
-&lt;/span&gt;</code></pre>
+          <pre><code>{{ codeButtonsVsLinksBad }}</code></pre>
         </div>
       </template>
 
       <template #good>
         <div class="actions-demo">
           <button type="button" class="action-item" @click="handleSave">
-            💾 Sauvegarder
+            💾 {{ $t('pages.semanticHtml.buttonsVsLinks.actions.save') }}
           </button>
           <button type="button" class="action-item" @click="handleDelete">
-            🗑️ Supprimer
+            🗑️ {{ $t('pages.semanticHtml.buttonsVsLinks.actions.delete') }}
           </button>
           <a href="/profile" class="action-item">
-            👤 Voir le profil
+            👤 {{ $t('pages.semanticHtml.buttonsVsLinks.actions.profile') }}
           </a>
           <button type="button" class="action-item" @click="toggleModal">
-            ℹ️ Plus d'infos
+            ℹ️ {{ $t('pages.semanticHtml.buttonsVsLinks.actions.info') }}
           </button>
         </div>
         <div class="code-block">
-          <pre><code>&lt;!-- Bon : boutons et liens avec sémantique correcte --&gt;
-&lt;button type="button" @click="handleSave"&gt;
-  💾 Sauvegarder
-&lt;/button&gt;
-&lt;button type="button" @click="handleDelete"&gt;
-  🗑️ Supprimer
-&lt;/button&gt;
-&lt;a href="/profile"&gt;
-  👤 Voir le profil
-&lt;/a&gt;
-&lt;button type="button" @click="toggleModal"&gt;
-  ℹ️ Plus d'infos
-&lt;/button&gt;</code></pre>
+          <pre><code>{{ codeButtonsVsLinksGood }}</code></pre>
         </div>
       </template>
     </ExampleToggle>
 
     <ExampleToggle
-      title="Listes et données structurées"
-      explanation="Utiliser les éléments de liste appropriés permet aux lecteurs d'écran d'annoncer le nombre d'éléments et de faciliter la navigation."
+      :title="$t('pages.semanticHtml.lists.title')"
+      :explanation="$t('pages.semanticHtml.lists.explanation')"
     >
       <template #bad>
         <div class="list-demo">
-          <div class="list-title">Ingrédients pour une omelette :</div>
+          <div class="list-title">{{ $t('pages.semanticHtml.lists.recipe.ingredients.title') }}</div>
           <div class="list-content">
-            <div>3 œufs</div>
-            <div>2 cuillères à soupe de lait</div>
-            <div>Sel et poivre</div>
-            <div>1 cuillère à soupe de beurre</div>
+            <div>{{ $t('pages.semanticHtml.lists.recipe.ingredients.eggs') }}</div>
+            <div>{{ $t('pages.semanticHtml.lists.recipe.ingredients.milk') }}</div>
+            <div>{{ $t('pages.semanticHtml.lists.recipe.ingredients.seasoning') }}</div>
+            <div>{{ $t('pages.semanticHtml.lists.recipe.ingredients.butter') }}</div>
           </div>
 
-          <div class="list-title">Étapes :</div>
+          <div class="list-title">{{ $t('pages.semanticHtml.lists.recipe.steps.title') }}</div>
           <div class="list-content">
-            <div>1. Battre les œufs avec le lait</div>
-            <div>2. Faire chauffer le beurre</div>
-            <div>3. Verser les œufs et cuire</div>
-            <div>4. Plier en deux et servir</div>
+            <div>1. {{ $t('pages.semanticHtml.lists.recipe.steps.step1') }}</div>
+            <div>2. {{ $t('pages.semanticHtml.lists.recipe.steps.step2') }}</div>
+            <div>3. {{ $t('pages.semanticHtml.lists.recipe.steps.step3') }}</div>
+            <div>4. {{ $t('pages.semanticHtml.lists.recipe.steps.step4') }}</div>
           </div>
         </div>
         <div class="code-block">
-          <pre><code>&lt;!-- Mauvais : divs sans structure de liste --&gt;
-&lt;div class="list-title"&gt;Ingrédients :&lt;/div&gt;
-&lt;div&gt;3 œufs&lt;/div&gt;
-&lt;div&gt;2 cuillères à soupe de lait&lt;/div&gt;
-&lt;div&gt;Sel et poivre&lt;/div&gt;
-
-&lt;div class="list-title"&gt;Étapes :&lt;/div&gt;
-&lt;div&gt;1. Battre les œufs&lt;/div&gt;
-&lt;div&gt;2. Faire chauffer le beurre&lt;/div&gt;
-&lt;div&gt;3. Verser et cuire&lt;/div&gt;</code></pre>
+          <pre><code>{{ codeListsBad }}</code></pre>
         </div>
       </template>
 
       <template #good>
         <div class="list-demo">
-          <h3>Ingrédients pour une omelette :</h3>
+          <h3>{{ $t('pages.semanticHtml.lists.recipe.ingredients.title') }}</h3>
           <ul>
-            <li>3 œufs</li>
-            <li>2 cuillères à soupe de lait</li>
-            <li>Sel et poivre</li>
-            <li>1 cuillère à soupe de beurre</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.ingredients.eggs') }}</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.ingredients.milk') }}</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.ingredients.seasoning') }}</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.ingredients.butter') }}</li>
           </ul>
 
-          <h3>Étapes :</h3>
+          <h3>{{ $t('pages.semanticHtml.lists.recipe.steps.title') }}</h3>
           <ol>
-            <li>Battre les œufs avec le lait</li>
-            <li>Faire chauffer le beurre</li>
-            <li>Verser les œufs et cuire</li>
-            <li>Plier en deux et servir</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.steps.step1') }}</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.steps.step2') }}</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.steps.step3') }}</li>
+            <li>{{ $t('pages.semanticHtml.lists.recipe.steps.step4') }}</li>
           </ol>
         </div>
         <div class="code-block">
-          <pre><code>&lt;!-- Bon : listes sémantiques appropriées --&gt;
-&lt;h3&gt;Ingrédients :&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;3 œufs&lt;/li&gt;
-  &lt;li&gt;2 cuillères à soupe de lait&lt;/li&gt;
-  &lt;li&gt;Sel et poivre&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Étapes :&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Battre les œufs avec le lait&lt;/li&gt;
-  &lt;li&gt;Faire chauffer le beurre&lt;/li&gt;
-  &lt;li&gt;Verser les œufs et cuire&lt;/li&gt;
-  &lt;li&gt;Plier en deux et servir&lt;/li&gt;
-&lt;/ol&gt;</code></pre>
+          <pre><code>{{ codeListsGood }}</code></pre>
         </div>
       </template>
     </ExampleToggle>

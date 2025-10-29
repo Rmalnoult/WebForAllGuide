@@ -28,6 +28,7 @@
 /* Syntax highlighting with high contrast colors */
 
 /* HTML Tags */
+.syntax-tag,
 .tag,
 .tag-name {
   color: #fb7185; /* Rose - good contrast */
@@ -38,10 +39,12 @@
 }
 
 /* Attributes */
+.syntax-attr,
 .attr-name {
   color: #c4b5fd; /* Light purple - excellent contrast */
 }
 
+.syntax-string,
 .attr-value {
   color: #86efac; /* Light green - excellent contrast */
 }
@@ -63,6 +66,7 @@
 }
 
 /* Comments */
+.syntax-comment,
 .comment {
   color: #94a3b8; /* Lighter gray - good contrast */
   font-style: italic;
@@ -74,12 +78,14 @@
 }
 
 /* Keywords */
+.syntax-keyword,
 .keyword {
   color: #fda4af; /* Light rose - good contrast */
   font-weight: 500;
 }
 
 /* Functions */
+.syntax-function,
 .function {
   color: #7dd3fc; /* Light cyan - excellent contrast */
 }
@@ -90,14 +96,17 @@
 }
 
 /* CSS specific */
+.syntax-selector,
 .selector {
   color: #fb7185;
 }
 
+.syntax-property,
 .property {
   color: #7dd3fc; /* Light cyan - excellent contrast */
 }
 
+.syntax-value,
 .value {
   color: #86efac;
 }

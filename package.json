@@ -15,6 +15,7 @@
     "test:headed": "playwright test --headed"
   },
   "dependencies": {
+    "@nuxtjs/i18n": "^10.1.2",
     "@vueuse/core": "^13.9.0",
     "html2canvas": "^1.4.1",
     "nuxt": "^3.15.2",

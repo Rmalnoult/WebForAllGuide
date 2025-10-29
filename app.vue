@@ -6,10 +6,18 @@ import { useKeyboardShortcuts } from './composables/useKeyboardShortcuts'
 
 const { prefersReducedMotion, prefersHighContrast, prefersDarkMode } = useUserPreferences()
 const { showHelpDialog } = useKeyboardShortcuts()
+const { t, locale } = useI18n()
 const route = useRoute()
 const routeAnnouncement = ref('')
 const isMobileMenuOpen = ref(false)
 const showAboutModal = ref(false)
+
+// Update HTML lang attribute when locale changes
+watch(locale, (newLocale) => {
+  if (process.client) {
+    document.documentElement.setAttribute('lang', newLocale === 'fr' ? 'fr-FR' : 'en-US')
+  }
+})
 
 const appClass = computed(() => {
   const classes = ['app']
@@ -60,17 +68,20 @@ onUnmounted(() => {
 
 // Announce route changes for screen readers
 watch(() => route.path, (newPath) => {
-  const pageNames = {
-    '/': 'Page d\'accueil',
-    '/semantic-html': 'HTML Sémantique',
-    '/keyboard-navigation': 'Navigation Clavier',
-    '/media-accessible': 'Images et Médias',
-    '/color-contrast': 'Contrastes et Couleurs',
-    '/accessible-forms': 'Formulaires accessibles',
-    '/aria-components': 'Composants ARIA',
-    '/performance': 'Performance et adaptabilité'
+  const pageNameKeys = {
+    '/': 'navigation.home.label',
+    '/semantic-html': 'navigation.semanticHtml.label',
+    '/keyboard-navigation': 'navigation.keyboardNavigation.label',
+    '/media-accessible': 'navigation.mediaAccessible.label',
+    '/color-contrast': 'navigation.colorContrast.label',
+    '/accessible-forms': 'navigation.accessibleForms.label',
+    '/aria-components': 'navigation.ariaComponents.label',
+    '/performance': 'navigation.performance.label'
   }
-  routeAnnouncement.value = `Navigation vers ${pageNames[newPath] || 'nouvelle page'}`
+
+  const pageKey = pageNameKeys[newPath]
+  const pageName = pageKey ? t(pageKey) : t('navigation.home.label')
+  routeAnnouncement.value = t('a11y.routeAnnounce', { page: pageName })
 
   // Close mobile menu on route change
   closeMobileMenu()
@@ -83,14 +94,14 @@ watch(() => route.path, (newPath) => {
 </script>
 
 <template>
-  <div :class="appClass" role="application" aria-label="Démo d'accessibilité web">
+  <div :class="appClass" role="application" :aria-label="$t('a11y.appLabel')">
     <!-- Skip links -->
     <div class="skip-links">
       <a href="#main-content" class="skip-link">
-        Aller au contenu principal
+        {{ $t('common.skipToContent') }}
       </a>
       <a href="#main-nav" class="skip-link">
-        Aller à la navigation
+        {{ $t('common.skipToNav') }}
       </a>
     </div>
 
@@ -99,7 +110,7 @@ watch(() => route.path, (newPath) => {
       class="burger-button"
       :aria-expanded="isMobileMenuOpen"
       aria-controls="main-nav"
-      aria-label="Menu de navigation"
+      :aria-label="$t('navigation.menuButton')"
       aria-describedby="burger-desc"
       @click="toggleMobileMenu"
     >
@@ -109,7 +120,7 @@ watch(() => route.path, (newPath) => {
         <span class="burger-line"></span>
       </span>
       <span id="burger-desc" class="sr-only">
-        {{ isMobileMenuOpen ? 'Fermer le menu de navigation principal' : 'Ouvrir le menu de navigation principal' }}
+        {{ isMobileMenuOpen ? $t('navigation.closeMenu') : $t('navigation.openMenu') }}
       </span>
     </button>
 
@@ -127,7 +138,7 @@ watch(() => route.path, (newPath) => {
         id="main-nav"
         :class="['app-sidebar', { 'mobile-open': isMobileMenuOpen }]"
         role="complementary"
-        aria-label="Barre latérale de navigation"
+        :aria-label="$t('navigation.mainNav')"
       >
         <AppNavigation @open-about="showAboutModal = true" />
       </aside>
@@ -137,7 +148,7 @@ watch(() => route.path, (newPath) => {
         id="main-content"
         class="app-main"
         role="main"
-        aria-label="Contenu principal"
+        :aria-label="$t('a11y.mainContent')"
         tabindex="-1"
       >
         <!-- Announcements for screen readers -->
@@ -155,7 +166,7 @@ watch(() => route.path, (newPath) => {
         <!-- Footer -->
         <footer class="app-footer" role="contentinfo">
           <p class="copyright">
-            © {{ new Date().getFullYear() }} Romain Malnoult. Tous droits réservés.
+            {{ $t('common.copyright', { year: new Date().getFullYear() }) }}
           </p>
         </footer>
       </main>

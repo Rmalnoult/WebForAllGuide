@@ -1,13 +1,15 @@
 <script setup>
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import PageHeader from '@/components/layout/PageHeader.vue'
+import ExampleToggle from '@/components/common/ExampleToggle.vue'
+import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
+
+const { t } = useI18n()
 const { getPageSEO } = useSEOConfig()
 const seo = getPageSEO('/accessible-forms')
 
 useHead(seo)
-
-import { ref, computed } from 'vue'
-import PageHeader from '@/components/layout/PageHeader.vue'
-import ExampleToggle from '@/components/common/ExampleToggle.vue'
-import { useSyntaxHighlight } from '@/composables/useSyntaxHighlight'
 
 // Initialize syntax highlighting
 useSyntaxHighlight()
@@ -41,22 +43,22 @@ function isValidEmail(email) {
 
 const badFormErrors = computed(() => {
   const errors = []
-  if (!badForm.value.name) errors.push('Nom requis')
-  if (!isValidEmail(badForm.value.email)) errors.push('Email invalide')
-  if (badForm.value.age < 16) errors.push('Âge minimum 16 ans')
+  if (!badForm.value.name) errors.push(t('pages.accessibleForms.validation.good.errors.nameRequired'))
+  if (!isValidEmail(badForm.value.email)) errors.push(t('pages.accessibleForms.validation.good.errors.emailInvalid'))
+  if (badForm.value.age < 16) errors.push(t('pages.accessibleForms.validation.good.errors.ageMinimum'))
   return errors
 })
 
 const goodFormErrors = computed(() => {
   const errors = []
   if (goodForm.value && !goodForm.value.name) {
-    errors.push({ field: 'name', message: 'Le nom est obligatoire' })
+    errors.push({ field: 'name', message: t('pages.accessibleForms.validation.good.errors.nameRequired') })
   }
   if (goodForm.value && !isValidEmail(goodForm.value.email)) {
-    errors.push({ field: 'email', message: 'L\'adresse email est invalide' })
+    errors.push({ field: 'email', message: t('pages.accessibleForms.validation.good.errors.emailInvalid') })
   }
   if (goodForm.value && goodForm.value.age < 16) {
-    errors.push({ field: 'age', message: 'L\'âge minimum requis est 16 ans' })
+    errors.push({ field: 'age', message: t('pages.accessibleForms.validation.good.errors.ageMinimum') })
   }
   return errors
 })
@@ -68,16 +70,16 @@ function submitBadForm() {
 function submitGoodForm() {
   goodFormSubmitted.value = true
   if (goodFormErrors.value.length === 0) {
-    alert('Formulaire soumis avec succès !')
+    alert(t('pages.accessibleForms.validation.good.successMessage'))
   }
 }
 
 // Complex form validation functions
 function validateUsernameBad() {
   if (complexBadForm.value.username.length < 3) {
-    usernameBadError.value = 'Trop court'
+    usernameBadError.value = t('pages.accessibleForms.complexValidation.bad.errors.usernameTooShort')
   } else if (!/^[a-zA-Z0-9_]+$/.test(complexBadForm.value.username)) {
-    usernameBadError.value = 'Caractères invalides'
+    usernameBadError.value = t('pages.accessibleForms.complexValidation.bad.errors.usernameInvalidChars')
   } else {
     usernameBadError.value = ''
   }
@@ -85,7 +87,7 @@ function validateUsernameBad() {
 
 function validateEmailBad() {
   if (!isValidEmail(complexBadForm.value.email)) {
-    emailBadError.value = 'Email invalide'
+    emailBadError.value = t('pages.accessibleForms.complexValidation.bad.errors.emailInvalid')
   } else {
     emailBadError.value = ''
   }
@@ -93,7 +95,7 @@ function validateEmailBad() {
 
 function validatePasswordBad() {
   if (complexBadForm.value.password.length < 8) {
-    passwordBadError.value = 'Trop court'
+    passwordBadError.value = t('pages.accessibleForms.complexValidation.bad.errors.passwordTooShort')
   } else {
     passwordBadError.value = ''
   }
@@ -104,9 +106,9 @@ function validateUsernameGood() {
   usernameGoodValid.value = false
 
   if (complexGoodForm.value.username.length < 3) {
-    usernameGoodError.value = 'Le nom d\'utilisateur doit contenir au moins 3 caractères'
+    usernameGoodError.value = t('pages.accessibleForms.complexValidation.good.usernameErrors.minLength')
   } else if (!/^[a-zA-Z0-9_]+$/.test(complexGoodForm.value.username)) {
-    usernameGoodError.value = 'Seuls les lettres, chiffres et underscore sont autorisés'
+    usernameGoodError.value = t('pages.accessibleForms.complexValidation.good.usernameErrors.invalidChars')
   } else {
     usernameGoodValid.value = true
   }
@@ -117,7 +119,7 @@ function validateEmailGood() {
   emailGoodValid.value = false
 
   if (!isValidEmail(complexGoodForm.value.email)) {
-    emailGoodError.value = 'Veuillez saisir une adresse email valide'
+    emailGoodError.value = t('pages.accessibleForms.complexValidation.good.emailError')
   } else {
     emailGoodValid.value = true
   }
@@ -127,7 +129,7 @@ function validatePasswordGood() {
   passwordGoodError.value = ''
 
   if (complexGoodForm.value.password.length < 8) {
-    passwordGoodError.value = 'Le mot de passe doit contenir au moins 8 caractères'
+    passwordGoodError.value = t('pages.accessibleForms.complexValidation.good.passwordError')
   }
 }
 
@@ -153,51 +155,51 @@ const isFormValid = computed(() => {
 <template>
   <div class="accessible-forms">
     <PageHeader
-      title="Formulaires Accessibles"
-      description="Créer des formulaires utilisables par tous avec une expérience claire et guidée"
+      :title="$t('pages.accessibleForms.title')"
+      :description="$t('pages.accessibleForms.description')"
     />
 
     <ExampleToggle
-      title="Labels et associations"
-      explanation="Chaque champ de formulaire doit avoir un label explicite et correctement associé. Les placeholders ne remplacent pas les labels."
+      :title="$t('pages.accessibleForms.labelsAndAssociations.title')"
+      :explanation="$t('pages.accessibleForms.labelsAndAssociations.explanation')"
     >
       <template #bad>
         <div class="form-demo">
           <form class="form-bad">
-            <h4>Connexion</h4>
+            <h4>{{ $t('pages.accessibleForms.labelsAndAssociations.bad.heading') }}</h4>
             <div class="form-group">
-              <input type="email" placeholder="Votre email">
+              <input type="email" :placeholder="$t('pages.accessibleForms.labelsAndAssociations.bad.email')">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Mot de passe" autocomplete="current-password">
+              <input type="password" :placeholder="$t('pages.accessibleForms.labelsAndAssociations.bad.password')" autocomplete="current-password">
             </div>
             <div class="form-group checkbox-group">
               <input type="checkbox">
-              <span>Se souvenir de moi</span>
+              <span>{{ $t('pages.accessibleForms.labelsAndAssociations.bad.remember') }}</span>
             </div>
-            <button type="submit">Se connecter</button>
+            <button type="submit">{{ $t('pages.accessibleForms.labelsAndAssociations.bad.submit') }}</button>
           </form>
         </div>
         <div class="code-block">
-            <pre><code>&lt;!-- ❌ Mauvais : Labels manquants --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.badComment') }} --&gt;
 &lt;form&gt;
-  &lt;h4&gt;Connexion&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.bad.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Pas de label associé --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.noLabel') }} --&gt;
   &lt;input
     type="email"
-    placeholder="Votre email"&gt;
+    placeholder="{{ $t('pages.accessibleForms.labelsAndAssociations.bad.email') }}"&gt;
 
-  &lt;!-- Pas de label associé, pas d'autocomplete --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.noLabelNoAutocomplete') }} --&gt;
   &lt;input
     type="password"
-    placeholder="Mot de passe"&gt;
+    placeholder="{{ $t('pages.accessibleForms.labelsAndAssociations.bad.password') }}"&gt;
 
-  &lt;!-- Checkbox non associée --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.checkboxNotAssociated') }} --&gt;
   &lt;input type="checkbox"&gt;
-  &lt;span&gt;Se souvenir de moi&lt;/span&gt;
+  &lt;span&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.bad.remember') }}&lt;/span&gt;
 
-  &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+  &lt;button type="submit"&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.bad.submit') }}&lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
       </template>
@@ -205,23 +207,23 @@ const isFormValid = computed(() => {
       <template #good>
         <div class="form-demo">
           <form class="form-good">
-            <h4>Connexion</h4>
+            <h4>{{ $t('pages.accessibleForms.labelsAndAssociations.good.heading') }}</h4>
             <div class="form-group">
-              <label for="email-good">Adresse email</label>
+              <label for="email-good">{{ $t('pages.accessibleForms.labelsAndAssociations.good.emailLabel') }}</label>
               <input
                 type="email"
                 id="email-good"
-                placeholder="exemple@domaine.fr"
+                :placeholder="$t('pages.accessibleForms.labelsAndAssociations.good.emailPlaceholder')"
                 required
                 aria-describedby="email-help"
                 autocomplete="email"
               >
               <div id="email-help" class="field-help">
-                Nous ne partagerons jamais votre email
+                {{ $t('pages.accessibleForms.labelsAndAssociations.good.emailHelp') }}
               </div>
             </div>
             <div class="form-group">
-              <label for="password-good">Mot de passe</label>
+              <label for="password-good">{{ $t('pages.accessibleForms.labelsAndAssociations.good.passwordLabel') }}</label>
               <input
                 type="password"
                 id="password-good"
@@ -230,37 +232,37 @@ const isFormValid = computed(() => {
                 autocomplete="current-password"
               >
               <div id="password-help" class="field-help">
-                Minimum 8 caractères avec majuscules et chiffres
+                {{ $t('pages.accessibleForms.labelsAndAssociations.good.passwordHelp') }}
               </div>
             </div>
             <div class="form-group checkbox-group">
               <input type="checkbox" id="remember-good">
-              <label for="remember-good">Se souvenir de moi</label>
+              <label for="remember-good">{{ $t('pages.accessibleForms.labelsAndAssociations.good.remember') }}</label>
             </div>
-            <button type="submit">Se connecter</button>
+            <button type="submit">{{ $t('pages.accessibleForms.labelsAndAssociations.good.submit') }}</button>
           </form>
         </div>
 
         <div class="code-block">
-            <pre><code>&lt;!-- ✅ Bon : Labels explicites et associés --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.goodComment') }} --&gt;
 &lt;form&gt;
-  &lt;h4&gt;Connexion&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.good.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Label associé via for/id --&gt;
-  &lt;label for="email-good"&gt;Adresse email&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.labelWithFor') }} --&gt;
+  &lt;label for="email-good"&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.good.emailLabel') }}&lt;/label&gt;
   &lt;input
     type="email"
     id="email-good"
-    placeholder="exemple@domaine.fr"
+    placeholder="{{ $t('pages.accessibleForms.labelsAndAssociations.good.emailPlaceholder') }}"
     required
     aria-describedby="email-help"
     autocomplete="email"&gt;
   &lt;div id="email-help"&gt;
-    Nous ne partagerons jamais votre email
+    {{ $t('pages.accessibleForms.labelsAndAssociations.good.emailHelp') }}
   &lt;/div&gt;
 
-  &lt;!-- Label avec instructions --&gt;
-  &lt;label for="password-good"&gt;Mot de passe&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.labelWithInstructions') }} --&gt;
+  &lt;label for="password-good"&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.good.passwordLabel') }}&lt;/label&gt;
   &lt;input
     type="password"
     id="password-good"
@@ -268,80 +270,80 @@ const isFormValid = computed(() => {
     aria-describedby="password-help"
     autocomplete="current-password"&gt;
   &lt;div id="password-help"&gt;
-    Minimum 8 caractères avec majuscules et chiffres
+    {{ $t('pages.accessibleForms.labelsAndAssociations.good.passwordHelp') }}
   &lt;/div&gt;
 
-  &lt;!-- Checkbox correctement associée --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.labelsAndAssociations.checkboxCorrectlyAssociated') }} --&gt;
   &lt;input type="checkbox" id="remember-good"&gt;
-  &lt;label for="remember-good"&gt;Se souvenir de moi&lt;/label&gt;
+  &lt;label for="remember-good"&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.good.remember') }}&lt;/label&gt;
 
-  &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+  &lt;button type="submit"&gt;{{ $t('pages.accessibleForms.labelsAndAssociations.good.submit') }}&lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>
 
     <ExampleToggle
-      title="Validation et messages d'erreur"
-      explanation="Les erreurs doivent être clairement annoncées, associées aux champs concernés, et donner des instructions précises pour les corriger."
+      :title="$t('pages.accessibleForms.validation.title')"
+      :explanation="$t('pages.accessibleForms.validation.explanation')"
     >
       <template #bad>
         <div class="form-demo">
           <form class="form-validation-bad" @submit.prevent="submitBadForm">
-            <h4>Inscription newsletter</h4>
+            <h4>{{ $t('pages.accessibleForms.validation.bad.heading') }}</h4>
             <div class="form-group">
-              <label>Nom</label>
+              <label>{{ $t('pages.accessibleForms.validation.bad.name') }}</label>
               <input type="text" v-model="badForm.name" :class="{ 'error': badFormSubmitted && !badForm.name }">
             </div>
             <div class="form-group">
-              <label>Email</label>
+              <label>{{ $t('pages.accessibleForms.validation.bad.email') }}</label>
               <input type="email" v-model="badForm.email" :class="{ 'error': badFormSubmitted && !isValidEmail(badForm.email) }">
             </div>
             <div class="form-group">
-              <label>Âge</label>
+              <label>{{ $t('pages.accessibleForms.validation.bad.age') }}</label>
               <input type="number" v-model="badForm.age" :class="{ 'error': badFormSubmitted && badForm.age < 16 }">
             </div>
 
             <div v-if="badFormSubmitted && badFormErrors.length" class="error-summary-bad">
-              ❌ Veuillez corriger les erreurs
+              ❌ {{ $t('pages.accessibleForms.validation.bad.errorSummary') }}
             </div>
 
-            <button type="submit">S'inscrire</button>
+            <button type="submit">{{ $t('pages.accessibleForms.validation.bad.submit') }}</button>
           </form>
         </div>
 
         <div class="code-block">
-            <pre><code>&lt;!-- ❌ Mauvais : Erreurs mal annoncées --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.badComment') }} --&gt;
 &lt;form @submit.prevent="submitBadForm"&gt;
-  &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.validation.bad.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Pas d'association label-input --&gt;
-  &lt;label&gt;Nom&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.noAssociation') }} --&gt;
+  &lt;label&gt;{{ $t('pages.accessibleForms.validation.bad.name') }}&lt;/label&gt;
   &lt;input
     type="text"
     v-model="badForm.name"
     :class="{ 'error': submitted &amp;&amp; !badForm.name }"&gt;
 
-  &lt;!-- Erreur visuelle seulement --&gt;
-  &lt;label&gt;Email&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.visualErrorOnly') }} --&gt;
+  &lt;label&gt;{{ $t('pages.accessibleForms.validation.bad.email') }}&lt;/label&gt;
   &lt;input
     type="email"
     v-model="badForm.email"
     :class="{ 'error': submitted &amp;&amp; !isValidEmail(badForm.email) }"&gt;
 
-  &lt;!-- Pas d'information sur l'erreur --&gt;
-  &lt;label&gt;Âge&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.noErrorInfo') }} --&gt;
+  &lt;label&gt;{{ $t('pages.accessibleForms.validation.bad.age') }}&lt;/label&gt;
   &lt;input
     type="number"
     v-model="badForm.age"
     :class="{ 'error': submitted &amp;&amp; badForm.age &lt; 16 }"&gt;
 
-  &lt;!-- Message d'erreur générique et inutile --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.genericMessage') }} --&gt;
   &lt;div v-if="submitted &amp;&amp; badFormErrors.length"&gt;
-    ❌ Veuillez corriger les erreurs
+    ❌ {{ $t('pages.accessibleForms.validation.bad.errorSummary') }}
   &lt;/div&gt;
 
-  &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
+  &lt;button type="submit"&gt;{{ $t('pages.accessibleForms.validation.bad.submit') }}&lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
       </template>
@@ -349,19 +351,19 @@ const isFormValid = computed(() => {
       <template #good>
         <div class="form-demo">
           <form class="form-validation-good" @submit.prevent="submitGoodForm" novalidate>
-            <h4>Inscription newsletter</h4>
+            <h4>{{ $t('pages.accessibleForms.validation.good.heading') }}</h4>
 
             <div v-if="goodFormSubmitted && goodFormErrors.length" class="error-summary-good" role="alert" aria-labelledby="error-summary-title">
-              <h5 id="error-summary-title">Erreurs à corriger :</h5>
+              <h5 id="error-summary-title">{{ $t('pages.accessibleForms.validation.good.errorSummaryTitle') }}</h5>
               <ul>
                 <li v-for="error in goodFormErrors" :key="error.field">
-                  <a :href="`#${error.field}-good-form`">{{ error?.message || 'Erreur de validation' }}</a>
+                  <a :href="`#${error.field}-good-form`">{{ error?.message || t('pages.accessibleForms.validation.good.errors.nameRequired') }}</a>
                 </li>
               </ul>
             </div>
 
             <div class="form-group">
-              <label for="name-good-form">Nom complet *</label>
+              <label for="name-good-form">{{ $t('pages.accessibleForms.validation.good.nameLabel') }} *</label>
               <input
                 type="text"
                 id="name-good-form"
@@ -377,12 +379,12 @@ const isFormValid = computed(() => {
                 class="error-message"
                 role="alert"
               >
-                ❌ Le nom est obligatoire
+                ❌ {{ $t('pages.accessibleForms.validation.good.nameError') }}
               </div>
             </div>
 
             <div class="form-group">
-              <label for="email-good-form">Adresse email *</label>
+              <label for="email-good-form">{{ $t('pages.accessibleForms.validation.good.emailLabel') }} *</label>
               <input
                 type="email"
                 id="email-good-form"
@@ -398,12 +400,12 @@ const isFormValid = computed(() => {
                 class="error-message"
                 role="alert"
               >
-                ❌ Veuillez saisir une adresse email valide (exemple@domaine.fr)
+                ❌ {{ $t('pages.accessibleForms.validation.good.emailError') }}
               </div>
             </div>
 
             <div class="form-group">
-              <label for="age-good-form">Âge *</label>
+              <label for="age-good-form">{{ $t('pages.accessibleForms.validation.good.ageLabel') }} *</label>
               <input
                 type="number"
                 id="age-good-form"
@@ -416,7 +418,7 @@ const isFormValid = computed(() => {
                 aria-describedby="age-help age-error"
               >
               <div id="age-help" class="field-help">
-                Vous devez avoir au moins 16 ans
+                {{ $t('pages.accessibleForms.validation.good.ageHelp') }}
               </div>
               <div
                 v-if="goodFormSubmitted && goodForm.age < 16"
@@ -424,25 +426,25 @@ const isFormValid = computed(() => {
                 class="error-message"
                 role="alert"
               >
-                ❌ L'âge minimum requis est 16 ans
+                ❌ {{ $t('pages.accessibleForms.validation.good.ageError') }}
               </div>
             </div>
 
-            <button type="submit">S'inscrire</button>
+            <button type="submit">{{ $t('pages.accessibleForms.validation.good.submit') }}</button>
           </form>
         </div>
 
         <div class="code-block">
-            <pre><code>&lt;!-- ✅ Bon : Erreurs clairement associées --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.goodComment') }} --&gt;
 &lt;form @submit.prevent="submitGoodForm" novalidate&gt;
-  &lt;h4&gt;Inscription newsletter&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.validation.good.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Résumé des erreurs avec navigation --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.errorSummary') }} --&gt;
   &lt;div
     v-if="submitted &amp;&amp; goodFormErrors.length"
     role="alert"
     aria-labelledby="error-summary-title"&gt;
-    &lt;h5 id="error-summary-title"&gt;Erreurs à corriger :&lt;/h5&gt;
+    &lt;h5 id="error-summary-title"&gt;{{ $t('pages.accessibleForms.validation.good.errorSummaryTitle') }}&lt;/h5&gt;
     &lt;ul&gt;
       &lt;li v-for="error in goodFormErrors" :key="error.field"&gt;
         &lt;a :href="`#${error.field}-good-form`"&gt;
@@ -452,8 +454,8 @@ const isFormValid = computed(() => {
     &lt;/ul&gt;
   &lt;/div&gt;
 
-  &lt;!-- Champ avec erreur spécifique associée --&gt;
-  &lt;label for="name-good-form"&gt;Nom complet *&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.validation.specificErrorAssociated') }} --&gt;
+  &lt;label for="name-good-form"&gt;{{ $t('pages.accessibleForms.validation.good.nameLabel') }} *&lt;/label&gt;
   &lt;input
     type="text"
     id="name-good-form"
@@ -465,111 +467,111 @@ const isFormValid = computed(() => {
     v-if="submitted &amp;&amp; !goodForm.name"
     id="name-error"
     role="alert"&gt;
-    ❌ Le nom est obligatoire
+    ❌ {{ $t('pages.accessibleForms.validation.good.nameError') }}
   &lt;/div&gt;
 
-  &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
+  &lt;button type="submit"&gt;{{ $t('pages.accessibleForms.validation.good.submit') }}&lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
       </template>
     </ExampleToggle>
 
     <ExampleToggle
-      title="Groupes de champs avec aria-labelledby"
-      explanation="Les groupes de champs liés doivent être associés à leurs titres via aria-labelledby pour créer des relations sémantiques claires, particulièrement pour les boutons radio et cases à cocher."
+      :title="$t('pages.accessibleForms.fieldsets.title')"
+      :explanation="$t('pages.accessibleForms.fieldsets.explanation')"
     >
       <template #bad>
         <div class="form-demo">
           <form class="form-fieldset-bad">
-            <h4>Préférences</h4>
+            <h4>{{ $t('pages.accessibleForms.fieldsets.bad.heading') }}</h4>
 
             <div class="messy-form">
               <div class="form-row">
                 <input type="radio" name="contact-bad" id="email-contact-bad" value="email">
-                <label for="email-contact-bad">Email</label>
+                <label for="email-contact-bad">{{ $t('pages.accessibleForms.fieldsets.bad.email') }}</label>
 
                 <input type="checkbox" id="newsletter-bad" value="newsletter">
-                <label for="newsletter-bad">Newsletter</label>
+                <label for="newsletter-bad">{{ $t('pages.accessibleForms.fieldsets.bad.newsletter') }}</label>
               </div>
 
               <div class="form-row">
                 <input type="radio" name="contact-bad" id="phone-contact-bad" value="phone">
-                <label for="phone-contact-bad">Téléphone</label>
+                <label for="phone-contact-bad">{{ $t('pages.accessibleForms.fieldsets.bad.phone') }}</label>
 
-                <input type="text" placeholder="Nom" class="text-input">
+                <input type="text" :placeholder="$t('pages.accessibleForms.fieldsets.bad.name')" class="text-input">
               </div>
 
               <div class="form-row">
                 <input type="checkbox" id="offers-bad" value="offers">
-                <label for="offers-bad">Offres</label>
+                <label for="offers-bad">{{ $t('pages.accessibleForms.fieldsets.bad.offers') }}</label>
 
                 <input type="radio" name="contact-bad" id="sms-contact-bad" value="sms">
-                <label for="sms-contact-bad">SMS</label>
+                <label for="sms-contact-bad">{{ $t('pages.accessibleForms.fieldsets.bad.sms') }}</label>
               </div>
 
               <div class="form-row">
-                <input type="email" placeholder="Email" class="text-input">
+                <input type="email" :placeholder="$t('pages.accessibleForms.fieldsets.bad.email')" class="text-input">
 
                 <input type="checkbox" id="updates-bad" value="updates">
-                <label for="updates-bad">Updates</label>
+                <label for="updates-bad">{{ $t('pages.accessibleForms.fieldsets.bad.updates') }}</label>
               </div>
 
               <div class="form-row">
                 <select class="select-input">
-                  <option>Choisir...</option>
-                  <option>Quotidien</option>
-                  <option>Hebdomadaire</option>
-                  <option>Mensuel</option>
+                  <option>{{ $t('pages.accessibleForms.fieldsets.bad.frequency') }}</option>
+                  <option>{{ $t('pages.accessibleForms.fieldsets.bad.daily') }}</option>
+                  <option>{{ $t('pages.accessibleForms.fieldsets.bad.weekly') }}</option>
+                  <option>{{ $t('pages.accessibleForms.fieldsets.bad.monthly') }}</option>
                 </select>
               </div>
             </div>
 
-            <button type="submit">OK</button>
+            <button type="submit">{{ $t('pages.accessibleForms.fieldsets.bad.submit') }}</button>
           </form>
         </div>
 
         <div class="code-block" data-no-highlight="true">
-            <pre><code data-highlighted="true">&lt;!-- ❌ Mauvais : Structure désorganisée --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.badComment') }} --&gt;
 &lt;form&gt;
-  &lt;h4&gt;Préférences&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.fieldsets.bad.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Éléments mélangés sans logique --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.mixedElements') }} --&gt;
   &lt;div&gt;
     &lt;input type="radio" name="contact-bad"
            id="email-contact-bad" value="email"&gt;
-    &lt;label for="email-contact-bad"&gt;Email&lt;/label&gt;
+    &lt;label for="email-contact-bad"&gt;{{ $t('pages.accessibleForms.fieldsets.bad.email') }}&lt;/label&gt;
 
     &lt;input type="checkbox" id="newsletter-bad"
            value="newsletter"&gt;
-    &lt;label for="newsletter-bad"&gt;Newsletter&lt;/label&gt;
+    &lt;label for="newsletter-bad"&gt;{{ $t('pages.accessibleForms.fieldsets.bad.newsletter') }}&lt;/label&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
     &lt;input type="radio" name="contact-bad"
            id="phone-contact-bad" value="phone"&gt;
-    &lt;label for="phone-contact-bad"&gt;Téléphone&lt;/label&gt;
+    &lt;label for="phone-contact-bad"&gt;{{ $t('pages.accessibleForms.fieldsets.bad.phone') }}&lt;/label&gt;
 
-    &lt;!-- Champ texte sans contexte --&gt;
-    &lt;input type="text" placeholder="Nom"&gt;
+    &lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.textFieldNoContext') }} --&gt;
+    &lt;input type="text" placeholder="{{ $t('pages.accessibleForms.fieldsets.bad.name') }}"&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
     &lt;input type="checkbox" id="offers-bad" value="offers"&gt;
-    &lt;label for="offers-bad"&gt;Offres&lt;/label&gt;
+    &lt;label for="offers-bad"&gt;{{ $t('pages.accessibleForms.fieldsets.bad.offers') }}&lt;/label&gt;
 
     &lt;input type="radio" name="contact-bad"
            id="sms-contact-bad" value="sms"&gt;
-    &lt;label for="sms-contact-bad"&gt;SMS&lt;/label&gt;
+    &lt;label for="sms-contact-bad"&gt;{{ $t('pages.accessibleForms.fieldsets.bad.sms') }}&lt;/label&gt;
   &lt;/div&gt;
 
-  &lt;!-- Select sans contexte --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.selectNoContext') }} --&gt;
   &lt;select&gt;
-    &lt;option&gt;Choisir...&lt;/option&gt;
-    &lt;option&gt;Quotidien&lt;/option&gt;
-    &lt;option&gt;Hebdomadaire&lt;/option&gt;
+    &lt;option&gt;{{ $t('pages.accessibleForms.fieldsets.bad.frequency') }}&lt;/option&gt;
+    &lt;option&gt;{{ $t('pages.accessibleForms.fieldsets.bad.daily') }}&lt;/option&gt;
+    &lt;option&gt;{{ $t('pages.accessibleForms.fieldsets.bad.weekly') }}&lt;/option&gt;
   &lt;/select&gt;
 
-  &lt;button type="submit"&gt;OK&lt;/button&gt;
+  &lt;button type="submit"&gt;{{ $t('pages.accessibleForms.fieldsets.bad.submit') }}&lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
       </template>
@@ -577,85 +579,85 @@ const isFormValid = computed(() => {
       <template #good>
         <div class="form-demo">
           <form class="form-fieldset-good">
-            <h4>Préférences de contact</h4>
+            <h4>{{ $t('pages.accessibleForms.fieldsets.good.heading') }}</h4>
 
             <div class="form-section" role="group" aria-labelledby="personal-info-title">
-              <h5 id="personal-info-title">Informations personnelles</h5>
+              <h5 id="personal-info-title">{{ $t('pages.accessibleForms.fieldsets.good.personalInfo.title') }}</h5>
               <div class="form-field">
-                <label for="name-good">Nom complet *</label>
+                <label for="name-good">{{ $t('pages.accessibleForms.fieldsets.good.personalInfo.nameLabel') }} *</label>
                 <input type="text" id="name-good" name="name" required aria-required="true" aria-describedby="name-desc">
-                <span id="name-desc" class="field-description">Votre nom complet tel qu'il apparaîtra dans nos communications</span>
+                <span id="name-desc" class="field-description">{{ $t('pages.accessibleForms.fieldsets.good.personalInfo.nameDescription') }}</span>
               </div>
               <div class="form-field">
-                <label for="email-field-good">Adresse email *</label>
+                <label for="email-field-good">{{ $t('pages.accessibleForms.fieldsets.good.personalInfo.emailLabel') }} *</label>
                 <input type="email" id="email-field-good" name="email-field" required aria-required="true" aria-describedby="email-desc">
-                <span id="email-desc" class="field-description">Nous utiliserons cet email pour toutes nos communications</span>
+                <span id="email-desc" class="field-description">{{ $t('pages.accessibleForms.fieldsets.good.personalInfo.emailDescription') }}</span>
               </div>
             </div>
 
             <div class="form-section" role="radiogroup" aria-labelledby="contact-method-title" aria-required="true">
-              <h5 id="contact-method-title">Méthode de contact préférée *</h5>
+              <h5 id="contact-method-title">{{ $t('pages.accessibleForms.fieldsets.good.contactMethod.title') }} *</h5>
               <div class="radio-group">
                 <input type="radio" name="contact-good" id="email-contact-good" value="email" required aria-describedby="contact-method-title">
-                <label for="email-contact-good">Email</label>
+                <label for="email-contact-good">{{ $t('pages.accessibleForms.fieldsets.good.contactMethod.email') }}</label>
               </div>
               <div class="radio-group">
                 <input type="radio" name="contact-good" id="phone-contact-good" value="phone" required aria-describedby="contact-method-title">
-                <label for="phone-contact-good">Téléphone</label>
+                <label for="phone-contact-good">{{ $t('pages.accessibleForms.fieldsets.good.contactMethod.phone') }}</label>
               </div>
               <div class="radio-group">
                 <input type="radio" name="contact-good" id="sms-contact-good" value="sms" required aria-describedby="contact-method-title">
-                <label for="sms-contact-good">SMS</label>
+                <label for="sms-contact-good">{{ $t('pages.accessibleForms.fieldsets.good.contactMethod.sms') }}</label>
               </div>
             </div>
 
             <div class="form-section" role="group" aria-labelledby="comm-types-title">
-              <h5 id="comm-types-title">Types de communications</h5>
-              <p id="comm-types-desc" class="section-description">Sélectionnez les types de communications que vous souhaitez recevoir</p>
+              <h5 id="comm-types-title">{{ $t('pages.accessibleForms.fieldsets.good.commTypes.title') }}</h5>
+              <p id="comm-types-desc" class="section-description">{{ $t('pages.accessibleForms.fieldsets.good.commTypes.description') }}</p>
               <div class="checkbox-group">
                 <input type="checkbox" id="newsletter-good" value="newsletter" aria-describedby="comm-types-desc">
-                <label for="newsletter-good">Newsletter</label>
+                <label for="newsletter-good">{{ $t('pages.accessibleForms.fieldsets.good.commTypes.newsletter') }}</label>
               </div>
               <div class="checkbox-group">
                 <input type="checkbox" id="offers-good" value="offers" aria-describedby="comm-types-desc">
-                <label for="offers-good">Offres spéciales</label>
+                <label for="offers-good">{{ $t('pages.accessibleForms.fieldsets.good.commTypes.offers') }}</label>
               </div>
               <div class="checkbox-group">
                 <input type="checkbox" id="updates-good" value="updates" aria-describedby="comm-types-desc">
-                <label for="updates-good">Mises à jour produit</label>
+                <label for="updates-good">{{ $t('pages.accessibleForms.fieldsets.good.commTypes.updates') }}</label>
               </div>
             </div>
 
             <div class="form-section" role="group" aria-labelledby="frequency-title">
-              <h5 id="frequency-title">Fréquence des communications</h5>
+              <h5 id="frequency-title">{{ $t('pages.accessibleForms.fieldsets.good.frequency.title') }}</h5>
               <div class="form-field">
-                <label for="frequency-good">Choisir la fréquence</label>
+                <label for="frequency-good">{{ $t('pages.accessibleForms.fieldsets.good.frequency.label') }}</label>
                 <select id="frequency-good" name="frequency" aria-describedby="frequency-desc">
-                  <option value="">Sélectionner...</option>
-                  <option value="daily">Quotidien</option>
-                  <option value="weekly">Hebdomadaire</option>
-                  <option value="monthly">Mensuel</option>
+                  <option value="">{{ $t('pages.accessibleForms.fieldsets.good.frequency.options.select') }}</option>
+                  <option value="daily">{{ $t('pages.accessibleForms.fieldsets.good.frequency.options.daily') }}</option>
+                  <option value="weekly">{{ $t('pages.accessibleForms.fieldsets.good.frequency.options.weekly') }}</option>
+                  <option value="monthly">{{ $t('pages.accessibleForms.fieldsets.good.frequency.options.monthly') }}</option>
                 </select>
-                <span id="frequency-desc" class="field-description">Définit la fréquence maximale de nos envois</span>
+                <span id="frequency-desc" class="field-description">{{ $t('pages.accessibleForms.fieldsets.good.frequency.description') }}</span>
               </div>
             </div>
 
-            <button type="submit">Sauvegarder les préférences</button>
+            <button type="submit">{{ $t('pages.accessibleForms.fieldsets.good.submit') }}</button>
           </form>
         </div>
 
         <div class="code-block">
-            <pre><code>&lt;!-- ✅ Bon : Groupes logiques avec aria-labelledby --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.goodComment') }} --&gt;
 &lt;form&gt;
-  &lt;h4&gt;Préférences de contact&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.fieldsets.good.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Section informations personnelles --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.personalInfoSection') }} --&gt;
   &lt;div role="group" aria-labelledby="personal-info-title"&gt;
     &lt;h5 id="personal-info-title"&gt;
-      Informations personnelles
+      {{ $t('pages.accessibleForms.fieldsets.good.personalInfo.title') }}
     &lt;/h5&gt;
 
-    &lt;label for="name-good"&gt;Nom complet *&lt;/label&gt;
+    &lt;label for="name-good"&gt;{{ $t('pages.accessibleForms.fieldsets.good.personalInfo.nameLabel') }} *&lt;/label&gt;
     &lt;input
       type="text"
       id="name-good"
@@ -664,17 +666,17 @@ const isFormValid = computed(() => {
       aria-required="true"
       aria-describedby="name-desc"&gt;
     &lt;span id="name-desc"&gt;
-      Votre nom tel qu'il apparaîtra dans nos communications
+      {{ $t('pages.accessibleForms.fieldsets.good.personalInfo.nameDescription') }}
     &lt;/span&gt;
   &lt;/div&gt;
 
-  &lt;!-- Groupe de boutons radio --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.radioGroup') }} --&gt;
   &lt;div
     role="radiogroup"
     aria-labelledby="contact-method-title"
     aria-required="true"&gt;
     &lt;h5 id="contact-method-title"&gt;
-      Méthode de contact préférée *
+      {{ $t('pages.accessibleForms.fieldsets.good.contactMethod.title') }} *
     &lt;/h5&gt;
 
     &lt;input
@@ -683,7 +685,7 @@ const isFormValid = computed(() => {
       id="email-contact-good"
       value="email"
       required&gt;
-    &lt;label for="email-contact-good"&gt;Email&lt;/label&gt;
+    &lt;label for="email-contact-good"&gt;{{ $t('pages.accessibleForms.fieldsets.good.contactMethod.email') }}&lt;/label&gt;
 
     &lt;input
       type="radio"
@@ -691,15 +693,14 @@ const isFormValid = computed(() => {
       id="phone-contact-good"
       value="phone"
       required&gt;
-    &lt;label for="phone-contact-good"&gt;Téléphone&lt;/label&gt;
+    &lt;label for="phone-contact-good"&gt;{{ $t('pages.accessibleForms.fieldsets.good.contactMethod.phone') }}&lt;/label&gt;
   &lt;/div&gt;
 
-  &lt;!-- Groupe de cases à cocher --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.fieldsets.checkboxGroup') }} --&gt;
   &lt;div role="group" aria-labelledby="comm-types-title"&gt;
-    &lt;h5 id="comm-types-title"&gt;Types de communications&lt;/h5&gt;
+    &lt;h5 id="comm-types-title"&gt;{{ $t('pages.accessibleForms.fieldsets.good.commTypes.title') }}&lt;/h5&gt;
     &lt;p id="comm-types-desc"&gt;
-      Sélectionnez les types de communications
-      que vous souhaitez recevoir
+      {{ $t('pages.accessibleForms.fieldsets.good.commTypes.description') }}
     &lt;/p&gt;
 
     &lt;input
@@ -707,11 +708,11 @@ const isFormValid = computed(() => {
       id="newsletter-good"
       value="newsletter"
       aria-describedby="comm-types-desc"&gt;
-    &lt;label for="newsletter-good"&gt;Newsletter&lt;/label&gt;
+    &lt;label for="newsletter-good"&gt;{{ $t('pages.accessibleForms.fieldsets.good.commTypes.newsletter') }}&lt;/label&gt;
   &lt;/div&gt;
 
   &lt;button type="submit"&gt;
-    Sauvegarder les préférences
+    {{ $t('pages.accessibleForms.fieldsets.good.submit') }}
   &lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
@@ -719,17 +720,17 @@ const isFormValid = computed(() => {
     </ExampleToggle>
 
     <ExampleToggle
-      title="Formulaire complexe avec validation temps réel"
-      explanation="Pour les formulaires complexes, la validation temps réel peut aider, mais elle doit être implémentée de manière non intrusive et accessible."
+      :title="$t('pages.accessibleForms.complexValidation.title')"
+      :explanation="$t('pages.accessibleForms.complexValidation.explanation')"
     >
       <template #bad>
         <div class="form-demo">
           <form class="complex-form-bad">
-            <h4>Créer un compte</h4>
+            <h4>{{ $t('pages.accessibleForms.complexValidation.bad.heading') }}</h4>
 
             <div class="form-row">
               <div class="form-group">
-                <label>Nom d'utilisateur</label>
+                <label>{{ $t('pages.accessibleForms.complexValidation.bad.username') }}</label>
                 <input
                   type="text"
                   v-model="complexBadForm.username"
@@ -740,7 +741,7 @@ const isFormValid = computed(() => {
               </div>
 
               <div class="form-group">
-                <label>Email</label>
+                <label>{{ $t('pages.accessibleForms.complexValidation.bad.email') }}</label>
                 <input
                   type="email"
                   v-model="complexBadForm.email"
@@ -752,7 +753,7 @@ const isFormValid = computed(() => {
             </div>
 
             <div class="form-group">
-              <label>Mot de passe</label>
+              <label>{{ $t('pages.accessibleForms.complexValidation.bad.password') }}</label>
               <input
                 type="password"
                 v-model="complexBadForm.password"
@@ -763,29 +764,29 @@ const isFormValid = computed(() => {
               <div v-if="passwordBadError" class="error-inline">{{ passwordBadError }}</div>
             </div>
 
-            <button type="submit">Créer le compte</button>
+            <button type="submit">{{ $t('pages.accessibleForms.complexValidation.bad.submit') }}</button>
           </form>
         </div>
 
         <div class="code-block">
-            <pre><code>&lt;!-- ❌ Mauvais : Validation intrusive --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.badComment') }} --&gt;
 &lt;form&gt;
-  &lt;h4&gt;Créer un compte&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.complexValidation.bad.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Validation immédiate sur chaque frappe --&gt;
-  &lt;label&gt;Nom d'utilisateur&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.immediateValidation') }} --&gt;
+  &lt;label&gt;{{ $t('pages.accessibleForms.complexValidation.bad.username') }}&lt;/label&gt;
   &lt;input
     type="text"
     v-model="complexBadForm.username"
     @input="validateUsernameBad"
     :class="{ 'error': usernameBadError }"&gt;
-  &lt;!-- Erreur qui apparaît/disparaît constamment --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.constantErrorToggle') }} --&gt;
   &lt;div v-if="usernameBadError"&gt;
     {{ usernameBadError }}
   &lt;/div&gt;
 
-  &lt;!-- Pas d'association avec aria-describedby --&gt;
-  &lt;label&gt;Email&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.noAriaDescribedby') }} --&gt;
+  &lt;label&gt;{{ $t('pages.accessibleForms.complexValidation.bad.email') }}&lt;/label&gt;
   &lt;input
     type="email"
     v-model="complexBadForm.email"
@@ -793,9 +794,9 @@ const isFormValid = computed(() => {
     :class="{ 'error': emailBadError }"&gt;
   &lt;div v-if="emailBadError"&gt;{{ emailBadError }}&lt;/div&gt;
 
-  &lt;!-- Messages d'erreur trop courts et peu utiles --&gt;
-  &lt;!-- Pas d'autocomplete pour aider les gestionnaires de mots de passe --&gt;
-  &lt;label&gt;Mot de passe&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.shortMessages') }} --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.noAutocomplete') }} --&gt;
+  &lt;label&gt;{{ $t('pages.accessibleForms.complexValidation.bad.password') }}&lt;/label&gt;
   &lt;input
     type="password"
     v-model="complexBadForm.password"
@@ -803,7 +804,7 @@ const isFormValid = computed(() => {
     :class="{ 'error': passwordBadError }"&gt;
   &lt;div v-if="passwordBadError"&gt;{{ passwordBadError }}&lt;/div&gt;
 
-  &lt;button type="submit"&gt;Créer le compte&lt;/button&gt;
+  &lt;button type="submit"&gt;{{ $t('pages.accessibleForms.complexValidation.bad.submit') }}&lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>
       </template>
@@ -811,11 +812,11 @@ const isFormValid = computed(() => {
       <template #good>
         <div class="form-demo">
           <form class="complex-form-good">
-            <h4>Créer un compte</h4>
+            <h4>{{ $t('pages.accessibleForms.complexValidation.good.heading') }}</h4>
 
             <div class="form-row">
               <div class="form-group">
-                <label for="username-complex">Nom d'utilisateur *</label>
+                <label for="username-complex">{{ $t('pages.accessibleForms.complexValidation.good.usernameLabel') }} *</label>
                 <input
                   type="text"
                   id="username-complex"
@@ -827,13 +828,13 @@ const isFormValid = computed(() => {
                   required
                 >
                 <div id="username-requirements" class="field-requirements">
-                  <h6>Exigences :</h6>
+                  <h6>{{ $t('pages.accessibleForms.complexValidation.good.usernameRequirements.title') }}</h6>
                   <ul>
                     <li :class="{ valid: complexGoodForm.username.length >= 3 }">
-                      Au moins 3 caractères
+                      {{ $t('pages.accessibleForms.complexValidation.good.usernameRequirements.minLength') }}
                     </li>
                     <li :class="{ valid: /^[a-zA-Z0-9_]+$/.test(complexGoodForm.username) }">
-                      Lettres, chiffres et underscore uniquement
+                      {{ $t('pages.accessibleForms.complexValidation.good.usernameRequirements.validChars') }}
                     </li>
                   </ul>
                 </div>
@@ -853,12 +854,12 @@ const isFormValid = computed(() => {
                   role="status"
                   aria-live="polite"
                 >
-                  ✅ Nom d'utilisateur disponible
+                  ✅ {{ $t('pages.accessibleForms.complexValidation.good.usernameValid') }}
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="email-complex">Adresse email *</label>
+                <label for="email-complex">{{ $t('pages.accessibleForms.complexValidation.good.emailLabel') }} *</label>
                 <input
                   type="email"
                   id="email-complex"
@@ -885,13 +886,13 @@ const isFormValid = computed(() => {
                   role="status"
                   aria-live="polite"
                 >
-                  ✅ Email valide
+                  ✅ {{ $t('pages.accessibleForms.complexValidation.good.emailValid') }}
                 </div>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="password-complex">Mot de passe *</label>
+              <label for="password-complex">{{ $t('pages.accessibleForms.complexValidation.good.passwordLabel') }} *</label>
               <input
                 type="password"
                 id="password-complex"
@@ -904,7 +905,7 @@ const isFormValid = computed(() => {
                 autocomplete="new-password"
               >
               <div id="password-strength" class="password-strength">
-                <h6>Force du mot de passe :</h6>
+                <h6>{{ $t('pages.accessibleForms.complexValidation.good.passwordStrength.title') }}</h6>
                 <div class="strength-indicator">
                   <div
                     class="strength-bar"
@@ -914,16 +915,16 @@ const isFormValid = computed(() => {
                 </div>
                 <div class="strength-requirements">
                   <div :class="{ valid: complexGoodForm.password.length >= 8 }">
-                    8+ caractères
+                    {{ $t('pages.accessibleForms.complexValidation.good.passwordStrength.length') }}
                   </div>
                   <div :class="{ valid: /[A-Z]/.test(complexGoodForm.password) }">
-                    Majuscule
+                    {{ $t('pages.accessibleForms.complexValidation.good.passwordStrength.uppercase') }}
                   </div>
                   <div :class="{ valid: /[0-9]/.test(complexGoodForm.password) }">
-                    Chiffre
+                    {{ $t('pages.accessibleForms.complexValidation.good.passwordStrength.number') }}
                   </div>
                   <div :class="{ valid: /[^A-Za-z0-9]/.test(complexGoodForm.password) }">
-                    Caractère spécial
+                    {{ $t('pages.accessibleForms.complexValidation.good.passwordStrength.special') }}
                   </div>
                 </div>
               </div>
@@ -939,18 +940,18 @@ const isFormValid = computed(() => {
             </div>
 
             <button type="submit" :disabled="!isFormValid">
-              Créer le compte
+              {{ $t('pages.accessibleForms.complexValidation.good.submit') }}
             </button>
           </form>
         </div>
 
         <div class="code-block">
-            <pre><code>&lt;!-- ✅ Bon : Validation respectueuse avec feedback --&gt;
+            <pre><code>&lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.goodComment') }} --&gt;
 &lt;form&gt;
-  &lt;h4&gt;Créer un compte&lt;/h4&gt;
+  &lt;h4&gt;{{ $t('pages.accessibleForms.complexValidation.good.heading') }}&lt;/h4&gt;
 
-  &lt;!-- Validation sur blur, pas sur input --&gt;
-  &lt;label for="username-complex"&gt;Nom d'utilisateur *&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.validationOnBlur') }} --&gt;
+  &lt;label for="username-complex"&gt;{{ $t('pages.accessibleForms.complexValidation.good.usernameLabel') }} *&lt;/label&gt;
   &lt;input
     type="text"
     id="username-complex"
@@ -962,20 +963,20 @@ const isFormValid = computed(() => {
     aria-invalid="!!usernameGoodError"
     required&gt;
 
-  &lt;!-- Instructions claires --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.clearInstructions') }} --&gt;
   &lt;div id="username-requirements"&gt;
-    &lt;h6&gt;Exigences :&lt;/h6&gt;
+    &lt;h6&gt;{{ $t('pages.accessibleForms.complexValidation.good.usernameRequirements.title') }}&lt;/h6&gt;
     &lt;ul&gt;
       &lt;li :class="{ valid: complexGoodForm.username.length &gt;= 3 }"&gt;
-        Au moins 3 caractères
+        {{ $t('pages.accessibleForms.complexValidation.good.usernameRequirements.minLength') }}
       &lt;/li&gt;
       &lt;li :class="{ valid: /^[a-zA-Z0-9_]+$/.test(username) }"&gt;
-        Lettres, chiffres et underscore uniquement
+        {{ $t('pages.accessibleForms.complexValidation.good.usernameRequirements.validChars') }}
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
 
-  &lt;!-- Feedback accessible --&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.accessibleFeedback') }} --&gt;
   &lt;div
     v-if="usernameGoodError"
     id="username-feedback"
@@ -988,11 +989,11 @@ const isFormValid = computed(() => {
     id="username-feedback"
     role="status"
     aria-live="polite"&gt;
-    ✅ Nom d'utilisateur disponible
+    ✅ {{ $t('pages.accessibleForms.complexValidation.good.usernameValid') }}
   &lt;/div&gt;
 
-  &lt;!-- Indicateur de force du mot de passe --&gt;
-  &lt;label for="password-complex"&gt;Mot de passe *&lt;/label&gt;
+  &lt;!-- {{ $t('pages.accessibleForms.codeExamples.complexValidation.passwordStrengthIndicator') }} --&gt;
+  &lt;label for="password-complex"&gt;{{ $t('pages.accessibleForms.complexValidation.good.passwordLabel') }} *&lt;/label&gt;
   &lt;input
     type="password"
     id="password-complex"
@@ -1003,7 +1004,7 @@ const isFormValid = computed(() => {
     required&gt;
 
   &lt;div id="password-strength"&gt;
-    &lt;h6&gt;Force du mot de passe :&lt;/h6&gt;
+    &lt;h6&gt;{{ $t('pages.accessibleForms.complexValidation.good.passwordStrength.title') }}&lt;/h6&gt;
     &lt;div class="strength-indicator"&gt;
       &lt;div
         class="strength-bar"
@@ -1014,7 +1015,7 @@ const isFormValid = computed(() => {
   &lt;/div&gt;
 
   &lt;button type="submit" :disabled="!isFormValid"&gt;
-    Créer le compte
+    {{ $t('pages.accessibleForms.complexValidation.good.submit') }}
   &lt;/button&gt;
 &lt;/form&gt;</code></pre>
         </div>

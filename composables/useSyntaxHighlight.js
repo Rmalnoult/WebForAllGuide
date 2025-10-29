@@ -22,8 +22,12 @@ export function useSyntaxHighlight() {
 
         // Check for specific content patterns
         const content = codeElement.innerHTML
+        // Detect JavaScript even with <script> tags
+        if (content.includes('&lt;script&gt;') && content.includes('&lt;/script&gt;')) {
+          language = 'javascript'
+        }
         // Only detect pure CSS (not HTML with <style> tags)
-        if (!content.includes('&lt;') && content.includes('{') && content.includes(':') && content.includes(';')) {
+        else if (!content.includes('&lt;') && content.includes('{') && content.includes(':') && content.includes(';')) {
           language = 'css'
         } else if (!content.includes('&lt;') && (content.includes('function') || content.includes('const ') || content.includes('let ') || content.includes('var '))) {
           // Only detect pure JavaScript (not HTML with <script> tags)
