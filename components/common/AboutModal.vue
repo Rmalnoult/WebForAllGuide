@@ -1,41 +1,29 @@
 <template>
   <SimpleModal
     v-model="isOpen"
-    title="À propos de ce site"
+    :title="$t('components.aboutModal.title')"
   >
     <div class="about-content">
       <!-- Section Cookies & Privacy -->
       <section class="about-section">
-        <h3 class="section-title">🌱 Un site respectueux de votre vie privée</h3>
-        <p>
-          Aucune donnée personnelle n'est collectée ni partagée. Aucun cookie n'est utilisé. Aucune pub.
-        </p>
-          <p>
-          Ce site utilise <strong>Plausible Analytics</strong>, un service d'analyse respectueux de la vie privée, pour mesurer le trafic.
-        </p>
-        <p>
-          Oui, c'est possible de créer un site web sans transformer vos données en produit.
-        </p>
+        <h3 class="section-title" v-html="$t('components.aboutModal.privacy.title')"></h3>
+        <p v-html="$t('components.aboutModal.privacy.noData')"></p>
+        <p v-html="$t('components.aboutModal.privacy.analytics')"></p>
+        <p v-html="$t('components.aboutModal.privacy.philosophy')"></p>
       </section>
 
       <!-- Section Auteur -->
       <section class="about-section author-section">
-        <h3 class="section-title">👨‍💻 À propos de l'auteur</h3>
-        <p>
-          Ce site a été créé par <strong>Romain Malnoult</strong>, Design System & Accessibility Developer.
-        </p>
-        <p>
-          Passionné par l'accessibilité numérique et convaincu qu'un web inclusif
-          est un meilleur web pour tous, je partage ici mes connaissances et
-          bonnes pratiques pour rendre le web accessible.
-        </p>
+        <h3 class="section-title" v-html="$t('components.aboutModal.author.title')"></h3>
+        <p v-html="$t('components.aboutModal.author.intro')"></p>
+        <p v-html="$t('components.aboutModal.author.passion')"></p>
 
         <a
           href="https://www.linkedin.com/in/romainmalnoult/"
           target="_blank"
           rel="noopener noreferrer"
           class="linkedin-link"
-          aria-label="Visiter le profil LinkedIn de Romain Malnoult (nouvelle fenêtre)"
+          :aria-label="$t('components.aboutModal.author.linkedinLabel')"
         >
           <svg
             class="linkedin-icon"
@@ -46,21 +34,16 @@
           >
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
-          Retrouvez-moi sur LinkedIn
+          {{ $t('components.aboutModal.author.linkedinText') }}
         </a>
       </section>
 
 
       <!-- Section Tech -->
       <section class="about-section tech-section">
-        <h3 class="section-title">⚡ Technologies</h3>
-        <p>
-          Ce site est construit avec <strong>Vue.js 3</strong> et démontre l'implémentation
-          concrète des normes <strong>WCAG 2.1</strong> (niveau AA) et des bonnes pratiques d'accessibilité.
-        </p>
-        <p class="tech-stack">
-          <strong>Stack technique :</strong> Vue.js 3, Vue Router, Vite, Playwright (tests), axe-core (audit accessibilité)
-        </p>
+        <h3 class="section-title" v-html="$t('components.aboutModal.tech.title')"></h3>
+        <p v-html="$t('components.aboutModal.tech.description')"></p>
+        <p class="tech-stack" v-html="$t('components.aboutModal.tech.stack')"></p>
       </section>
     </div>
   </SimpleModal>

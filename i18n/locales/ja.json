@@ -1,0 +1,1724 @@
+{
+  "common": {
+    "skipToContent": "メインコンテンツへスキップ",
+    "skipToNav": "ナビゲーションへスキップ",
+    "copyright": "© {year} Romain Malnoult. 全著作権所有。"
+  },
+  "navigation": {
+    "ariaLabel": "メインナビゲーション",
+    "mainNav": "ナビゲーションサイドバー",
+    "menuButton": "ナビゲーションメニュー",
+    "openMenu": "メインナビゲーションメニューを開く",
+    "closeMenu": "メインナビゲーションメニューを閉じる",
+    "navigateTo": "{page}に移動",
+    "navStart": "ナビゲーションの開始",
+    "navEnd": "ナビゲーションの終了",
+    "breadcrumb": "パンくずリスト",
+    "backToHome": "ホームに戻る",
+    "aboutButton": "このサイトについて",
+    "aboutButtonAria": "このサイトについて",
+    "home": {
+      "label": "ホーム",
+      "description": "ホームページと紹介"
+    },
+    "colorContrast": {
+      "label": "コントラストと色",
+      "description": "WCAG比率と色覚異常"
+    },
+    "mediaAccessible": {
+      "label": "画像とメディア",
+      "description": "代替テキストとキャプション"
+    },
+    "performance": {
+      "label": "パフォーマンス",
+      "description": "最適化と適応性"
+    },
+    "semanticHtml": {
+      "label": "セマンティックHTML",
+      "description": "構造とHTML要素"
+    },
+    "ariaComponents": {
+      "label": "ARIA",
+      "description": "ARIA属性とコンポーネント"
+    },
+    "keyboardNavigation": {
+      "label": "キーボードナビゲーション",
+      "description": "フォーカスとショートカット"
+    },
+    "accessibleForms": {
+      "label": "フォーム",
+      "description": "ラベルと検証"
+    }
+  },
+  "language": {
+    "switchLanguage": "言語を切り替える",
+    "switchToEnglish": "Switch to English",
+    "switchToFrench": "Passer au français",
+    "currentLanguage": "現在の言語",
+    "languageChanged": "言語を{language}に変更しました",
+    "french": "Français",
+    "english": "English",
+    "switchToSpanish": "Cambiar a español",
+    "switchToItalian": "Passa all'italiano",
+    "switchToGerman": "Zu Deutsch wechseln",
+    "switchToDutch": "Schakel naar Nederlands",
+    "switchToArabic": "التبديل إلى العربية",
+    "switchToJapanese": "日本語に切り替える",
+    "switchToPortuguese": "Mudar para português",
+    "spanish": "Español",
+    "italian": "Italiano",
+    "german": "Deutsch",
+    "dutch": "Nederlands",
+    "arabic": "العربية",
+    "japanese": "日本語",
+    "portuguese": "Português"
+  },
+  "a11y": {
+    "appLabel": "Webアクセシビリティのデモ",
+    "mainContent": "メインコンテンツ",
+    "routeAnnounce": "{page}に移動"
+  },
+  "seo": {
+    "siteName": "Webアクセシビリティ実用ガイド",
+    "siteDescription": "WCAG標準に従ってWebアクセシビリティを学ぶためのインタラクティブガイド",
+    "keywords": "Webアクセシビリティ、WCAG、a11y、ARIA、セマンティックHTML、キーボードナビゲーション",
+    "author": "Romain Malnoult",
+    "jobTitle": "デザインシステム&アクセシビリティテックリード",
+    "about": "Webアクセシビリティ",
+    "aboutDescription": "すべての人がWebにアクセスできるようにするための実践と標準"
+  },
+  "components": {
+    "exampleComparison": {
+      "badExample": "悪い例",
+      "goodExample": "良い例",
+      "explanation": "説明"
+    },
+    "exampleToggle": {
+      "optionsForExample": "例{title}のオプション",
+      "exportAsImage": "画像としてエクスポート",
+      "exporting": "エクスポート中...",
+      "badExample": "悪い例",
+      "goodExample": "良い例",
+      "explanation": "説明："
+    },
+    "aboutModal": {
+      "title": "このサイトについて",
+      "privacy": {
+        "title": "🌱 プライバシーを尊重するサイト",
+        "noData": "個人データは収集・共有されません。クッキーは使用されません。広告もありません。",
+        "analytics": "このサイトは、プライバシーに配慮したアナリティクスサービスである<strong>Plausible Analytics</strong>を使用してトラフィックを測定しています。",
+        "philosophy": "はい、あなたのデータを製品にすることなく、ウェブサイトを作成することは可能です。"
+      },
+      "author": {
+        "title": "👨‍💻 作者について",
+        "intro": "このサイトは、デザインシステム&アクセシビリティ開発者の<strong>Romain Malnoult</strong>によって作成されました。",
+        "passion": "デジタルアクセシビリティに情熱を注ぎ、包括的なWebがすべての人にとってより良いWebであると確信し、ここではWebをアクセシブルにするための知識とベストプラクティスを共有しています。",
+        "linkedinLabel": "Romain MalnoultのLinkedInプロフィールを訪問（新しいウィンドウ）",
+        "linkedinText": "LinkedInで私を見つける"
+      },
+      "tech": {
+        "title": "⚡ テクノロジー",
+        "description": "このサイトは<strong>Vue.js 3</strong>で構築され、<strong>WCAG 2.1</strong>標準（レベルAA）とアクセシビリティのベストプラクティスの具体的な実装を示しています。",
+        "stack": "<strong>技術スタック：</strong> Vue.js 3、Vue Router、Vite、Playwright（テスト）、axe-core（アクセシビリティ監査）"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Webアクセシビリティ実用ガイド",
+      "lead": "アクセシビリティとは、すべての人が使用できるWebを保証することです：障害者、高齢者、モバイルユーザー、低速接続、骨折した腕、騒がしい環境など。",
+      "whyAccessibility": "なぜアクセシビリティが重要なのか？",
+      "stats": {
+        "disability": "世界人口の何パーセントが障害と共に生活している",
+        "directive": "欧州アクセシビリティ指令",
+        "errors": "のWebサイトにアクセシビリティエラーがある"
+      },
+      "curbCut": {
+        "title": "障害のために設計すると、誰もが遭遇する問題を解決する",
+        "intro1": "縁石カットは車椅子利用者のために都市に革命をもたらしましたが、スーツケース、ベビーカー、自転車を持つすべての歩行者にも役立ちました。",
+        "intro2": "一部の人のための改善は、すべての人に利益をもたらします。この概念は、街路のアクセスランプから生まれ、Webに完全に適用されます。",
+        "imageCaption": "縁石カットの典型的な例",
+        "examples": {
+          "ramps": {
+            "title": "縁石カット",
+            "designedFor": "車椅子利用者",
+            "benefitsAlso": "ベビーカーを持つ親、サイクリスト、台車を持つ配達員、キャリーケースを持つ人、スケートボード、スクーター、高齢者"
+          },
+          "captions": {
+            "title": "ビデオキャプション",
+            "designedFor": "聴覚障害者または難聴者",
+            "benefitsAlso": "地下鉄でビデオを見る、外国語を学ぶ、騒がしい環境で会議を追う、難しいアクセントを理解する"
+          },
+          "keyboard": {
+            "title": "キーボードナビゲーション",
+            "designedFor": "マウスを使用できない人",
+            "benefitsAlso": "ショートカットを使用する開発者、マウスが壊れたユーザー、キーボードを好むパワーユーザー、腕がギプスに入っている人"
+          },
+          "voice": {
+            "title": "スマートフォンの音声制御",
+            "designedFor": "視覚障害者と運動障害のある人",
+            "benefitsAlso": "運転中のメッセージング、ヘッドフォンでのスポーツ、工具で手が塞がっている、リモートコントロール、オフィスでのマルチタスク"
+          },
+          "toothbrush": {
+            "title": "電動歯ブラシ",
+            "designedFor": "可動性が制限されている人や関節炎の人（1954年）",
+            "benefitsAlso": "すべての人にとってより良いブラッシング、歯科医によって推奨、学習中の子供、疲れた人、証明された優れた効率"
+          },
+          "audiobooks": {
+            "title": "オーディオブック",
+            "designedFor": "視覚障害者（1932年、アメリカ視覚障害者財団）",
+            "benefitsAlso": "ドライバー、ジョギング者、マルチタスク、ディスレクシアの人、読み方を学ぶ子供、2020年に13億ドルの売上"
+          }
+        },
+        "quote": "アクセシビリティは制約ではなく、変装したイノベーションです。"
+      },
+      "tools": {
+        "title": "アクセシビリティをテストするための無料ツール",
+        "intro": "これらのツールは、アクセシビリティの問題を特定して修正するのに役立ちます：",
+        "wave": {
+          "name": "WAVE",
+          "description": "ページ上のアクセシビリティエラーを直接視覚化するブラウザ拡張機能",
+          "features": {
+            "realtime": "リアルタイム分析",
+            "visualization": "エラーの視覚化",
+            "report": "詳細レポート"
+          },
+          "link": "WAVEをインストール"
+        },
+        "axe": {
+          "name": "axe DevTools",
+          "description": "DevToolsに統合された開発者拡張機能、非常に正確で詳細",
+          "features": {
+            "integrated": "DevToolsに統合",
+            "automated": "自動テスト",
+            "suggestions": "修正の提案"
+          },
+          "link": "axe DevToolsをインストール"
+        },
+        "lighthouse": {
+          "name": "Lighthouse",
+          "description": "Chrome DevToolsに統合された監査、全体的なアクセシビリティスコアを含む",
+          "features": {
+            "builtin": "Chromeに既に含まれている",
+            "score": "全体スコア",
+            "recommendations": "推奨事項"
+          },
+          "link": "Lighthouseガイド"
+        },
+        "mdn": {
+          "name": "MDN Accessibility",
+          "description": "Webアクセシビリティに関する完全な参照ドキュメント",
+          "features": {
+            "guides": "詳細ガイド",
+            "examples": "実用的な例",
+            "updates": "定期的な更新"
+          },
+          "link": "MDNドキュメント"
+        },
+        "cca": {
+          "name": "Colour Contrast Analyser",
+          "description": "WCAGに従って色のコントラストをテストするための無料アプリケーション",
+          "features": {
+            "realtime": "リアルタイムテスト",
+            "picker": "カラーピッカー",
+            "ratios": "WCAG AA/AAA比率"
+          },
+          "link": "CCAをダウンロード"
+        },
+        "insights": {
+          "name": "Accessibility Insights",
+          "description": "詳細な手動および自動テスト用のMicrosoftツールスイート",
+          "features": {
+            "guided": "ガイド付きテスト",
+            "focus": "視覚的なフォーカス順序",
+            "fastpass": "自動FastPass"
+          },
+          "link": "AIをインストール"
+        },
+        "proTip": "プロのヒント：これらのツールを補完として使用し、実際のユーザーテストの代替として使用しないでください。自動ツールでは、アクセシビリティの問題の100％を検出できません。",
+        "game": {
+          "name": "Accessible Game Jam",
+          "badge": "インタラクティブ",
+          "description": "Webアクセシビリティに関する知識をインタラクティブにテストしましょう！楽しみながら学ぶゲーム。",
+          "features": {
+            "quiz": "インタラクティブクイズ",
+            "cases": "実用的なケース",
+            "learning": "楽しい学習"
+          },
+          "link": "今すぐプレイ"
+        }
+      },
+      "screenReaders": {
+        "title": "一般的なスクリーンリーダー",
+        "intro": "インターフェースをよりよくテストするために、最も使用されているスクリーンリーダーを理解する：",
+        "nvda": {
+          "name": "NVDA",
+          "platform": "Windows",
+          "description": "無料でオープンソースのスクリーンリーダー、非常に人気",
+          "free": "無料",
+          "usage": "41％の使用率",
+          "link": "NVDAをダウンロード"
+        },
+        "jaws": {
+          "name": "JAWS",
+          "platform": "Windows",
+          "description": "プロフェッショナルなスクリーンリーダー、歴史的な市場リーダー",
+          "paid": "有料",
+          "usage": "40％の使用率",
+          "link": "JAWS公式サイト"
+        },
+        "voiceover": {
+          "name": "VoiceOver",
+          "platform": "macOS/iOS",
+          "description": "すべてのAppleデバイスに組み込まれたスクリーンリーダー",
+          "builtin": "組み込み",
+          "usage": "8％の使用率",
+          "shortcut": "ショートカット："
+        },
+        "talkback": {
+          "name": "TalkBack",
+          "platform": "Android",
+          "description": "Androidのデフォルトのスクリーンリーダー",
+          "builtin": "組み込み",
+          "usage": "モバイル使用",
+          "activation": "有効化：設定 > アクセシビリティ"
+        },
+        "testing": {
+          "title": "スクリーンリーダーでテストする方法",
+          "steps": {
+            "close": "目を閉じるか画面をオフにする",
+            "keyboard": "キーボードのみでナビゲート（Tab、矢印、Enter、Space）",
+            "listen": "何がアナウンスされるかを注意深く聞く",
+            "verify": "画面を見ずにすべてが理解できることを確認する"
+          },
+          "note": "注：スクリーンリーダーで15分間テストすることは、何時間もの自動監査よりも価値があります。"
+        }
+      },
+      "quickNav": {
+        "title": "クイックナビゲーション",
+        "intro": "サイドバーメニューまたはこれらのショートカットを使用して例を探索します：",
+        "links": {
+          "contrast": {
+            "title": "コントラスト",
+            "description": "WCAG、色覚異常、テーマ"
+          },
+          "media": {
+            "title": "画像とメディア",
+            "description": "代替テキスト、キャプション付きビデオ"
+          },
+          "aria": {
+            "title": "ARIA",
+            "description": "アコーディオン、トースト、ソート可能なテーブル"
+          },
+          "keyboard": {
+            "title": "キーボードナビゲーション",
+            "description": "可視フォーカス、トラップ、アクセシブルなモーダル"
+          },
+          "forms": {
+            "title": "フォーム",
+            "description": "ラベル、検証、メッセージ"
+          },
+          "semantic": {
+            "title": "セマンティックHTML",
+            "description": "構造、見出し、ボタン対リンク"
+          },
+          "performance": {
+            "title": "パフォーマンス",
+            "description": "動きの削減、ズーム、適応性"
+          }
+        }
+      }
+    },
+    "accessibleForms": {
+      "title": "アクセシブルなフォーム",
+      "description": "明確でガイド付きの体験ですべての人が使用できるフォームを作成する",
+      "labelsAndAssociations": {
+        "title": "ラベルと関連付け",
+        "explanation": "各フォームフィールドには、明示的で適切に関連付けられたラベルが必要です。プレースホルダーはラベルを置き換えません。",
+        "bad": {
+          "heading": "ログイン",
+          "email": "あなたのメールアドレス",
+          "password": "パスワード",
+          "remember": "ログイン状態を保持",
+          "submit": "ログイン"
+        },
+        "good": {
+          "heading": "ログイン",
+          "emailLabel": "メールアドレス",
+          "emailPlaceholder": "{'example@domain.com'}",
+          "emailHelp": "メールアドレスを共有することはありません",
+          "passwordLabel": "パスワード",
+          "passwordHelp": "大文字と数字を含む8文字以上",
+          "remember": "ログイン状態を保持",
+          "submit": "ログイン"
+        }
+      },
+      "validation": {
+        "title": "検証とエラーメッセージ",
+        "explanation": "エラーは明確にアナウンスされ、関連するフィールドに関連付けられ、修正のための正確な指示を提供する必要があります。",
+        "bad": {
+          "heading": "ニュースレター登録",
+          "name": "名前",
+          "email": "メール",
+          "age": "年齢",
+          "errorSummary": "エラーを修正してください",
+          "submit": "登録する"
+        },
+        "good": {
+          "heading": "ニュースレター登録",
+          "nameLabel": "氏名",
+          "nameError": "名前は必須です",
+          "emailLabel": "メールアドレス",
+          "emailError": "有効なメールアドレスを入力してください（{'example@domain.com'}）",
+          "ageLabel": "年齢",
+          "ageHelp": "16歳以上である必要があります",
+          "ageError": "最低必要年齢は16歳です",
+          "errorSummaryTitle": "修正すべきエラー：",
+          "submit": "登録する",
+          "errors": {
+            "nameRequired": "名前は必須です",
+            "emailInvalid": "メールアドレスが無効です",
+            "ageMinimum": "最低必要年齢は16歳です"
+          }
+        }
+      },
+      "fieldsets": {
+        "title": "aria-labelledbyを使用したフィールドグループ",
+        "explanation": "関連するフィールドのグループは、aria-labelledbyを介してタイトルと関連付けて、明確なセマンティック関係を作成する必要があります。特にラジオボタンとチェックボックスの場合。",
+        "bad": {
+          "heading": "設定",
+          "email": "メール",
+          "phone": "電話",
+          "sms": "SMS",
+          "newsletter": "ニュースレター",
+          "offers": "オファー",
+          "updates": "更新情報",
+          "name": "名前",
+          "frequency": "選択...",
+          "daily": "毎日",
+          "weekly": "毎週",
+          "monthly": "毎月",
+          "submit": "OK"
+        },
+        "good": {
+          "heading": "連絡先の設定",
+          "personalInfo": {
+            "title": "個人情報",
+            "nameLabel": "氏名",
+            "nameDescription": "通信に表示される氏名",
+            "emailLabel": "メールアドレス",
+            "emailDescription": "すべての通信にこのメールを使用します"
+          },
+          "contactMethod": {
+            "title": "希望する連絡方法",
+            "email": "メール",
+            "phone": "電話",
+            "sms": "SMS"
+          },
+          "commTypes": {
+            "title": "通信タイプ",
+            "description": "受け取りたい通信のタイプを選択してください",
+            "newsletter": "ニュースレター",
+            "offers": "特別オファー",
+            "updates": "製品の更新情報"
+          },
+          "frequency": {
+            "title": "通信頻度",
+            "label": "頻度を選択",
+            "description": "メール送信の最大頻度を設定します",
+            "options": {
+              "select": "選択...",
+              "daily": "毎日",
+              "weekly": "毎週",
+              "monthly": "毎月"
+            }
+          },
+          "submit": "設定を保存"
+        }
+      },
+      "complexValidation": {
+        "title": "リアルタイム検証を含む複雑なフォーム",
+        "explanation": "複雑なフォームの場合、リアルタイム検証が役立ちますが、邪魔にならず、アクセシブルな方法で実装する必要があります。",
+        "bad": {
+          "heading": "アカウント作成",
+          "username": "ユーザー名",
+          "email": "メール",
+          "password": "パスワード",
+          "errors": {
+            "usernameTooShort": "短すぎます",
+            "usernameInvalidChars": "無効な文字",
+            "emailInvalid": "無効なメール",
+            "passwordTooShort": "短すぎます"
+          },
+          "submit": "アカウント作成"
+        },
+        "good": {
+          "heading": "アカウント作成",
+          "usernameLabel": "ユーザー名",
+          "usernameRequirements": {
+            "title": "要件：",
+            "minLength": "3文字以上",
+            "validChars": "文字、数字、アンダースコアのみ"
+          },
+          "usernameErrors": {
+            "minLength": "ユーザー名は3文字以上である必要があります",
+            "invalidChars": "文字、数字、アンダースコアのみが許可されています"
+          },
+          "usernameValid": "ユーザー名は利用可能です",
+          "emailLabel": "メールアドレス",
+          "emailError": "有効なメールアドレスを入力してください",
+          "emailValid": "有効なメール",
+          "passwordLabel": "パスワード",
+          "passwordStrength": {
+            "title": "パスワードの強度：",
+            "length": "8文字以上",
+            "uppercase": "大文字",
+            "number": "数字",
+            "special": "特殊文字"
+          },
+          "passwordError": "パスワードは8文字以上である必要があります",
+          "submit": "アカウント作成",
+          "cancel": "キャンセル"
+        }
+      },
+      "codeExamples": {
+        "labelsAndAssociations": {
+          "badComment": "❌ 悪い例：ラベルがない",
+          "noLabel": "関連するラベルがない",
+          "noLabelNoAutocomplete": "関連するラベルがない、オートコンプリートなし",
+          "checkboxNotAssociated": "チェックボックスが関連付けられていない",
+          "goodComment": "✅ 良い例：明示的で関連付けられたラベル",
+          "labelWithFor": "for/idで関連付けられたラベル",
+          "labelWithInstructions": "指示を含むラベル",
+          "checkboxCorrectlyAssociated": "正しく関連付けられたチェックボックス"
+        },
+        "validation": {
+          "badComment": "❌ 悪い例：エラーのアナウンスが不十分",
+          "noAssociation": "ラベルと入力の関連付けがない",
+          "visualErrorOnly": "視覚的なエラーのみ",
+          "noErrorInfo": "エラー情報がない",
+          "genericMessage": "一般的で役に立たないエラーメッセージ",
+          "goodComment": "✅ 良い例：明確に関連付けられたエラー",
+          "errorSummary": "ナビゲーション付きエラー要約",
+          "specificErrorAssociated": "特定の関連付けられたエラーを持つフィールド"
+        },
+        "fieldsets": {
+          "badComment": "❌ 悪い例：整理されていない構造",
+          "mixedElements": "ロジックなしで混在した要素",
+          "textFieldNoContext": "コンテキストのないテキストフィールド",
+          "selectNoContext": "コンテキストのない選択",
+          "goodComment": "✅ 良い例：aria-labelledbyを使用した論理的なグループ",
+          "personalInfoSection": "個人情報セクション",
+          "radioGroup": "ラジオボタングループ",
+          "checkboxGroup": "チェックボックスグループ"
+        },
+        "complexValidation": {
+          "badComment": "❌ 悪い例：邪魔な検証",
+          "immediateValidation": "各キーストロークでの即座の検証",
+          "constantErrorToggle": "常に表示/非表示されるエラー",
+          "noAriaDescribedby": "aria-describedbyとの関連付けなし",
+          "shortMessages": "短すぎて役に立たないエラーメッセージ",
+          "noAutocomplete": "パスワードマネージャーを支援するオートコンプリートなし",
+          "goodComment": "✅ 良い例：フィードバック付きの配慮された検証",
+          "validationOnBlur": "入力ではなくblurでの検証",
+          "clearInstructions": "明確な指示",
+          "accessibleFeedback": "アクセシブルなフィードバック",
+          "passwordStrengthIndicator": "パスワード強度インジケーター"
+        }
+      }
+    },
+    "ariaComponents": {
+      "title": "ARIA",
+      "description": "複雑なコンポーネントのセマンティクスを豊かにしてアクセシブルにする",
+      "whatIsAria": {
+        "title": "ARIAとは？",
+        "intro": "ARIA（Accessible Rich Internet Applications）は、リッチなWebアプリケーションと動的コンポーネントのアクセシビリティを向上させることができるW3C仕様です。"
+      },
+      "faq": {
+        "title": "よくある質問",
+        "questions": {
+          "q1": {
+            "title": "Webアクセシビリティとは何ですか？",
+            "content": "Webアクセシビリティとは、障害者を含むすべての人がWebサイトとアプリケーションを使用できるようにすることを意味します。"
+          },
+          "q2": {
+            "title": "なぜ重要なのですか？",
+            "content": "世界人口の15％が障害と共に生活しています（出典：国連）。アクセシビリティはすべての人の体験を向上させ、しばしば法的義務です。"
+          },
+          "q3": {
+            "title": "どのように始めればよいですか？",
+            "content": "WCAGガイドラインを学ぶことから始め、監査ツールを使用し、実際のユーザーでテストします。"
+          }
+        }
+      },
+      "forms": {
+        "title": "ARIA属性を使用したフォーム",
+        "explanation": "ARIA属性は、支援技術にラベル、説明、状態を提供することでフォームを豊かにします。",
+        "validation": {
+          "emailRequired": "メールは必須です",
+          "emailInvalid": "無効なメール形式",
+          "passwordRequired": "パスワードは必須です",
+          "passwordWeak": "パスワードには文字と数字を含める必要があります",
+          "termsRequired": "利用規約に同意する必要があります"
+        },
+        "bad": {
+          "title": "ARIAなしのフォーム",
+          "description": "❌ 適切なARIA属性がないアクセシブルでないフォーム：",
+          "emailPlaceholder": "あなたのメール",
+          "errorMessage": "パスワードが短すぎます"
+        },
+        "good": {
+          "title": "ARIAを使用したフォーム",
+          "description": "✅ 適切なARIA属性を使用したアクセシブルなフォーム：",
+          "emailLabel": "メールアドレス（必須）",
+          "emailPlaceholder": "{'example@email.com'}",
+          "emailHint": "形式：name{'@'}example.com",
+          "submitLabel": "フォームを送信",
+          "passwordLabel": "パスワード（8文字以上）",
+          "passwordPlaceholder": "パスワード",
+          "passwordRequirements": "数字と文字を含む8文字以上",
+          "passwordError": "パスワードは8文字以上である必要があります",
+          "notificationOptions": "通知オプション",
+          "emailNotification": "メール通知",
+          "emailNotificationHint": "重要な更新をメールで受け取る",
+          "smsNotification": "SMS通知",
+          "smsNotificationHint": "緊急アラートをSMSで受け取る",
+          "termsLabel": "同意します",
+          "termsLink": "利用規約",
+          "termsLinkLabel": "利用規約を読む",
+          "submitButton": "送信"
+        },
+        "success": "フォームが正常に送信されました",
+        "error": "送信前にエラーを修正してください",
+        "searchLaunched": "検索を開始しました"
+      },
+      "accordion": {
+        "title": "アクセシブルなアコーディオン",
+        "explanation": "アコーディオンは、適切なARIA属性を使用し、キーボードナビゲーションをサポートし、状態の変更をアナウンスする必要があります。",
+        "bad": {
+          "title": "ARIA属性なし"
+        },
+        "good": {
+          "title": "適切なARIAを使用"
+        }
+      },
+      "tabindex": {
+        "title": "Tabindexとキーボードナビゲーション",
+        "intro": "tabindex属性は、要素がキーボードフォーカスを受け取ることができるかどうか、どの順序で受け取るかを制御します。",
+        "positive": {
+          "title": "✅ tabindex=\"0\"",
+          "description": "要素は自然なDOM順序でフォーカス可能"
+        },
+        "negative": {
+          "title": "⚠️ tabindex=\"-1\"",
+          "description": "JavaScriptでフォーカス可能だがTabではない"
+        },
+        "greaterThanZero": {
+          "title": "❌ tabindex > 0",
+          "description": "ナビゲーション順序を変更（避けるべき！）"
+        },
+        "bestPractices": {
+          "title": "📋 Tabindexのベストプラクティス",
+          "practice1": "カスタムインタラクティブ要素をフォーカス可能にするには<code class=\"inline-code\">tabindex=\"0\"</code>を使用",
+          "practice2": "プログラム的フォーカス（モーダル、アラート）には<code class=\"inline-code\">tabindex=\"-1\"</code>を使用",
+          "practice3": "正の値は絶対に使用しない - DOM順序を尊重する",
+          "practice4": "ネイティブなインタラクティブ要素（<code class=\"inline-code\">&lt;button&gt;</code>、<code class=\"inline-code\">&lt;a&gt;</code>、<code class=\"inline-code\">&lt;input&gt;</code>）はtabindexを必要としない"
+        },
+        "interactive": {
+          "title": "🎯 インタラクティブな例",
+          "description": "これらの要素でキーボードナビゲーション（Tab/Shift+Tab）をテストします："
+        },
+        "focusable": {
+          "title": "✅ フォーカス可能な要素",
+          "nativeButton": "ネイティブボタン",
+          "textInput": "テキストフィールド",
+          "link": "リンク",
+          "customButton": "カスタムボタン（div）",
+          "customButtonLabel": "カスタムボタン",
+          "customTab": "カスタムタブ",
+          "menuItem": "メニューオプション",
+          "menuItemLabel": "メニューオプション"
+        },
+        "nonFocusable": {
+          "title": "❌ フォーカス不可能な要素",
+          "simpleDiv": "シンプルなテキスト（div）",
+          "span": "インラインテキスト（span）",
+          "paragraph": "段落",
+          "disabledButton": "無効なボタン",
+          "disabledInput": "無効なフィールド",
+          "ariaHidden": "aria-hidden要素",
+          "alert": "アラートメッセージ（tabindex=\"-1\"）",
+          "focusAlert": "アラートにフォーカス",
+          "alertUpdated": "アラートメッセージが今フォーカスされました！"
+        },
+        "testingTips": {
+          "title": "💡 テストのヒント",
+          "tip1": "<kbd>Tab</kbd>を使用して前方にナビゲート",
+          "tip2": "<kbd>Shift + Tab</kbd>を使用して後方にナビゲート",
+          "tip3": "<kbd>Space</kbd>または<kbd>Enter</kbd>を使用して要素を有効化",
+          "tip4": "フォーカスインジケーター（青いアウトライン）を観察",
+          "tip5": "どの要素がフォーカスを受け取れるか、受け取れないかに注意"
+        }
+      },
+      "dropdown": {
+        "title": "アクセシブルなドロップダウンメニュー",
+        "explanation": "ドロップダウンメニューは、キーボードナビゲーションをサポートし、Escapeで閉じ、適切にフォーカスを維持する必要があります。",
+        "bad": {
+          "title": "ARIAなしのメニュー",
+          "actions": "アクション",
+          "edit": "編集",
+          "copy": "コピー",
+          "delete": "削除",
+          "share": "共有"
+        },
+        "good": {
+          "title": "ARIAを使用したメニュー"
+        }
+      },
+      "gallery": {
+        "title": "アクセシブルな画像ギャラリー",
+        "explanation": "画像ギャラリーは、キーボードナビゲーションを許可し、各画像にコンテキスト説明を提供する必要があります。ARIA tablist/tab/tabpanelパターンは、この使用例に最適です。",
+        "ariaLabel": "製品画像",
+        "altSuffix": "サムネイル",
+        "images": {
+          "front": "16インチMacBook Proの前面図、画面が閉じられ、洗練されたアルミニウムデザインを示しています。",
+          "open": "MacBook Proが90度開いており、macOSデスクトップを表示する画面、キーボード、トラックパッドが見えます。",
+          "side": "閉じたMacBook Proの側面図、薄いプロファイルとポートを強調しています。",
+          "laptop1": {
+            "alt": "MacBook Pro前面図、画面が閉じている"
+          },
+          "laptop2": {
+            "alt": "MacBook Proが開いており、画面とキーボードを示している"
+          },
+          "laptop3": {
+            "alt": "MacBook Proの側面図、厚さを示している"
+          }
+        }
+      },
+      "sortableTable": {
+        "title": "アクセシブルなソート可能なテーブル",
+        "explanation": "ソート可能なテーブルは、現在のソート状態を示し、キーボードナビゲーションを許可し、スクリーンリーダーに変更をアナウンスする必要があります。",
+        "columns": {
+          "name": "名前",
+          "email": "メール",
+          "role": "役割",
+          "status": "ステータス"
+        },
+        "users": {
+          "alice": {
+            "name": "アリス・マーティン",
+            "role": "管理者",
+            "status": "アクティブ"
+          },
+          "bob": {
+            "name": "ボブ・デュポン",
+            "role": "ユーザー",
+            "status": "非アクティブ"
+          },
+          "charlie": {
+            "name": "チャーリー・ルロイ",
+            "role": "モデレーター",
+            "status": "アクティブ"
+          },
+          "diana": {
+            "name": "ダイアナ・モロー",
+            "role": "ユーザー",
+            "status": "停止中"
+          }
+        }
+      },
+      "liveRegions": {
+        "title": "動的なaria-live領域",
+        "explanation": "Aria-live領域を使用すると、スクリーンリーダーにコンテンツの変更をアナウンスできます。'polite'は現在のアナウンスが終了するのを待ち、'assertive'はすぐに中断します。",
+        "bad": {
+          "title": "aria-liveなし",
+          "description": "変更がアナウンスされない",
+          "badComment": "悪い例：aria-live属性なし",
+          "updateButton": "カウンターを更新",
+          "clearButton": "クリア",
+          "defaultContent": "カウンター：0",
+          "updatedContent": "カウンターが更新されました：",
+          "problems": {
+            "title": "問題点：",
+            "problem1": "変更がアナウンスされない",
+            "problem2": "スクリーンリーダーユーザーはコンテンツが変更されたことを知らない",
+            "problem3": "メッセージの重要度の指示がない"
+          }
+        },
+        "good": {
+          "title": "適切なaria-liveを使用",
+          "description": "変更が優先度に応じてアナウンスされる",
+          "politeComment": "良い例：情報用のaria-live=\"polite\"",
+          "assertiveComment": "良い例：アラート用のaria-live=\"assertive\"",
+          "infoMessage": "情報：データが更新されました",
+          "alertMessage": "警告：即座の対応が必要です",
+          "typeLabel": "領域タイプ：",
+          "politeOption": "Polite（待機）",
+          "assertiveOption": "Assertive（中断）",
+          "offOption": "オフ（サイレント）",
+          "infoButton": "情報（polite）",
+          "alertButton": "アラート（assertive）",
+          "clearButton": "クリア",
+          "politeDefault": "Politeゾーン（情報）",
+          "assertiveDefault": "Assertiveゾーン（アラート）",
+          "politeMessage": "ℹ️ 情報：カウンターは",
+          "assertiveMessage": "⚠️ アラート：対応が必要です！（メッセージ",
+          "advantages": {
+            "title": "利点：",
+            "advantage1": "重要なメッセージはaria-live=\"assertive\"で中断",
+            "advantage2": "情報メッセージはaria-live=\"polite\"で待機",
+            "advantage3": "aria-atomic=\"true\"は領域コンテンツ全体をアナウンス",
+            "advantage4": "適切な役割（status、alert）がより多くのコンテキストを提供"
+          }
+        }
+      },
+      "iconButtons": {
+        "title": "アクセシブルなアイコンボタン",
+        "explanation": "アイコンのみを含むボタンには、スクリーンリーダーが理解できるようにaria-labelまたは視覚的に隠されたテキストが必要です。",
+        "heading": "説明のないボタン",
+        "bad": {
+          "description": "これらのボタンにはテキスト指示がありません：",
+          "problems": {
+            "title": "問題点：",
+            "problem1": "スクリーンリーダーは「ボタン」とだけアナウンス",
+            "problem2": "アイコンを見ずにアクションを知ることは不可能",
+            "problem3": "絵文字は誤解される可能性がある",
+            "problem4": "ホバー時のツールチップがない"
+          }
+        },
+        "good": {
+          "title": "アクセシブルなボタン",
+          "description": "アイコンをアクセシブルにするいくつかのアプローチ：",
+          "approach1": {
+            "title": "1. aria-labelを使用",
+            "delete": "アイテムを削除",
+            "edit": "アイテムを編集",
+            "favorite": "お気に入りに追加"
+          },
+          "approach2": {
+            "title": "2. 可視テキストを使用",
+            "search": "検索",
+            "settings": "設定"
+          },
+          "approach3": {
+            "title": "3. 視覚的に隠されたテキストを使用",
+            "save": "保存",
+            "share": "共有"
+          },
+          "bestPractices": {
+            "title": "ベストプラクティス：",
+            "practice1": "常に代替テキストを提供（aria-label、隠しテキスト、または可視テキスト）",
+            "practice2": "装飾的なアイコンにはaria-hidden=\"true\"を使用",
+            "practice3": "title属性でツールチップを追加",
+            "practice4": "スペースが許す場合は可視テキストを優先"
+          }
+        }
+      },
+      "combobox": {
+        "title": "コンボボックス / 候補付き検索",
+        "explanation": "候補付き検索（コンボボックス）は、キーボードでナビゲート可能で、結果をアナウンスし、選択を許可する必要があります。",
+        "bad": {
+          "title": "ARIAまたはキーボードナビゲーションなし",
+          "placeholder": "国を検索...",
+          "selected": "選択済み："
+        },
+        "good": {
+          "title": "ARIAとキーボードナビゲーションを使用",
+          "label": "国を検索",
+          "placeholder": "入力して検索...",
+          "resultsCount": "件の結果",
+          "resultsCountPlural": "",
+          "available": "利用可能",
+          "availablePlural": "",
+          "selected": "選択済み："
+        }
+      },
+      "toast": {
+        "title": "トースト通知（Live Regions）",
+        "explanation": "動的通知は、フォーカスを奪うことなくスクリーンリーダーにアナウンスされる必要があります。情報にはrole='status'を、エラーにはrole='alert'を使用します。",
+        "bad": {
+          "title": "aria-liveなし",
+          "description": "❌ 通知がスクリーンリーダーにアナウンスされない",
+          "message": "リクエストが保存されました",
+          "showButton": "通知を表示"
+        },
+        "good": {
+          "title": "適切なaria-liveを使用",
+          "description": "✅ 通知が適切にアナウンスされる",
+          "statusMessage": "リクエストが保存されました",
+          "closeNotification": "通知を閉じる",
+          "errorMessage": "エラー：アクションを完了できません",
+          "closeAlert": "アラートを閉じる",
+          "closePrefix": "閉じる",
+          "alertType": "アラート",
+          "notificationType": "通知",
+          "infoButton": "情報（polite）",
+          "errorButton": "エラー（assertive）",
+          "successMessage": "成功！変更が保存されました。",
+          "errorDetailMessage": "エラー：変更を保存できません。",
+          "inaccessibleMessage": "アクセシブルでない通知（アナウンスされない）",
+          "differences": {
+            "title": "違い：",
+            "diff1": "<code>role=\"status\"</code> + <code>aria-live=\"polite\"</code>：情報通知用、現在の読み上げを中断しない",
+            "diff2": "<code>role=\"alert\"</code> + <code>aria-live=\"assertive\"</code>：重大なエラー用、すぐに中断",
+            "diff3": "<code>aria-atomic=\"true\"</code>：通知コンテンツ全体をアナウンス"
+          }
+        }
+      },
+      "principles": {
+        "roles": {
+          "title": "🏷️ 役割",
+          "description": "要素が何であるかを定義（ボタン、ナビゲーション、アラートなど）",
+          "example": "role=\"button\""
+        },
+        "states": {
+          "title": "📊 状態",
+          "description": "要素の現在の状態を記述（チェック済み、展開済み、無効など）",
+          "example": "aria-expanded=\"true\""
+        },
+        "properties": {
+          "title": "🔧 プロパティ",
+          "description": "追加情報を提供（ラベル、describedby、コントロールなど）",
+          "example": "aria-label=\"メインメニュー\""
+        }
+      },
+      "goldenRules": {
+        "title": "⚠️ ARIAのゴールデンルール",
+        "rule": "ネイティブHTMLを使用できる場合はARIAを使用しない"
+      },
+      "ariaAttributes": {
+        "title": "使用されるARIA属性：",
+        "ariaLabel": "<code>aria-label</code>：アクセシブルなラベルを提供",
+        "ariaDescribedby": "<code>aria-describedby</code>：詳細な説明を関連付ける",
+        "ariaRequired": "<code>aria-required</code>：必須フィールドを示す",
+        "ariaInvalid": "<code>aria-invalid</code>：無効なフィールドを通知",
+        "ariaLabelledby": "<code>aria-labelledby</code>：既存のラベルを参照",
+        "roleAlert": "<code>role=\"alert\"</code>：エラーをすぐにアナウンス",
+        "ariaHidden": "<code>aria-hidden</code>：装飾的要素を非表示",
+        "ariaLive": "<code>aria-live</code>：動的変更をアナウンス"
+      },
+      "table": {
+        "ariaLabel": "ユーザーリスト",
+        "instructions": "列ヘッダーをクリックしてテーブルをソートします。Tabを使用してソートボタン間をナビゲートします。",
+        "sortStatus": {
+          "ascending": "昇順",
+          "descending": "降順",
+          "message": "テーブルが{column}で{direction}順にソートされました"
+        }
+      },
+      "alerts": {
+        "customButtonClicked": "カスタムボタンがクリックされました！",
+        "tabSelected": "タブが選択されました！",
+        "menuSelected": "メニューオプションが選択されました！",
+        "formSuccess": "フォームが正常に送信されました！"
+      },
+      "codeExamples": {
+        "forms": {
+          "badNoLabel": "悪い例：ラベルなし、説明なし",
+          "badIconNotAccessible": "悪い例：アイコンがアクセシブルでない",
+          "badErrorNotAssociated": "悪い例：エラーが関連付けられていない、オートコンプリートなし",
+          "goodAriaLabel": "良い例：可視ラベルのないフィールドのaria-label",
+          "goodButtonLabel": "良い例：aria-labelを持つボタン",
+          "goodErrorAssociated": "良い例：aria-describedbyで関連付けられたエラー"
+        },
+        "accordion": {
+          "badComment": "悪い例：ARIA属性なし、キーボードナビゲーションなし",
+          "goodComment": "良い例：キーボードナビゲーション付きの完全なARIA"
+        },
+        "tabindex": {
+          "goodInteractive": "良い例：インタラクティブ要素がフォーカス可能",
+          "goodProgrammatic": "良い例：プログラム的フォーカス用",
+          "badBreaksOrder": "悪い例：自然なタブ順序を壊す",
+          "interactiveExamples": "インタラクティブな例",
+          "nativeFocusable": "ネイティブなフォーカス可能要素",
+          "customFocusable": "カスタムフォーカス可能要素",
+          "nonFocusable": "フォーカス不可能な要素",
+          "disabledElements": "無効な要素",
+          "hiddenFromSR": "スクリーンリーダーから非表示",
+          "programmaticOnly": "プログラム的にのみフォーカス可能"
+        },
+        "dropdown": {
+          "badComment": "悪い例：メニュー役割なし、フォーカストラップなし",
+          "goodComment": "良い例：ARIA属性とフォーカス管理"
+        },
+        "gallery": {
+          "badComment": "❌ 悪い例：ギャラリーがキーボードでアクセスできない",
+          "goodComment": "✅ 良い例：キーボードナビゲーション付きのアクセシブルなギャラリー"
+        },
+        "sortableTable": {
+          "badComment": "❌ 悪い例：ARIAなし、キーボードナビゲーションなし",
+          "goodComment": "✅ 良い例：完全なARIA + キーボードナビゲーション"
+        },
+        "liveRegions": {
+          "badComment": "悪い例：スクリーンリーダーにアナウンスされない",
+          "goodInfoComment": "良い例：情報通知（polite）",
+          "goodAlertComment": "良い例：エラーアラート（assertive）"
+        }
+      }
+    },
+    "colorContrast": {
+      "title": "コントラストと色",
+      "description": "すべてのユーザーに最適な可読性を確保する",
+      "wcagStats": {
+        "title": "WCAG EN 301 549基準",
+        "normalText": {
+          "ratio": "4.5:1",
+          "label": "通常のテキスト - 最小コントラスト比",
+          "detail": "EN 301 549 / WCAG AA"
+        },
+        "largeText": {
+          "ratio": "3:1",
+          "label": "大きなテキスト - 最小コントラスト比",
+          "detail": "18pt以上または14pt以上の太字"
+        }
+      },
+      "textContrast": {
+        "title": "テキストのコントラスト",
+        "explanation": "WCAG AAコントラスト比は、通常のテキストで最小4.5:1、大きなテキスト（18pt以上または14pt以上の太字）で3:1を要求します。AAAレベルは7:1と4.5:1でより厳格です。",
+        "bad": {
+          "sample1": "白地に明るい灰色のテキスト（2.2:1）- 不合格",
+          "sample2": "白地に中灰色のテキスト（3.8:1）- 不合格",
+          "sample3": "白地に黄色のテキスト（1.9:1）- 不合格",
+          "sample4": "赤地にオレンジ（1.2:1）- 不合格",
+          "sample5": "黒の背景に暗い灰色（2.5:1）- 不合格",
+          "sample6": "暗い背景に青（1.8:1）- 不合格"
+        },
+        "good": {
+          "sample1": "白地に暗い灰色のテキスト（7.0:1）- AAA合格",
+          "sample2": "白地に黒のテキスト（21:1）- AAA合格",
+          "sample3": "白地に暗い青のテキスト（5.9:1）- AA合格",
+          "sample4": "暗い青地に白（8.6:1）- AAA合格",
+          "sample5": "黒の背景に白（21:1）- AAA合格",
+          "sample6": "暗い背景に黄色（12.3:1）- AAA合格"
+        }
+      },
+      "colorInfo": {
+        "title": "色による情報",
+        "explanation": "情報は色だけに依存してはいけません。常に追加の視覚的指標（アイコン、パターン、テキスト）を追加します。",
+        "form": {
+          "heading": "登録フォーム",
+          "name": "氏名",
+          "email": "メール",
+          "password": "パスワード",
+          "legend": "赤 = エラー、緑 = 有効",
+          "errors": {
+            "nameMin": "名前は3文字以上である必要があります",
+            "passwordMin": "パスワードは8文字以上である必要があります"
+          },
+          "success": {
+            "email": "有効なメール"
+          }
+        },
+        "orders": {
+          "heading": "注文ステータス",
+          "pending": "保留中",
+          "processing": "処理中",
+          "delivered": "配達済み"
+        }
+      },
+      "colorblind": {
+        "title": "色覚異常とアクセシビリティ",
+        "explanation": "男性の約8％と女性の0.5％が色覚異常です。赤緑の組み合わせは特に問題があります。",
+        "chart": {
+          "title": "パフォーマンスチャート",
+          "legend": {
+            "errors": "失敗",
+            "success": "成功"
+          },
+          "months": {
+            "jan": "1月",
+            "feb": "2月",
+            "mar": "3月"
+          }
+        }
+      },
+      "theme": {
+        "title": "アクセシブルなテーマスイッチャー",
+        "explanation": "テーマスイッチャーは、コントラスト比を維持し、可読性を保持し、ユーザーのシステム設定を尊重する必要があります。",
+        "bad": {
+          "heading": "固定インターフェース",
+          "content": "ページコンテンツ",
+          "description": "このテキストはテーマに応じて色が変わります。",
+          "button": "アクション",
+          "card": {
+            "title": "情報カード",
+            "description": "読むべき重要な情報。"
+          }
+        },
+        "good": {
+          "legend": "テーマを選択",
+          "light": "ライト",
+          "dark": "ダーク",
+          "auto": "自動",
+          "heading": "適応型インターフェース",
+          "content": "ページコンテンツ",
+          "description": "このテキストはすべてのテーマで良好なコントラストを維持します。",
+          "button": "アクション",
+          "card": {
+            "title": "情報カード",
+            "description": "常に読みやすい重要な情報。"
+          }
+        }
+      },
+      "links": {
+        "title": "リンク - 下線と識別",
+        "explanation": "リンクは色だけに依存せずに識別可能である必要があります。下線、パターンの違い、または他の視覚的指標が不可欠です。",
+        "heading": "色のみに基づくリンク",
+        "intro": "Webアクセシビリティは、包括的なサイトを作成するために不可欠です。",
+        "learnMore": "アクセシビリティについてもっと学ぶ",
+        "bestPractices": "がベストプラクティスを理解するのに役立ちます。",
+        "wcag": "WCAGガイドラインは、アクセシビリティを向上させるための包括的なフレームワークを提供します。",
+        "resources": "リソースページにアクセスして、ツールとチュートリアルを見つけてください。"
+      },
+      "codeExamples": {
+        "textContrast": {
+          "badComment": "❌ 悪い例：不十分なコントラスト比",
+          "goodComment": "✅ 良い例：WCAG準拠のコントラスト比"
+        },
+        "colorOnly": {
+          "badComment": "❌ 悪い例：色のみによる情報",
+          "formNoIndicators": "テキスト指標のないフォーム",
+          "statusNoText": "明示的なテキストのないステータス",
+          "onlyColor": "色のみ",
+          "goodComment": "✅ 良い例：色 + テキスト + アイコン + ARIA",
+          "formExplicitMessages": "明示的なメッセージを持つフォーム",
+          "statusWithTextIcons": "テキストとアイコンを持つステータス"
+        },
+        "colorblind": {
+          "badComment": "❌ 悪い例：色覚異常者には赤/緑が区別できない",
+          "legendColorOnly": "色のみに基づく凡例",
+          "barsNoVisualDiff": "視覚的な区別のないバー",
+          "goodComment": "✅ 良い例：異なる色 + パターン + アイコン",
+          "legendExplicitIcons": "明示的なアイコンを持つ凡例",
+          "barsWithPatternsTooltips": "パターンとツールチップを持つバー"
+        },
+        "darkMode": {
+          "badComment": "❌ 悪い例：コントラストの喪失、アクセシブルでない",
+          "controlsNotAccessible": "アクセシブルでないコントロール",
+          "goodComment": "✅ 良い例：コントラストの維持、アクセシブル、システム設定",
+          "accessibleControlsFieldset": "fieldsetを使用したアクセシブルなコントロール"
+        },
+        "linkContrast": {
+          "badComment": "❌ 悪い例：色のみが区別",
+          "goodComment": "✅ 良い例：色 + 下線 + 可視フォーカス"
+        }
+      }
+    },
+    "keyboardNavigation": {
+      "title": "キーボードナビゲーション",
+      "description": "すべてのユーザーがマウスなしで効率的にナビゲートできるようにする",
+      "shortcuts": {
+        "title": "キーボードショートカット",
+        "tab": "インタラクティブ要素間を移動",
+        "shiftTab": "後方ナビゲーション",
+        "enter": "ボタンとリンクを有効化",
+        "escape": "モーダルとメニューを閉じる",
+        "arrows": "リストとメニューで移動"
+      },
+      "listNavigation": {
+        "title": "リストでのキーボードナビゲーション",
+        "explanation": "キーボードでナビゲート可能なリストは、従来のTabナビゲーションに加えて、矢印キーを使用して要素間を移動できます。",
+        "bad": {
+          "intro": "Tabナビゲーションのみのメニュー：",
+          "items": {
+            "home": "ホーム",
+            "projects": "プロジェクト",
+            "team": "チーム",
+            "stats": "統計",
+            "settings": "設定"
+          }
+        },
+        "good": {
+          "intro": "矢印ナビゲーションを使用したメニュー：",
+          "hint": "↑ ↓を使用して移動、Enterで選択"
+        }
+      },
+      "focusStyles": {
+        "title": "可視フォーカススタイル",
+        "explanation": "キーボードでナビゲートするユーザーは、ページ上のどこにいるかを知るために明確な視覚的指標が必要です。",
+        "intro": "この領域でTabを使用してナビゲートしてみてください：",
+        "button1": "ボタン1",
+        "button2": "ボタン2",
+        "link": "ページへのリンク",
+        "input": "テキストを入力",
+        "submit": "送信"
+      },
+      "skipLink": {
+        "title": "スキップリンク（コンテンツへスキップ）",
+        "explanation": "スキップリンクを使用すると、キーボードユーザーはすべてのナビゲーションを通過することなく、メインコンテンツに直接ジャンプできます。",
+        "skip": "メインコンテンツへスキップ",
+        "bad": {
+          "logo": "サイトロゴ",
+          "nav": {
+            "home": "ホーム",
+            "products": "製品",
+            "services": "サービス",
+            "about": "概要",
+            "blog": "ブログ",
+            "contact": "お問い合わせ",
+            "support": "サポート",
+            "account": "マイアカウント"
+          },
+          "content": {
+            "heading": "メインコンテンツ",
+            "description": "ユーザーはすべてのナビゲーションリンクを通過する必要があります..."
+          }
+        },
+        "good": {
+          "content": {
+            "heading": "メインコンテンツ",
+            "description": "スキップリンクのおかげで、ユーザーは直接ここにアクセスできます！"
+          }
+        }
+      },
+      "modalTrap": {
+        "title": "フォーカストラップ付きモーダル",
+        "explanation": "モーダルはフォーカスを内部に保持し、Escapeキーで閉じることができる必要があります。フォーカスは、モーダルを開いた要素に戻る必要があります。",
+        "openBad": "モーダルを開く（悪い例）",
+        "openGood": "モーダルを開く（良い例）",
+        "modal": {
+          "title": "アクションを確認",
+          "content": "続行してもよろしいですか？",
+          "reason": "理由（オプション）",
+          "cancel": "キャンセル",
+          "confirm": "確認",
+          "closeLabel": "モーダルを閉じる"
+        }
+      },
+      "codeExamples": {
+        "listNavigation": {
+          "badComment": "悪い例：Tabナビゲーションのみ",
+          "userMustTab5Times": "ユーザーは5回Tabを押す必要がある",
+          "noArrowNavigation": "矢印ナビゲーションなし",
+          "noMenuSemantics": "メニューのセマンティクスなし",
+          "goodComment": "良い例：roving tabindexを使用した矢印ナビゲーション",
+          "menuItem": "メニュー{number}",
+          "arrowNavigationComment": "roving tabindexを使用した矢印ナビゲーション",
+          "home": "ホーム",
+          "projects": "プロジェクト",
+          "team": "チーム",
+          "stats": "統計",
+          "settings": "設定"
+        },
+        "focusIndicators": {
+          "badComment": "悪い例：CSSでフォーカスが削除されている",
+          "accessibilityProblems": "❌ アクセシビリティの問題：",
+          "button1NoType": "タイプなし、フォーカスが見えない",
+          "button2NoType": "タイプなし、フォーカスが見えない",
+          "linkNoFocus": "フォーカスが見えない",
+          "inputNoFocus": "フォーカスが見えない",
+          "keyboardNavigationNotVisible": "キーボードナビゲーションが視覚的に追跡不可能",
+          "goodComment": "良い例：可視フォーカスインジケーター",
+          "removeFocusComment": "すべてのフォーカスインジケーターを削除",
+          "button1": "ボタン1",
+          "button2": "ボタン2",
+          "link": "リンク",
+          "visibleFocusComment": "可視でアクセシブルなフォーカスインジケーター"
+        },
+        "skipLinks": {
+          "badComment": "悪い例：スキップリンクなし",
+          "tenPlusLinks": "10以上のナビゲーションリンク...",
+          "userMustTraverse": "ユーザーはすべてのナビゲーションを通過する必要がある",
+          "goodComment": "良い例：フォーカス時に可視になるスキップリンク",
+          "skipToContent": "メインコンテンツへスキップ",
+          "logo": "サイトロゴ",
+          "home": "ホーム",
+          "products": "製品",
+          "services": "サービス",
+          "mainContent": "メインコンテンツ",
+          "skipLinkComment": "デフォルトで非表示のスキップリンク、フォーカス時に可視"
+        },
+        "modalTrap": {
+          "badComment": "悪い例：フォーカス管理なしのモーダル",
+          "goodComment": "良い例：フォーカストラップ付きモーダル",
+          "confirmAction": "アクションを確認",
+          "areYouSure": "続行してもよろしいですか？",
+          "reasonOptional": "理由（オプション）",
+          "cancel": "キャンセル",
+          "confirm": "確認",
+          "closeModal": "モーダルを閉じる",
+          "focusTrapComment": "必須機能",
+          "autoFocus": "最初の要素への自動フォーカス",
+          "trapFocus": "フォーカストラップ（Tab/Shift+Tab）",
+          "closeOnEscape": "Escapeで閉じる",
+          "returnFocus": "トリガー要素にフォーカスを戻す"
+        }
+      }
+    },
+    "mediaAccessible": {
+      "title": "アクセシブルな画像とメディア",
+      "description": "視覚的なコンテンツをすべてのユーザーが理解できるようにする",
+      "altText": {
+        "title": "画像の代替テキスト",
+        "explanation": "代替テキストを使用すると、スクリーンリーダーが画像を説明できます。情報画像には説明的に、装飾画像には空にする必要があります。",
+        "product": {
+          "name": "MacBook Pro 16\"",
+          "price": "€2,499",
+          "rating": "4.8/5",
+          "reviews": "127件のレビュー",
+          "alt": "MacBook Pro 16インチ、前面図、画面が開いてmacOSインターフェースを表示",
+          "ratingAlt": "評価",
+          "stars": "星、基づく"
+        },
+        "notification": "注文が確認されました！"
+      },
+      "video": {
+        "title": "アクセシブルなビデオ",
+        "explanation": "ビデオにはキャプションが必要で、キーボードでアクセス可能なコントロールが必要で、自動再生してはいけません。",
+        "heading": "製品プレゼンテーション",
+        "bad": {
+          "placeholder": "デモビデオ",
+          "note": "（自動再生、キャプションなし）"
+        },
+        "good": {
+          "placeholder": "MacBook Proデモビデオ",
+          "note": "（アクセシブルなコントロール、キャプション利用可能）",
+          "description": "MacBook Pro 16インチの機能を紹介する2分間のビデオ。日本語のキャプション利用可能。",
+          "fallback": "お使いのブラウザはビデオをサポートしていません。",
+          "transcriptLink": "トランスクリプトを表示"
+        }
+      },
+      "charts": {
+        "title": "チャートと視覚的データ",
+        "explanation": "チャートには、それを見ることができないユーザーのためのテキスト説明と代替データが必要です。",
+        "heading": "四半期売上",
+        "chartTitle": "四半期売上の棒グラフ",
+        "chartDesc": "4四半期にわたる売上の増加傾向：Q1：40k€、Q2：60k€、Q3：80k€、Q4：100k€",
+        "table": {
+          "caption": "詳細な四半期売上データ",
+          "columns": {
+            "quarter": "四半期",
+            "sales": "売上（k€）",
+            "evolution": "進化"
+          },
+          "data": {
+            "q1": {
+              "quarter": "2025年Q1",
+              "sales": "40",
+              "evolution": "-"
+            },
+            "q2": {
+              "quarter": "2025年Q2",
+              "sales": "60",
+              "evolution": "+50%"
+            },
+            "q3": {
+              "quarter": "2025年Q3",
+              "sales": "80",
+              "evolution": "+33%"
+            },
+            "q4": {
+              "quarter": "2025年Q4",
+              "sales": "100",
+              "evolution": "+25%"
+            }
+          }
+        }
+      },
+      "codeExamples": {
+        "altText": {
+          "badComment": "❌ 悪い例：説明的でない代替テキスト",
+          "goodComment": "✅ 良い例：説明的な代替テキスト",
+          "decorativeIcon": "装飾的なアイコン：空のalt、コンテキスト用の.sr-only",
+          "decorativeNotification": "通知内の装飾的なアイコン"
+        },
+        "video": {
+          "badComment": "❌ 悪い例：自動再生付きビデオ",
+          "goodComment": "✅ 良い例：キャプションとコントロール付きのアクセシブルなビデオ",
+          "subtitles": "聴覚障害者向けのキャプション",
+          "audioDescriptions": "視覚障害者向けの音声説明",
+          "fallback": "トランスクリプトへのリンク付きフォールバック"
+        },
+        "charts": {
+          "badComment": "❌ 悪い例：説明または代替データのないチャート",
+          "labels": "ラベル",
+          "goodComment": "✅ 良い例：代替データ付きのアクセシブルなチャート",
+          "bars": "チャートバー",
+          "accessibleLabels": "アクセシブルなラベル",
+          "alternativeTable": "すべてのデータを含む代替テーブル",
+          "otherRows": "... その他の行"
+        }
+      }
+    },
+    "performance": {
+      "title": "パフォーマンス",
+      "description": "動きの削減、ズーム、適応性",
+      "motion": {
+        "title": "動きの設定の尊重",
+        "explanation": "ユーザーは、アニメーションを減らすためにシステムを構成できます。吐き気や気を散らすことを避けるために、この設定を尊重する必要があります。",
+        "bad": {
+          "heading": "デフォルトのアニメーション",
+          "card": {
+            "title": "バウンスするカード",
+            "description": "このアニメーションは常にトリガーされます"
+          },
+          "button": "クリックしてください！",
+          "slide": "永続的なスライド"
+        },
+        "good": {
+          "heading": "配慮されたアニメーション",
+          "simulate": "「動きを削減」をシミュレート（prefers-reduced-motion）",
+          "card": {
+            "title": "配慮されたカード",
+            "description": "ホバー時のみの軽いアニメーション"
+          },
+          "button": "クリックしてください！",
+          "feedback": "ありがとうございます！",
+          "load": "読み込み",
+          "stopLoad": "停止",
+          "pulse": "パルス開始",
+          "stopPulse": "パルス停止",
+          "prev": "前のスライド",
+          "next": "次のスライド",
+          "slide": "スライド"
+        }
+      },
+      "zoom": {
+        "title": "ズームと大きなフォントサイズのサポート",
+        "explanation": "インターフェースは、最大200％のズームまで機能的で読みやすい状態を維持する必要があります。テキストは、ユーザーのフォントサイズの設定に適応する必要があります。",
+        "simulate": "ズームをシミュレート：",
+        "indicator": "テキストサイズ：",
+        "warning": "レイアウトが自動的に適応",
+        "bad": {
+          "heading": "固定インターフェース",
+          "menu": "メニュー",
+          "nav": {
+            "home": "ホーム",
+            "products": "製品",
+            "services": "サービス",
+            "contact": "お問い合わせ"
+          },
+          "toolbar": {
+            "new": "新規",
+            "edit": "編集",
+            "delete": "削除",
+            "search": "検索..."
+          },
+          "cards": {
+            "product1": {
+              "title": "製品1",
+              "description": "短い説明",
+              "price": "€19.99"
+            },
+            "product2": {
+              "title": "製品2",
+              "description": "短い説明",
+              "price": "€24.99"
+            }
+          }
+        },
+        "good": {
+          "heading": "適応型インターフェース",
+          "menu": "メニュー",
+          "toggleMenu": "メニューを切り替え",
+          "toolbar": {
+            "new": "新規",
+            "edit": "編集",
+            "delete": "削除",
+            "search": "検索..."
+          },
+          "cards": {
+            "product1": {
+              "title": "製品1",
+              "description": "適応的な説明",
+              "price": "€19.99"
+            },
+            "product2": {
+              "title": "製品2",
+              "description": "適応的な説明",
+              "price": "€24.99"
+            }
+          }
+        }
+      },
+      "responsive": {
+        "title": "適応型およびレスポンシブデザイン",
+        "explanation": "インターフェースは、すべてのデバイスと向きで動作し、タッチに適切なサイズのコントロールを持つ必要があります。",
+        "simulate": "デバイスをシミュレート：",
+        "devices": {
+          "desktop": "デスクトップ（1200px以上）",
+          "tablet": "タブレット（768px）",
+          "mobile": "モバイル（375px）"
+        },
+        "bad": {
+          "heading": "固定デスクトップインターフェース",
+          "logo": "ロゴ",
+          "nav": {
+            "home": "ホーム",
+            "about": "概要",
+            "services": "サービス",
+            "portfolio": "ポートフォリオ",
+            "blog": "ブログ",
+            "contact": "お問い合わせ"
+          },
+          "login": "ログイン",
+          "signup": "サインアップ",
+          "form": {
+            "heading": "お問い合わせ",
+            "name": "名前",
+            "email": "メール",
+            "message": "メッセージ",
+            "cancel": "キャンセル",
+            "send": "送信"
+          },
+          "info": {
+            "heading": "お問い合わせ先",
+            "address": "123 Peace Street",
+            "city": "75001 パリ",
+            "phone": "+33 1 23 45 67 89"
+          }
+        },
+        "good": {
+          "heading": "適応型インターフェース",
+          "menu": "メニュー",
+          "form": {
+            "heading": "お問い合わせ",
+            "nameLabel": "お名前",
+            "emailLabel": "メールアドレス",
+            "messageLabel": "メッセージ",
+            "cancel": "キャンセル",
+            "send": "送信"
+          },
+          "info": {
+            "heading": "お問い合わせ先"
+          }
+        }
+      },
+      "lazyLoading": {
+        "title": "Lazy Loading：可視リソースのみを読み込む",
+        "explanation": "Lazy loading（遅延読み込み）を使用すると、ページの読み込み時にすべてをダウンロードするのではなく、ユーザーが必要とするときにのみ画像とリソースを読み込むことができます。",
+        "bad": {
+          "heading": "一度にすべてを読み込む（Eager Loading）",
+          "problem": "具体例：50製品のeコマースサイトは、ユーザーが見ない可能性のあるページの下部にある画像も含めて、すべての画像をすぐに読み込みます。",
+          "term": "技術用語：Eager Loading = すべてのリソースの即座の読み込み",
+          "issues": {
+            "problem1": "問題1：50画像 × 200 KB = 10 MBをすぐにダウンロード",
+            "problem2": "問題2：ページを見る前に8〜15秒の待ち時間",
+            "problem3": "問題3：不必要にモバイルデータ容量を消費",
+            "problem4": "問題4：プロセッサにストレスをかけ、バッテリーを消耗"
+          },
+          "resources": {
+            "html": "HTML（20 KB）",
+            "css": "CSS（50 KB）",
+            "js": "JavaScript（200 KB）",
+            "img1": "画像1可視（200 KB）",
+            "img2": "画像2可視（200 KB）",
+            "img3": "ページ下部の画像3（200 KB）",
+            "img4": "ページ下部の画像4（200 KB）",
+            "img5": "ページ下部の画像5（200 KB）"
+          },
+          "time": "合計読み込み時間：8秒",
+          "data": "消費データ：1.27 MB（600 KBが不要を含む）"
+        },
+        "good": {
+          "heading": "段階的読み込み（Lazy Loading + Cache）",
+          "solution": "具体例：同じeコマースサイトは、最初に可視コンテンツを読み込み、その後の画像はユーザーがスクロールしたときにのみ読み込みます。",
+          "terms": "技術用語：Lazy Loading = 遅延読み込み • HTTP Cache = ブラウザの一時メモリ",
+          "controls": {
+            "title": "最適化をテスト：",
+            "lazyLoad": {
+              "label": "Lazy Loadingが有効",
+              "description": "スクロール時に画像を読み込む（loading=\"lazy\"属性）"
+            },
+            "cache": {
+              "label": "HTTP Cacheが有効",
+              "description": "メモリに保存して再ダウンロードを避ける（Cache-Control）"
+            }
+          },
+          "resources": {
+            "html": "HTML（20 KB）- 読み込み済み",
+            "css": "CSS（50 KB）- 読み込み済み",
+            "js": "JavaScript（200 KB）- 読み込み済み",
+            "img1": "画像1可視（200 KB）- 読み込み済み",
+            "img2": "画像2可視（200 KB）- 読み込み済み",
+            "img3": "画像3",
+            "img4": "画像4",
+            "imgCached": "既に表示された画像",
+            "lazy": "（スクロール時に読み込み）",
+            "notLoaded": "（まだ読み込まれていない）",
+            "cached": "（キャッシュ済み、0 KB）",
+            "redownload": "（再ダウンロード）"
+          },
+          "time": "初期読み込み時間：",
+          "timeFast": "2秒",
+          "timeSlow": "5秒",
+          "dataSaved": "節約されたデータ：",
+          "savings": {
+            "both": "600 KB（47％）",
+            "single": "200 KB（16％）"
+          },
+          "benefits": {
+            "title": "アクセシビリティへの影響：",
+            "speed": {
+              "label": "速度（FCP）",
+              "description": "より速いFirst Contentful Paint = ページがすぐに可視"
+            },
+            "mobile": {
+              "label": "モバイルデータ",
+              "description": "限られたデータプランまたは低速ネットワーク（3G）のユーザーに不可欠"
+            },
+            "battery": {
+              "label": "バッテリー",
+              "description": "ネットワーク転送が少ない = 大幅なエネルギー節約"
+            },
+            "devices": {
+              "label": "古いデバイス",
+              "description": "処理するリソースが少ない = 古いハードウェアで動作"
+            }
+          }
+        }
+      },
+      "codeExamples": {
+        "motion": {
+          "badComment": "アニメーションを強制するCSS",
+          "alwaysActive": "常にアクティブ",
+          "noUserControl": "ユーザー制御なし",
+          "htmlNoControls": "コントロールなしのHTML",
+          "autoCarousel": "停止オプションなしで自動的にスクロールするカルーセル",
+          "goodComment": "ユーザーの設定を尊重するCSS",
+          "systemPreferences": "システム設定の尊重",
+          "htmlWithControls": "ユーザーコントロール付きHTML",
+          "userControlledContent": "ユーザー制御のコンテンツ"
+        },
+        "zoom": {
+          "badComment": "固定寸法のCSS",
+          "fixedWidth": "固定幅",
+          "fixedSize": "固定サイズ",
+          "noAdapt": "ズームに適応しない",
+          "contentCut": "ズーム時にコンテンツが切れる",
+          "htmlNoAdaptive": "適応構造なしのHTML",
+          "goodComment": "相対単位のCSS",
+          "relativeUnit": "ルートのfont-sizeに対する相対単位",
+          "adaptToPreferences": "設定に適応",
+          "flexible": "柔軟",
+          "noFixedLimit": "固定制限なし",
+          "contentManagement": "コンテンツ管理",
+          "zoomSupport": "最大200％のズームサポート",
+          "htmlFlexible": "柔軟な構造のHTML"
+        },
+        "responsive": {
+          "badComment": "硬直したCSS",
+          "fixedPosition": "モバイルで問題",
+          "fixedWidth": "固定幅",
+          "overflow": "モバイルでオーバーフロー",
+          "alwaysTwoColumns": "常に2列",
+          "tooSmallTouch": "タッチには小さすぎる",
+          "htmlNoAdaptability": "適応性なしのHTML",
+          "goodComment": "レスポンシブCSS",
+          "fluid": "流動的",
+          "hiddenByDefault": "モバイルではデフォルトで非表示",
+          "minTouchTarget": "最小タッチターゲット",
+          "htmlAdaptiveNav": "適応型ナビゲーション付きHTML"
+        },
+        "lazyLoading": {
+          "badComment": "すべての画像がすぐに読み込まれる",
+          "resultBefore": "結果：ページを見る前に12 MBをダウンロード！",
+          "goodComment": "loading=\"lazy\"属性は、可視のときにのみ画像を読み込む",
+          "otherImagesOnScroll": "他の画像は、ユーザーがスクロールした場合にのみ読み込まれます",
+          "resultSmart": "結果：開始時に500 KB、残りは必要な場合のみ！"
+        }
+      }
+    },
+    "semanticHtml": {
+      "title": "セマンティックHTML",
+      "description": "理解可能な方法でコンテンツを構造化するために適切なHTML要素を使用する",
+      "pageStructure": {
+        "title": "ページ構造",
+        "explanation": "明確なセマンティック構造は、スクリーンリーダーがナビゲートし、コンテンツを理解するのに役立ちます。セクション要素（header、nav、main、footer）は重要なランドマークを作成します。",
+        "bad": {
+          "siteTitle": "私のサイト",
+          "nav": {
+            "home": "ホーム",
+            "about": "概要",
+            "contact": "お問い合わせ"
+          },
+          "content": {
+            "title": "ようこそ",
+            "body": "メインページのコンテンツ..."
+          },
+          "footer": "© 2025 私のサイト"
+        },
+        "good": {
+          "siteTitle": "私のサイト",
+          "navLabel": "メインナビゲーション",
+          "content": {
+            "title": "ようこそ",
+            "body": "メインページのコンテンツ..."
+          },
+          "footer": "© 2025 私のサイト"
+        }
+      },
+      "headings": {
+        "title": "見出し階層",
+        "explanation": "論理的な見出し階層（h1 → h2 → h3）を使用すると、スクリーンリーダーがナビゲーションアウトラインを作成し、ユーザーがコンテンツ構造を理解できます。",
+        "article": {
+          "h1": "アクセシビリティ入門",
+          "intro": "Webアクセシビリティは重要です...",
+          "h2": "基本的なテクニック",
+          "techniques": "いくつかのテクニック...",
+          "h3semantic": "セマンティックHTML",
+          "semantic": "セマンティックHTML...",
+          "h4": "構造要素",
+          "elements": "header、navのような要素...",
+          "h3css": "CSSとアクセシビリティ",
+          "css": "CSSは改善できます..."
+        }
+      },
+      "buttonsVsLinks": {
+        "title": "ボタン対クリック可能な要素",
+        "explanation": "アクションには適切な要素を使用します：アクションにはボタン、ナビゲーションにはリンク。これにより、適切なセマンティクスと期待されるキーボード動作が保証されます。",
+        "actions": {
+          "save": "保存",
+          "delete": "削除",
+          "profile": "プロフィールを表示",
+          "info": "詳細情報"
+        },
+        "alerts": {
+          "saved": "保存されました！",
+          "deleteConfirm": "削除してもよろしいですか？",
+          "deleted": "削除されました！",
+          "profile": "プロフィールに移動（シミュレート）",
+          "modal": "モーダルが開きました（シミュレート）"
+        }
+      },
+      "lists": {
+        "title": "リストと構造化データ",
+        "explanation": "適切なリスト要素を使用すると、スクリーンリーダーがアイテムの数をアナウンスし、ナビゲーションを容易にします。",
+        "recipe": {
+          "ingredients": {
+            "title": "オムレツの材料：",
+            "eggs": "卵3個",
+            "milk": "牛乳大さじ2",
+            "seasoning": "塩コショウ",
+            "butter": "バター大さじ1"
+          },
+          "steps": {
+            "title": "手順：",
+            "step1": "卵を牛乳と混ぜる",
+            "step2": "バターを熱する",
+            "step3": "卵を注ぎ、調理する",
+            "step4": "半分に折って提供"
+          }
+        }
+      },
+      "codeExamples": {
+        "pageStructure": {
+          "badComment": "悪い例：セマンティクスのない一般的なdiv",
+          "goodComment": "良い例：適切な役割を持つセマンティック要素"
+        },
+        "headings": {
+          "badComment": "悪い例：階層のないスタイル付きdiv",
+          "goodComment": "良い例：論理的な見出し階層"
+        },
+        "buttonsVsLinks": {
+          "badComment": "悪い例：セマンティクスのないクリック可能なdiv",
+          "goodComment": "良い例：正しいセマンティクスを持つボタンとリンク"
+        },
+        "lists": {
+          "badComment": "悪い例：リスト構造のないdiv",
+          "goodComment": "良い例：適切なセマンティックリスト"
+        }
+      }
+    }
+  }
+}

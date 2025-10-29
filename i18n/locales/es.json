@@ -1,0 +1,1724 @@
+{
+  "common": {
+    "skipToContent": "Saltar al contenido principal",
+    "skipToNav": "Saltar a la navegación",
+    "copyright": "© {year} Romain Malnoult. Todos los derechos reservados."
+  },
+  "navigation": {
+    "ariaLabel": "Navegación principal",
+    "mainNav": "Barra lateral de navegación",
+    "menuButton": "Menú de navegación",
+    "openMenu": "Abrir menú de navegación principal",
+    "closeMenu": "Cerrar menú de navegación principal",
+    "navigateTo": "Navegando a {page}",
+    "navStart": "Inicio de la navegación",
+    "navEnd": "Fin de la navegación",
+    "breadcrumb": "Migas de pan",
+    "backToHome": "Volver al inicio",
+    "aboutButton": "Acerca de este sitio",
+    "aboutButtonAria": "Acerca de este sitio",
+    "home": {
+      "label": "Inicio",
+      "description": "Página de inicio e introducción"
+    },
+    "colorContrast": {
+      "label": "Contraste y Colores",
+      "description": "Ratios WCAG y daltonismo"
+    },
+    "mediaAccessible": {
+      "label": "Imágenes y Medios",
+      "description": "Texto alternativo y subtítulos"
+    },
+    "performance": {
+      "label": "Rendimiento",
+      "description": "Optimización y adaptabilidad"
+    },
+    "semanticHtml": {
+      "label": "HTML Semántico",
+      "description": "Estructura y elementos HTML"
+    },
+    "ariaComponents": {
+      "label": "ARIA",
+      "description": "Atributos y componentes ARIA"
+    },
+    "keyboardNavigation": {
+      "label": "Navegación con Teclado",
+      "description": "Enfoque y atajos"
+    },
+    "accessibleForms": {
+      "label": "Formularios",
+      "description": "Etiquetas y validación"
+    }
+  },
+  "language": {
+    "switchLanguage": "Cambiar idioma",
+    "switchToEnglish": "Switch to English",
+    "switchToFrench": "Passer au français",
+    "currentLanguage": "Idioma actual",
+    "languageChanged": "Idioma cambiado a {language}",
+    "french": "Français",
+    "english": "English",
+    "switchToSpanish": "Cambiar a español",
+    "switchToItalian": "Passa all'italiano",
+    "switchToGerman": "Zu Deutsch wechseln",
+    "switchToDutch": "Schakel naar Nederlands",
+    "switchToArabic": "التبديل إلى العربية",
+    "switchToJapanese": "日本語に切り替える",
+    "switchToPortuguese": "Mudar para português",
+    "spanish": "Español",
+    "italian": "Italiano",
+    "german": "Deutsch",
+    "dutch": "Nederlands",
+    "arabic": "العربية",
+    "japanese": "日本語",
+    "portuguese": "Português"
+  },
+  "a11y": {
+    "appLabel": "Demostración de accesibilidad web",
+    "mainContent": "Contenido principal",
+    "routeAnnounce": "Navegando a {page}"
+  },
+  "seo": {
+    "siteName": "Guía Práctica de Accesibilidad Web",
+    "siteDescription": "Guía interactiva para aprender accesibilidad web según los estándares WCAG",
+    "keywords": "accesibilidad web, WCAG, a11y, ARIA, HTML semántico, navegación con teclado",
+    "author": "Romain Malnoult",
+    "jobTitle": "Tech Lead Design System y Accesibilidad",
+    "about": "Accesibilidad Web",
+    "aboutDescription": "Prácticas y estándares para hacer la web accesible para todos"
+  },
+  "components": {
+    "exampleComparison": {
+      "badExample": "Mal ejemplo",
+      "goodExample": "Buen ejemplo",
+      "explanation": "Explicación"
+    },
+    "exampleToggle": {
+      "optionsForExample": "Opciones para el ejemplo {title}",
+      "exportAsImage": "Exportar como imagen",
+      "exporting": "Exportando...",
+      "badExample": "Mal ejemplo",
+      "goodExample": "Buen ejemplo",
+      "explanation": "Explicación:"
+    },
+    "aboutModal": {
+      "title": "Acerca de este sitio",
+      "privacy": {
+        "title": "🌱 Un sitio que respeta tu privacidad",
+        "noData": "No se recopilan ni comparten datos personales. No se utilizan cookies. Sin anuncios.",
+        "analytics": "Este sitio utiliza <strong>Plausible Analytics</strong>, un servicio de análisis que respeta la privacidad, para medir el tráfico.",
+        "philosophy": "Sí, es posible crear un sitio web sin convertir tus datos en un producto."
+      },
+      "author": {
+        "title": "👨‍💻 Acerca del autor",
+        "intro": "Este sitio fue creado por <strong>Romain Malnoult</strong>, Desarrollador de Design System y Accesibilidad.",
+        "passion": "Apasionado por la accesibilidad digital y convencido de que una web inclusiva es una mejor web para todos, comparto aquí mis conocimientos y mejores prácticas para hacer la web accesible.",
+        "linkedinLabel": "Visitar el perfil de LinkedIn de Romain Malnoult (ventana nueva)",
+        "linkedinText": "Encuéntrame en LinkedIn"
+      },
+      "tech": {
+        "title": "⚡ Tecnologías",
+        "description": "Este sitio está construido con <strong>Vue.js 3</strong> y demuestra la implementación concreta de los estándares <strong>WCAG 2.1</strong> (nivel AA) y las mejores prácticas de accesibilidad.",
+        "stack": "<strong>Stack tecnológico:</strong> Vue.js 3, Vue Router, Vite, Playwright (tests), axe-core (auditoría de accesibilidad)"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Guía Práctica de Accesibilidad Web",
+      "lead": "La accesibilidad significa garantizar una web utilizable por todos: personas con discapacidad, personas mayores, usuarios móviles, conexiones lentas, brazo roto, entornos ruidosos, etc.",
+      "whyAccessibility": "¿Por qué la accesibilidad?",
+      "stats": {
+        "disability": "de la población mundial vive con una discapacidad",
+        "directive": "Directiva Europea de Accesibilidad",
+        "errors": "de los sitios web tienen errores de accesibilidad"
+      },
+      "curbCut": {
+        "title": "Cuando diseñamos para la discapacidad, resolvemos problemas que todos encuentran",
+        "intro1": "Los vados peatonales revolucionaron las ciudades para sillas de ruedas, pero también para todos los peatones con maletas, cochecitos o bicicletas.",
+        "intro2": "Una mejora para algunos beneficia a todos. Este concepto, nacido de las rampas de acceso a la calle, se aplica perfectamente a la web.",
+        "imageCaption": "Ejemplo típico de un vado peatonal",
+        "examples": {
+          "ramps": {
+            "title": "Vados peatonales",
+            "designedFor": "Usuarios de sillas de ruedas",
+            "benefitsAlso": "Padres con cochecitos, ciclistas, repartidores con carros, personas con maletas con ruedas, patinetas, patinetes, personas mayores"
+          },
+          "captions": {
+            "title": "Subtítulos de video",
+            "designedFor": "Personas sordas o con problemas de audición",
+            "benefitsAlso": "Ver videos en el metro, aprender un idioma extranjero, seguir una conferencia en un entorno ruidoso, entender acentos difíciles"
+          },
+          "keyboard": {
+            "title": "Navegación con teclado",
+            "designedFor": "Personas que no pueden usar un ratón",
+            "benefitsAlso": "Desarrolladores usando atajos, usuarios con ratón roto, usuarios avanzados que prefieren el teclado, personas con el brazo en cabestrillo"
+          },
+          "voice": {
+            "title": "Control por voz de smartphones",
+            "designedFor": "Personas ciegas y personas con discapacidades motoras",
+            "benefitsAlso": "Mensajería mientras se conduce, deportes con auriculares, manos ocupadas con herramientas, control remoto, multitarea en la oficina"
+          },
+          "toothbrush": {
+            "title": "Cepillo de dientes eléctrico",
+            "designedFor": "Personas con movilidad reducida o artritis (1954)",
+            "benefitsAlso": "Mejor cepillado para todos, recomendado por dentistas, niños aprendiendo, personas cansadas, eficiencia superior comprobada"
+          },
+          "audiobooks": {
+            "title": "Audiolibros",
+            "designedFor": "Personas ciegas (1932, American Foundation for the Blind)",
+            "benefitsAlso": "Conductores, corredores, multitarea, disléxicos, niños aprendiendo a leer, $1.3 mil millones en ventas en 2020"
+          }
+        },
+        "quote": "La accesibilidad no es una restricción, es innovación disfrazada."
+      },
+      "tools": {
+        "title": "Herramientas gratuitas para probar la accesibilidad",
+        "intro": "Estas herramientas te ayudan a identificar y corregir problemas de accesibilidad:",
+        "wave": {
+          "name": "WAVE",
+          "description": "Extensión del navegador que visualiza errores de accesibilidad directamente en tu página",
+          "features": {
+            "realtime": "Análisis en tiempo real",
+            "visualization": "Visualización de errores",
+            "report": "Informe detallado"
+          },
+          "link": "Instalar WAVE"
+        },
+        "axe": {
+          "name": "axe DevTools",
+          "description": "Extensión para desarrolladores integrada en DevTools, muy precisa y detallada",
+          "features": {
+            "integrated": "Integrado en DevTools",
+            "automated": "Pruebas automatizadas",
+            "suggestions": "Sugerencias de corrección"
+          },
+          "link": "Instalar axe DevTools"
+        },
+        "lighthouse": {
+          "name": "Lighthouse",
+          "description": "Auditoría integrada en Chrome DevTools, incluye una puntuación general de accesibilidad",
+          "features": {
+            "builtin": "Ya en Chrome",
+            "score": "Puntuación general",
+            "recommendations": "Recomendaciones"
+          },
+          "link": "Guía de Lighthouse"
+        },
+        "mdn": {
+          "name": "MDN Accessibility",
+          "description": "Documentación de referencia completa sobre accesibilidad web",
+          "features": {
+            "guides": "Guías detalladas",
+            "examples": "Ejemplos prácticos",
+            "updates": "Actualizaciones regulares"
+          },
+          "link": "Documentación MDN"
+        },
+        "cca": {
+          "name": "Colour Contrast Analyser",
+          "description": "Aplicación gratuita para probar contrastes de color según WCAG",
+          "features": {
+            "realtime": "Pruebas en tiempo real",
+            "picker": "Selector de color",
+            "ratios": "Ratios WCAG AA/AAA"
+          },
+          "link": "Descargar CCA"
+        },
+        "insights": {
+          "name": "Accessibility Insights",
+          "description": "Suite de herramientas de Microsoft para pruebas manuales y automatizadas en profundidad",
+          "features": {
+            "guided": "Pruebas guiadas",
+            "focus": "Orden visual de enfoque",
+            "fastpass": "FastPass automatizado"
+          },
+          "link": "Instalar AI"
+        },
+        "proTip": "Consejo profesional: Usa estas herramientas como complemento, no como reemplazo de las pruebas con usuarios reales. Ninguna herramienta automatizada puede detectar el 100% de los problemas de accesibilidad.",
+        "game": {
+          "name": "Accessible Game Jam",
+          "badge": "Interactivo",
+          "description": "¡Pon a prueba tus conocimientos de accesibilidad web de forma interactiva! Un juego para aprender mientras te diviertes.",
+          "features": {
+            "quiz": "Cuestionario interactivo",
+            "cases": "Casos prácticos",
+            "learning": "Aprendizaje lúdico"
+          },
+          "link": "Jugar ahora"
+        }
+      },
+      "screenReaders": {
+        "title": "Lectores de pantalla comunes",
+        "intro": "Comprender los lectores de pantalla más utilizados para probar mejor tus interfaces:",
+        "nvda": {
+          "name": "NVDA",
+          "platform": "Windows",
+          "description": "Lector de pantalla gratuito y de código abierto, muy popular",
+          "free": "Gratuito",
+          "usage": "41% de uso",
+          "link": "Descargar NVDA"
+        },
+        "jaws": {
+          "name": "JAWS",
+          "platform": "Windows",
+          "description": "Lector de pantalla profesional, líder histórico del mercado",
+          "paid": "De pago",
+          "usage": "40% de uso",
+          "link": "Sitio oficial de JAWS"
+        },
+        "voiceover": {
+          "name": "VoiceOver",
+          "platform": "macOS/iOS",
+          "description": "Lector de pantalla integrado en todos los dispositivos Apple",
+          "builtin": "Integrado",
+          "usage": "8% de uso",
+          "shortcut": "Atajo:"
+        },
+        "talkback": {
+          "name": "TalkBack",
+          "platform": "Android",
+          "description": "Lector de pantalla predeterminado en Android",
+          "builtin": "Integrado",
+          "usage": "Uso móvil",
+          "activation": "Activación: Configuración > Accesibilidad"
+        },
+        "testing": {
+          "title": "Cómo probar con un lector de pantalla",
+          "steps": {
+            "close": "Cierra los ojos o apaga la pantalla",
+            "keyboard": "Navega solo con el teclado (Tab, flechas, Enter, Espacio)",
+            "listen": "Escucha atentamente lo que se anuncia",
+            "verify": "Verifica que todo sea comprensible sin ver la pantalla"
+          },
+          "note": "Nota: 15 minutos de prueba con un lector de pantalla vale más que horas de auditoría automatizada."
+        }
+      },
+      "quickNav": {
+        "title": "Navegación rápida",
+        "intro": "Usa el menú lateral o estos atajos para explorar ejemplos:",
+        "links": {
+          "contrast": {
+            "title": "Contraste",
+            "description": "WCAG, daltonismo, temas"
+          },
+          "media": {
+            "title": "Imágenes y Medios",
+            "description": "Texto alternativo, videos con subtítulos"
+          },
+          "aria": {
+            "title": "ARIA",
+            "description": "Acordeón, toast, tabla ordenable"
+          },
+          "keyboard": {
+            "title": "Navegación con Teclado",
+            "description": "Enfoque visible, trampa, modal accesible"
+          },
+          "forms": {
+            "title": "Formularios",
+            "description": "Etiquetas, validación, mensajes"
+          },
+          "semantic": {
+            "title": "HTML Semántico",
+            "description": "Estructura, encabezados, botones vs enlaces"
+          },
+          "performance": {
+            "title": "Rendimiento",
+            "description": "Movimiento reducido, zoom, adaptabilidad"
+          }
+        }
+      }
+    },
+    "accessibleForms": {
+      "title": "Formularios Accesibles",
+      "description": "Crea formularios utilizables por todos con una experiencia clara y guiada",
+      "labelsAndAssociations": {
+        "title": "Etiquetas y asociaciones",
+        "explanation": "Cada campo de formulario debe tener una etiqueta explícita y correctamente asociada. Los marcadores de posición no reemplazan las etiquetas.",
+        "bad": {
+          "heading": "Iniciar sesión",
+          "email": "Tu correo electrónico",
+          "password": "Contraseña",
+          "remember": "Recuérdame",
+          "submit": "Iniciar sesión"
+        },
+        "good": {
+          "heading": "Iniciar sesión",
+          "emailLabel": "Dirección de correo electrónico",
+          "emailPlaceholder": "{'example@domain.com'}",
+          "emailHelp": "Nunca compartiremos tu correo electrónico",
+          "passwordLabel": "Contraseña",
+          "passwordHelp": "Mínimo 8 caracteres con mayúsculas y números",
+          "remember": "Recuérdame",
+          "submit": "Iniciar sesión"
+        }
+      },
+      "validation": {
+        "title": "Validación y mensajes de error",
+        "explanation": "Los errores deben ser claramente anunciados, asociados con los campos relevantes y proporcionar instrucciones precisas para la corrección.",
+        "bad": {
+          "heading": "Registro a newsletter",
+          "name": "Nombre",
+          "email": "Correo electrónico",
+          "age": "Edad",
+          "errorSummary": "Por favor corrija los errores",
+          "submit": "Registrarse"
+        },
+        "good": {
+          "heading": "Registro a newsletter",
+          "nameLabel": "Nombre completo",
+          "nameError": "El nombre es obligatorio",
+          "emailLabel": "Dirección de correo electrónico",
+          "emailError": "Por favor ingrese una dirección de correo electrónico válida ({'example@domain.com'})",
+          "ageLabel": "Edad",
+          "ageHelp": "Debes tener al menos 16 años",
+          "ageError": "La edad mínima requerida es 16",
+          "errorSummaryTitle": "Errores a corregir:",
+          "submit": "Registrarse",
+          "errors": {
+            "nameRequired": "El nombre es obligatorio",
+            "emailInvalid": "La dirección de correo electrónico no es válida",
+            "ageMinimum": "La edad mínima requerida es 16"
+          }
+        }
+      },
+      "fieldsets": {
+        "title": "Grupos de campos con aria-labelledby",
+        "explanation": "Los grupos de campos relacionados deben estar asociados con sus títulos mediante aria-labelledby para crear relaciones semánticas claras, particularmente para botones de radio y casillas de verificación.",
+        "bad": {
+          "heading": "Preferencias",
+          "email": "Correo electrónico",
+          "phone": "Teléfono",
+          "sms": "SMS",
+          "newsletter": "Newsletter",
+          "offers": "Ofertas",
+          "updates": "Actualizaciones",
+          "name": "Nombre",
+          "frequency": "Elegir...",
+          "daily": "Diario",
+          "weekly": "Semanal",
+          "monthly": "Mensual",
+          "submit": "OK"
+        },
+        "good": {
+          "heading": "Preferencias de contacto",
+          "personalInfo": {
+            "title": "Información personal",
+            "nameLabel": "Nombre completo",
+            "nameDescription": "Tu nombre completo como aparecerá en nuestras comunicaciones",
+            "emailLabel": "Dirección de correo electrónico",
+            "emailDescription": "Usaremos este correo para todas nuestras comunicaciones"
+          },
+          "contactMethod": {
+            "title": "Método de contacto preferido",
+            "email": "Correo electrónico",
+            "phone": "Teléfono",
+            "sms": "SMS"
+          },
+          "commTypes": {
+            "title": "Tipos de comunicación",
+            "description": "Selecciona los tipos de comunicaciones que deseas recibir",
+            "newsletter": "Newsletter",
+            "offers": "Ofertas especiales",
+            "updates": "Actualizaciones de productos"
+          },
+          "frequency": {
+            "title": "Frecuencia de comunicación",
+            "label": "Elegir frecuencia",
+            "description": "Establece la frecuencia máxima de nuestros envíos",
+            "options": {
+              "select": "Seleccionar...",
+              "daily": "Diario",
+              "weekly": "Semanal",
+              "monthly": "Mensual"
+            }
+          },
+          "submit": "Guardar preferencias"
+        }
+      },
+      "complexValidation": {
+        "title": "Formulario complejo con validación en tiempo real",
+        "explanation": "Para formularios complejos, la validación en tiempo real puede ayudar, pero debe implementarse de manera no intrusiva y accesible.",
+        "bad": {
+          "heading": "Crear cuenta",
+          "username": "Nombre de usuario",
+          "email": "Correo electrónico",
+          "password": "Contraseña",
+          "errors": {
+            "usernameTooShort": "Demasiado corto",
+            "usernameInvalidChars": "Caracteres inválidos",
+            "emailInvalid": "Correo inválido",
+            "passwordTooShort": "Demasiado corta"
+          },
+          "submit": "Crear cuenta"
+        },
+        "good": {
+          "heading": "Crear cuenta",
+          "usernameLabel": "Nombre de usuario",
+          "usernameRequirements": {
+            "title": "Requisitos:",
+            "minLength": "Al menos 3 caracteres",
+            "validChars": "Solo letras, números y guión bajo"
+          },
+          "usernameErrors": {
+            "minLength": "El nombre de usuario debe contener al menos 3 caracteres",
+            "invalidChars": "Solo se permiten letras, números y guión bajo"
+          },
+          "usernameValid": "Nombre de usuario disponible",
+          "emailLabel": "Dirección de correo electrónico",
+          "emailError": "Por favor ingrese una dirección de correo electrónico válida",
+          "emailValid": "Correo electrónico válido",
+          "passwordLabel": "Contraseña",
+          "passwordStrength": {
+            "title": "Fortaleza de la contraseña:",
+            "length": "8+ caracteres",
+            "uppercase": "Mayúscula",
+            "number": "Número",
+            "special": "Carácter especial"
+          },
+          "passwordError": "La contraseña debe contener al menos 8 caracteres",
+          "submit": "Crear cuenta",
+          "cancel": "Cancelar"
+        }
+      },
+      "codeExamples": {
+        "labelsAndAssociations": {
+          "badComment": "❌ Malo: Etiquetas faltantes",
+          "noLabel": "Sin etiqueta asociada",
+          "noLabelNoAutocomplete": "Sin etiqueta asociada, sin autocompletado",
+          "checkboxNotAssociated": "Casilla de verificación no asociada",
+          "goodComment": "✅ Bueno: Etiquetas explícitas y asociadas",
+          "labelWithFor": "Etiqueta asociada mediante for/id",
+          "labelWithInstructions": "Etiqueta con instrucciones",
+          "checkboxCorrectlyAssociated": "Casilla de verificación correctamente asociada"
+        },
+        "validation": {
+          "badComment": "❌ Malo: Errores mal anunciados",
+          "noAssociation": "Sin asociación etiqueta-entrada",
+          "visualErrorOnly": "Solo error visual",
+          "noErrorInfo": "Sin información de error",
+          "genericMessage": "Mensaje de error genérico e inútil",
+          "goodComment": "✅ Bueno: Errores claramente asociados",
+          "errorSummary": "Resumen de errores con navegación",
+          "specificErrorAssociated": "Campo con error específico asociado"
+        },
+        "fieldsets": {
+          "badComment": "❌ Malo: Estructura desorganizada",
+          "mixedElements": "Elementos mezclados sin lógica",
+          "textFieldNoContext": "Campo de texto sin contexto",
+          "selectNoContext": "Select sin contexto",
+          "goodComment": "✅ Bueno: Grupos lógicos con aria-labelledby",
+          "personalInfoSection": "Sección de información personal",
+          "radioGroup": "Grupo de botones de radio",
+          "checkboxGroup": "Grupo de casillas de verificación"
+        },
+        "complexValidation": {
+          "badComment": "❌ Malo: Validación intrusiva",
+          "immediateValidation": "Validación inmediata en cada pulsación",
+          "constantErrorToggle": "Error que aparece/desaparece constantemente",
+          "noAriaDescribedby": "Sin asociación con aria-describedby",
+          "shortMessages": "Mensajes de error demasiado cortos y no útiles",
+          "noAutocomplete": "Sin autocompletado para ayudar a los gestores de contraseñas",
+          "goodComment": "✅ Bueno: Validación respetuosa con retroalimentación",
+          "validationOnBlur": "Validación en blur, no en input",
+          "clearInstructions": "Instrucciones claras",
+          "accessibleFeedback": "Retroalimentación accesible",
+          "passwordStrengthIndicator": "Indicador de fortaleza de contraseña"
+        }
+      }
+    },
+    "ariaComponents": {
+      "title": "ARIA",
+      "description": "Enriquece la semántica de componentes complejos para hacerlos accesibles",
+      "whatIsAria": {
+        "title": "¿Qué es ARIA?",
+        "intro": "ARIA (Accessible Rich Internet Applications) es una especificación del W3C que permite mejorar la accesibilidad de aplicaciones web ricas y componentes dinámicos."
+      },
+      "faq": {
+        "title": "Preguntas frecuentes",
+        "questions": {
+          "q1": {
+            "title": "¿Qué es la accesibilidad web?",
+            "content": "La accesibilidad web significa hacer que los sitios web y aplicaciones sean utilizables por todos, incluidas las personas con discapacidades."
+          },
+          "q2": {
+            "title": "¿Por qué es importante?",
+            "content": "El 15% de la población mundial vive con una discapacidad (Fuente: Naciones Unidas). La accesibilidad mejora la experiencia para todos y a menudo es una obligación legal."
+          },
+          "q3": {
+            "title": "¿Cómo empezar?",
+            "content": "Comienza aprendiendo las pautas WCAG, usa herramientas de auditoría y prueba con usuarios reales."
+          }
+        }
+      },
+      "forms": {
+        "title": "Formularios con atributos ARIA",
+        "explanation": "Los atributos ARIA enriquecen los formularios proporcionando etiquetas, descripciones y estados a las tecnologías de asistencia.",
+        "validation": {
+          "emailRequired": "El correo electrónico es obligatorio",
+          "emailInvalid": "Formato de correo electrónico inválido",
+          "passwordRequired": "La contraseña es obligatoria",
+          "passwordWeak": "La contraseña debe contener letras y números",
+          "termsRequired": "Debes aceptar los términos"
+        },
+        "bad": {
+          "title": "Formulario sin ARIA",
+          "description": "❌ Formulario inaccesible sin atributos ARIA apropiados:",
+          "emailPlaceholder": "Tu correo electrónico",
+          "errorMessage": "Contraseña demasiado corta"
+        },
+        "good": {
+          "title": "Formulario con ARIA",
+          "description": "✅ Formulario accesible con atributos ARIA apropiados:",
+          "emailLabel": "Dirección de correo electrónico (obligatorio)",
+          "emailPlaceholder": "{'example@email.com'}",
+          "emailHint": "Formato: nombre{'@'}ejemplo.com",
+          "submitLabel": "Enviar formulario",
+          "passwordLabel": "Contraseña (8 caracteres mínimo)",
+          "passwordPlaceholder": "Contraseña",
+          "passwordRequirements": "Mínimo 8 caracteres con números y letras",
+          "passwordError": "La contraseña debe contener al menos 8 caracteres",
+          "notificationOptions": "Opciones de notificación",
+          "emailNotification": "Notificaciones por correo electrónico",
+          "emailNotificationHint": "Recibir actualizaciones importantes por correo electrónico",
+          "smsNotification": "Notificaciones por SMS",
+          "smsNotificationHint": "Recibir alertas urgentes por SMS",
+          "termsLabel": "Acepto los",
+          "termsLink": "términos de uso",
+          "termsLinkLabel": "Leer los términos de uso",
+          "submitButton": "Enviar"
+        },
+        "success": "Formulario enviado con éxito",
+        "error": "Por favor corrija los errores antes de enviar",
+        "searchLaunched": "Búsqueda iniciada"
+      },
+      "accordion": {
+        "title": "Acordeón accesible",
+        "explanation": "Un acordeón debe usar atributos ARIA apropiados, soportar navegación con teclado y anunciar cambios de estado.",
+        "bad": {
+          "title": "Sin atributos ARIA"
+        },
+        "good": {
+          "title": "Con ARIA apropiado"
+        }
+      },
+      "tabindex": {
+        "title": "Tabindex y navegación con teclado",
+        "intro": "El atributo tabindex controla si un elemento puede recibir enfoque del teclado y en qué orden.",
+        "positive": {
+          "title": "✅ tabindex=\"0\"",
+          "description": "El elemento es enfocable en el orden natural del DOM"
+        },
+        "negative": {
+          "title": "⚠️ tabindex=\"-1\"",
+          "description": "Enfocable por JavaScript pero no por Tab"
+        },
+        "greaterThanZero": {
+          "title": "❌ tabindex > 0",
+          "description": "Cambia el orden de navegación (¡evitar!)"
+        },
+        "bestPractices": {
+          "title": "📋 Mejores prácticas de Tabindex",
+          "practice1": "Usa <code class=\"inline-code\">tabindex=\"0\"</code> para hacer enfocables elementos interactivos personalizados",
+          "practice2": "Usa <code class=\"inline-code\">tabindex=\"-1\"</code> para enfoque programático (modales, alertas)",
+          "practice3": "NUNCA uses valores positivos - respeta el orden del DOM",
+          "practice4": "Los elementos interactivos nativos (<code class=\"inline-code\">&lt;button&gt;</code>, <code class=\"inline-code\">&lt;a&gt;</code>, <code class=\"inline-code\">&lt;input&gt;</code>) no necesitan tabindex"
+        },
+        "interactive": {
+          "title": "🎯 Ejemplos interactivos",
+          "description": "Prueba la navegación con teclado (Tab/Shift+Tab) con estos elementos:"
+        },
+        "focusable": {
+          "title": "✅ Elementos enfocables",
+          "nativeButton": "Botón nativo",
+          "textInput": "Campo de texto",
+          "link": "Enlace",
+          "customButton": "Botón personalizado (div)",
+          "customButtonLabel": "Botón personalizado",
+          "customTab": "Pestaña personalizada",
+          "menuItem": "Opción de menú",
+          "menuItemLabel": "Opción de menú"
+        },
+        "nonFocusable": {
+          "title": "❌ Elementos no enfocables",
+          "simpleDiv": "Texto simple (div)",
+          "span": "Texto en línea (span)",
+          "paragraph": "Párrafo",
+          "disabledButton": "Botón deshabilitado",
+          "disabledInput": "Campo deshabilitado",
+          "ariaHidden": "elemento aria-hidden",
+          "alert": "Mensaje de alerta (tabindex=\"-1\")",
+          "focusAlert": "Enfocar en alerta",
+          "alertUpdated": "¡Mensaje de alerta ahora enfocado!"
+        },
+        "testingTips": {
+          "title": "💡 Consejos de prueba",
+          "tip1": "Usa <kbd>Tab</kbd> para navegar hacia adelante",
+          "tip2": "Usa <kbd>Shift + Tab</kbd> para navegar hacia atrás",
+          "tip3": "Usa <kbd>Espacio</kbd> o <kbd>Enter</kbd> para activar elementos",
+          "tip4": "Observa el indicador de enfoque (contorno azul)",
+          "tip5": "Nota qué elementos pueden o no pueden recibir enfoque"
+        }
+      },
+      "dropdown": {
+        "title": "Menú desplegable accesible",
+        "explanation": "Un menú desplegable debe soportar navegación con teclado, cerrarse con Escape y mantener el enfoque apropiadamente.",
+        "bad": {
+          "title": "Menú sin ARIA",
+          "actions": "Acciones",
+          "edit": "Editar",
+          "copy": "Copiar",
+          "delete": "Eliminar",
+          "share": "Compartir"
+        },
+        "good": {
+          "title": "Menú con ARIA"
+        }
+      },
+      "gallery": {
+        "title": "Galería de imágenes accesible",
+        "explanation": "Una galería de imágenes debe permitir navegación con teclado y proporcionar descripciones contextuales para cada imagen. El patrón ARIA tablist/tab/tabpanel es perfecto para este caso de uso.",
+        "ariaLabel": "Imágenes del producto",
+        "altSuffix": "Miniatura",
+        "images": {
+          "front": "Vista frontal del MacBook Pro de 16 pulgadas con la pantalla cerrada, mostrando el elegante diseño de aluminio.",
+          "open": "MacBook Pro abierto a 90 grados, pantalla encendida mostrando el escritorio de macOS, teclado y trackpad visibles.",
+          "side": "Vista lateral del MacBook Pro cerrado, destacando su perfil delgado y puertos.",
+          "laptop1": {
+            "alt": "MacBook Pro vista frontal, pantalla cerrada"
+          },
+          "laptop2": {
+            "alt": "MacBook Pro abierto mostrando pantalla y teclado"
+          },
+          "laptop3": {
+            "alt": "MacBook Pro vista lateral mostrando grosor"
+          }
+        }
+      },
+      "sortableTable": {
+        "title": "Tabla ordenable accesible",
+        "explanation": "Una tabla ordenable debe indicar el estado de ordenación actual, permitir navegación con teclado y anunciar cambios a los lectores de pantalla.",
+        "columns": {
+          "name": "Nombre",
+          "email": "Correo electrónico",
+          "role": "Rol",
+          "status": "Estado"
+        },
+        "users": {
+          "alice": {
+            "name": "Alice Martin",
+            "role": "Admin",
+            "status": "Activo"
+          },
+          "bob": {
+            "name": "Bob Dupont",
+            "role": "Usuario",
+            "status": "Inactivo"
+          },
+          "charlie": {
+            "name": "Charlie Leroy",
+            "role": "Moderador",
+            "status": "Activo"
+          },
+          "diana": {
+            "name": "Diana Moreau",
+            "role": "Usuario",
+            "status": "Suspendido"
+          }
+        }
+      },
+      "liveRegions": {
+        "title": "Regiones dinámicas aria-live",
+        "explanation": "Las regiones aria-live permiten anunciar cambios de contenido a los lectores de pantalla. 'polite' espera a que termine el anuncio actual, 'assertive' interrumpe inmediatamente.",
+        "bad": {
+          "title": "Sin aria-live",
+          "description": "Los cambios no se anuncian",
+          "badComment": "Malo: sin atributo aria-live",
+          "updateButton": "Actualizar contador",
+          "clearButton": "Limpiar",
+          "defaultContent": "Contador: 0",
+          "updatedContent": "Contador actualizado:",
+          "problems": {
+            "title": "Problemas:",
+            "problem1": "Los cambios no se anuncian",
+            "problem2": "Los usuarios de lectores de pantalla no saben que el contenido ha cambiado",
+            "problem3": "Sin indicación de la importancia del mensaje"
+          }
+        },
+        "good": {
+          "title": "Con aria-live apropiado",
+          "description": "Los cambios se anuncian según su prioridad",
+          "politeComment": "Bueno: con aria-live=\"polite\" para información",
+          "assertiveComment": "Bueno: con aria-live=\"assertive\" para alertas",
+          "infoMessage": "Información: Datos actualizados",
+          "alertMessage": "Advertencia: Acción inmediata requerida",
+          "typeLabel": "Tipo de región:",
+          "politeOption": "Polite (espera)",
+          "assertiveOption": "Assertive (interrumpe)",
+          "offOption": "Off (silencioso)",
+          "infoButton": "Info (polite)",
+          "alertButton": "Alerta (assertive)",
+          "clearButton": "Limpiar",
+          "politeDefault": "Zona polite (información)",
+          "assertiveDefault": "Zona assertive (alertas)",
+          "politeMessage": "ℹ️ Información: El contador está en",
+          "assertiveMessage": "⚠️ ALERTA: ¡Acción requerida! (Mensaje",
+          "advantages": {
+            "title": "Ventajas:",
+            "advantage1": "Los mensajes importantes interrumpen con aria-live=\"assertive\"",
+            "advantage2": "Los mensajes informativos esperan con aria-live=\"polite\"",
+            "advantage3": "aria-atomic=\"true\" anuncia el contenido completo de la región",
+            "advantage4": "Los roles apropiados (status, alert) proporcionan más contexto"
+          }
+        }
+      },
+      "iconButtons": {
+        "title": "Botones de iconos accesibles",
+        "explanation": "Los botones que contienen solo iconos deben tener un aria-label o texto visualmente oculto para ser entendidos por los lectores de pantalla.",
+        "heading": "Botones sin descripción",
+        "bad": {
+          "description": "Estos botones no tienen indicación textual:",
+          "problems": {
+            "title": "Problemas:",
+            "problem1": "Los lectores de pantalla solo anuncian \"botón\"",
+            "problem2": "Imposible saber la acción sin ver el icono",
+            "problem3": "Los emojis pueden ser malinterpretados",
+            "problem4": "Sin tooltip al pasar el ratón"
+          }
+        },
+        "good": {
+          "title": "Botones accesibles",
+          "description": "Varios enfoques para hacer los iconos accesibles:",
+          "approach1": {
+            "title": "1. Con aria-label",
+            "delete": "Eliminar elemento",
+            "edit": "Editar elemento",
+            "favorite": "Agregar a favoritos"
+          },
+          "approach2": {
+            "title": "2. Con texto visible",
+            "search": "Buscar",
+            "settings": "Configuración"
+          },
+          "approach3": {
+            "title": "3. Con texto visualmente oculto",
+            "save": "Guardar",
+            "share": "Compartir"
+          },
+          "bestPractices": {
+            "title": "Mejores prácticas:",
+            "practice1": "Proporciona siempre texto alternativo (aria-label, texto oculto o texto visible)",
+            "practice2": "Usa aria-hidden=\"true\" en iconos decorativos",
+            "practice3": "Agrega tooltips con el atributo title",
+            "practice4": "Prefiere texto visible cuando el espacio lo permita"
+          }
+        }
+      },
+      "combobox": {
+        "title": "Combobox / Búsqueda con sugerencias",
+        "explanation": "Una búsqueda con sugerencias (combobox) debe ser navegable con teclado, anunciar resultados y permitir la selección.",
+        "bad": {
+          "title": "Sin ARIA ni navegación con teclado",
+          "placeholder": "Buscar un país...",
+          "selected": "Seleccionado:"
+        },
+        "good": {
+          "title": "Con ARIA y navegación con teclado",
+          "label": "Buscar un país",
+          "placeholder": "Escribe para buscar...",
+          "resultsCount": "resultado",
+          "resultsCountPlural": "s",
+          "available": "disponible",
+          "availablePlural": "s",
+          "selected": "Seleccionado:"
+        }
+      },
+      "toast": {
+        "title": "Notificaciones toast (Live Regions)",
+        "explanation": "Las notificaciones dinámicas deben ser anunciadas a los lectores de pantalla sin robar el enfoque. Usa role='status' para información y role='alert' para errores.",
+        "bad": {
+          "title": "Sin aria-live",
+          "description": "❌ Las notificaciones no se anuncian a los lectores de pantalla",
+          "message": "Tu solicitud ha sido guardada",
+          "showButton": "Mostrar notificación"
+        },
+        "good": {
+          "title": "Con aria-live apropiado",
+          "description": "✅ Las notificaciones se anuncian correctamente",
+          "statusMessage": "Tu solicitud ha sido guardada",
+          "closeNotification": "Cerrar notificación",
+          "errorMessage": "Error: no se puede completar la acción",
+          "closeAlert": "Cerrar alerta",
+          "closePrefix": "Cerrar",
+          "alertType": "alerta",
+          "notificationType": "notificación",
+          "infoButton": "Info (polite)",
+          "errorButton": "Error (assertive)",
+          "successMessage": "¡Éxito! Tus cambios han sido guardados.",
+          "errorDetailMessage": "Error: No se pueden guardar los cambios.",
+          "inaccessibleMessage": "Notificación inaccesible (no anunciada)",
+          "differences": {
+            "title": "Diferencias:",
+            "diff1": "<code>role=\"status\"</code> + <code>aria-live=\"polite\"</code>: Para notificaciones informativas, no interrumpe la lectura actual",
+            "diff2": "<code>role=\"alert\"</code> + <code>aria-live=\"assertive\"</code>: Para errores críticos, interrumpe inmediatamente",
+            "diff3": "<code>aria-atomic=\"true\"</code>: Anuncia el contenido completo de la notificación"
+          }
+        }
+      },
+      "principles": {
+        "roles": {
+          "title": "🏷️ Roles",
+          "description": "Definen qué es un elemento (button, navigation, alert...)",
+          "example": "role=\"button\""
+        },
+        "states": {
+          "title": "📊 Estados",
+          "description": "Describen el estado actual de un elemento (checked, expanded, disabled...)",
+          "example": "aria-expanded=\"true\""
+        },
+        "properties": {
+          "title": "🔧 Propiedades",
+          "description": "Proporcionan información adicional (label, describedby, controls...)",
+          "example": "aria-label=\"Menú principal\""
+        }
+      },
+      "goldenRules": {
+        "title": "⚠️ Regla de Oro de ARIA",
+        "rule": "No uses ARIA si puedes usar HTML nativo"
+      },
+      "ariaAttributes": {
+        "title": "Atributos ARIA usados:",
+        "ariaLabel": "<code>aria-label</code>: Proporciona una etiqueta accesible",
+        "ariaDescribedby": "<code>aria-describedby</code>: Asocia una descripción detallada",
+        "ariaRequired": "<code>aria-required</code>: Indica un campo obligatorio",
+        "ariaInvalid": "<code>aria-invalid</code>: Señala un campo inválido",
+        "ariaLabelledby": "<code>aria-labelledby</code>: Referencia una etiqueta existente",
+        "roleAlert": "<code>role=\"alert\"</code>: Anuncia errores inmediatamente",
+        "ariaHidden": "<code>aria-hidden</code>: Oculta elementos decorativos",
+        "ariaLive": "<code>aria-live</code>: Anuncia cambios dinámicos"
+      },
+      "table": {
+        "ariaLabel": "Lista de usuarios",
+        "instructions": "Haz clic en los encabezados de columna para ordenar la tabla. Usa Tab para navegar entre los botones de ordenación.",
+        "sortStatus": {
+          "ascending": "ascendente",
+          "descending": "descendente",
+          "message": "Tabla ordenada por {column} en orden {direction}"
+        }
+      },
+      "alerts": {
+        "customButtonClicked": "¡Botón personalizado clickeado!",
+        "tabSelected": "¡Pestaña seleccionada!",
+        "menuSelected": "¡Opción de menú seleccionada!",
+        "formSuccess": "¡Formulario enviado con éxito!"
+      },
+      "codeExamples": {
+        "forms": {
+          "badNoLabel": "Malo: sin etiqueta, sin descripción",
+          "badIconNotAccessible": "Malo: icono no accesible",
+          "badErrorNotAssociated": "Malo: error no asociado, sin autocompletado",
+          "goodAriaLabel": "Bueno: aria-label para campo sin etiqueta visible",
+          "goodButtonLabel": "Bueno: botón con aria-label",
+          "goodErrorAssociated": "Bueno: error asociado con aria-describedby"
+        },
+        "accordion": {
+          "badComment": "Malo: Sin atributos ARIA, sin navegación con teclado",
+          "goodComment": "Bueno: ARIA completo con navegación con teclado"
+        },
+        "tabindex": {
+          "goodInteractive": "Bueno: Elemento interactivo enfocable",
+          "goodProgrammatic": "Bueno: Para enfoque programático",
+          "badBreaksOrder": "Malo: Rompe el orden de tabulación natural",
+          "interactiveExamples": "Ejemplos interactivos",
+          "nativeFocusable": "Elementos nativos enfocables",
+          "customFocusable": "Elementos personalizados enfocables",
+          "nonFocusable": "Elementos no enfocables",
+          "disabledElements": "Elementos deshabilitados",
+          "hiddenFromSR": "Ocultos de lectores de pantalla",
+          "programmaticOnly": "Solo enfocables programáticamente"
+        },
+        "dropdown": {
+          "badComment": "Malo: Sin rol de menú, sin trampa de enfoque",
+          "goodComment": "Bueno: Atributos ARIA y gestión de enfoque"
+        },
+        "gallery": {
+          "badComment": "❌ Malo: galería no accesible con teclado",
+          "goodComment": "✅ Bueno: galería accesible con navegación con teclado"
+        },
+        "sortableTable": {
+          "badComment": "❌ Malo: Sin ARIA, sin navegación con teclado",
+          "goodComment": "✅ Bueno: ARIA completo + navegación con teclado"
+        },
+        "liveRegions": {
+          "badComment": "Malo: no anunciado a lectores de pantalla",
+          "goodInfoComment": "Bueno: notificación de información (polite)",
+          "goodAlertComment": "Bueno: alerta de error (assertive)"
+        }
+      }
+    },
+    "colorContrast": {
+      "title": "Contraste y Colores",
+      "description": "Garantiza una legibilidad óptima para todos los usuarios",
+      "wcagStats": {
+        "title": "Criterios WCAG EN 301 549",
+        "normalText": {
+          "ratio": "4.5:1",
+          "label": "Texto normal - Ratio de contraste mínimo",
+          "detail": "EN 301 549 / WCAG AA"
+        },
+        "largeText": {
+          "ratio": "3:1",
+          "label": "Texto grande - Ratio de contraste mínimo",
+          "detail": "18pt+ o 14pt+ en negrita"
+        }
+      },
+      "textContrast": {
+        "title": "Contraste de texto",
+        "explanation": "El ratio de contraste WCAG AA requiere un mínimo de 4.5:1 para texto normal y 3:1 para texto grande (18pt+ o 14pt+ en negrita). El nivel AAA es más estricto con 7:1 y 4.5:1.",
+        "bad": {
+          "sample1": "Texto gris claro sobre blanco (2.2:1) - Falla",
+          "sample2": "Texto gris medio sobre blanco (3.8:1) - Falla",
+          "sample3": "Texto amarillo sobre blanco (1.9:1) - Falla",
+          "sample4": "Naranja sobre rojo (1.2:1) - Falla",
+          "sample5": "Gris oscuro sobre fondo negro (2.5:1) - Falla",
+          "sample6": "Azul sobre fondo oscuro (1.8:1) - Falla"
+        },
+        "good": {
+          "sample1": "Texto gris oscuro sobre blanco (7.0:1) - Pasa AAA",
+          "sample2": "Texto negro sobre blanco (21:1) - Pasa AAA",
+          "sample3": "Texto azul oscuro sobre blanco (5.9:1) - Pasa AA",
+          "sample4": "Blanco sobre azul oscuro (8.6:1) - Pasa AAA",
+          "sample5": "Blanco sobre fondo negro (21:1) - Pasa AAA",
+          "sample6": "Amarillo sobre fondo oscuro (12.3:1) - Pasa AAA"
+        }
+      },
+      "colorInfo": {
+        "title": "Información por color",
+        "explanation": "La información nunca debe depender únicamente del color. Siempre agrega indicadores visuales adicionales (iconos, patrones, texto).",
+        "form": {
+          "heading": "Formulario de registro",
+          "name": "Nombre completo",
+          "email": "Correo electrónico",
+          "password": "Contraseña",
+          "legend": "Rojo = Error, Verde = Válido",
+          "errors": {
+            "nameMin": "El nombre debe contener al menos 3 caracteres",
+            "passwordMin": "La contraseña debe contener al menos 8 caracteres"
+          },
+          "success": {
+            "email": "Correo electrónico válido"
+          }
+        },
+        "orders": {
+          "heading": "Estado del pedido",
+          "pending": "Pendiente",
+          "processing": "Procesando",
+          "delivered": "Entregado"
+        }
+      },
+      "colorblind": {
+        "title": "Daltonismo y accesibilidad",
+        "explanation": "Aproximadamente el 8% de los hombres y el 0.5% de las mujeres son daltónicos. Las combinaciones rojo-verde son particularmente problemáticas.",
+        "chart": {
+          "title": "Gráfico de rendimiento",
+          "legend": {
+            "errors": "Fallos",
+            "success": "Éxitos"
+          },
+          "months": {
+            "jan": "Enero",
+            "feb": "Febrero",
+            "mar": "Marzo"
+          }
+        }
+      },
+      "theme": {
+        "title": "Selector de tema accesible",
+        "explanation": "Un selector de tema debe mantener los ratios de contraste, preservar la legibilidad y respetar las preferencias del sistema del usuario.",
+        "bad": {
+          "heading": "Interfaz fija",
+          "content": "Contenido de la página",
+          "description": "Este texto cambia de color según el tema.",
+          "button": "Acción",
+          "card": {
+            "title": "Tarjeta de información",
+            "description": "Información importante para leer."
+          }
+        },
+        "good": {
+          "legend": "Elegir tema",
+          "light": "Claro",
+          "dark": "Oscuro",
+          "auto": "Auto",
+          "heading": "Interfaz adaptativa",
+          "content": "Contenido de la página",
+          "description": "Este texto mantiene buen contraste en todos los temas.",
+          "button": "Acción",
+          "card": {
+            "title": "Tarjeta de información",
+            "description": "Información importante siempre legible."
+          }
+        }
+      },
+      "links": {
+        "title": "Enlaces - Subrayado e identificación",
+        "explanation": "Los enlaces deben ser identificables sin depender únicamente del color. El subrayado, diferencias de patrón u otros indicadores visuales son esenciales.",
+        "heading": "Enlaces basados únicamente en color",
+        "intro": "La accesibilidad web es esencial para crear sitios inclusivos.",
+        "learnMore": "Aprende más sobre accesibilidad",
+        "bestPractices": "puede ayudarte a entender las mejores prácticas.",
+        "wcag": "Las pautas WCAG proporcionan un marco completo para mejorar la accesibilidad.",
+        "resources": "Visita nuestra página de recursos para encontrar herramientas y tutoriales."
+      },
+      "codeExamples": {
+        "textContrast": {
+          "badComment": "❌ Malo: Ratios de contraste insuficientes",
+          "goodComment": "✅ Bueno: Ratios de contraste compatibles con WCAG"
+        },
+        "colorOnly": {
+          "badComment": "❌ Malo: Información solo por color",
+          "formNoIndicators": "Formulario sin indicadores de texto",
+          "statusNoText": "Estado sin texto explícito",
+          "onlyColor": "Solo color",
+          "goodComment": "✅ Bueno: Color + texto + iconos + ARIA",
+          "formExplicitMessages": "Formulario con mensajes explícitos",
+          "statusWithTextIcons": "Estado con texto e iconos"
+        },
+        "colorblind": {
+          "badComment": "❌ Malo: Rojo/Verde indistinguible para daltónicos",
+          "legendColorOnly": "Leyenda basada solo en colores",
+          "barsNoVisualDiff": "Barras sin diferenciación visual",
+          "goodComment": "✅ Bueno: Colores distintos + patrones + iconos",
+          "legendExplicitIcons": "Leyenda con iconos explícitos",
+          "barsWithPatternsTooltips": "Barras con patrones y tooltips"
+        },
+        "darkMode": {
+          "badComment": "❌ Malo: Contraste perdido, no accesible",
+          "controlsNotAccessible": "Controles no accesibles",
+          "goodComment": "✅ Bueno: Contrastes mantenidos, accesible, preferencia del sistema",
+          "accessibleControlsFieldset": "Controles accesibles con fieldset"
+        },
+        "linkContrast": {
+          "badComment": "❌ Malo: Solo el color diferencia",
+          "goodComment": "✅ Bueno: Color + subrayado + enfoque visible"
+        }
+      }
+    },
+    "keyboardNavigation": {
+      "title": "Navegación con Teclado",
+      "description": "Permite a todos los usuarios navegar eficientemente sin ratón",
+      "shortcuts": {
+        "title": "Atajos de teclado",
+        "tab": "Navegar entre elementos interactivos",
+        "shiftTab": "Navegación hacia atrás",
+        "enter": "Activar botones y enlaces",
+        "escape": "Cerrar modales y menús",
+        "arrows": "Navegar en listas y menús"
+      },
+      "listNavigation": {
+        "title": "Navegación con teclado en listas",
+        "explanation": "Las listas navegables con teclado permiten usar las teclas de flecha para moverse entre elementos, además de la navegación clásica con Tab.",
+        "bad": {
+          "intro": "Menú solo con navegación Tab:",
+          "items": {
+            "home": "Inicio",
+            "projects": "Proyectos",
+            "team": "Equipo",
+            "stats": "Estadísticas",
+            "settings": "Configuración"
+          }
+        },
+        "good": {
+          "intro": "Menú con navegación de flechas:",
+          "hint": "Usa ↑ ↓ para navegar, Enter para seleccionar"
+        }
+      },
+      "focusStyles": {
+        "title": "Estilos de enfoque visibles",
+        "explanation": "Los usuarios que navegan con teclado necesitan indicadores visuales claros para saber dónde están en la página.",
+        "intro": "Intenta navegar con Tab en esta área:",
+        "button1": "Botón 1",
+        "button2": "Botón 2",
+        "link": "Enlace a página",
+        "input": "Ingresa texto",
+        "submit": "Enviar"
+      },
+      "skipLink": {
+        "title": "Enlace de salto (Skip to content)",
+        "explanation": "Los enlaces de salto permiten a los usuarios de teclado saltar directamente al contenido principal sin tener que pasar por toda la navegación.",
+        "skip": "Saltar al contenido principal",
+        "bad": {
+          "logo": "Logo del sitio",
+          "nav": {
+            "home": "Inicio",
+            "products": "Productos",
+            "services": "Servicios",
+            "about": "Acerca de",
+            "blog": "Blog",
+            "contact": "Contacto",
+            "support": "Soporte",
+            "account": "Mi cuenta"
+          },
+          "content": {
+            "heading": "Contenido principal",
+            "description": "El usuario debe navegar por todos los enlaces de navegación..."
+          }
+        },
+        "good": {
+          "content": {
+            "heading": "Contenido principal",
+            "description": "¡El usuario puede acceder directamente aquí gracias al enlace de salto!"
+          }
+        }
+      },
+      "modalTrap": {
+        "title": "Modal con trampa de enfoque",
+        "explanation": "Los modales deben mantener el enfoque dentro y permitir cerrar con la tecla Escape. El enfoque debe volver al elemento que abrió el modal.",
+        "openBad": "Abrir modal (mal ejemplo)",
+        "openGood": "Abrir modal (buen ejemplo)",
+        "modal": {
+          "title": "Confirmar acción",
+          "content": "¿Estás seguro de que quieres continuar?",
+          "reason": "Razón (opcional)",
+          "cancel": "Cancelar",
+          "confirm": "Confirmar",
+          "closeLabel": "Cerrar modal"
+        }
+      },
+      "codeExamples": {
+        "listNavigation": {
+          "badComment": "Malo: Solo navegación Tab",
+          "userMustTab5Times": "El usuario debe presionar Tab 5 veces",
+          "noArrowNavigation": "Sin navegación de flechas",
+          "noMenuSemantics": "Sin semántica de menú",
+          "goodComment": "Bueno: navegación de flechas con roving tabindex",
+          "menuItem": "Menú {number}",
+          "arrowNavigationComment": "Navegación de flechas con roving tabindex",
+          "home": "Inicio",
+          "projects": "Proyectos",
+          "team": "Equipo",
+          "stats": "Estadísticas",
+          "settings": "Configuración"
+        },
+        "focusIndicators": {
+          "badComment": "Malo: enfoque eliminado con CSS",
+          "accessibilityProblems": "❌ Problemas de accesibilidad:",
+          "button1NoType": "Sin tipo, enfoque invisible",
+          "button2NoType": "Sin tipo, enfoque invisible",
+          "linkNoFocus": "Enfoque invisible",
+          "inputNoFocus": "Enfoque invisible",
+          "keyboardNavigationNotVisible": "Navegación con teclado imposible de seguir visualmente",
+          "goodComment": "Bueno: indicadores de enfoque visibles",
+          "removeFocusComment": "Elimina todos los indicadores de enfoque",
+          "button1": "Botón 1",
+          "button2": "Botón 2",
+          "link": "Enlace",
+          "visibleFocusComment": "Indicadores de enfoque visibles y accesibles"
+        },
+        "skipLinks": {
+          "badComment": "Malo: sin enlace de salto",
+          "tenPlusLinks": "10+ enlaces de navegación...",
+          "userMustTraverse": "El usuario debe atravesar toda la navegación",
+          "goodComment": "Bueno: enlace de salto visible al enfocar",
+          "skipToContent": "Saltar al contenido principal",
+          "logo": "Logo del sitio",
+          "home": "Inicio",
+          "products": "Productos",
+          "services": "Servicios",
+          "mainContent": "Contenido principal",
+          "skipLinkComment": "Enlace de salto oculto por defecto, visible al enfocar"
+        },
+        "modalTrap": {
+          "badComment": "Malo: modal sin gestión de enfoque",
+          "goodComment": "Bueno: modal con trampa de enfoque",
+          "confirmAction": "Confirmar acción",
+          "areYouSure": "¿Estás seguro de que quieres continuar?",
+          "reasonOptional": "Razón (opcional)",
+          "cancel": "Cancelar",
+          "confirm": "Confirmar",
+          "closeModal": "Cerrar modal",
+          "focusTrapComment": "Funciones esenciales",
+          "autoFocus": "Auto enfoque en el primer elemento",
+          "trapFocus": "Trampa de enfoque (Tab/Shift+Tab)",
+          "closeOnEscape": "Cerrar con Escape",
+          "returnFocus": "Devolver enfoque al elemento activador"
+        }
+      }
+    },
+    "mediaAccessible": {
+      "title": "Imágenes y Medios Accesibles",
+      "description": "Haz que el contenido visual sea comprensible para todos los usuarios",
+      "altText": {
+        "title": "Texto alternativo para imágenes",
+        "explanation": "El texto alternativo permite a los lectores de pantalla describir imágenes. Deben ser descriptivos para imágenes informativas, vacíos para imágenes decorativas.",
+        "product": {
+          "name": "MacBook Pro 16\"",
+          "price": "€2,499",
+          "rating": "4.8/5",
+          "reviews": "127 reseñas",
+          "alt": "MacBook Pro de 16 pulgadas, vista frontal, pantalla abierta mostrando la interfaz de macOS",
+          "ratingAlt": "Calificación de",
+          "stars": "estrellas, basado en"
+        },
+        "notification": "¡Pedido confirmado!"
+      },
+      "video": {
+        "title": "Video accesible",
+        "explanation": "Los videos deben tener subtítulos, controles accesibles con teclado y no reproducirse automáticamente.",
+        "heading": "Presentación del producto",
+        "bad": {
+          "placeholder": "Video de demostración",
+          "note": "(Reproducción automática, sin subtítulos)"
+        },
+        "good": {
+          "placeholder": "Video de demostración del MacBook Pro",
+          "note": "(Controles accesibles, subtítulos disponibles)",
+          "description": "Video de 2 minutos presentando las características del MacBook Pro de 16 pulgadas. Subtítulos en español disponibles.",
+          "fallback": "Tu navegador no soporta video.",
+          "transcriptLink": "Ver transcripción"
+        }
+      },
+      "charts": {
+        "title": "Gráficos y datos visuales",
+        "explanation": "Los gráficos deben estar acompañados de descripciones textuales y datos alternativos para usuarios que no pueden verlos.",
+        "heading": "Ventas trimestrales",
+        "chartTitle": "Gráfico de barras de ventas trimestrales",
+        "chartDesc": "Tendencia de ventas en crecimiento durante 4 trimestres: T1: €40k, T2: €60k, T3: €80k, T4: €100k",
+        "table": {
+          "caption": "Datos detallados de ventas trimestrales",
+          "columns": {
+            "quarter": "Trimestre",
+            "sales": "Ventas (k€)",
+            "evolution": "Evolución"
+          },
+          "data": {
+            "q1": {
+              "quarter": "T1 2025",
+              "sales": "40",
+              "evolution": "-"
+            },
+            "q2": {
+              "quarter": "T2 2025",
+              "sales": "60",
+              "evolution": "+50%"
+            },
+            "q3": {
+              "quarter": "T3 2025",
+              "sales": "80",
+              "evolution": "+33%"
+            },
+            "q4": {
+              "quarter": "T4 2025",
+              "sales": "100",
+              "evolution": "+25%"
+            }
+          }
+        }
+      },
+      "codeExamples": {
+        "altText": {
+          "badComment": "❌ Malo: textos alt no descriptivos",
+          "goodComment": "✅ Bueno: textos alt descriptivos",
+          "decorativeIcon": "Icono decorativo: alt vacío, .sr-only para contexto",
+          "decorativeNotification": "Icono decorativo en notificación"
+        },
+        "video": {
+          "badComment": "❌ Malo: video con reproducción automática",
+          "goodComment": "✅ Bueno: video accesible con subtítulos y controles",
+          "subtitles": "Subtítulos para personas con problemas de audición",
+          "audioDescriptions": "Descripciones de audio para personas con discapacidad visual",
+          "fallback": "Alternativa con enlace a transcripción"
+        },
+        "charts": {
+          "badComment": "❌ Malo: gráfico sin descripción o datos alternativos",
+          "labels": "Etiquetas",
+          "goodComment": "✅ Bueno: gráfico accesible con datos alternativos",
+          "bars": "Barras del gráfico",
+          "accessibleLabels": "Etiquetas accesibles",
+          "alternativeTable": "Tabla alternativa con todos los datos",
+          "otherRows": "... otras filas"
+        }
+      }
+    },
+    "performance": {
+      "title": "Rendimiento",
+      "description": "Movimiento reducido, zoom, adaptabilidad",
+      "motion": {
+        "title": "Respetar las preferencias de movimiento",
+        "explanation": "Los usuarios pueden configurar su sistema para reducir animaciones. Esta preferencia debe respetarse para evitar náuseas y distracciones.",
+        "bad": {
+          "heading": "Animaciones predeterminadas",
+          "card": {
+            "title": "Tarjeta que rebota",
+            "description": "Esta animación se activa constantemente"
+          },
+          "button": "¡Haz clic!",
+          "slide": "Deslizamiento permanente"
+        },
+        "good": {
+          "heading": "Animaciones respetuosas",
+          "simulate": "Simular \"Reducir movimiento\" (prefers-reduced-motion)",
+          "card": {
+            "title": "Tarjeta respetuosa",
+            "description": "Animación ligera solo al pasar el ratón"
+          },
+          "button": "¡Haz clic!",
+          "feedback": "¡Gracias!",
+          "load": "Cargar",
+          "stopLoad": "Detener",
+          "pulse": "Iniciar pulsación",
+          "stopPulse": "Detener pulsación",
+          "prev": "Diapositiva anterior",
+          "next": "Siguiente diapositiva",
+          "slide": "Diapositiva"
+        }
+      },
+      "zoom": {
+        "title": "Soporte de zoom y tamaño de fuente grande",
+        "explanation": "La interfaz debe permanecer funcional y legible hasta un zoom del 200%. Los textos deben adaptarse a las preferencias de tamaño de fuente del usuario.",
+        "simulate": "Simular zoom:",
+        "indicator": "Tamaño del texto:",
+        "warning": "El diseño se adapta automáticamente",
+        "bad": {
+          "heading": "Interfaz fija",
+          "menu": "Menú",
+          "nav": {
+            "home": "Inicio",
+            "products": "Productos",
+            "services": "Servicios",
+            "contact": "Contacto"
+          },
+          "toolbar": {
+            "new": "Nuevo",
+            "edit": "Editar",
+            "delete": "Eliminar",
+            "search": "Buscar..."
+          },
+          "cards": {
+            "product1": {
+              "title": "Producto 1",
+              "description": "Descripción corta",
+              "price": "€19.99"
+            },
+            "product2": {
+              "title": "Producto 2",
+              "description": "Descripción corta",
+              "price": "€24.99"
+            }
+          }
+        },
+        "good": {
+          "heading": "Interfaz adaptativa",
+          "menu": "Menú",
+          "toggleMenu": "Alternar Menú",
+          "toolbar": {
+            "new": "Nuevo",
+            "edit": "Editar",
+            "delete": "Eliminar",
+            "search": "Buscar..."
+          },
+          "cards": {
+            "product1": {
+              "title": "Producto 1",
+              "description": "Descripción adaptativa",
+              "price": "€19.99"
+            },
+            "product2": {
+              "title": "Producto 2",
+              "description": "Descripción adaptativa",
+              "price": "€24.99"
+            }
+          }
+        }
+      },
+      "responsive": {
+        "title": "Diseño adaptativo y responsive",
+        "explanation": "La interfaz debe funcionar en todos los dispositivos y orientaciones, con controles de tamaño apropiado para el tacto.",
+        "simulate": "Simular dispositivo:",
+        "devices": {
+          "desktop": "Escritorio (1200px+)",
+          "tablet": "Tablet (768px)",
+          "mobile": "Móvil (375px)"
+        },
+        "bad": {
+          "heading": "Interfaz de escritorio fija",
+          "logo": "Logo",
+          "nav": {
+            "home": "Inicio",
+            "about": "Acerca de",
+            "services": "Servicios",
+            "portfolio": "Portafolio",
+            "blog": "Blog",
+            "contact": "Contacto"
+          },
+          "login": "Iniciar sesión",
+          "signup": "Registrarse",
+          "form": {
+            "heading": "Contáctanos",
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "message": "Mensaje",
+            "cancel": "Cancelar",
+            "send": "Enviar"
+          },
+          "info": {
+            "heading": "Nuestros datos de contacto",
+            "address": "123 Calle de la Paz",
+            "city": "28001 Madrid",
+            "phone": "+34 91 123 45 67"
+          }
+        },
+        "good": {
+          "heading": "Interfaz adaptativa",
+          "menu": "Menú",
+          "form": {
+            "heading": "Contáctanos",
+            "nameLabel": "Tu nombre",
+            "emailLabel": "Tu correo electrónico",
+            "messageLabel": "Tu mensaje",
+            "cancel": "Cancelar",
+            "send": "Enviar"
+          },
+          "info": {
+            "heading": "Nuestros datos de contacto"
+          }
+        }
+      },
+      "lazyLoading": {
+        "title": "Lazy Loading: cargar solo recursos visibles",
+        "explanation": "La carga diferida (lazy loading) permite cargar imágenes y recursos solo cuando el usuario los necesita, en lugar de descargar todo de una vez cuando se carga la página.",
+        "bad": {
+          "heading": "Cargar todo de una vez (Eager Loading)",
+          "problem": "Ejemplo concreto: Un sitio de comercio electrónico con 50 productos carga todas las imágenes inmediatamente, incluso las que están al final de la página que el usuario puede que nunca vea.",
+          "term": "Término técnico: Eager Loading = carga inmediata de todos los recursos",
+          "issues": {
+            "problem1": "Problema 1: 50 imágenes × 200 KB = 10 MB descargados inmediatamente",
+            "problem2": "Problema 2: Tiempo de espera de 8-15 segundos antes de ver la página",
+            "problem3": "Problema 3: Consume innecesariamente el plan de datos móviles",
+            "problem4": "Problema 4: Estresa el procesador y agota la batería"
+          },
+          "resources": {
+            "html": "HTML (20 KB)",
+            "css": "CSS (50 KB)",
+            "js": "JavaScript (200 KB)",
+            "img1": "Imagen 1 visible (200 KB)",
+            "img2": "Imagen 2 visible (200 KB)",
+            "img3": "Imagen 3 al final de página (200 KB)",
+            "img4": "Imagen 4 al final de página (200 KB)",
+            "img5": "Imagen 5 al final de página (200 KB)"
+          },
+          "time": "Tiempo de carga total: 8 segundos",
+          "data": "Datos consumidos: 1.27 MB (incluyendo 600 KB innecesarios)"
+        },
+        "good": {
+          "heading": "Carga progresiva (Lazy Loading + Cache)",
+          "solution": "Ejemplo concreto: El mismo sitio de comercio electrónico primero carga el contenido visible, luego las imágenes posteriores solo cuando el usuario se desplaza.",
+          "terms": "Términos técnicos: Lazy Loading = carga diferida • HTTP Cache = memoria temporal del navegador",
+          "controls": {
+            "title": "Prueba las optimizaciones:",
+            "lazyLoad": {
+              "label": "Lazy Loading habilitado",
+              "description": "Carga imágenes al desplazarse (atributo loading=\"lazy\")"
+            },
+            "cache": {
+              "label": "HTTP Cache habilitado",
+              "description": "Almacena en memoria para evitar volver a descargar (Cache-Control)"
+            }
+          },
+          "resources": {
+            "html": "HTML (20 KB) - Cargado",
+            "css": "CSS (50 KB) - Cargado",
+            "js": "JavaScript (200 KB) - Cargado",
+            "img1": "Imagen 1 visible (200 KB) - Cargada",
+            "img2": "Imagen 2 visible (200 KB) - Cargada",
+            "img3": "Imagen 3",
+            "img4": "Imagen 4",
+            "imgCached": "Imagen ya vista",
+            "lazy": "(cargada al desplazarse)",
+            "notLoaded": "(aún no cargada)",
+            "cached": "(en caché, 0 KB)",
+            "redownload": "(a volver a descargar)"
+          },
+          "time": "Tiempo de carga inicial:",
+          "timeFast": "2 segundos",
+          "timeSlow": "5 segundos",
+          "dataSaved": "Datos ahorrados:",
+          "savings": {
+            "both": "600 KB (47%)",
+            "single": "200 KB (16%)"
+          },
+          "benefits": {
+            "title": "Impacto en la accesibilidad:",
+            "speed": {
+              "label": "Velocidad (FCP)",
+              "description": "First Contentful Paint más rápido = página visible inmediatamente"
+            },
+            "mobile": {
+              "label": "Datos móviles",
+              "description": "Esencial para usuarios con plan de datos limitado o red lenta (3G)"
+            },
+            "battery": {
+              "label": "Batería",
+              "description": "Menos transferencia de red = ahorro significativo de energía"
+            },
+            "devices": {
+              "label": "Dispositivos antiguos",
+              "description": "Menos recursos a procesar = funciona en hardware antiguo"
+            }
+          }
+        }
+      },
+      "codeExamples": {
+        "motion": {
+          "badComment": "CSS que fuerza animaciones",
+          "alwaysActive": "Siempre activo",
+          "noUserControl": "Sin control del usuario",
+          "htmlNoControls": "HTML sin controles",
+          "autoCarousel": "Carrusel que se desplaza automáticamente sin opción de parada",
+          "goodComment": "CSS que respeta las preferencias del usuario",
+          "systemPreferences": "Respetar las preferencias del sistema",
+          "htmlWithControls": "HTML con controles del usuario",
+          "userControlledContent": "Contenido controlado por el usuario"
+        },
+        "zoom": {
+          "badComment": "CSS con dimensiones fijas",
+          "fixedWidth": "Ancho fijo",
+          "fixedSize": "Tamaño fijo",
+          "noAdapt": "No se adapta al zoom",
+          "contentCut": "Contenido cortado al hacer zoom",
+          "htmlNoAdaptive": "HTML sin estructura adaptativa",
+          "goodComment": "CSS con unidades relativas",
+          "relativeUnit": "Unidad relativa al tamaño de fuente raíz",
+          "adaptToPreferences": "Se adapta a las preferencias",
+          "flexible": "Flexible",
+          "noFixedLimit": "Sin límite fijo",
+          "contentManagement": "Gestión de contenido",
+          "zoomSupport": "Soporte de zoom hasta 200%",
+          "htmlFlexible": "HTML con estructura flexible"
+        },
+        "responsive": {
+          "badComment": "CSS rígido",
+          "fixedPosition": "Problemático en móvil",
+          "fixedWidth": "Ancho fijo",
+          "overflow": "Se desborda en móvil",
+          "alwaysTwoColumns": "Siempre 2 columnas",
+          "tooSmallTouch": "Demasiado pequeño para tacto",
+          "htmlNoAdaptability": "HTML sin adaptabilidad",
+          "goodComment": "CSS responsive",
+          "fluid": "Fluido",
+          "hiddenByDefault": "Oculto por defecto en móvil",
+          "minTouchTarget": "Objetivo táctil mínimo",
+          "htmlAdaptiveNav": "HTML con navegación adaptativa"
+        },
+        "lazyLoading": {
+          "badComment": "Todas las imágenes se cargan inmediatamente",
+          "resultBefore": "Resultado: ¡12 MB para descargar antes de ver la página!",
+          "goodComment": "El atributo loading=\"lazy\" carga la imagen solo cuando es visible",
+          "otherImagesOnScroll": "Otras imágenes solo se cargarán si el usuario se desplaza hacia ellas",
+          "resultSmart": "Resultado: ¡500 KB al inicio, el resto solo si es necesario!"
+        }
+      }
+    },
+    "semanticHtml": {
+      "title": "HTML Semántico",
+      "description": "Usa los elementos HTML correctos para estructurar el contenido de manera comprensible",
+      "pageStructure": {
+        "title": "Estructura de la página",
+        "explanation": "Una estructura semántica clara ayuda a los lectores de pantalla a navegar y comprender el contenido. Los elementos de sección (header, nav, main, footer) crean puntos de referencia importantes.",
+        "bad": {
+          "siteTitle": "Mi Sitio",
+          "nav": {
+            "home": "Inicio",
+            "about": "Acerca de",
+            "contact": "Contacto"
+          },
+          "content": {
+            "title": "Bienvenido",
+            "body": "Contenido principal de la página..."
+          },
+          "footer": "© 2025 Mi Sitio"
+        },
+        "good": {
+          "siteTitle": "Mi Sitio",
+          "navLabel": "Navegación principal",
+          "content": {
+            "title": "Bienvenido",
+            "body": "Contenido principal de la página..."
+          },
+          "footer": "© 2025 Mi Sitio"
+        }
+      },
+      "headings": {
+        "title": "Jerarquía de encabezados",
+        "explanation": "Una jerarquía lógica de encabezados (h1 → h2 → h3) permite a los lectores de pantalla crear un esquema de navegación y a los usuarios comprender la estructura del contenido.",
+        "article": {
+          "h1": "Introducción a la accesibilidad",
+          "intro": "La accesibilidad web es importante...",
+          "h2": "Técnicas básicas",
+          "techniques": "Aquí hay algunas técnicas...",
+          "h3semantic": "HTML Semántico",
+          "semantic": "El HTML semántico...",
+          "h4": "Elementos de estructura",
+          "elements": "Elementos como header, nav...",
+          "h3css": "CSS y accesibilidad",
+          "css": "CSS puede mejorar..."
+        }
+      },
+      "buttonsVsLinks": {
+        "title": "Botones vs elementos clicables",
+        "explanation": "Usa los elementos correctos para las acciones: botones para acciones, enlaces para navegación. Esto asegura la semántica adecuada y los comportamientos de teclado esperados.",
+        "actions": {
+          "save": "Guardar",
+          "delete": "Eliminar",
+          "profile": "Ver perfil",
+          "info": "Más información"
+        },
+        "alerts": {
+          "saved": "¡Guardado!",
+          "deleteConfirm": "¿Estás seguro de que quieres eliminar?",
+          "deleted": "¡Eliminado!",
+          "profile": "Navegando al perfil (simulado)",
+          "modal": "Modal abierto (simulado)"
+        }
+      },
+      "lists": {
+        "title": "Listas y datos estructurados",
+        "explanation": "Usar elementos de lista apropiados permite a los lectores de pantalla anunciar el número de elementos y facilitar la navegación.",
+        "recipe": {
+          "ingredients": {
+            "title": "Ingredientes para una tortilla:",
+            "eggs": "3 huevos",
+            "milk": "2 cucharadas de leche",
+            "seasoning": "Sal y pimienta",
+            "butter": "1 cucharada de mantequilla"
+          },
+          "steps": {
+            "title": "Pasos:",
+            "step1": "Batir los huevos con la leche",
+            "step2": "Calentar la mantequilla",
+            "step3": "Verter los huevos y cocinar",
+            "step4": "Doblar por la mitad y servir"
+          }
+        }
+      },
+      "codeExamples": {
+        "pageStructure": {
+          "badComment": "Malo: divs genéricos sin semántica",
+          "goodComment": "Bueno: elementos semánticos con roles apropiados"
+        },
+        "headings": {
+          "badComment": "Malo: divs estilizados sin jerarquía",
+          "goodComment": "Bueno: jerarquía lógica de encabezados"
+        },
+        "buttonsVsLinks": {
+          "badComment": "Malo: divs clicables sin semántica",
+          "goodComment": "Bueno: botones y enlaces con semántica correcta"
+        },
+        "lists": {
+          "badComment": "Malo: divs sin estructura de lista",
+          "goodComment": "Bueno: listas semánticas apropiadas"
+        }
+      }
+    }
+  }
+}

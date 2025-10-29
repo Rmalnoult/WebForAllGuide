@@ -331,6 +331,34 @@ label {
   }
 }
 
+/* RTL Support for Arabic */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .app-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--color-border);
+}
+
+[dir="rtl"] .language-trigger,
+[dir="rtl"] .language-option {
+  text-align: right;
+}
+
+[dir="rtl"] .current-language {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .chevron-icon {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .chevron-icon.chevron-open {
+  transform: scaleX(-1) rotate(180deg);
+}
+
 /* Impression */
 @media print {
   .no-print {

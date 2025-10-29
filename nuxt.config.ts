@@ -116,6 +116,49 @@ export default defineNuxtConfig({
         iso: 'en-US',
         name: 'English',
         file: 'en.json'
+      },
+      {
+        code: 'es',
+        iso: 'es-ES',
+        name: 'Español',
+        file: 'es.json'
+      },
+      {
+        code: 'it',
+        iso: 'it-IT',
+        name: 'Italiano',
+        file: 'it.json'
+      },
+      {
+        code: 'de',
+        iso: 'de-DE',
+        name: 'Deutsch',
+        file: 'de.json'
+      },
+      {
+        code: 'nl',
+        iso: 'nl-NL',
+        name: 'Nederlands',
+        file: 'nl.json'
+      },
+      {
+        code: 'ar',
+        iso: 'ar',
+        name: 'العربية',
+        file: 'ar.json',
+        dir: 'rtl'
+      },
+      {
+        code: 'ja',
+        iso: 'ja-JP',
+        name: '日本語',
+        file: 'ja.json'
+      },
+      {
+        code: 'pt',
+        iso: 'pt-PT',
+        name: 'Português',
+        file: 'pt.json'
       }
     ],
     lazy: true,
@@ -168,7 +211,70 @@ export default defineNuxtConfig({
         '/en/color-contrast',
         '/en/accessible-forms',
         '/en/aria-components',
-        '/en/performance'
+        '/en/performance',
+        // Spanish routes (with /es prefix)
+        '/es',
+        '/es/semantic-html',
+        '/es/keyboard-navigation',
+        '/es/media-accessible',
+        '/es/color-contrast',
+        '/es/accessible-forms',
+        '/es/aria-components',
+        '/es/performance',
+        // Italian routes (with /it prefix)
+        '/it',
+        '/it/semantic-html',
+        '/it/keyboard-navigation',
+        '/it/media-accessible',
+        '/it/color-contrast',
+        '/it/accessible-forms',
+        '/it/aria-components',
+        '/it/performance',
+        // German routes (with /de prefix)
+        '/de',
+        '/de/semantic-html',
+        '/de/keyboard-navigation',
+        '/de/media-accessible',
+        '/de/color-contrast',
+        '/de/accessible-forms',
+        '/de/aria-components',
+        '/de/performance',
+        // Dutch routes (with /nl prefix)
+        '/nl',
+        '/nl/semantic-html',
+        '/nl/keyboard-navigation',
+        '/nl/media-accessible',
+        '/nl/color-contrast',
+        '/nl/accessible-forms',
+        '/nl/aria-components',
+        '/nl/performance',
+        // Portuguese routes (with /pt prefix)
+        '/pt',
+        '/pt/semantic-html',
+        '/pt/keyboard-navigation',
+        '/pt/media-accessible',
+        '/pt/color-contrast',
+        '/pt/accessible-forms',
+        '/pt/aria-components',
+        '/pt/performance',
+        // Arabic routes (with /ar prefix)
+        '/ar',
+        '/ar/semantic-html',
+        '/ar/keyboard-navigation',
+        '/ar/media-accessible',
+        '/ar/color-contrast',
+        '/ar/accessible-forms',
+        '/ar/aria-components',
+        '/ar/performance',
+        // Japanese routes (with /ja prefix)
+        '/ja',
+        '/ja/semantic-html',
+        '/ja/keyboard-navigation',
+        '/ja/media-accessible',
+        '/ja/color-contrast',
+        '/ja/accessible-forms',
+        '/ja/aria-components',
+        '/ja/performance'
       ],
       ignore: ['/about', '/contact', '/profile', '/semantic-h-t-m-l', '/a-r-i-a-components'],
       failOnError: false

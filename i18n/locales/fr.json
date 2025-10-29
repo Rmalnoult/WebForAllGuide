@@ -57,7 +57,21 @@
     "currentLanguage": "Langue actuelle",
     "languageChanged": "Langue changée en {language}",
     "french": "Français",
-    "english": "English"
+    "english": "English",
+    "switchToSpanish": "Cambiar a español",
+    "switchToItalian": "Passa all'italiano",
+    "switchToGerman": "Zu Deutsch wechseln",
+    "switchToDutch": "Schakel naar Nederlands",
+    "switchToArabic": "التبديل إلى العربية",
+    "switchToJapanese": "日本語に切り替える",
+    "switchToPortuguese": "Mudar para português",
+    "spanish": "Español",
+    "italian": "Italiano",
+    "german": "Deutsch",
+    "dutch": "Nederlands",
+    "arabic": "العربية",
+    "japanese": "日本語",
+    "portuguese": "Português"
   },
   "a11y": {
     "appLabel": "Démo d'accessibilité web",
@@ -86,6 +100,27 @@
       "badExample": "Mauvais exemple",
       "goodExample": "Bon exemple",
       "explanation": "Explication :"
+    },
+    "aboutModal": {
+      "title": "À propos de ce site",
+      "privacy": {
+        "title": "🌱 Un site qui respecte votre vie privée",
+        "noData": "Aucune donnée personnelle n'est collectée ou partagée. Aucun cookie n'est utilisé. Pas de publicité.",
+        "analytics": "Ce site utilise <strong>Plausible Analytics</strong>, un service d'analyse respectueux de la vie privée, pour mesurer le trafic.",
+        "philosophy": "Oui, il est possible de créer un site web sans transformer vos données en produit."
+      },
+      "author": {
+        "title": "👨‍💻 À propos de l'auteur",
+        "intro": "Ce site a été créé par <strong>Romain Malnoult</strong>, Développeur Design System & Accessibilité.",
+        "passion": "Passionné par l'accessibilité numérique et convaincu qu'un web inclusif est un meilleur web pour tous, je partage ici mes connaissances et bonnes pratiques pour rendre le web accessible.",
+        "linkedinLabel": "Visiter le profil LinkedIn de Romain Malnoult (nouvelle fenêtre)",
+        "linkedinText": "Retrouvez-moi sur LinkedIn"
+      },
+      "tech": {
+        "title": "⚡ Technologies",
+        "description": "Ce site est construit avec <strong>Vue.js 3</strong> et démontre la mise en œuvre concrète des normes <strong>WCAG 2.1</strong> (niveau AA) et des meilleures pratiques d'accessibilité.",
+        "stack": "<strong>Stack technique :</strong> Vue.js 3, Vue Router, Vite, Playwright (tests), axe-core (audit d'accessibilité)"
+      }
     }
   },
   "pages": {
@@ -340,7 +375,6 @@
           "ageError": "L'âge minimum requis est 16 ans",
           "errorSummaryTitle": "Erreurs à corriger :",
           "submit": "S'inscrire",
-          "successMessage": "Formulaire soumis avec succès !",
           "errors": {
             "nameRequired": "Le nom est obligatoire",
             "emailInvalid": "L'adresse email est invalide",
@@ -1686,6 +1720,5 @@
         }
       }
     }
-  },
-  "TEST_KEY_12345": "This is a test"
+  }
 }

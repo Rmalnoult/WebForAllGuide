@@ -92,6 +92,13 @@ const headingId = computed(() => {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid var(--color-border);
+  display: block !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  background: transparent !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Breadcrumb navigation */
@@ -140,6 +147,7 @@ const headingId = computed(() => {
 /* Page title */
 .page-title-wrapper {
   margin: 0.5rem 0 1.5rem 0;
+  text-align: left;
 }
 
 .page-title {
@@ -148,6 +156,7 @@ const headingId = computed(() => {
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
   font-weight: 700;
+  text-align: left;
 }
 
 .page-title:focus {

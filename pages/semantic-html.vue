@@ -147,7 +147,7 @@ const codePageStructureBad = computed(() => `<!-- ${tc('pageStructure.badComment
 
 const codePageStructureGood = computed(() => `<!-- ${tc('pageStructure.goodComment')} -->
 <header>
-  <h1>${tc('pageStructure.siteTitle')}</h1>
+  <div class="site-title">${tc('pageStructure.siteTitle')}</div>
   <nav aria-label="${tc('pageStructure.mainNav')}">
     <ul>
       <li><a href="/">${tc('pageStructure.home')}</a></li>
@@ -294,7 +294,7 @@ function toggleModal() {
       <template #good>
         <div class="page-structure">
           <header class="page-header">
-            <h1 class="site-title">{{ $t('pages.semanticHtml.pageStructure.good.siteTitle') }}</h1>
+            <div class="site-title">{{ $t('pages.semanticHtml.pageStructure.good.siteTitle') }}</div>
             <nav :aria-label="$t('pages.semanticHtml.pageStructure.good.navLabel')">
               <ul class="navigation">
                 <li><a href="/" class="nav-item">{{ $t('pages.semanticHtml.pageStructure.bad.nav.home') }}</a></li>
@@ -468,22 +468,6 @@ function toggleModal() {
 .semantic-html {
   max-width: 100%;
   margin: 0 auto;
-}
-
-header {
-  text-align: left;
-  margin-bottom: 3rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.lead {
-  font-size: 1.25rem;
-  color: var(--color-text-secondary);
 }
 
 /* Page structure demo styles */

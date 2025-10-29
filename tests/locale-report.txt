@@ -1,0 +1,21 @@
+LOCALE FILES ANALYSIS REPORT
+Generated: 2025-10-29T18:22:34.303Z
+
+REFERENCE: en.json (1423 keys)
+
+================================================================================
+SUMMARY
+================================================================================
+
+✅ ar.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ de.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ es.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ fr.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ it.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ ja.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ nl.json         Total: 1423 | Missing:    0 | Extra:    0
+✅ pt.json         Total: 1423 | Missing:    0 | Extra:    0
+
+
+
+

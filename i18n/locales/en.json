@@ -54,10 +54,24 @@
     "switchLanguage": "Switch language",
     "switchToEnglish": "Switch to English",
     "switchToFrench": "Passer au français",
+    "switchToSpanish": "Cambiar a español",
+    "switchToItalian": "Passa all'italiano",
+    "switchToGerman": "Zu Deutsch wechseln",
+    "switchToDutch": "Schakel naar Nederlands",
+    "switchToArabic": "التبديل إلى العربية",
+    "switchToJapanese": "日本語に切り替える",
+    "switchToPortuguese": "Mudar para português",
     "currentLanguage": "Current language",
     "languageChanged": "Language changed to {language}",
     "french": "Français",
-    "english": "English"
+    "english": "English",
+    "spanish": "Español",
+    "italian": "Italiano",
+    "german": "Deutsch",
+    "dutch": "Nederlands",
+    "arabic": "العربية",
+    "japanese": "日本語",
+    "portuguese": "Português"
   },
   "a11y": {
     "appLabel": "Web accessibility demo",
@@ -86,6 +100,27 @@
       "badExample": "Bad example",
       "goodExample": "Good example",
       "explanation": "Explanation:"
+    },
+    "aboutModal": {
+      "title": "About this site",
+      "privacy": {
+        "title": "🌱 A site that respects your privacy",
+        "noData": "No personal data is collected or shared. No cookies are used. No ads.",
+        "analytics": "This site uses <strong>Plausible Analytics</strong>, a privacy-friendly analytics service, to measure traffic.",
+        "philosophy": "Yes, it's possible to create a website without turning your data into a product."
+      },
+      "author": {
+        "title": "👨‍💻 About the author",
+        "intro": "This site was created by <strong>Romain Malnoult</strong>, Design System & Accessibility Developer.",
+        "passion": "Passionate about digital accessibility and convinced that an inclusive web is a better web for everyone, I share here my knowledge and best practices to make the web accessible.",
+        "linkedinLabel": "Visit Romain Malnoult's LinkedIn profile (new window)",
+        "linkedinText": "Find me on LinkedIn"
+      },
+      "tech": {
+        "title": "⚡ Technologies",
+        "description": "This site is built with <strong>Vue.js 3</strong> and demonstrates the concrete implementation of <strong>WCAG 2.1</strong> standards (level AA) and accessibility best practices.",
+        "stack": "<strong>Tech stack:</strong> Vue.js 3, Vue Router, Vite, Playwright (tests), axe-core (accessibility audit)"
+      }
     }
   },
   "pages": {
