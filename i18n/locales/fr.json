@@ -641,14 +641,14 @@
         },
         "nonFocusable": {
           "title": "❌ Éléments non-focusables",
-          "simpleDiv": "Texte simple (div)",
-          "span": "Texte inline (span)",
+          "simpleText": "Texte simple (div)",
+          "inlineText": "Texte inline (span)",
           "paragraph": "Paragraphe",
           "disabledButton": "Bouton désactivé",
           "disabledInput": "Champ désactivé",
-          "ariaHidden": "Élément aria-hidden",
-          "alert": "Message d'alerte (tabindex=\"-1\")",
-          "focusAlert": "Focus sur l'alerte",
+          "hiddenElement": "Élément aria-hidden",
+          "alertMessage": "Message d'alerte (tabindex=\"-1\")",
+          "focusAlertButton": "Focus sur l'alerte",
           "alertUpdated": "Message d'alerte maintenant focusé!"
         },
         "testingTips": {
