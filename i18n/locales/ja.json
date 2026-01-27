@@ -48,6 +48,10 @@
     "accessibleForms": {
       "label": "フォーム",
       "description": "ラベルと検証"
+    },
+    "ariaPlayground": {
+      "label": "ARIAプレイグラウンド",
+      "description": "リアルタイムでARIAをテスト"
     }
   },
   "language": {
@@ -641,14 +645,14 @@
         },
         "nonFocusable": {
           "title": "❌ フォーカス不可能な要素",
-          "simpleDiv": "シンプルなテキスト（div）",
-          "span": "インラインテキスト（span）",
+          "simpleText": "シンプルなテキスト（div）",
+          "inlineText": "インラインテキスト（span）",
           "paragraph": "段落",
           "disabledButton": "無効なボタン",
           "disabledInput": "無効なフィールド",
-          "ariaHidden": "aria-hidden要素",
-          "alert": "アラートメッセージ（tabindex=\"-1\"）",
-          "focusAlert": "アラートにフォーカス",
+          "hiddenElement": "aria-hidden要素",
+          "alertMessage": "アラートメッセージ（tabindex=\"-1\"）",
+          "focusAlertButton": "アラートにフォーカス",
           "alertUpdated": "アラートメッセージが今フォーカスされました！"
         },
         "testingTips": {
@@ -1718,6 +1722,116 @@
           "badComment": "悪い例：リスト構造のないdiv",
           "goodComment": "良い例：適切なセマンティックリスト"
         }
+      }
+    },
+    "ariaPlayground": {
+      "title": "ARIA Playground",
+      "description": "Test and experiment with ARIA attributes in real-time with screen reader simulation",
+      "seo": {
+        "title": "ARIA Playground - Interactive ARIA Testing Environment",
+        "description": "Test and learn ARIA attributes with live screen reader simulation, code editing, and accessibility feedback",
+        "keywords": "ARIA, screen reader, accessibility testing, ARIA roles, ARIA states, WAI-ARIA, accessibility playground"
+      },
+      "tutorial": {
+        "title": "How to Use the ARIA Playground",
+        "close": "Close tutorial",
+        "hide": "Hide Tutorial",
+        "show": "Show tutorial",
+        "showButton": "📚 Show Tutorial",
+        "step1": {
+          "title": "Write Your HTML Code",
+          "description": "Use the code editor on the left to write or paste your HTML. The editor provides autocomplete for ARIA attributes and validates your code in real-time. Press Ctrl+Enter to run your code."
+        },
+        "step2": {
+          "title": "See the Live Preview",
+          "description": "The preview panel shows your code rendered as it would appear in a browser. You can interact with elements by clicking or using keyboard navigation (Tab, Enter, arrows)."
+        },
+        "step3": {
+          "title": "Monitor Screen Reader Output",
+          "description": "The bottom panel shows what a screen reader would announce as you interact with elements. Select different screen reader modes (NVDA, VoiceOver, JAWS) to see how announcements differ."
+        },
+        "step4": {
+          "title": "Explore ARIA Attributes",
+          "description": "Click the settings icon to access the ARIA Explorer sidebar, which provides a searchable reference of all ARIA roles, states, and properties with examples you can insert directly into your code."
+        },
+        "tips": {
+          "title": "💡 Pro Tips",
+          "tip1": "Use the ARIA Explorer to discover available attributes and see example usage",
+          "tip2": "Enable audio output to hear how screen readers would speak the content",
+          "tip3": "Test keyboard navigation by using Tab to move through interactive elements",
+          "tip4": "Share your code with others using the Share button to get a shareable URL"
+        }
+      },
+      "header": {
+        "switchToLight": "Switch to light theme",
+        "switchToDark": "Switch to dark theme",
+        "share": "Share",
+        "settings": "Settings",
+        "backToHome": "Back to home"
+      },
+      "editor": {
+        "ariaLabel": "Code editor",
+        "run": "Run",
+        "runCode": "Run code (Ctrl+Enter)",
+        "reset": "Reset",
+        "resetCode": "Reset code to default",
+        "copy": "Copy",
+        "copyCode": "Copy code to clipboard",
+        "codeRun": "Code executed",
+        "codeReset": "Code reset to default",
+        "codeCopied": "Code copied to clipboard"
+      },
+      "preview": {
+        "title": "Live Preview",
+        "frameTitle": "Live preview of your ARIA code"
+      },
+      "output": {
+        "title": "Screen Reader Output",
+        "ariaLabel": "Screen reader announcements log",
+        "empty": "Interact with elements in the preview to see screen reader output...",
+        "selectMode": "Select screen reader mode",
+        "enableAudio": "Enable audio output",
+        "disableAudio": "Disable audio output",
+        "audioEnabled": "Audio output enabled",
+        "audioDisabled": "Audio output disabled",
+        "clear": "Clear",
+        "cleared": "Output cleared"
+      },
+      "settings": {
+        "title": "Settings",
+        "close": "Close settings",
+        "fontSize": "Editor Font Size",
+        "speechRate": "Speech Rate",
+        "autoRun": "Auto-run code on changes",
+        "autoRunDescription": "Automatically update preview when you type",
+        "theme": "Editor Theme",
+        "darkTheme": "Dark",
+        "lightTheme": "Light",
+        "resetDefaults": "Reset to defaults",
+        "save": "Save"
+      },
+      "ariaExplorer": {
+        "title": "ARIA Explorer",
+        "close": "Close ARIA explorer",
+        "search": "Search ARIA attributes",
+        "searchPlaceholder": "Search...",
+        "example": "Example",
+        "values": "Possible values",
+        "insert": "Insert",
+        "insertAria": "Insert {name}",
+        "noResults": "No results found",
+        "categories": {
+          "all": "All",
+          "roles": "Roles",
+          "states": "States",
+          "properties": "Properties",
+          "live": "Live Regions"
+        }
+      },
+      "resize": "Resize editor panel",
+      "resizeOutput": "Resize output panel",
+      "share": {
+        "preparing": "Preparing shareable link..."
       }
     }
   }

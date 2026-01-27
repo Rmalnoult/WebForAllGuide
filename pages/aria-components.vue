@@ -405,7 +405,7 @@ function focusAlert() {
     alertElement.value.textContent = t('pages.ariaComponents.tabindex.nonFocusable.alertUpdated')
     setTimeout(() => {
       if (alertElement.value) {
-        alertElement.value.textContent = t('pages.ariaComponents.tabindex.nonFocusable.alert')
+        alertElement.value.textContent = t('pages.ariaComponents.tabindex.nonFocusable.alertMessage')
       }
     }, 2000)
   }

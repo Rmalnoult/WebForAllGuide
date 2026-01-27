@@ -48,6 +48,10 @@
     "accessibleForms": {
       "label": "Formulaires",
       "description": "Labels et validation"
+    },
+    "ariaPlayground": {
+      "label": "Espace ARIA",
+      "description": "Tester ARIA en temps réel"
     }
   },
   "language": {
@@ -1718,6 +1722,116 @@
           "badComment": "Mauvais : divs sans structure de liste",
           "goodComment": "Bon : listes sémantiques appropriées"
         }
+      }
+    },
+    "ariaPlayground": {
+      "title": "Espace ARIA",
+      "description": "Testez et expérimentez les attributs ARIA en temps réel avec simulation de lecteur d'écran",
+      "seo": {
+        "title": "Espace ARIA - Environnement de test ARIA interactif",
+        "description": "Testez et apprenez les attributs ARIA avec simulation de lecteur d'écran en direct, édition de code et retour d'accessibilité",
+        "keywords": "ARIA, lecteur d'écran, test d'accessibilité, rôles ARIA, états ARIA, WAI-ARIA, espace d'accessibilité"
+      },
+      "tutorial": {
+        "title": "Comment utiliser l'Espace ARIA",
+        "close": "Fermer le tutoriel",
+        "hide": "Masquer le tutoriel",
+        "show": "Afficher le tutoriel",
+        "showButton": "📚 Afficher le tutoriel",
+        "step1": {
+          "title": "Écrivez votre code HTML",
+          "description": "Utilisez l'éditeur de code à gauche pour écrire ou coller votre HTML. L'éditeur fournit l'autocomplétion pour les attributs ARIA et valide votre code en temps réel. Appuyez sur Ctrl+Entrée pour exécuter votre code."
+        },
+        "step2": {
+          "title": "Visualisez l'aperçu en direct",
+          "description": "Le panneau d'aperçu affiche votre code rendu comme il apparaîtrait dans un navigateur. Vous pouvez interagir avec les éléments en cliquant ou en utilisant la navigation au clavier (Tab, Entrée, flèches)."
+        },
+        "step3": {
+          "title": "Surveillez la sortie du lecteur d'écran",
+          "description": "Le panneau inférieur affiche ce qu'un lecteur d'écran annoncerait lorsque vous interagissez avec les éléments. Sélectionnez différents modes de lecteur d'écran (NVDA, VoiceOver, JAWS) pour voir comment les annonces diffèrent."
+        },
+        "step4": {
+          "title": "Explorez les attributs ARIA",
+          "description": "Cliquez sur l'icône des paramètres pour accéder à la barre latérale Explorateur ARIA, qui fournit une référence consultable de tous les rôles, états et propriétés ARIA avec des exemples que vous pouvez insérer directement dans votre code."
+        },
+        "tips": {
+          "title": "💡 Conseils Pro",
+          "tip1": "Utilisez l'Explorateur ARIA pour découvrir les attributs disponibles et voir des exemples d'utilisation",
+          "tip2": "Activez la sortie audio pour entendre comment les lecteurs d'écran vocalisent le contenu",
+          "tip3": "Testez la navigation au clavier en utilisant Tab pour vous déplacer entre les éléments interactifs",
+          "tip4": "Partagez votre code avec d'autres en utilisant le bouton Partager pour obtenir une URL partageable"
+        }
+      },
+      "header": {
+        "switchToLight": "Passer au thème clair",
+        "switchToDark": "Passer au thème sombre",
+        "share": "Partager",
+        "settings": "Paramètres",
+        "backToHome": "Retour à l'accueil"
+      },
+      "editor": {
+        "ariaLabel": "Éditeur de code",
+        "run": "Exécuter",
+        "runCode": "Exécuter le code (Ctrl+Entrée)",
+        "reset": "Réinitialiser",
+        "resetCode": "Réinitialiser le code par défaut",
+        "copy": "Copier",
+        "copyCode": "Copier le code dans le presse-papiers",
+        "codeRun": "Code exécuté",
+        "codeReset": "Code réinitialisé par défaut",
+        "codeCopied": "Code copié dans le presse-papiers"
+      },
+      "preview": {
+        "title": "Aperçu en direct",
+        "frameTitle": "Aperçu en direct de votre code ARIA"
+      },
+      "output": {
+        "title": "Sortie du lecteur d'écran",
+        "ariaLabel": "Journal des annonces du lecteur d'écran",
+        "empty": "Interagissez avec les éléments dans l'aperçu pour voir la sortie du lecteur d'écran...",
+        "selectMode": "Sélectionner le mode de lecteur d'écran",
+        "enableAudio": "Activer la sortie audio",
+        "disableAudio": "Désactiver la sortie audio",
+        "audioEnabled": "Sortie audio activée",
+        "audioDisabled": "Sortie audio désactivée",
+        "clear": "Effacer",
+        "cleared": "Sortie effacée"
+      },
+      "settings": {
+        "title": "Paramètres",
+        "close": "Fermer les paramètres",
+        "fontSize": "Taille de police de l'éditeur",
+        "speechRate": "Vitesse de parole",
+        "autoRun": "Exécution automatique lors des modifications",
+        "autoRunDescription": "Mettre à jour automatiquement l'aperçu lorsque vous tapez",
+        "theme": "Thème de l'éditeur",
+        "darkTheme": "Sombre",
+        "lightTheme": "Clair",
+        "resetDefaults": "Réinitialiser par défaut",
+        "save": "Enregistrer"
+      },
+      "ariaExplorer": {
+        "title": "Explorateur ARIA",
+        "close": "Fermer l'explorateur ARIA",
+        "search": "Rechercher des attributs ARIA",
+        "searchPlaceholder": "Rechercher...",
+        "example": "Exemple",
+        "values": "Valeurs possibles",
+        "insert": "Insérer",
+        "insertAria": "Insérer {name}",
+        "noResults": "Aucun résultat trouvé",
+        "categories": {
+          "all": "Tous",
+          "roles": "Rôles",
+          "states": "États",
+          "properties": "Propriétés",
+          "live": "Régions dynamiques"
+        }
+      },
+      "resize": "Redimensionner le panneau de l'éditeur",
+      "resizeOutput": "Redimensionner le panneau de sortie",
+      "share": {
+        "preparing": "Préparation du lien de partage..."
       }
     }
   }
