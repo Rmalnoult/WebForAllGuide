@@ -100,7 +100,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // Modules
-  modules: ['@nuxtjs/i18n', '@nuxtjs/plausible'],
+  modules: [
+    'nuxt-gtag','@nuxtjs/i18n', '@nuxtjs/plausible'],
+
+  gtag: {
+    id: process.env.GOOGLE_ANALYTICS_ID || '',
+    enabled: !!process.env.GOOGLE_ANALYTICS_ID
+  },
 
   // i18n configuration
   i18n: {

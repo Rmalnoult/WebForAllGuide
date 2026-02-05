@@ -21,6 +21,7 @@
     "@vueuse/core": "^13.9.0",
     "html2canvas": "^1.4.1",
     "nuxt": "^3.15.2",
+    "nuxt-gtag": "^4.1.0",
     "vue": "^3.5.18"
   },
   "devDependencies": {

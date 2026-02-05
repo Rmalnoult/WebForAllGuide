@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#4F46E5"/>
+  <g fill="white">
+    <!-- Accessibility icon (wheelchair symbol) -->
+    <circle cx="50" cy="28" r="8"/>
+    <path d="M50 40 c-12 0-22 10-22 22 c0 12 10 22 22 22 c12 0 22-10 22-22 M50 84 c-12 0-22-10-22-22"
+          stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M50 40 L50 55 L62 50" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

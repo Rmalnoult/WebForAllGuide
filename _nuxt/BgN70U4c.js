@@ -1,0 +1,1 @@
+import{u as e}from"./DLj1BPX9.js";import{x as a}from"#entry";const m={__name:"a-r-i-a-components",setup(t){const{getPageSEO:o}=e(),s=o("/a-r-i-a-components");return a(s),()=>{}}};export{m as default};
